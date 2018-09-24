@@ -1,4 +1,4 @@
-package riskGameModel;
+package riskGameModel.location;
 
 import java.util.List;
 

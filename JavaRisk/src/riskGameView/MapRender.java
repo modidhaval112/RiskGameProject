@@ -19,6 +19,11 @@ public class MapRender {
 		}
 		return selectedFile;
 
+	}
+
+
+	public void readFile() {
+		
 	}	
 	
 }
