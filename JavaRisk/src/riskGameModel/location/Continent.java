@@ -12,6 +12,23 @@ public class Continent {
 	private List<Country> countries;
 	
 	/**
+	 * This is a constructor to create the Continent given only the continent. 
+	 * @param continentName This is the name of the Continent
+	 */
+	public Continent(String continentName) {
+		this.continentName = continentName;
+	}
+	
+	/**
+	 * This is a constructor to create the Continent given the continent and countries of that continent.
+	 * @param continentName This is the name of the Continent
+	 * @param countries This is the list of the countries that belong to that continent.
+	 */
+	public Continent(String continentName, List<Country> countries) {
+		this.continentName = continentName;
+		this.countries=countries;
+	}
+	/**
 	 * method to get the countries which belong to this continent
 	 * @return String
 	 */
