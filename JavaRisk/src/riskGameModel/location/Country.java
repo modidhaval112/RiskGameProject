@@ -12,11 +12,24 @@ import java.util.List;
 public class Country {
 
 	private String countryName;
-	private List<Country> adjacentCountries;
-	private Continent belongsToContinent;
+	private List<Country> neighbouringCountries;
+	private String belongsToContinent;
 	private int startPixel;
 	private int endPixel;
 	
+	/**
+	 * This is the parameterized constructor with following parameters
+	 * @param countryName Name of the Country
+	 * @param startPixel For displaying the map
+	 * @param endPixel For displaying the map
+	 * @param belongsToContinent Name of the Continent
+	 */
+	public Country(String countryName,int startPixel,int endPixel,String belongsToContinent) {
+		this.countryName = countryName;
+		this.startPixel = startPixel;
+		this.endPixel = endPixel;
+		this.belongsToContinent = belongsToContinent;
+	}
 	/**
 	 * method to get the name of the country
 	 * @return countryName :  Name of the country
@@ -35,28 +48,28 @@ public class Country {
 	 * method to get the neighbors of this particular country
 	 * @return adjacentCountries : List of neighboring countries
 	 */
-	public List<Country> getAdjacentCountries() {
-		return adjacentCountries;
+	public List<Country> getNeighbouringCountries() {
+		return neighbouringCountries;
 	}
 	/**
 	 * method to set the neighbors of this particular country
 	 * @param adjacentCountries : List of neighboring countries
 	 */
-	public void setAdjacentCountries(List<Country> adjacentCountries) {
-		this.adjacentCountries = adjacentCountries;
+	public void setNeighbouringCountries(List<Country> adjacentCountries) {
+		this.neighbouringCountries = adjacentCountries;
 	}
 	/**
 	 * method to get the continent to which the country belongs
 	 * @return belongsToContinent : Name of the continent to which the country belongs
 	 */
-	public Continent getBelongsToContinent() {
+	public String getBelongsToContinent() {
 		return belongsToContinent;
 	}
 	/**
 	 * method to set the continent to which the country belongs
 	 * @param belongsToContinent : Name of the continent to which the country belongs
 	 */
-	public void setBelongsToContinent(Continent belongsToContinent) {
+	public void setBelongsToContinent(String belongsToContinent) {
 		this.belongsToContinent = belongsToContinent;
 	}
 	/**
