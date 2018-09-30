@@ -7,8 +7,13 @@ public class GameLauncher {
 	public static void main(String[] args) {
 
 		GameLauncher gameLauncher = new GameLauncher();
-		gameLauncher.editMap();
+		gameLauncher.createMap();
 		
+	}
+
+	private void createMap() {
+		CreateMapFile createMapFile = new CreateMapFile();
+		createMapFile.main(null);
 	}
 
 	public void editMap() {

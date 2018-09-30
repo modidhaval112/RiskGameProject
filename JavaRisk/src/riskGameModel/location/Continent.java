@@ -10,7 +10,7 @@ import java.util.List;
 public class Continent {
 	private String continentName;
 	private List<Country> countries;
-	
+	private int numberOfCountries;
 	/**
 	 * This is a constructor to create the Continent given only the continent. 
 	 * @param continentName This is the name of the Continent
@@ -55,5 +55,21 @@ public class Continent {
 	 */
 	public void setContinentName(String continentName) {
 		this.continentName = continentName;
+	}
+
+	/**
+	 * Get the count of countries in this continent
+	 * @return numberOfCountries 
+	 */
+	public int getNumberOfCountries() {
+		return numberOfCountries;
+	}
+
+	/**
+	 * Set the count of countries in this continent
+	 * @param numberOfCountries 
+	 */
+	public void setNumberOfCountries(int numberOfCountries) {
+		this.numberOfCountries = numberOfCountries;
 	}
 }
