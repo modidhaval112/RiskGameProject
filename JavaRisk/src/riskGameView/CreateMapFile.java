@@ -32,7 +32,7 @@ public class CreateMapFile {
 	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
 	private List<Country> countries = new ArrayList<>() ;
 	
-	public void main(String[] args) {
+	public CreateMapFile() {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
 		numberOfContinents = scanner.nextInt();
