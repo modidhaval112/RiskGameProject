@@ -13,7 +13,7 @@ public class GameLauncher {
 
 	private void createMap() {
 		CreateMapFile createMapFile = new CreateMapFile();
-		createMapFile.main(null);
+		//createMapFile.main(null);
 	}
 
 	public void editMap() {
