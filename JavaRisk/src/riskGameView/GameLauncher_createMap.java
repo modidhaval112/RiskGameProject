@@ -1,4 +1,5 @@
 package riskGameView;
+/*package riskGameView;
 
 import java.io.File;
 
@@ -27,3 +28,4 @@ public class GameLauncher {
 	
 
 }
+*/
