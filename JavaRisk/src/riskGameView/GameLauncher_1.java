@@ -31,7 +31,7 @@ import javax.swing.UIManager;
  * The functionality of the class is to present the viewer a menu to start the
  * game , exit etc
  *
- * @author Darwin Anirudh G Fall 2018
+ * @author Team 13 Fall 2018
  */
 
 public class GameLauncher_1 extends JFrame implements ActionListener {
@@ -142,11 +142,13 @@ public class GameLauncher_1 extends JFrame implements ActionListener {
 			
 		} else if (event.getSource() == createMapButton) {
 			System.out.println("#### createMapButton  is clicked ####");
+			gameFrame.setVisible(false);
 			createMapFile = new CreateMapFile();
 			
 			
 		} else if (event.getSource() == editMapButton) {
 			System.out.println("#### editMapMapButton  is clicked ####");
+			
 			PlayerCount p = new PlayerCount();
 			
 		} else if (event.getSource() == exitButton) {
