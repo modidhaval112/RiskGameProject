@@ -36,10 +36,11 @@ public class CreateMapFile {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
 		numberOfContinents = scanner.nextInt();
-		for(int i=1;i<=numberOfContinents;i++) {
+		for(int i=1; i<=numberOfContinents; i++) {
 			System.out.println("Enter the name of the Continent"+ i);
 			nameOfContinents.add(scanner.next());
-		}
+		} 
+		
 		for(int i=0;i<numberOfContinents;i++) {
 			System.out.println("Enter the number of Countries in the Continent : " + nameOfContinents.get(i));
 			int numberOfCountries = scanner.nextInt(); // add number format exception
