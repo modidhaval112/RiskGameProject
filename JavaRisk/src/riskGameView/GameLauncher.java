@@ -137,6 +137,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 			/*PlayerCounter pc = new PlayerCounter();
 			
 			pc.setVisible(true);*/
+			gameFrame.setVisible(false);
 			playerCount = new PlayerCount();
 			playerCount.setVisible(true);
 			
@@ -148,7 +149,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 			
 		} else if (event.getSource() == editMapButton) {
 			System.out.println("#### editMapMapButton  is clicked ####");
-			
+			gameFrame.setVisible(false);
 			PlayerCount p = new PlayerCount();
 			
 		} else if (event.getSource() == exitButton) {
