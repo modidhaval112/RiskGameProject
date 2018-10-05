@@ -17,6 +17,31 @@ public class Country {
 	private int startPixel;
 	private int endPixel;
 	
+	/***
+	 *Default Constructor 
+	 **/
+	public Country() {}
+	
+	
+	/***
+	 *This is the parameterized constructor with following parameters
+	 *@param countryName Name of the Country
+	 **/
+	public Country(String countryName) {
+        this.countryName = countryName;
+    }
+	
+	
+	/***
+	 *This is the parameterized constructor with following parameters
+	 *@param countryName Name of the Country
+	 *@param belongsToContinent Name of the Continent
+	 **/
+	public Country(String countryName,String belongsToContinent) {
+        this.countryName = countryName;
+        this.belongsToContinent = belongsToContinent;
+    }
+	
 	/**
 	 * This is the parameterized constructor with following parameters
 	 * @param countryName Name of the Country
