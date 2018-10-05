@@ -10,6 +10,23 @@ public class MapContents {
 
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
+	private String mapAuthorName;
+	
+	
+	/**
+	 * This method is to get Hashmap of map author name
+	 * @return  countryAndNeighbors Hashmap of countries and its list of neighbors.
+	 */
+	
+	
+	public String getMapAuthorName() {
+		return mapAuthorName;
+	}
+	public void setMapAuthorName(String mapAuthorName) {
+		this.mapAuthorName = mapAuthorName;
+	}
+
+	
 	/**
 	 * This method is to get Hashmap of countries and its list of neighbors.
 	 * @return  countryAndNeighbors Hashmap of countries and its list of neighbors.
@@ -17,6 +34,7 @@ public class MapContents {
 	public HashMap<Country, List<Country>> getCountryAndNeighbors() {
 		return countryAndNeighbors;
 	}
+	
 	/**
 	 * This method is to set Hashmap of countries and its list of neighbors.
 	 * @param countryAndNeighbors Hashmap of countries and its list of neighbors.
