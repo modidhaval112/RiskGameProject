@@ -19,8 +19,8 @@ public class MapParserTest {
 	
 
 	@Test
-	public void test() {
-		mapParserObject.MapParser(filePath);
+	public void mapParsertest() {
+		mapParserObject.mapParser(filePath);
 		int numberOfContinents= mapParserObject.getContinentList().size();
 		
 		assertEquals(7,numberOfContinents);

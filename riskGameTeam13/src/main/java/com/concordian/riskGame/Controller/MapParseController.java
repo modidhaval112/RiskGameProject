@@ -48,7 +48,7 @@ public class MapParseController {
 	private HashMap<Country, List<Country>> countryAndNeighbors;
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 
-	public void MapParser(String filePath) {
+	public void mapParser(String filePath) {
 		try {
 
 			fileObject = new File(filePath);

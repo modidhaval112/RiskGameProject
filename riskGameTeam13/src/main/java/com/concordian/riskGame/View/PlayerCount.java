@@ -152,7 +152,7 @@ public class PlayerCount extends JFrame implements ActionListener
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
 					mapParse = new MapParseController();
-					mapParse.MapParser(selectedFile.getAbsolutePath().toString());
+					mapParse.mapParser(selectedFile.getAbsolutePath().toString());
 
 				}
 
