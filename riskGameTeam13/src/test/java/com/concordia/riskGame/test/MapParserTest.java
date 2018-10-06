@@ -6,14 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.concordian.riskGame.Controller.MapParseController;
-
+/**
+ * Test to check if reading the map is functioning properly
+ * 
+ */
 public class MapParserTest {
 
 	private String filePath;
 	private MapParseController mapParserObject;
 	@Before
 	public void setUp() throws Exception {
-		filePath="src/main/resources/Africa.map";
+	    filePath="src/main/resources/Africa.map";
 		mapParserObject = new MapParseController();		
 	}
 	
@@ -25,6 +28,8 @@ public class MapParserTest {
 		
 		assertEquals(7,numberOfContinents);
 	}
+	
+	
 		
 
 }
