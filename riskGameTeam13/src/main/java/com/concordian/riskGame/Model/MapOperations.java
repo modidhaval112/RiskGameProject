@@ -8,9 +8,11 @@ import com.concordia.riskGame.entity.Country;
 import com.concordian.riskGame.Model.MapContents;
 
 public class MapOperations {
-
+	
+	private StringBuilder builder;
+	
 	public void writeMapFile(MapContents mapContents,String fileName) {
-		StringBuilder builder = new StringBuilder();
+		builder = new StringBuilder();
 		builder.append("[MAP]");
 		builder.append("\n");
 		builder.append("[Continents]\n");
@@ -28,6 +30,16 @@ public class MapOperations {
 			builder.append(","+country.getCountryName());
 			}
 		}
+		
 		System.out.println(builder);
+	}
+/**
+ * This method returns the builder 
+ * this is being used in CreateMapFileTest to test if the map is built as per the format
+ * @return
+ */
+	public StringBuilder getBuilder() {
+		return builder;
+		
 	}
 }
