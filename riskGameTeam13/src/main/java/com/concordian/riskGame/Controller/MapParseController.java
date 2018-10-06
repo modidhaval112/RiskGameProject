@@ -39,7 +39,7 @@ public class MapParseController {
 	private MapContents mapContentsObj;
 	private String mapAuthorName;
 	private String[] splitUtllityString;
-	private List<Continent> contitentList;
+	private List<Continent> continentList;
 	private List<Country> countryList;
 	private List<Country> adjCountry;
 	private Continent continentObejct;
@@ -81,7 +81,7 @@ public class MapParseController {
 
 	private void readMapElements(BufferedReader bufferReader) {
 		try {
-			contitentList = new ArrayList<Continent>();
+			continentList = new ArrayList<Continent>();
 			countryList = new ArrayList<Country>();
 			countryAndNeighbors = new HashMap<>();
 
@@ -108,7 +108,7 @@ public class MapParseController {
 							String[] continentValues = currentLine.split("=");
 							Continent continentObject = new Continent(continentValues[0],
 									Integer.parseInt(continentValues[1]));
-							contitentList.add(continentObject);
+							continentList.add(continentObject);
 						}
 					}
 					bufferReader.mark(0);
@@ -194,7 +194,7 @@ public class MapParseController {
 			continentAndItsCountries = new HashMap<>();
 			
 			
-			for(Continent continentInstance : contitentList)
+			for(Continent continentInstance : continentList)
 			{
 				System.out.println("Continent Name is "+continentInstance.getContinentName());
 				Continent contientObj = new Continent(continentInstance.getContinentName());
@@ -279,7 +279,7 @@ public class MapParseController {
 	public void displayContinent() {
 		try {
 
-			for (Continent continentObejct : contitentList) {
+			for (Continent continentObejct : continentList) {
 				System.out.println(
 						"###### The Continent Name is            ######### :" + continentObejct.getContinentName());
 				System.out.println("###### The Continent Control value is ######### :"
@@ -309,6 +309,10 @@ public class MapParseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Continent> getContinentList(){
+		return continentList;
 	}
 
 }
