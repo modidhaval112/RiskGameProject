@@ -85,7 +85,7 @@ public class PlayerCount extends JFrame implements ActionListener
 			//set Background Image
 			try 
 			{
-	            JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("rsz_aoe_bk.jpg"))));
+	            JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
 	            countFrame.setContentPane(label);
 	        } catch (IOException e) 
 			{
@@ -93,7 +93,7 @@ public class PlayerCount extends JFrame implements ActionListener
 	        }
 
 			System.out.println("### Read Config value ####" + readConfig.getPlayerCount());
-			playerCounter = arrayOfPlayer();;
+			playerCounter = arrayOfPlayer();
 			countFrame.getContentPane().setLayout(null);
             
 			countLabel = new JLabel("Select the No.Of Players");
