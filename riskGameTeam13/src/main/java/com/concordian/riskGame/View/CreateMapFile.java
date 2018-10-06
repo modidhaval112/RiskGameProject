@@ -36,6 +36,7 @@ public class CreateMapFile {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
 		numberOfContinents = scanner.nextInt();
+		
 		for(int i=1; i<=numberOfContinents; i++) {
 			System.out.println("Enter the name of the Continent"+ i);
 			nameOfContinents.add(scanner.next());
@@ -45,6 +46,7 @@ public class CreateMapFile {
 			System.out.println("Enter the number of Countries in the Continent : " + nameOfContinents.get(i));
 			int numberOfCountries = scanner.nextInt(); // add number format exception
 			System.out.println("Enter the countries that belong to the Continent : "+nameOfContinents.get(i));
+			
 			for(int j=0;j<numberOfCountries;j++) {
 				 String countryName = scanner.next();
 				 nameOfCountries.add(countryName);
@@ -52,14 +54,17 @@ public class CreateMapFile {
 				 countries.add(country);
 			}
 			scanner.nextLine();
+			
 			Continent continent = new Continent(nameOfContinents.get(i));
 			continentsWithItsCountries.put(continent, countries);
 		}
+		
 		for(int i=0;i<countries.size();i++) {
 			System.out.println("Enter the neighbouring countries to the country\""  + countries.get(i).getCountryName() + "\"in \",\"(comma) seperated values " );
 			String[] neighbouringCountries = scanner.nextLine().split(",");
 			List<Country> neighbourCountries = new ArrayList<>();
 			boolean errorWhileReadingCountry = false;
+			
 			for(String neighbour : neighbouringCountries) {
 				if(neighbour.equals(countries.get(i).getCountryName())) {
 					errorWhileReadingCountry = true;
@@ -92,6 +97,7 @@ public class CreateMapFile {
 		String[] neighbouringCountries = scanner.nextLine().split(",");
 		List<Country> neighbourCountries = new ArrayList<>();
 		boolean errorWhileReadingCountry = false;
+		
 		for(String neighbour : neighbouringCountries) {
 			if(neighbour.equals(countryName)) {
 				reenterCountries(countryName,scanner,continent);
