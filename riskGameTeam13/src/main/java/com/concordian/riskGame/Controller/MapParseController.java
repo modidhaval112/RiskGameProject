@@ -55,6 +55,8 @@ public class MapParseController {
 
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 
+			
+			
 			readMapElements(bufferReaderForFile);
 
 			displayContinent();

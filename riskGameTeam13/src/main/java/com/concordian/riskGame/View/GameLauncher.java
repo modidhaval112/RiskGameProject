@@ -62,7 +62,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gameFrame = new JFrame("Concordia Conquest");
 		try {
-            JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("rsz_aoe_bk.jpg"))));
+            JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
             gameFrame.setContentPane(label);
         } catch (IOException e) {
             e.printStackTrace();
