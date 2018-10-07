@@ -19,6 +19,8 @@ import com.concordia.riskGame.entity.GameMap;
 
 public class MapValidator {
 	
+	private Boolean validMapFlag;
+	private String statusMessage;
 /*	public boolean checkNeighbourCountryCount(GameMap gameMap) {
 		
 		Map<Country, List<Country>> mapCountry = gameMap.getMapCountry();
@@ -186,11 +188,8 @@ public class MapValidator {
 		MapValidator mapValidator = new MapValidator();
 		GameMap gameMap;
 		Map<String, Integer> visitedMap1 = new HashMap<>();
-		Boolean validMapFlag;
-		String statusMessage;
 		
 		
-		System.out.println("In Init method");
 		//String filePath = new File("resources/003_I72_Fairchild T-31.map").getAbsolutePath();
 		//File file = new File(filePath);
 		
@@ -332,9 +331,14 @@ public class MapValidator {
 		}
 		
 		
+		
 		System.out.println("Message : " + statusMessage);
 		System.out.println("validMapFlag : " + validMapFlag);
 		
+		
+	}
+	public Boolean getValidMapFlag() {
+		return validMapFlag;
 	}
 	
 }
