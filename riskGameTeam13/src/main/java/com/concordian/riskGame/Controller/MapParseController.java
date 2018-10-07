@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
+import com.concordia.riskGame.exception.InvalidMapFileException;
 import com.concordia.riskGame.util.MapValidator;
 import com.concordian.riskGame.Model.MapContents;
 
@@ -58,6 +59,9 @@ public class MapParseController {
 
 			MapValidator mapValidator = new MapValidator();
 			mapValidator.init(fileObject);
+			if(!mapValidator.getValidMapFlag()) {
+				throw new InvalidMapFileException("Invalid Map File");
+			}
 			
 			readMapElements(bufferReaderForFile);
 
@@ -75,6 +79,9 @@ public class MapParseController {
 
 		}
 
+		catch (InvalidMapFileException e) {
+			e.printStackTrace();
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
