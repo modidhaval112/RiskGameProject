@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
+import com.concordia.riskGame.util.MapValidator;
 import com.concordian.riskGame.Model.MapContents;
 
 
@@ -55,7 +56,8 @@ public class MapParseController {
 
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 
-			
+			MapValidator mapValidator = new MapValidator();
+			mapValidator.init(fileObject);
 			
 			readMapElements(bufferReaderForFile);
 

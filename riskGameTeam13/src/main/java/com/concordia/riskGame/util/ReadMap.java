@@ -11,14 +11,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.GameMap;
 
-
+/**
+ * This class reads the .map file and Returns the GameMap object
+ * @author d_modi
+ */
 
 public class ReadMap {
 
+	/**
+	 * method to read the .map file and along with that setting all the 
+	 * attributes of GameMap Object
+	 * @param file : File Object
+	 * @return : GameMap Object
+	 */
 	public GameMap readMapFile(File file) {
 
 		String line;

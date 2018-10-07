@@ -12,7 +12,10 @@ import java.util.Set;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.GameMap;
 
-
+/**
+ * This class contains all the methods to validate the map file.
+ * @author d_modi
+ */
 
 public class MapValidator {
 	
@@ -29,7 +32,13 @@ public class MapValidator {
 		
 		return true;
 	}
-*/	
+*/
+	
+	/**
+	 * method to check if all the labels are described properly
+	 * @param gameMap : GameMap object
+	 * @return : true if all labels are described properly, otherwise false
+	 */
 	public boolean checkMapLabel(GameMap gameMap) {
 		
 		if(gameMap.getLabelCount() == 3)
@@ -40,6 +49,11 @@ public class MapValidator {
 		return false;
 	}
 	
+	/**
+	 * method to check if Continent count is greater than zero or not
+	 * @param gameMap : GameMap object
+	 * @return : true if winCount is greater than zero, otherwise false
+	 */
 	public boolean checkWinCount(GameMap gameMap) {
 		
 		for (Entry<String, Integer> entry : gameMap.getMapWinCount().entrySet()) {
@@ -52,6 +66,11 @@ public class MapValidator {
 		return true;
 	}
 	
+	/**
+	 * method to check if Country Continent if from Continent list only
+	 * @param gameMap : GameMap object
+	 * @return : true if Country Continent is from Continent List, otherwise false
+	 */
 	public boolean checkContinent(GameMap gameMap) {
 		
 		for (String s : gameMap.getSetContinent()) {
@@ -63,6 +82,11 @@ public class MapValidator {
 		return true;
 	}
 	
+	/**
+	 * method to check if all continent have at least one country
+	 * @param gameMap : GameMap object
+	 * @return : true if all continent has at least one country, otherwise false
+	 */
 	public boolean checkContinentCountry(GameMap gameMap) {
 		Set<String> setContinent = gameMap.getMapWinCount().keySet();
 		for (String s : gameMap.getSetContinent()) {
@@ -77,6 +101,11 @@ public class MapValidator {
 			return false;
 	}
 	
+	/**
+	 * method to check if country is assigned to only one country
+	 * @param gameMap : GameMap object
+	 * @return : true if all countries are assigned to only one country, otherwise false
+	 */
 	public boolean checkUniqueContinentCountry(GameMap gameMap) {
 		
 		if(gameMap.getUniqueCountryCount())
@@ -121,6 +150,13 @@ public class MapValidator {
 		
 	}*/
 	
+	/**
+	 * method to check if map is connected graph or not
+	 * @param parent : starting node of the graph
+	 * @param mapCountry : map of Country and neighboring Countries
+	 * @param visitedMap : map of Country and visited value, 1 for visited and 0 if not visited
+	 * @return : true if graph is connected, otherwise false
+	 */
 	public Map<String, Integer> checkConnectedGraph(Country parent, Map<Country, List<Country>> mapCountry, Map<String, Integer> visitedMap) {
 		List<Country> nbCountries = new ArrayList<>();
 		visitedMap.put(parent.getCountryName().trim(), 1);
@@ -142,16 +178,21 @@ public class MapValidator {
 		return visitedMap;
 	}
 	
-	
-	public static void main(String[] args) {
+	/**
+	 * method to check all the output returned by above described methods
+	 * @param file : File Object
+	 */
+	public void init(File file) {
 		MapValidator mapValidator = new MapValidator();
 		GameMap gameMap;
 		Map<String, Integer> visitedMap1 = new HashMap<>();
 		Boolean validMapFlag;
 		String statusMessage;
 		
-		String filePath = new File("resources/003_I72_Fairchild T-31.map").getAbsolutePath();
-		File file = new File(filePath);
+		
+		System.out.println("In Init method");
+		//String filePath = new File("resources/003_I72_Fairchild T-31.map").getAbsolutePath();
+		//File file = new File(filePath);
 		
 		ReadMap readMap = new ReadMap();
 		gameMap = readMap.readMapFile(file);
@@ -260,7 +301,8 @@ public class MapValidator {
 			return;
 		}
 		
-/*		if(mapValidator.checkNeighbourCountryCount(gameMap)) {
+/*		Map<String, Integer> visitedContinentMap = new HashMap<>();		
+ 		if(mapValidator.checkNeighbourCountryCount(gameMap)) {
 			validMapFlag = true;
 		}
 		else {
@@ -282,7 +324,7 @@ public class MapValidator {
 		}*/
 		
 		
-		Map<String, Integer> visitedContinentMap = new HashMap<>();
+		
 		
 		Set<String> setContinentValues = new HashSet<>();
 		for (Entry<String, String> entry : gameMap.getContinentCountry().entrySet()) {
