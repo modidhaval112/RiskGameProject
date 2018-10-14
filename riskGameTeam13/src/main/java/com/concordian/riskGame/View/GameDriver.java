@@ -1,4 +1,4 @@
-package com.concordian.riskGame.Controller;
+package com.concordian.riskGame.View;
 
 import java.util.Scanner;
 
