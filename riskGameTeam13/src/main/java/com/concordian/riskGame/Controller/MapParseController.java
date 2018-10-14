@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;
+import com.concordia.riskGame.exception.InvalidMapFileException;
+import com.concordia.riskGame.util.MapValidator;
 import com.concordia.riskGame.util.ReadConfiguration;
 import com.concordian.riskGame.Model.MapContents;
 import com.concordian.riskGame.View.GameDriver;
@@ -67,11 +69,15 @@ public class MapParseController {
 		try {
 
 			fileObject = new File(filePath);
+			System.out.println("File Path " + filePath);
 
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			
 			System.out.println("##### The combo box selected number is ##### :"+Integer.parseInt(numberCombo));
-			
+
+			MapValidator mapValidator = new MapValidator();
+			mapValidator.init(fileObject);
+
 			
 			readMapElements(bufferReaderForFile);
 
@@ -92,10 +98,8 @@ public class MapParseController {
 	*/		
 	
 			
-			
-
 		}
-
+		
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -410,7 +414,7 @@ public class MapParseController {
 		
 		System.out.println("##### The players and their assgned countries are ####");
 		
-		//zero random assignment needs to be checked as wel
+		//zero random assignment needs to be checked as well
 		
 		
 		
@@ -429,8 +433,8 @@ public class MapParseController {
 			}
 		}
 			
-			gameDriverObject = new  GameDriver();
-			gameDriverObject.gamePhase();
+			//gameDriverObject = new  GameDriver();
+			//gameDriverObject.gamePhase();
 			
 	}			
 		
