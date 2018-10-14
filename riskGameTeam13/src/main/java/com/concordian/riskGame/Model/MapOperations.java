@@ -1,45 +1,48 @@
 package com.concordian.riskGame.Model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
-import com.concordian.riskGame.Model.MapContents;
 
 public class MapOperations {
 	
-	private StringBuilder builder;
+	private StringBuilder mapFileContents;
 	
 	public void writeMapFile(MapContents mapContents,String fileName) {
-		builder = new StringBuilder();
-		builder.append("[MAP]");
-		builder.append("\n");
-		builder.append("[Continents]\n");
+		mapFileContents = new StringBuilder();
+		mapFileContents.append("[MAP]");
+		mapFileContents.append("\n");
+		mapFileContents.append("[Continents]\n");
 		for(Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
-			builder.append(continent.getContinentName());
-			builder.append("=");
-			builder.append(continent.getNumberOfCountries());
+			mapFileContents.append(continent.getContinentName());
+			mapFileContents.append("=");
+			mapFileContents.append(continent.getNumberOfCountries());
+			mapFileContents.append("\n");
 		}
-		builder.append("\n[Territories]\n");
+		mapFileContents.append("\n[Territories]\n");
 		for(Map.Entry<Country, List<Country>> countryAndNeighbours : mapContents.getCountryAndNeighbors().entrySet()) {
-			builder.append("\n"+countryAndNeighbours.getKey().getCountryName()+",");
-			builder.append("0,0");
+			mapFileContents.append("\n"+countryAndNeighbours.getKey().getCountryName()+",");
+			mapFileContents.append("0,0");
 			List<Country> neighbours = countryAndNeighbours.getValue();
 			for(Country country : neighbours) {
-			builder.append(","+country.getCountryName());
+			mapFileContents.append(","+country.getCountryName());
 			}
 		}
-		
-		System.out.println(builder);
+		fileName = fileName + ".map";
+		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
+            out.print(mapFileContents);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
-/**
- * This method returns the builder 
- * this is being used in CreateMapFileTest to test if the map is built as per the format
- * @return
- */
-	public StringBuilder getBuilder() {
-		return builder;
-		
+	
+	public StringBuilder getMapFileContents() {
+		return mapFileContents;
 	}
 }

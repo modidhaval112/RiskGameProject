@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
+
 import com.concordian.riskGame.Model.MapContents;
 import com.concordian.riskGame.Model.MapOperations;
-
+import com.concordia.riskGame.entity.Continent;
+import com.concordia.riskGame.entity.Country;
 
 /**
  * This class is for the user driven creation of the Map File
@@ -36,17 +37,15 @@ public class CreateMapFile {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
 		numberOfContinents = scanner.nextInt();
-		
-		for(int i=1; i<=numberOfContinents; i++) {
+		try {
+		for(int i=1;i<=numberOfContinents;i++) {
 			System.out.println("Enter the name of the Continent"+ i);
 			nameOfContinents.add(scanner.next());
-		} 
-		
+		}
 		for(int i=0;i<numberOfContinents;i++) {
 			System.out.println("Enter the number of Countries in the Continent : " + nameOfContinents.get(i));
 			int numberOfCountries = scanner.nextInt(); // add number format exception
 			System.out.println("Enter the countries that belong to the Continent : "+nameOfContinents.get(i));
-			
 			for(int j=0;j<numberOfCountries;j++) {
 				 String countryName = scanner.next();
 				 nameOfCountries.add(countryName);
@@ -54,17 +53,14 @@ public class CreateMapFile {
 				 countries.add(country);
 			}
 			scanner.nextLine();
-			
 			Continent continent = new Continent(nameOfContinents.get(i));
 			continentsWithItsCountries.put(continent, countries);
 		}
-		
 		for(int i=0;i<countries.size();i++) {
 			System.out.println("Enter the neighbouring countries to the country\""  + countries.get(i).getCountryName() + "\"in \",\"(comma) seperated values " );
 			String[] neighbouringCountries = scanner.nextLine().split(",");
 			List<Country> neighbourCountries = new ArrayList<>();
 			boolean errorWhileReadingCountry = false;
-			
 			for(String neighbour : neighbouringCountries) {
 				if(neighbour.equals(countries.get(i).getCountryName())) {
 					errorWhileReadingCountry = true;
@@ -81,6 +77,12 @@ public class CreateMapFile {
 			}
 			countriesWithItsNeighbours.put(countries.get(i), neighbourCountries);
 		}
+		}catch (Exception InputMismatchException) {
+			System.out.println("Please enter a valid input ");
+			//main(null);
+		} 
+			
+		
 		
 		System.out.println("Please Enter the Name of The Map that you want to create");
        // Scanner scanMapFileName = new Scanner(System.in);
@@ -97,7 +99,6 @@ public class CreateMapFile {
 		String[] neighbouringCountries = scanner.nextLine().split(",");
 		List<Country> neighbourCountries = new ArrayList<>();
 		boolean errorWhileReadingCountry = false;
-		
 		for(String neighbour : neighbouringCountries) {
 			if(neighbour.equals(countryName)) {
 				reenterCountries(countryName,scanner,continent);
