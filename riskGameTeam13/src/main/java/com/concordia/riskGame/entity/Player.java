@@ -23,6 +23,20 @@ public class Player  implements Serializable {
     public int totalArmies;
     public int reinforcementArmies;
     public List<Country> assignedCountries;
+    public Map<Player, List<Country>> playerAssign;
+    public Player() {
+    	
+	}
+	public Player(String name) {
+		this.name = name;
+	}
+	public Map<Player, List<Country>> getPlayerAssign() {
+		return playerAssign;
+	}
+	public void setPlayerAssign(Map<Player, List<Country>> playerAssign) {
+		this.playerAssign = playerAssign;
+	}
+
 	public String getName() {
 		return name;
 	}
