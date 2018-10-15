@@ -70,13 +70,11 @@ public class MapParseController {
 		try {
 
 			fileObject = new File(filePath);
-<<<<<<< HEAD
+
 			numberOfPlayers = Integer.parseInt(numberCombo);
 			
 			
-=======
 			System.out.println("File Path " + filePath);
->>>>>>> ee9b2b4e3b291e7c09707b8cf5852398cd5c9c63
 
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			
@@ -444,13 +442,12 @@ public class MapParseController {
 			}
 		}
 			
-<<<<<<< HEAD
+
 			/*gameDriverObject = new  GameDriver();
 			gameDriverObject.gamePhase();*/
-=======
+
 			//gameDriverObject = new  GameDriver();
 			//gameDriverObject.gamePhase();
->>>>>>> ee9b2b4e3b291e7c09707b8cf5852398cd5c9c63
 			
 	}			
 		
