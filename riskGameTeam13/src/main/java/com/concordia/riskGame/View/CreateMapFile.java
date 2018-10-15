@@ -1,4 +1,4 @@
-package com.concordian.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,8 +8,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.concordian.riskGame.Model.MapContents;
-import com.concordian.riskGame.Model.MapOperations;
+import com.concordia.riskGame.Model.MapContents;
+import com.concordia.riskGame.Model.MapOperations;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 

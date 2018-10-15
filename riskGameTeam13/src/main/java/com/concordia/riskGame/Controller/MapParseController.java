@@ -1,4 +1,4 @@
-package com.concordian.riskGame.Controller;
+package com.concordia.riskGame.Controller;
 
 import java.io.BufferedReader;
 
@@ -18,14 +18,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JOptionPane;
 
+import com.concordia.riskGame.Model.MapContents;
+import com.concordia.riskGame.View.GameDriver;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;
 import com.concordia.riskGame.exception.InvalidMapFileException;
 import com.concordia.riskGame.util.MapValidator;
 import com.concordia.riskGame.util.ReadConfiguration;
-import com.concordian.riskGame.Model.MapContents;
-import com.concordian.riskGame.View.GameDriver;
 
 
 

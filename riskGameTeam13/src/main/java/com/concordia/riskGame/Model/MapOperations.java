@@ -1,4 +1,4 @@
-package com.concordian.riskGame.Model;
+package com.concordia.riskGame.Model;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
