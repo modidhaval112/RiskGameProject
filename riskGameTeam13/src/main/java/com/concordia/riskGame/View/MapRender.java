@@ -1,4 +1,4 @@
-package com.concordian.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.io.File;
 

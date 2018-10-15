@@ -1,4 +1,4 @@
-package com.concordian.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,9 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+
+import com.concordia.riskGame.Model.MapContents;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
-import com.concordian.riskGame.Model.MapContents;
 
 /**
  * @author saich

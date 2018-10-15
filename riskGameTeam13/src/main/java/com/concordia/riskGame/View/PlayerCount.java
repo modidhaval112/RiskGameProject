@@ -1,4 +1,4 @@
-package com.concordian.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -25,8 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.concordia.riskGame.Controller.MapParseController;
 import com.concordia.riskGame.util.ReadConfiguration;
-import com.concordian.riskGame.Controller.MapParseController;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;

@@ -1,9 +1,9 @@
-package com.concordian.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.util.Scanner;
 
+import com.concordia.riskGame.View.PlayerCount;
 import com.concordia.riskGame.util.ReadConfiguration;
-import com.concordian.riskGame.View.PlayerCount;
 
 public class GameDriver {
 
