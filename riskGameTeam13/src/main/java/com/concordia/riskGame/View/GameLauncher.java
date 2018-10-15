@@ -47,6 +47,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private JLabel titleLabel;
 	private PlayerCount playerCount;
 	private CreateMapFile createMapFile;
+	private MapEditView editObject;
 	
 
 	public GameLauncher() {
@@ -151,7 +152,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		} else if (event.getSource() == editMapButton) {
 			System.out.println("#### editMapMapButton  is clicked ####");
 			gameFrame.setVisible(false);
-			PlayerCount p = new PlayerCount();
+			editObject= new MapEditView();
 			
 		} else if (event.getSource() == exitButton) {
 			System.exit(0);
