@@ -47,7 +47,7 @@ public class PlayerCount extends JFrame implements ActionListener
 
 {
 
-	private String[] playerCounterArray;
+	private String[] playerCounterArray = {"3","4","5"};
 	private ReadConfiguration readConfigurationObject;
 	private int noOfPlayers;
 	private JFrame countFrame;
@@ -93,7 +93,7 @@ public class PlayerCount extends JFrame implements ActionListener
 		}
 
 		System.out.println("### Read Config value ####" + readConfigurationObject.getPlayerCount());
-		playerCounterArray = arrayOfPlayer();
+		/*playerCounterArray = arrayOfPlayer();*/
 
 		countFrame.getContentPane().setLayout(null);
 
@@ -172,7 +172,7 @@ public class PlayerCount extends JFrame implements ActionListener
 	public String[] arrayOfPlayer() {
 		int playerSize = Integer.parseInt(readConfigurationObject.getPlayerCount());
 		playerCounterArray = new String[playerSize];
-
+		
 		for (int i = 0; i < playerSize; i++) {
 			number = number + 1;
 			playerCounterArray[i] = Integer.toString(number);
