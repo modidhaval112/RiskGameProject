@@ -25,6 +25,7 @@ import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;
 import com.concordia.riskGame.exception.InvalidMapFileException;
 import com.concordia.riskGame.util.MapValidator;
+import com.concordia.riskGame.util.RandomAssignment;
 import com.concordia.riskGame.util.ReadConfiguration;
 
 
@@ -98,7 +99,19 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			
-			playerNameAssignment();
+			RandomAssignment randonAssignment = new RandomAssignment();
+			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
+			
+			for ( Player key : playerObject.getPlayerAssign().keySet() ) {
+			    System.out.println("Player Name : " +  key.getName() );
+			    for (int i = 0; i < key.getAssignedCountries().size(); i++) {
+					System.out.println("     Assigned Of Countries : " + playerObject.getPlayerAssign().get(key).get(i).getCountryName());
+				}
+			    System.out.println("");
+			}
+
+			
+			//playerNameAssignment();
 			
 			
 		
