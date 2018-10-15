@@ -31,7 +31,8 @@ import javax.swing.UIManager;
  * The functionality of the class is to present the viewer a menu to start the
  * game , exit etc
  *
- * @author Team 13 Fall 2018
+ * @author Darwin Anirudh -Team 13
+ * @author Dheeraj As - Team 13
  */
 
 public class GameLauncher extends JFrame implements ActionListener {

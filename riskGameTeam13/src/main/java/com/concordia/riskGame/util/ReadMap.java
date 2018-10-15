@@ -109,6 +109,7 @@ public class ReadMap {
 			gameMap.setMapContinentCountry(mapContinentCountry);
 			gameMap.setContinentCountry(continentCountry);
 			gameMap.setLabelCount(labelCount);
+			System.out.println("Label Count  : " + labelCount);
 			if (!setContinent.isEmpty()) {
 				gameMap.setSetContinent(setContinent);
 			}
