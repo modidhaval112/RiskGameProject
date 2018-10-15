@@ -43,6 +43,7 @@ public class MapParseController {
 	private BufferedReader bufferReaderForFile;
 	private MapContents mapContentsObj;
 	private String mapAuthorName;
+	private int numberOfPlayers;
 	private String[] splitUtllityString;
 	private List<Continent> contitentList;
 	private List<Country> countryList;
@@ -67,6 +68,9 @@ public class MapParseController {
 		try {
 
 			fileObject = new File(filePath);
+			numberOfPlayers = Integer.parseInt(numberCombo);
+			
+			
 
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			
@@ -86,6 +90,8 @@ public class MapParseController {
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			
 			playerNameAssignment();
+			
+			
 		
 	/*		gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase();
@@ -346,10 +352,11 @@ public class MapParseController {
 		System.out.println("##### Number of Players are                     ###### :"+readConfigurationObject.getPlayerCount());
 		playerList = new ArrayList();
 		
-		for (int i=0;i < Integer.parseInt(readConfigurationObject.getPlayerCount()) ;i++ )
+		
+		for (int i=0;i < numberOfPlayers ;i++ )
 		{
 			playerObject = new Player();
-			playerObject.name="Player"+i;
+			playerObject.name="Player"+"-"+i;
 			
 			playerList.add(playerObject);
 			System.out.println("####### The player name is #########"+playerObject.getName());
@@ -368,17 +375,20 @@ public class MapParseController {
 		countryListClone = countryList;
 		List<Player> playerListClone = new ArrayList();
 		playerListClone = playerList;
-		int count =4;
+		int count = numberOfPlayers -1;
 		int index;
 		for (Country country : countryList)
 		{
 		
 			System.out.println("The country name is :"+country.getCountryName());
 			
-			
-			
-			
 			index = count;
+			if(count ==0)
+			{
+				count = getRandomInteger(numberOfPlayers,1);
+				
+				
+			}
 			
 			System.out.println("The index is "+index);
 			Player playerInstance = playerListClone.get(index);
@@ -393,15 +403,11 @@ public class MapParseController {
 			playerInstance.setAssignedCountries(assignedCountryList);
 			Collections.replaceAll(playerList,playerList.get(index),playerInstance);
 		
-			if(count ==0)
-			{
-				count = getRandomInteger(5,1);
-				
-				
-			}
-			
-			System.out.println("The random number is :"+count);
 			count = count - 1;
+			
+			
+			
+			
 			
 			
 			
@@ -429,8 +435,8 @@ public class MapParseController {
 			}
 		}
 			
-			gameDriverObject = new  GameDriver();
-			gameDriverObject.gamePhase();
+			/*gameDriverObject = new  GameDriver();
+			gameDriverObject.gamePhase();*/
 			
 	}			
 		
@@ -438,10 +444,6 @@ public class MapParseController {
 		
 		
 		
-		for (Country country : countryList)
-		{
-			
-		}
 		
 		
 		
