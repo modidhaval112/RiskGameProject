@@ -28,7 +28,9 @@ public class MapOperations {
 		for(Map.Entry<Country, List<Country>> countryAndNeighbours : mapContents.getCountryAndNeighbors().entrySet()) {
 			mapFileContents.append("\n"+countryAndNeighbours.getKey().getCountryName()+",");
 			mapFileContents.append("0,0");
+			
 			List<Country> neighbours = countryAndNeighbours.getValue();
+			mapFileContents.append(neighbours.get(0).getBelongsToContinent());
 			for(Country country : neighbours) {
 			mapFileContents.append(","+country.getCountryName());
 			}
