@@ -77,7 +77,9 @@ public class MapParseController {
 
 			MapValidator mapValidator = new MapValidator();
 			mapValidator.init(fileObject);
-
+			if(!mapValidator.getValidMapFlag()) {
+				throw new InvalidMapFileException("Invalid Map File");
+			}
 			
 			readMapElements(bufferReaderForFile);
 
