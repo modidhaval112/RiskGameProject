@@ -1,13 +1,11 @@
 package com.concordia.riskGame.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
 /**
  * This Class implements the Dice rolling functionality.
  * 
  * @author Dheeraj As
- *
  */
 public class Dice {
 	
@@ -16,11 +14,11 @@ public class Dice {
 	private static int diceBound = 7;
 	
 		
-/**
- * This Method implements the random dice rolling
- * @param numberOfDice
- * @return
- */
+	/**
+	 * This Method implements the random dice rolling
+	 * @param numberOfDice
+	 * @return diceBox Dice Object
+	 */
 	public static Dice rollDice(int numberOfDice) {
 		
 		Dice diceBox= new Dice();
@@ -35,16 +33,26 @@ public class Dice {
 	}
 	
 	
-	// method to input the Number of dice to be rolled
-    public void setNumberOfDice(int numberOfDice) {
+	/**
+	 * This method sets number of Dice
+	 * @param numberOfDice
+	 */
+	public void setNumberOfDice(int numberOfDice) {
 	    this.numberOfDice = numberOfDice;
 	}
 	
-    
+    /**
+     * this method returns number of dice. 
+     * @return noberOfDice
+     */
 	public int getNumberOfDice() {
 		return numberOfDice;
 	}
 	
+	/**
+	 * This method returns integer array pf resulted dice.
+	 * @return resultOfDice Result Dice Array
+	 */
 	public int[] getDiceRollResult () {
 		return resultOfDice;
 	}	
