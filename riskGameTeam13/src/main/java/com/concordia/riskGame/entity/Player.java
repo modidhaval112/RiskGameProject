@@ -35,7 +35,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method is used to return Map of Player and Countries assigned to him.
-	 * @returnplayerAssign Players and assigned countries to him
+	 * @return playerAssign Players and assigned countries to him
 	 */
 	public Map<Player, List<Country>> getPlayerAssign() {
 		return playerAssign;
