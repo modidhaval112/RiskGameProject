@@ -1,31 +1,20 @@
 package com.concordia.riskGame.View;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import java.awt.Dimension;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
 import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 /**
  * The functionality of the class is to present the viewer a menu to start the
@@ -34,7 +23,6 @@ import javax.swing.UIManager;
  * @author Darwin Anirudh -Team 13
  * @author Dheeraj As - Team 13
  */
-
 public class GameLauncher extends JFrame implements ActionListener {
 
 	private JFrame gameFrame;
@@ -49,7 +37,9 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private CreateMapFile createMapFile;
 	private MapEditView editObject;
 	
-
+	/**
+	 * This method launches the game
+	 */
 	public GameLauncher() {
 		try {
 			initUI();
@@ -59,6 +49,9 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * this method initilize the UI of the game
+	 */
 	public void initUI() {
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -99,7 +92,6 @@ public class GameLauncher extends JFrame implements ActionListener {
 		titleLabel.setForeground(Color.black);
 		titleLabel.setFont(new Font("Sans Serif", Font.PLAIN, 14));
 	
-		
 		startGameButton.setBounds(200, 90, 100, 30);
 		startGameButton.addActionListener(this);
 
@@ -112,25 +104,28 @@ public class GameLauncher extends JFrame implements ActionListener {
 		exitButton.setBounds(200, 390, 100, 30);
 		exitButton.addActionListener(this);
 		
-	
 		gameFrame.getContentPane().add(titleLabel);
 		gameFrame.getContentPane().add(startGameButton);
 		gameFrame.getContentPane().add(createMapButton);
 		gameFrame.getContentPane().add(editMapButton);
 		gameFrame.getContentPane().add(exitButton);
-		
-
 		gameFrame.getContentPane().add(gamePanel);
 		gameFrame.setVisible(true);
 
-
 	}
 
+	/**
+	 * main method
+	 * @param args 
+	 */
 	public static void main(String[] args) {
 		GameLauncher ex = new GameLauncher();
 
 	}
 
+	/**
+	 * This method taked event as an input and perform task depending on the event
+	 */
 	public void actionPerformed(ActionEvent event) {
 
 		String action = event.getActionCommand();
@@ -160,11 +155,4 @@ public class GameLauncher extends JFrame implements ActionListener {
 		}
 
 	}
-
-	
-	
-	                                                                           
-	
-
-
 }
