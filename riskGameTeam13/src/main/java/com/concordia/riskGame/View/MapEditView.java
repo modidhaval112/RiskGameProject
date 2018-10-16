@@ -27,6 +27,7 @@ import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 
 /**
+ * Class to edit the loaded map
  * @author saich
  *
  */
@@ -42,18 +43,20 @@ public class MapEditView extends java.awt.Frame {
 	private JButton renameCountry = new JButton();
 	private List<Country> CountriesList;
 	private MapContents mapContentsObj;
-
-
-
-
 	private JFrame frame = new JFrame();
-	private JPanel   panel = new JPanel();
-	
+	private JPanel   panel = new JPanel();	
 	private JTextField AddText = new JTextField("Enter Country or Continent to add or rename", 20);
+	
+	/**
+	 * Default Constructor
+	 */
 	public MapEditView() {
 		MapDefinition();
 	}
 
+	/**
+	 * This method edits the map content
+	 */
 	private void MapDefinition() {
 		headingLabel.setText(" Please Choose your operation to rename,remove or add Continent or Country from Map  ");
 		headingLabel.setVisible(true);
@@ -66,7 +69,6 @@ public class MapEditView extends java.awt.Frame {
 		removeCountry.setName("removeCountryButton");
 		removeCountry.setVisible(true);
 
-
 		addCountry.setText("AddCountry");
 		addCountry.setName("addCountryButton");
 		addCountry.setVisible(true);
@@ -74,7 +76,6 @@ public class MapEditView extends java.awt.Frame {
 		addContinent.setText("AddContinent");
 		addContinent.setName("addContinentButton");
 		addContinent.setVisible(true);
-
 
 		renameContinent.setText("RenameContinent");
 		renameContinent.setName("renameContinentButton");
@@ -84,11 +85,6 @@ public class MapEditView extends java.awt.Frame {
 		renameCountry.setName("renameCountryButton");
 		renameCountry.setVisible(true);
 
-
-
-
-
-
 		frame.setTitle("Edit Map");
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
@@ -96,26 +92,21 @@ public class MapEditView extends java.awt.Frame {
 		panel.setBackground(Color.cyan);
 		GridBagLayout layout = new GridBagLayout();
 
-
 		panel.setLayout(layout);        
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		gbc.fill = GridBagConstraints.BOTH;
-
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		panel.add(label1,gbc);
-
 
 		gbc.gridx = 2;
 		gbc.gridy = 4;
 		panel.add(addCountry,gbc);
 
-
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		panel.add(addContinent,gbc);
-
 
 		gbc.gridx = 1;
 		gbc.gridy = 3;
@@ -162,14 +153,11 @@ public class MapEditView extends java.awt.Frame {
 		//list.setBounds(100,100, 75,75);  
 		listScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Countries List",TitledBorder.CENTER, TitledBorder.TOP));
 
-
-
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 2;
 
 		panel.add(listScroller,gbc);
-
 
 		mapContentsObj = new MapContents();
 		//CountriesList=mapContentsObj.getCountries();
@@ -186,19 +174,13 @@ public class MapEditView extends java.awt.Frame {
 		//list.setBounds(100,100, 75,75);  
 		listScroller2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Countinents List",TitledBorder.CENTER, TitledBorder.TOP));
 
-
 		gbc.gridx = 2;
 		gbc.gridy = 1;
 		gbc.gridwidth = 2;
 
 		panel.add(listScroller2,gbc);
-
 		frame.add(panel);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
 	}
 }
 
