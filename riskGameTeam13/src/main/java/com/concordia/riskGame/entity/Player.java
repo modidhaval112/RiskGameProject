@@ -22,7 +22,7 @@ public class Player implements Serializable {
 	/**
 	 * default constructor
 	 */
-	private Player() {
+	public Player() {
 	}
 
 	/**
