@@ -24,8 +24,8 @@ public class ReadMap {
 	/**
 	 * method to read the .map file and along with that setting all the 
 	 * attributes of GameMap Object
-	 * @param file : File Object
-	 * @return : GameMap Object
+	 * @param file File Object
+	 * @return gameMap GameMap Object
 	 */
 	public GameMap readMapFile(File file) {
 

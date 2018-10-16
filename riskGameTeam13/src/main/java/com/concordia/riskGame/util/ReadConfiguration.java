@@ -1,99 +1,81 @@
- package com.concordia.riskGame.util;
+package com.concordia.riskGame.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ReadConfiguration   
-{
+/**
+ * this class reads Input put stream
+ * @author Dhaval
+ *
+ */
+public class ReadConfiguration {
 
 	private InputStream inputStream;
 	private String playerCount;
 
-	
-	
-	public ReadConfiguration()  
-	{
-		
-		
-
-		try 
-		{
+	/**
+	 * this method is to read configurations file
+	 */
+	public ReadConfiguration() {
+		try {
 			Properties prop = new Properties();
 			String propFileName = "application.properties";
 
 			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
-			if (inputStream != null)
-			{
+			if (inputStream != null) {
 				prop.load(inputStream);
-			} else 
-			{
+			} else {
 				throw new FileNotFoundException("Property File :'" + propFileName + "' not found in the classpath");
 			}
 
-			
 			playerCount = prop.getProperty("playerCount");
 			setPlayerCount(playerCount);
-			
-			
-		} catch (Exception e) 
-		{
+
+		} catch (Exception e) {
 			System.out.println("Exception: " + e);
-		}
-		finally 
-		{
-			try 
-			{
+		} finally {
+			try {
 				inputStream.close();
-			} 
-			catch (IOException e) 
-			{
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 
 	}
 
-
-
-	private void setPlayerCount(int playerCount2) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	public InputStream getInputStream() 
-	{
+	/**
+	 * This method returns Input Stream
+	 * @return inputStream Input Stream
+	 */
+	public InputStream getInputStream() {
 		return inputStream;
 	}
 
-
-
-	public void setInputStream(InputStream inputStream) 
-	{
+	/**
+	 * This method sets Input Stream
+	 * @param inputStream Input Stream
+	 */
+	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
 
-
-
-	public String getPlayerCount() 
-	{
+	/**
+	 * This method returns number of players
+	 * @return playCount number of players
+	 */
+	public String getPlayerCount() {
 		return playerCount;
 	}
 
-
-
-	public void setPlayerCount(String playerCount) 
-	{
+	/**
+	 * This method sets number of Player
+	 * @param playerCount number of Players
+	 */
+	public void setPlayerCount(String playerCount) {
 		this.playerCount = playerCount;
 	}
-	
-	
-	
-	
 
 }
