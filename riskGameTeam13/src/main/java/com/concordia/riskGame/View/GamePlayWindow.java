@@ -13,13 +13,17 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 
+/**
+ * This class opens player Window
+ * @author Darwin
+ */
 public class GamePlayWindow 
 {
-
 	private JFrame frmConcordiaConquest;
 
 	/**
-	 * Launch the application.
+	 * This method launches the game
+	 * @param args
 	 */
 	public static void main(String[] args) 
 	{

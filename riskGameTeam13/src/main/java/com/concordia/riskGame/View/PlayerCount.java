@@ -1,39 +1,24 @@
 package com.concordia.riskGame.View;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.awt.Window;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.concordia.riskGame.Controller.MapParseController;
 import com.concordia.riskGame.util.ReadConfiguration;
-
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Component;
-import javax.swing.JScrollPane;
 
 /**
  * This Class performs actions for selecting the number of players from property
@@ -46,7 +31,6 @@ import javax.swing.JScrollPane;
 public class PlayerCount extends JFrame implements ActionListener
 
 {
-
 	private String[] playerCounterArray = {"3","4","5"};
 	private ReadConfiguration readConfigurationObject;
 	private int noOfPlayers;
@@ -130,6 +114,7 @@ public class PlayerCount extends JFrame implements ActionListener
 	/**
 	 * This function implements actions when okay button is clicked and presents
 	 * user the option to select the map file
+	 * @param event User Event
 	 */
 	public void actionPerformed(ActionEvent event) {
 		try {
@@ -167,7 +152,7 @@ public class PlayerCount extends JFrame implements ActionListener
 
 	/**
 	 * This function gets the number of players from ReadConfiguration class and
-	 * returns String array.
+	 * @return playerCounterArray String Array of Players
 	 */
 	public String[] arrayOfPlayer() {
 		int playerSize = Integer.parseInt(readConfigurationObject.getPlayerCount());
@@ -182,36 +167,67 @@ public class PlayerCount extends JFrame implements ActionListener
 
 	}
 
+	/**
+	 * This method get the filePath
+	 * @return filePath
+	 */
 	public String getFilePath() {
 		return filePath;
 	}
 
+	/**
+	 * this method sets the filePath
+	 * @param filePath path of the file
+	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * method to get Player Array
+	 * @return playerCounterArray player array
+	 */
 	public String[] getPlayerCounter() {
 		return playerCounterArray;
 	}
 
+	/**
+	 * method to set player Array
+	 * @param playerCounter Alayer Array
+	 */
 	public void setPlayerCounter(String[] playerCounter) {
 		this.playerCounterArray = playerCounter;
 	}
 
+	/**
+	 * method to get ReadConfiguration object
+	 * @return readConfigurationObject ReadConfiguration  object
+	 */
 	public ReadConfiguration getReadConfig() {
 		return readConfigurationObject;
 	}
 
+	/**
+	 * method to set ReadConfiguration object
+	 * @param readConfig ReadConfiguration  object
+	 */
 	public void setReadConfig(ReadConfiguration readConfig) {
 		this.readConfigurationObject = readConfig;
 	}
 
+	/**
+	 * method to get numberOfPlayers
+	 * @return noOfPlayers number of players
+	 */
 	public int getNoOfPlayers() {
 		return noOfPlayers;
 	}
 
+	/**
+	 * method to set number of players
+	 * @param noOfPlayers number of Players
+	 */
 	public void setNoOfPlayers(int noOfPlayers) {
 		this.noOfPlayers = noOfPlayers;
 	}
-
 }
