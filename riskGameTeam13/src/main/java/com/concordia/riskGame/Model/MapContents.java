@@ -7,26 +7,33 @@ import com.concordia.riskGame.Model.MapContents;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 
+
+/**
+ * This class contains getters and setters for MapContents attributes
+ * 
+ * @author Dheeraj As
+ */
 public class MapContents {
 
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 	private String mapAuthorName;
 	
-	
 	/**
-	 * This method is to get Hashmap of map author name
-	 * @return  countryAndNeighbors Hashmap of countries and its list of neighbors.
+	 * This method is to get map author name
+	 * @return  mapAuthorName
 	 */
-	
-	
 	public String getMapAuthorName() {
 		return mapAuthorName;
 	}
+	
+	/**
+	 * This method is to set map author name
+	 * @param  mapAuthorName
+	 */
 	public void setMapAuthorName(String mapAuthorName) {
 		this.mapAuthorName = mapAuthorName;
 	}
-
 	
 	/**
 	 * This method is to get Hashmap of countries and its list of neighbors.
@@ -43,6 +50,7 @@ public class MapContents {
 	public void setCountryAndNeighbors(HashMap<Country, List<Country>> countryAndNeighbors) {
 		this.countryAndNeighbors = countryAndNeighbors;
 	}
+	
 	/**
 	 * Method to get Continent and its countries
 	 * @return  continentAndItsCountries Hashmap of continents and its list of countries.
@@ -50,6 +58,7 @@ public class MapContents {
 	public HashMap<Continent, List<Country>> getContinentAndItsCountries() {
 		return continentAndItsCountries;
 	}
+	
 	/**
 	 * Method to set Continent and its countries
 	 * @param continentAndItsCountries Hashmap of continents and its list of countries.

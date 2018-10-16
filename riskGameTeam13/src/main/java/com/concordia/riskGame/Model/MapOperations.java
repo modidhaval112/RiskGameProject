@@ -9,10 +9,22 @@ import java.util.Map;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 
+/**
+ * This class performs different operations for the map file
+ * 
+ * @author Sandeep
+ *
+ */
 public class MapOperations {
 	
 	private StringBuilder mapFileContents;
 	
+	
+	/**
+	 * This method creates .map file after taking inputs from the user
+	 * @param mapContents
+	 * @param fileName
+	 */
 	public void writeMapFile(MapContents mapContents,String fileName) {
 		mapFileContents = new StringBuilder();
 		mapFileContents.append("[MAP]");
@@ -44,6 +56,10 @@ public class MapOperations {
         }
 	}
 	
+	/**
+	 * This method returns map contents in String builder
+	 * @return mapFileContents Map File content
+	 */
 	public StringBuilder getMapFileContents() {
 		return mapFileContents;
 	}
