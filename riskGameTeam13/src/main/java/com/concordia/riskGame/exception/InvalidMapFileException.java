@@ -1,14 +1,13 @@
 package com.concordia.riskGame.exception;
 
-
 /**
  * This class contains custom exception for Invalid map file.
- * @author d_modi
+ * @author D_Modi
  */
 public class InvalidMapFileException extends Exception{
 	
     /**
-     * Parameterless Constructor
+     * Default Constructor
      */
     public InvalidMapFileException() {}
 
