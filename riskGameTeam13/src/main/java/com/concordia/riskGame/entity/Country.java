@@ -16,6 +16,7 @@ public class Country {
 	private String belongsToContinent;
 	private int startPixel;
 	private int endPixel;
+	private int armies;
 	
 	/***
 	 *Default Constructor 
@@ -125,4 +126,16 @@ public class Country {
 	public void setEndPixel(int endPixel) {
 		this.endPixel = endPixel;
 	}
+
+
+	public int getArmies() {
+		return armies;
+	}
+
+
+	public void setArmies(int armies) {
+		this.armies = armies;
+	}
+	
+	
 }
