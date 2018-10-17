@@ -74,11 +74,12 @@ public class MapParseController {
 
 			System.out.println("##### The combo box selected number is ##### :" + Integer.parseInt(numberCombo));
 
-			MapValidator mapValidator = new MapValidator();
-			mapValidator.init(fileObject);
-			if (!mapValidator.getValidMapFlag()) {
-				throw new InvalidMapFileException("Invalid Map File");
-			}
+			//MapValidator mapValidator = new MapValidator();
+			//mapValidator.init(fileObject);
+			
+			//if (!mapValidator.getValidMapFlag()) {
+			//	throw new InvalidMapFileException("Invalid Map File");
+			//}
 
 			readMapElements(bufferReaderForFile);
 

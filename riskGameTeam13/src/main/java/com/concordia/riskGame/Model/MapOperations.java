@@ -30,18 +30,18 @@ public class MapOperations {
 	 */
 	public String writeMapFile(MapContents mapContents,String fileName) throws FileNotFoundException {
 		mapFileContents = new StringBuilder();
-		mapFileContents.append("[MAP]");
-		mapFileContents.append("\n");
-		mapFileContents.append("[Continents]\n");
+		mapFileContents.append("[Map]");
+		mapFileContents.append(System.lineSeparator());
+		mapFileContents.append("[Continents]"+System.lineSeparator());
 		for(Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
 			mapFileContents.append(continent.getContinentName());
 			mapFileContents.append("=");
 			mapFileContents.append(continent.getNumberOfCountries());
-			mapFileContents.append("\n");
+			mapFileContents.append(System.lineSeparator());
 		}
-		mapFileContents.append("\n[Territories]\n");
+		mapFileContents.append(System.lineSeparator()+"[Territories]");
 		for(Map.Entry<Country, List<Country>> countryAndNeighbours : mapContents.getCountryAndNeighbors().entrySet()) {
-			mapFileContents.append("\n"+countryAndNeighbours.getKey().getCountryName()+",");
+			mapFileContents.append(System.lineSeparator()+countryAndNeighbours.getKey().getCountryName()+",");
 			mapFileContents.append("0,0");
 			
 			List<Country> neighbours = countryAndNeighbours.getValue();

@@ -28,9 +28,8 @@ import com.concordia.riskGame.util.ReadConfiguration;
  * @author Dheeraj As - Team 13
  *
  */
-public class PlayerCount extends JFrame implements ActionListener
-
-{
+public class PlayerCount extends JFrame implements ActionListener {
+	
 	private String[] playerCounterArray = {"3","4","5"};
 	private ReadConfiguration readConfigurationObject;
 	private int noOfPlayers;
