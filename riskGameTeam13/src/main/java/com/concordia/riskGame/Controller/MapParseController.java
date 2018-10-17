@@ -99,6 +99,10 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			
+			RandomAssignment randonAssignment = new RandomAssignment();
+			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
+			
+			
 				if(Integer.parseInt(numberCombo) == 3)
 				initialArmies = 35; 
 				
