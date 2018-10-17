@@ -60,7 +60,7 @@ public class MapParseController {
 	private Player playerObject;
 	private ReadConfiguration readConfigurationObject;
 	private List<Player> playerList;
-	
+	private int initialArmies;
 	
 	
 	
@@ -99,25 +99,41 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			
-			RandomAssignment randonAssignment = new RandomAssignment();
-			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
+				if(Integer.parseInt(numberCombo) == 3)
+				initialArmies = 35; 
+				
+				if(Integer.parseInt(numberCombo) == 4)
+				initialArmies = 30; 
+					
+				if(Integer.parseInt(numberCombo) == 5)
+				initialArmies = 25; 
+				playerList = new ArrayList();
 			
 			for ( Player key : playerObject.getPlayerAssign().keySet() ) {
 			    System.out.println("Player Name : " +  key.getName() );
+			    System.out.println("     Assigned Of Countries  :"+key.getAssignedCountries().size());
+			   
+			    initialArmies = initialArmies;
+			    key.setTotalArmies(initialArmies);
+			    System.out.println("     Assigned Armies            :"+initialArmies);
 			    for (int i = 0; i < key.getAssignedCountries().size(); i++) {
 					System.out.println("     Assigned Of Countries : " + playerObject.getPlayerAssign().get(key).get(i).getCountryName());
+					
 				}
+			    
+			    playerList.add(key);
 			    System.out.println("");
 			}
 
 			
-			//playerNameAssignment();
+			/*displayPlayerDetails();*/
+			
+			/*playerNameAssignment();*/
 			
 			
-		
-	/*		gameDriverObject = new GameDriver();
-			gameDriverObject.gamePhase();
-	*/		
+			
+				gameDriverObject = new GameDriver();
+				gameDriverObject.gamePhase(playerList,countryAndNeighbors);
 	
 		}
 		
