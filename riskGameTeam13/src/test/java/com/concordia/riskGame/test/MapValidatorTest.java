@@ -14,7 +14,7 @@ import com.concordia.riskGame.util.MapValidator;
  * @author Dheeraj As
  *
  */
-public class MapValidationTest {
+public class MapValidatorTest {
 	
 	File fileValid;
 	File fileInvalidDisconnected;
@@ -42,6 +42,7 @@ public class MapValidationTest {
 		
 		
 	}
+	
    /**
     * This method check if map is valid 
     * The input used is a valid map
@@ -55,10 +56,11 @@ public class MapValidationTest {
 		 
 		 assertTrue(validFlag);
 	}
-/**
- * This method checks if a disconnected map is considered to be invalid
- * @throws InvalidMapFileException 
- */
+	
+	/**
+	 * This method checks if a disconnected map is considered to be invalid
+	 * @throws InvalidMapFileException 
+	 */
 	@Test
 	public void testDisconnectedMap() {
 		
@@ -67,6 +69,7 @@ public class MapValidationTest {
 		 
 		 assertFalse(validFlag);
 	}
+	
     /**
      * This method checks if map with Zero Continents is considered to be invalid
      */
@@ -77,10 +80,10 @@ public class MapValidationTest {
 		 
 		 assertFalse(validFlag);
 	}
+	
     /**
      * This method checks if map with Zero Continents is considered to be invalid
      */
-	
 	@Test
 	public void testZeroCountryMap() {
 		
@@ -90,6 +93,7 @@ public class MapValidationTest {
 		 assertFalse(validFlag);
 		
 	}
+	
    /**
     * This method checks if map with an Unassigned country throws an error
     * 
@@ -103,6 +107,7 @@ public class MapValidationTest {
 		 assertFalse(validFlag);
 		
 	}
+	
     /**
      * 	This method checks if map with a country assigned to two Continents throws an error
      */
@@ -128,6 +133,7 @@ public class MapValidationTest {
 		 assertFalse(validFlag);
 		
 	}
+	
 	/**
 	 * This method checks if a Unidirectional map is considered as valid or not
 	 */
