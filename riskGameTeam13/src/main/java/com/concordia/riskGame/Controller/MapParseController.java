@@ -67,7 +67,7 @@ public class MapParseController {
 	
 	
 
-	public void MapParser(String filePath,String numberCombo) {
+	public MapContents mapParser(String filePath,String numberCombo) {
 		try {
 
 			fileObject = new File(filePath);
@@ -119,19 +119,19 @@ public class MapParseController {
 			gameDriverObject.gamePhase();
 	*/		
 	
-			
 		}
 		
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return mapContentObject;
 
 	}
 
 	private void readMapElements(BufferedReader bufferReader) {
 		try {
-			contitentList = new ArrayList<Continent>();
-			countryList = new ArrayList<Country>();
+			contitentList = new ArrayList<>();
+			countryList = new ArrayList<>();
 			countryAndNeighbors = new HashMap<>();
 
 			while ((currentLine = bufferReader.readLine()) != null) {
@@ -376,7 +376,7 @@ public class MapParseController {
 		for (int i=0;i < numberOfPlayers ;i++ )
 		{
 			playerObject = new Player();
-			playerObject.name="Player"+"-"+i;
+			playerObject.setName("Player"+"-"+i);
 			
 			playerList.add(playerObject);
 			System.out.println("####### The player name is #########"+playerObject.getName());
