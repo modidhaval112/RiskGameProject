@@ -38,7 +38,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private MapEditView editObject;
 	
 	/**
-	 * This method launches the game
+	 * This method launches the game and displays the start menu
 	 */
 	public GameLauncher() {
 		try {
