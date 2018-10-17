@@ -2,10 +2,7 @@ package com.concordia.riskGame.View;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,10 +19,6 @@ import com.concordia.riskGame.entity.Country;
 public class CreateMapFile {
 
 	private static final int List = 0;
-	/**
-	 * In this method we start the creation of the Map by asking the inputs from the user.
-	 * @param args
-	 */
 	private int numberOfContinents;
 	private int numberOfCountries;	
 	private List<String> nameOfContinents = new ArrayList<>();
@@ -34,6 +27,10 @@ public class CreateMapFile {
 	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
 	private List<Country> countries = new ArrayList<>() ;
 	
+	/**
+	 * In this method we start the creation of the Map by asking the inputs from the user.
+	 * 
+	 */
 	public CreateMapFile() {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
@@ -99,6 +96,13 @@ public class CreateMapFile {
 		}
 	}
 
+	/**
+	 * this method ask user countries one more time after giving the wrong information
+	 * @param countryName name of the countries
+	 * @param scanner Scanner object
+	 * @param continent Continent name
+	 * @return neighbourCountries list of neighbor countries
+	 */
 	private List<Country> reenterCountries(String countryName,Scanner scanner,String continent) {
 		System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 		String[] neighbouringCountries = scanner.nextLine().split(",");

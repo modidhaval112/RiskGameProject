@@ -10,11 +10,24 @@ import java.util.Map;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 
+
+/**
+ * This class is created to perform different operations on the map file
+ * @author Sande
+ *
+ */
 public class MapOperations {
 	
 	private StringBuilder mapFileContents;
 	private static final String[] ILLEGAL_CHARACTERS = { "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":" };
 	
+	/**
+	 * This method is used to create map file after taking inputs from the user
+	 * @param mapContents Map Content
+	 * @param fileName name of the file
+	 * @return fileName name of the file
+	 * @throws FileNotFoundException
+	 */
 	public String writeMapFile(MapContents mapContents,String fileName) throws FileNotFoundException {
 		mapFileContents = new StringBuilder();
 		mapFileContents.append("[MAP]");
@@ -58,6 +71,10 @@ public class MapOperations {
 		return fileName;
 	}
 	
+	/**
+	 * method to return map content as a String Builder
+	 * @return mapFileContents map content
+	 */
 	public StringBuilder getMapFileContents() {
 		return mapFileContents;
 	}
