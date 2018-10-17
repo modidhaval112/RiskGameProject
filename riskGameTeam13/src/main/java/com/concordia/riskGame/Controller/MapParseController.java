@@ -147,7 +147,10 @@ public class MapParseController {
 		return mapContentObject;
 
 	}
-
+/**
+ * This method reads the selected map's elements
+ * @param bufferReader
+ */
 	private void readMapElements(BufferedReader bufferReader) {
 		try {
 			contitentList = new ArrayList<>();
@@ -173,6 +176,7 @@ public class MapParseController {
 				if (currentLine.contains("[Continents]")) {
 					while ((currentLine = bufferReader.readLine()) != null && !currentLine.contains("[")) {
 						System.out.println(currentLine);
+						
 						if (!currentLine.isEmpty()) {
 							String[] continentValues = currentLine.split("=");
 							Continent continentObject = new Continent(continentValues[0],
@@ -190,10 +194,12 @@ public class MapParseController {
 					while ((currentLine = bufferReader.readLine()) != null) {
 						if (!currentLine.isEmpty()) {
 							System.out.println(currentLine);
+							
 							String[] territoryValues = currentLine.split(",", 2);
 							String[] adjCountries = territoryValues[1].split(",", 2);
 							String[] adjCountries2 = adjCountries[1].split(",", 2);
 							String[] adjCountries3 = adjCountries2[1].split(",", 2);
+							
 							System.out.println("###### The value of split one is ###### :" + territoryValues[0]);
 							System.out.println(
 									"###### The value of adj split adjCountries3[0] is ###### :" + adjCountries3[0]);
@@ -233,14 +239,14 @@ public class MapParseController {
 
 	}
 
-	public void countryAndNeighboursMap()
-	{
-		try
-		{
+	/**
+	 * Method prints out the countries and its neighbours
+	 */
+	public void countryAndNeighboursMap(){
+		try{
 			System.out.println("######  countryAndNeighbors Map size     #############"+countryAndNeighbors.size());
 			
-			for (Map.Entry<Country, List<Country>> entry : countryAndNeighbors.entrySet())
-			{
+			for (Map.Entry<Country, List<Country>> entry : countryAndNeighbors.entrySet()){
 				
 				System.out.println("##### Key is ##### :"+entry.getKey().getCountryName() + "value size is   "+entry.getValue().size() );
 				
@@ -251,51 +257,45 @@ public class MapParseController {
 			
 			
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
 	
-	public void contitentAndCountriesMap()
-	{
-		try
-		{
+	public void contitentAndCountriesMap() {
+		try {
 			System.out.println("##### Reading countryList ######");
 			continentAndItsCountries = new HashMap<>();
 			
 			Collections.shuffle(contitentList);
 			
 			
-			for(Continent continentInstance : contitentList)
-			{
+			for(Continent continentInstance : contitentList) {
+				
 				System.out.println("Continent Name is "+continentInstance.getContinentName());
 				Continent contientObj = new Continent(continentInstance.getContinentName());
 				List<Country> counList = new ArrayList<Country>();
 				
-				for (Country countryInstance : countryList)
-				{
-					if(countryInstance.getBelongsToContinent().equals(continentInstance.getContinentName()))
-					{
+				for (Country countryInstance : countryList){
+					
+					if(countryInstance.getBelongsToContinent().equals(continentInstance.getContinentName())){
 						counList.add(countryInstance);
 					}
 				}
 				
 				continentAndItsCountries.put(contientObj, counList);
-				
 			}
 			
-			for (Map.Entry<Continent, List<Country>> entry : continentAndItsCountries.entrySet())
-			{
+			for (Map.Entry<Continent, List<Country>> entry : continentAndItsCountries.entrySet()) {
+				
 				System.out.println("##### Key is ##### :"+entry.getKey().getContinentName() + "value size is   "+entry.getValue().size() );
 			}
 			
 			
 			
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -306,26 +306,23 @@ public class MapParseController {
 	
 	
 	public List<Country> getContinentCountries(String belongsToContinent) {
-		try
-		{
+		
+		try {
 			List<Country> couList = new ArrayList<Country>(); 
 			
-			for (int i =0 ;i <countryList.size();i++ )
-			{
-				if (belongsToContinent.equals(countryList.get(i).getBelongsToContinent()))
-				{
+			for (int i =0 ;i <countryList.size();i++ ){
+				
+				if (belongsToContinent.equals(countryList.get(i).getBelongsToContinent())){
 					
 					System.out.println("###### Country name is ###########      :"+countryList.get(i).getCountryName());
 					couList.add(countryList.get(i));
 					
 				}
-				
 			}
 			
 			return couList;
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -386,15 +383,14 @@ public class MapParseController {
 		}
 	}*/
 	
-	public void playerNameAssignment()
-	{
+	public void playerNameAssignment() {
+		
 		readConfigurationObject = new ReadConfiguration();
 		System.out.println("##### Number of Players are                     ###### :"+readConfigurationObject.getPlayerCount());
 		playerList = new ArrayList();
 		
 		
-		for (int i=0;i < numberOfPlayers ;i++ )
-		{
+		for (int i=0;i < numberOfPlayers ;i++ ) {
 			playerObject = new Player();
 			playerObject.setName("Player"+"-"+i);
 			
@@ -409,22 +405,21 @@ public class MapParseController {
 
 	
 	
-	public void randomPlayerAndCountries()
-	{
+	public void randomPlayerAndCountries() {
+		
 		List<Country> countryListClone = new ArrayList();
 		countryListClone = countryList;
 		List<Player> playerListClone = new ArrayList();
 		playerListClone = playerList;
 		int count = numberOfPlayers -1;
 		int index;
-		for (Country country : countryList)
-		{
+		
+		for (Country country : countryList) {
 		
 			System.out.println("The country name is :"+country.getCountryName());
 			
 			index = count;
-			if(count ==0)
-			{
+			if(count ==0) {
 				count = getRandomInteger(numberOfPlayers,1);
 				
 				
@@ -435,22 +430,16 @@ public class MapParseController {
 			
 			
 			List<Country> assignedCountryList = new ArrayList();
-			if(playerInstance.getAssignedCountries()!=null)
-			{
-			assignedCountryList = playerInstance.getAssignedCountries();
+			
+			if(playerInstance.getAssignedCountries()!=null) {
+				assignedCountryList = playerInstance.getAssignedCountries();
 			}
+			
 			assignedCountryList.add(country);
 			playerInstance.setAssignedCountries(assignedCountryList);
 			Collections.replaceAll(playerList,playerList.get(index),playerInstance);
 		
 			count = count - 1;
-			
-			
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -461,19 +450,16 @@ public class MapParseController {
 		
 		
 		
-		for (Player player : playerList)
-		{
+		for (Player player : playerList) {
 			System.out.println("The players name is "+player.getName());
 			
-			if(player.getAssignedCountries()!=null )
-			{
-			System.out.println("The player assigned list size is : "+player.getAssignedCountries().size());
+			if(player.getAssignedCountries()!=null ) {
+				System.out.println("The player assigned list size is : "+player.getAssignedCountries().size());
 			
-			for(int i =0; i <player.getAssignedCountries().size();i++ )
-			{
-				System.out.println("Assigned country of "+player.getName() +" is "  +player.getAssignedCountries().get(i).getCountryName());
+				for(int i =0; i <player.getAssignedCountries().size();i++ ){
+					System.out.println("Assigned country of "+player.getName() +" is "  +player.getAssignedCountries().get(i).getCountryName());
+				}
 			}
-		}
 			
 
 			/*gameDriverObject = new  GameDriver();
@@ -482,7 +468,7 @@ public class MapParseController {
 			//gameDriverObject = new  GameDriver();
 			//gameDriverObject.gamePhase();
 			
-	}			
+		}			
 		
 		
 		
@@ -491,56 +477,50 @@ public class MapParseController {
 		
 		
 		
-	}
+}
 	
 	
 	
-	public  int getRandomInteger(int maximum, int minimum)
-	{ 
+	public  int getRandomInteger(int maximum, int minimum) { 
 		return ((int) (Math.random()*(maximum - minimum))) + minimum; 
 	}
 
 		
-public int getRandomNumber() {
+	public int getRandomNumber() {
 	
-	int randomInt = new Random().nextInt((5-1) + 1);
+		int randomInt = new Random().nextInt((5-1) + 1);
 	
-	if(randomInt == 0)
-	{
-		getRandomNumber();
+		if(randomInt == 0) {
+			getRandomNumber();
+		}
+	
+		System.out.println("Random Int"+randomInt);
+		return randomInt;
 	}
-	
-	System.out.println("Random Int"+randomInt);
-	return randomInt;
-}
 	
 	public Country getRandomCountryList(List<Country> list) {
 
 	    
 	    int index = ThreadLocalRandom.current().nextInt(list.size());		
-	    
 	    return list.get(index);
 	    
 	}
 	
 	
-public Player getRandomPlayerList(List<Player> list) {
+	public Player getRandomPlayerList(List<Player> list) {
 
 	    
 	    int index = ThreadLocalRandom.current().nextInt(list.size());		
-	    
 	    return list.get(index);
 	    
 	}
 
-public int getRandomPlayerListIndex(List<Player> list) {
+	public int getRandomPlayerListIndex(List<Player> list) {
 
     
-    int index = ThreadLocalRandom.current().nextInt(list.size());		
+		int index = ThreadLocalRandom.current().nextInt(list.size());		
+		return index;
     
-    return index;
-    
-}
+	}
 	
-
 }
