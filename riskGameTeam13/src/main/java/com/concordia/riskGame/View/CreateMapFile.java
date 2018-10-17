@@ -1,5 +1,6 @@
 package com.concordia.riskGame.View;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,18 +22,18 @@ import com.concordia.riskGame.entity.Country;
 public class CreateMapFile {
 
 	private static final int List = 0;
+	/**
+	 * In this method we start the creation of the Map by asking the inputs from the user.
+	 * @param args
+	 */
 	private int numberOfContinents;
-	private int numberOfCountries;
+	private int numberOfCountries;	
 	private List<String> nameOfContinents = new ArrayList<>();
 	private List<String> nameOfCountries = new ArrayList<>();
 	private HashMap<Continent, List<Country>> continentsWithItsCountries= new HashMap<>();
 	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
 	private List<Country> countries = new ArrayList<>() ;
 	
-	/**
-	 * In this method we start the creation of the Map by asking the inputs from the user.
-	 * 
-	 */
 	public CreateMapFile() {
 		System.out.println("Enter the number of Continents");
 		Scanner scanner = new Scanner(System.in);
@@ -91,16 +92,13 @@ public class CreateMapFile {
         mapContents.setContinentAndItsCountries(continentsWithItsCountries);
         mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 		MapOperations mapOperations = new MapOperations();
-		mapOperations.writeMapFile(mapContents, fileName);
+		try {
+			mapOperations.writeMapFile(mapContents, fileName);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * This method asks user to re enter countries as the same country can not be its own neighbor
-	 * @param countryName Name of the Country
-	 * @param scanner Scanner Object
-	 * @param continent Name of the Continent
-	 * @return neighbourCountries neighbor countries
-	 */
 	private List<Country> reenterCountries(String countryName,Scanner scanner,String continent) {
 		System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 		String[] neighbouringCountries = scanner.nextLine().split(",");

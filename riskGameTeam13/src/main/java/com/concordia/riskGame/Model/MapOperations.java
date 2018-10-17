@@ -1,6 +1,7 @@
 package com.concordia.riskGame.Model;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
@@ -9,23 +10,12 @@ import java.util.Map;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 
-/**
- * This class performs different operations for the map file
- * 
- * @author Sandeep
- *
- */
 public class MapOperations {
 	
 	private StringBuilder mapFileContents;
+	private static final String[] ILLEGAL_CHARACTERS = { "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<", ">", "|", "\"", ":" };
 	
-	
-	/**
-	 * This method creates .map file after taking inputs from the user
-	 * @param mapContents
-	 * @param fileName
-	 */
-	public void writeMapFile(MapContents mapContents,String fileName) {
+	public String writeMapFile(MapContents mapContents,String fileName) throws FileNotFoundException {
 		mapFileContents = new StringBuilder();
 		mapFileContents.append("[MAP]");
 		mapFileContents.append("\n");
@@ -42,24 +32,32 @@ public class MapOperations {
 			mapFileContents.append("0,0");
 			
 			List<Country> neighbours = countryAndNeighbours.getValue();
-			mapFileContents.append(neighbours.get(0).getBelongsToContinent());
+			mapFileContents.append("," + neighbours.get(0).getBelongsToContinent());
 			for(Country country : neighbours) {
-			mapFileContents.append(","+country.getCountryName());
+			mapFileContents.append("," + country.getCountryName());
 			}
 		}
 		fileName = fileName + ".map";
+		for (int i = 0; i < ILLEGAL_CHARACTERS.length; i++) {
+			if(fileName.contains(ILLEGAL_CHARACTERS[i]))
+			{
+				throw new FileNotFoundException();
+			}
+		}
+		
 		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
             out.print(mapFileContents);
             out.close();
-        } catch (Exception e) {
+        }
+		catch (FileNotFoundException e) {
+			throw new FileNotFoundException();
+        } 
+		catch (Exception e) {
             e.printStackTrace();
         }
+		return fileName;
 	}
 	
-	/**
-	 * This method returns map contents in String builder
-	 * @return mapFileContents Map File content
-	 */
 	public StringBuilder getMapFileContents() {
 		return mapFileContents;
 	}
