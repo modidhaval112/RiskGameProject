@@ -500,11 +500,46 @@ public class MapEditView extends java.awt.Frame {
 			}
 		});
 
+		renameContinent.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String s =  continentsJList.getSelectedValue();
+
+				if(AddText.getText().isEmpty())
+				{
+					setLog("Enter Continent in Textbox");
+
+				}
+				else
+				{
+					setLog("Renaming Continent");
+					renameContinent(s, AddText.getText());
+					frame.validate();
+					frame.repaint();
+					panel.repaint();
+				}
+
+			}
+		});
+
 
 	}
 
 	public void removeContinent(String Continent)
 	{
+
+
+		List<String> continentRemoveCountries =new ArrayList<String>();
+		continentRemoveCountries= continentsAndCountriesMap.get(Continent);
+
+
+
+		for (int i=0 ;i<continentRemoveCountries.size();i++) {
+
+			removeCountry(continentRemoveCountries.get(i));
+		}
+
 		System.out.println("In removing Continent");
 		continentsAndCountriesMap.remove(Continent);
 		continents.removeElement(Continent);
@@ -513,6 +548,11 @@ public class MapEditView extends java.awt.Frame {
 		panel.repaint();
 
 	}
+
+
+
+
+
 
 
 	public void removeCountry(String Country)
@@ -573,13 +613,13 @@ public class MapEditView extends java.awt.Frame {
 		panel.repaint();
 
 	}
-	
+
 	public void setLog(String logger)
 	{
-        String currentText = log.getText();
-        String newLog = new Date() + " " +  logger;
-        String appendLog =newLog + "\n" + currentText;
-        log.setText(appendLog);
+		String currentText = log.getText();
+		String newLog = new Date() + " " +  logger;
+		String appendLog =newLog + "\n" + currentText;
+		log.setText(appendLog);
 
 	}
 
@@ -593,19 +633,14 @@ public class MapEditView extends java.awt.Frame {
 
 			List<String>  continentCountries= new ArrayList<String>();
 			System.out.println(entry.getKey().toString());
-			
-if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
-		{
-	continentCountries.add(Country);
-	System.out.println("continent countries loop are"+continentCountries);
-	continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
-		}
-			
 
-			if(Continent.equals(entry.getKey().toString()) &!entry.getValue().isEmpty())
+
+
+
+			if(Continent.equals(entry.getKey().toString()) &!(entry.getValue()== null))
 
 			{
-				 continentCountries= entry.getValue();
+				continentCountries= entry.getValue();
 
 				continentCountries.add(Country);
 				System.out.println("continent countries are"+continentCountries);
@@ -613,11 +648,16 @@ if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
 			}
 
 
+			if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
+			{
+				continentCountries.add(Country);
+				System.out.println("continent countries loop are"+continentCountries);
+				continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
+			}
+
+
 
 		}
-
-
-
 
 		countryAndNeighborsMap.put(Country,null);
 
@@ -631,9 +671,52 @@ if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
 
 	}
 
+	public void renameContinent(String continent, String renameContinent)
+
+	{
+		String removeFlag="N";
+		List<String>  continentCountriesList = null;
+		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
+		{
+
+
+			if(entry.getKey().equals(continent))
+
+
+			{
+
+				continentCountriesList= entry.getValue();
+
+
+				removeFlag="Y";
+
+
+			}
+		}
+
+
+		if(removeFlag.equals("Y"))
+		{
+
+
+			continentsAndCountriesMap.remove(continent);
+			continents.removeElement(continent);
+			continentsAndCountriesMap.put(renameContinent, continentCountriesList);
+
+
+
+			continents.addElement(renameContinent);
+		}
+
+		frame.validate();
+		frame.repaint();
+		panel.repaint();
+
+	}
+
 	public void EditMapFileChoose() {	
 		try {
-			
+
 			{
 				System.out.println("#### In Choosing the file ####");
 				filenameFilter = new FileNameExtensionFilter(" .map", "map", "map");
@@ -658,8 +741,8 @@ if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
 				}
 			}
 		}
-		
-		
+
+
 		catch (Exception e) {
 			e.printStackTrace();
 		}
