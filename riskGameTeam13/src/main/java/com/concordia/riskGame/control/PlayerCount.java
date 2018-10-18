@@ -1,4 +1,4 @@
-package com.concordia.riskGame.View;
+package com.concordia.riskGame.control;
 
 import java.awt.Color;
 import java.awt.Dimension;
