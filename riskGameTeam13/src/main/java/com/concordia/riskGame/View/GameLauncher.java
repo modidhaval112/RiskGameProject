@@ -148,6 +148,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 			System.out.println("#### editMapMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			editObject= new MapEditView();
+			editObject.EditMapFileChoose();
 			
 		} else if (event.getSource() == exitButton) {
 			System.exit(0);

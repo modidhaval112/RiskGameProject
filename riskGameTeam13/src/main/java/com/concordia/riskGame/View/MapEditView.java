@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +28,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+
+import com.concordia.riskGame.Controller.MapParseController;
+import com.concordia.riskGame.Model.MapContents;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * @author saich
  *
@@ -48,6 +53,11 @@ public class MapEditView extends java.awt.Frame {
 	private JButton addAdjacentCountry = new JButton();
 	private JButton removeAdjacentCountry = new JButton();
 	private JTextArea log = new JTextArea(30,30);
+	private JFileChooser fileChooser;
+	private FileNameExtensionFilter filenameFilter;
+	private JFrame countFrame;
+	private String filePath = null;
+	private MapParseController mapParseObject;
 
 
 	private List<Country> CountriesList;
@@ -580,7 +590,39 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	public void EditMapFileChoose() {	
+		try {
+			
+			{
+				System.out.println("#### In Choosing the file ####");
+				filenameFilter = new FileNameExtensionFilter(" .map", "map", "map");
+				//countFrame.setVisible(true);
+				fileChooser = new JFileChooser();
+				fileChooser.setDialogTitle("Select the desired map file");
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				fileChooser.setFileFilter(filenameFilter);
 
+				int result = fileChooser.showOpenDialog(fileChooser);
+				fileChooser.setLocation(500, 200);
+				fileChooser.setSize(500, 500);
+				fileChooser.setVisible(true);
+
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fileChooser.getSelectedFile();
+					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
+					filePath = selectedFile.getAbsolutePath().toString();
+					mapParseObject = new MapParseController();
+					mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),"5");
+
+				}
+			}
+		}
+		
+		
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 
 }
