@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ import com.concordia.riskGame.entity.Country;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.hamcrest.core.IsNull;
 /**
  * @author saich
  *
@@ -156,33 +159,41 @@ public class MapEditView extends java.awt.Frame {
 		panel.add(labecountries,gbc);
 
 
-		gbc.gridx = 2;
+		gbc.gridx = 0;
 		gbc.gridy = 4;
+		gbc.gridwidth = 4;
+
 		panel.add(addCountry,gbc);
 
 
-		gbc.gridx = 1;
+		gbc.gridx = 4;
 		gbc.gridy = 4;
+		gbc.gridwidth = 4;
+
 		panel.add(addContinent,gbc);
 
 
-		gbc.gridx = 1;
+		gbc.gridx = 0;
 		gbc.gridy = 3;
+		gbc.gridwidth = 4;
+
 		panel.add(renameCountry,gbc);
 
-		gbc.gridx = 2;
+		gbc.gridx = 4;
 		gbc.gridy = 3;
+		gbc.gridwidth = 4;
+
 		panel.add(renameContinent,gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 5;
-		gbc.gridwidth = 2;
+		gbc.gridwidth = 4;
 
 		panel.add(removeCountry,gbc);
 
-		gbc.gridx = 2;
+		gbc.gridx = 4;
 		gbc.gridy = 5;
-		gbc.gridwidth = 2;
+		gbc.gridwidth = 4;
 
 		panel.add(removeContinent,gbc);
 
@@ -197,6 +208,8 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 4;
 		gbc.gridy = 6;
 		gbc.gridwidth = 4;
+
+
 		panel.add(removeAdjacentCountry,gbc);
 
 		gbc.gridx = 0;
@@ -209,8 +222,10 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.gridwidth = 12;
+		gbc.weighty=1;
 
-		panel.add(log,gbc);
+
+		panel.add(scroll,gbc);
 
 
 
@@ -272,8 +287,8 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
-		gbc.weightx=3;
 		gbc.weighty=2;
+		gbc.weightx=0.5;
 
 		panel.add(listScroller,gbc);
 
@@ -293,6 +308,8 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
+		gbc.weighty=2;
+		gbc.weightx=0.5;
 
 		panel.add(listScroller2,gbc);
 
@@ -309,6 +326,8 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 6;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
+		gbc.weightx=0.5;
+		gbc.weighty=2;
 
 		panel.add(ContinentslistScroller,gbc);
 
@@ -325,6 +344,8 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 9;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
+		gbc.weightx=0.5;
+		gbc.weighty=2;
 
 		panel.add(countinentCountrieslistScroller,gbc);
 
@@ -417,7 +438,7 @@ public class MapEditView extends java.awt.Frame {
 			{
 				String s = (String) continentsJList.getSelectedValue();
 				System.out.println("Continent Selected: " + s);
-				log.setText("Continent Removed: " + s);
+				setLog("Continent Removed: " + s);
 				removeContinent(s);
 
 			}
@@ -429,7 +450,7 @@ public class MapEditView extends java.awt.Frame {
 			{
 				String s = (String) countriesJList.getSelectedValue();
 				System.out.println("Country Selected: " + s);
-				log.setText("Country Removed: " + s);
+				setLog("Country Removed: " + s);
 				removeCountry(s);
 
 			}
@@ -444,12 +465,12 @@ public class MapEditView extends java.awt.Frame {
 
 				if(continentsJList.isSelectionEmpty())
 				{
-					log.setText("Select Continent to add Country");
+					setLog("Select Continent to add Country");
 
 				}
 				else if(!s.equals("null"))
 				{
-					log.setText("Country Input is : " + s);
+					setLog("Country Input is : " + s);
 					addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
 				}
 
@@ -464,7 +485,7 @@ public class MapEditView extends java.awt.Frame {
 
 				if(AddText.getText().isEmpty())
 				{
-					log.setText("Enter Continent in Textbox");
+					setLog("Enter Continent in Textbox");
 
 				}
 				else
@@ -552,22 +573,42 @@ public class MapEditView extends java.awt.Frame {
 		panel.repaint();
 
 	}
+	
+	public void setLog(String logger)
+	{
+        String currentText = log.getText();
+        String newLog = new Date() + " " +  logger;
+        String appendLog =newLog + "\n" + currentText;
+        log.setText(appendLog);
+
+	}
 
 	public void addCountry(String Country,String Continent)
 	{
 		System.out.println("In Adding Country");
-		countryAndNeighborsMap.remove(Country);
 		countries.addElement(Country);
 
 		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
 		{
 
+			List<String>  continentCountries= new ArrayList<String>();
+			System.out.println(entry.getKey().toString());
+			
+if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
+		{
+	continentCountries.add(Country);
+	System.out.println("continent countries loop are"+continentCountries);
+	continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
+		}
+			
 
-			List<String>  continentCountries= entry.getValue();
+			if(Continent.equals(entry.getKey().toString()) &!entry.getValue().isEmpty())
 
-			if(Continent.equals(entry.getKey().toString()))
 			{
+				 continentCountries= entry.getValue();
+
 				continentCountries.add(Country);
+				System.out.println("continent countries are"+continentCountries);
 				continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
 			}
 
@@ -612,7 +653,7 @@ public class MapEditView extends java.awt.Frame {
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
 					mapParseObject = new MapParseController();
-					mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),"5");
+					mapParseObject.editMapParsermapParser(selectedFile.getAbsolutePath().toString());
 
 				}
 			}
