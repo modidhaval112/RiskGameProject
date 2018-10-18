@@ -34,7 +34,6 @@ public class GameDriver {
 	private String[] nameArmiesSpilt;
 	private String countryName;
 	private String armiesCount;
-	private IntialArmyAssignment intialArmyAssignObject;
 	private List<Player> gmPlayerList;
 	private HashMap<Country, List<Country>>  gmcountryAndNeighbours;
 	private List<Player> updatedPlayerList = new ArrayList();
@@ -47,9 +46,6 @@ public class GameDriver {
 		List<Player> playerList = new ArrayList();
 		gmcountryAndNeighbours = new HashMap();
 		gmcountryAndNeighbours = countryAndConnected;
-		intialArmyAssignObject = new IntialArmyAssignment();
-		
-		playerList = intialArmyAssignObject.armyAssignment(player);		
 
 		for (Player p : player ) {
 	
