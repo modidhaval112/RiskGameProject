@@ -29,10 +29,11 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
-import com.concordia.riskGame.Controller.MapParseController;
-import com.concordia.riskGame.Model.MapContents;
+import com.concordia.riskGame.control.MapParseController;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
+import com.concordia.riskGame.model.MapContents;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
