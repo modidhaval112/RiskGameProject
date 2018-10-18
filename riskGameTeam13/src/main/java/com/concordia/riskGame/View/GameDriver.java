@@ -107,7 +107,8 @@ public class GameDriver {
 
 		List<Country> assignedCountriesClone = new ArrayList();
 		List<Country> assignedCountriesClone2 = new ArrayList();
-
+		if(!isSourceDestCountrySame(fromCountry,toCountry))
+		{
 		if (isNeighbour(fromCountry, toCountry)) {
 			for (Country countryInstance : player.getAssignedCountries()) {
 				if (countryInstance.getCountryName().equalsIgnoreCase(fromCountry)) {
@@ -154,7 +155,11 @@ public class GameDriver {
 
 			player.setAssignedCountries(connectedCountries);
 		} else {
-			System.out.println("##### IsNeighbour returned false ######");
+			System.out.println("##### Both the countries are not neighbours ######");
+		}
+		}
+		else {
+			System.out.println("##### Source Country and Destination Country can not be the same ######");
 		}
 
 		System.out.println("##### End of Fortify ###### ");
@@ -333,7 +338,15 @@ public class GameDriver {
 	}
 
 	
+	public boolean isSourceDestCountrySame(String sourceCountry,String destinationCountry)
+	{
+		boolean returnValue = true;
+		
+		if(sourceCountry.equalsIgnoreCase(destinationCountry))
+		returnValue = false;
 	
+		return returnValue;
+	}
 	
 	
 	
