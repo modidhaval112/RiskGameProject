@@ -3,7 +3,6 @@ package com.concordia.riskGame.View;
 import java.util.Scanner;
 
 import com.concordia.riskGame.View.PlayerCount;
-import com.concordia.riskGame.util.IntialArmyAssignment;
 import com.concordia.riskGame.util.ReadConfiguration;
 
 import java.util.ArrayList;
