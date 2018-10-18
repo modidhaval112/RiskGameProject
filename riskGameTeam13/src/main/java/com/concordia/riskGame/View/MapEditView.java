@@ -601,7 +601,7 @@ public class MapEditView extends java.awt.Frame {
 			
 			
 			MapContents mapContents = new MapContents();
-			
+			System.out.println();
 
 			mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
