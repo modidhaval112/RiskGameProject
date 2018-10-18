@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JOptionPane;
 
-import com.concordia.riskGame.View.GameDriver;
+import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.View.MapEditView;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
