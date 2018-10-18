@@ -1,4 +1,4 @@
-package com.concordia.riskGame.control;
+package com.concordia.riskGame.model;
 
 import java.io.BufferedReader;
 
@@ -24,7 +24,6 @@ import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;
 import com.concordia.riskGame.exception.InvalidMapFileException;
-import com.concordia.riskGame.model.MapContents;
 import com.concordia.riskGame.util.MapValidator;
 import com.concordia.riskGame.util.RandomAssignment;
 import com.concordia.riskGame.util.ReadConfiguration;
