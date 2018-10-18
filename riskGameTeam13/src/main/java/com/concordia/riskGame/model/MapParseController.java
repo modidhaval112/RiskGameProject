@@ -62,11 +62,12 @@ public class MapParseController {
 	private int initialArmies;
 	private MapEditView mapEditView;
 	private MapValidator mapValidator;
-	
+
 	/**
-	 * This method reads the map file and set the corresponding continents and countries in their respective entity classes.
+	 * This method reads the map file and set the corresponding continents and
+	 * countries in their respective entity classes.
 	 * 
-	 * @param filePath Path of the map file
+	 * @param filePath    Path of the map file
 	 * @param numberCombo Number of players returned from the drop down menu
 	 * 
 	 * @return the mapContent Object with map details enriched
@@ -81,13 +82,13 @@ public class MapParseController {
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			mapValidator = new MapValidator();
 			mapValidator.init(fileObject);
-			
+
 			if (!mapValidator.getValidMapFlag()) {
 				throw new InvalidMapFileException("Invalid Map File");
 			}
-			
+
 			readMapElements(bufferReaderForFile);
-			
+
 			setcontitentAndCountriesMap();
 			mapContentObject = new MapContents();
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
@@ -112,29 +113,24 @@ public class MapParseController {
 				System.out.println("");
 			}
 
-
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase(playerList, countryAndNeighbors);
 
-		}
-		catch(InvalidMapFileException e)
-		{
+		} catch (InvalidMapFileException e) {
 			e.printStackTrace();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mapContentObject;
 
 	}
 
-	
 	/**
 	 * This method get the number of players and returns initial armies
 	 * 
 	 * @param intialArmies initial number of army assigned.
 	 * 
-	 * @return The intial army assignment number 
+	 * @return The initial army assignment number
 	 */
 	public int initialArmyAssignment(int intialArmies) {
 
@@ -158,34 +154,30 @@ public class MapParseController {
 
 		return initialArmies;
 	}
-	
 
 	/**
 	 * The following method reads the file to be edited and edit the map.
 	 * 
 	 * @param filePath Path of the map file.
 	 */
-	
 	public void editMapParsermapParser(String filePath) {
-		
-		try {
-		fileObject = new File(filePath);
-		System.out.println("File Path is  " + filePath);
-		bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
-		mapValidator = new MapValidator();
-		mapValidator.init(fileObject);
-		readMapElements(bufferReaderForFile);
-		setcontitentAndCountriesMap();
-		mapContentObject = new MapContents();
-		mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
-		mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
-		mapEditView = new MapEditView();
-		mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries);
 
+		try {
+			fileObject = new File(filePath);
+			System.out.println("File Path is  " + filePath);
+			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
+			mapValidator = new MapValidator();
+			mapValidator.init(fileObject);
+			readMapElements(bufferReaderForFile);
+			setcontitentAndCountriesMap();
+			mapContentObject = new MapContents();
+			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
+			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
+			mapEditView = new MapEditView();
+			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -200,7 +192,6 @@ public class MapParseController {
 			contitentList = new ArrayList<>();
 			countryList = new ArrayList<>();
 			countryAndNeighbors = new HashMap<>();
-
 			while ((currentLine = bufferReader.readLine()) != null) {
 				if (currentLine.contains("[Map]")) {
 					while ((currentLine = bufferReader.readLine()) != null && !currentLine.contains("[")) {
@@ -209,7 +200,6 @@ public class MapParseController {
 							System.out.println("splitUtllityString :" + splitUtllityString[1]);
 							mapAuthorName = splitUtllityString[1];
 						}
-
 					}
 					bufferReader.mark(0);
 				}
@@ -264,8 +254,6 @@ public class MapParseController {
 
 	}
 
-	
-	
 	/**
 	 * Method prints out the countries and its neighbours'
 	 */
@@ -281,8 +269,6 @@ public class MapParseController {
 		}
 	}
 
-	
-	
 	/**
 	 * This method set Continent and its respective countries Map
 	 */
@@ -315,9 +301,8 @@ public class MapParseController {
 	/**
 	 * This method gets the List of countries for the corresponding continent.
 	 *
-	 *@param belongsToContinent Continent Name
+	 * @param belongsToContinent Continent Name
 	 */
-	
 	public List<Country> getContinentCountries(String continentName) {
 
 		try {
@@ -330,7 +315,6 @@ public class MapParseController {
 
 				}
 			}
-
 			return countriesList;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -338,23 +322,23 @@ public class MapParseController {
 		}
 	}
 
-	/*public void playerNameAssignment() {
-
-		readConfigurationObject = new ReadConfiguration();
-		System.out.println(
-				"##### Number of Players are                     ###### :" + readConfigurationObject.getPlayerCount());
-		playerList = new ArrayList();
-
-		for (int i = 0; i < numberOfPlayers; i++) {
-			playerObject = new Player();
-			playerObject.setName("Player" + "-" + i);
-
-			playerList.add(playerObject);
-			System.out.println("####### The player name is #########" + playerObject.getName());
-
-		}
-		
-	}
-*/
+	/*
+	 * public void playerNameAssignment() {
+	 * 
+	 * readConfigurationObject = new ReadConfiguration(); System.out.println(
+	 * "##### Number of Players are                     ###### :" +
+	 * readConfigurationObject.getPlayerCount()); playerList = new ArrayList();
+	 * 
+	 * for (int i = 0; i < numberOfPlayers; i++) { playerObject = new Player();
+	 * playerObject.setName("Player" + "-" + i);
+	 * 
+	 * playerList.add(playerObject);
+	 * System.out.println("####### The player name is #########" +
+	 * playerObject.getName());
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 }
