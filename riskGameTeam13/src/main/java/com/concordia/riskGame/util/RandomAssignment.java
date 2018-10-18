@@ -83,7 +83,7 @@ public class RandomAssignment {
     {
 		int[] randoms = new int[parts];
 	    Arrays.fill(randoms, (number/parts)-1); // At least one
-	    int remainder = number - ((number/parts)-1) * parts;
+	    int remainder = number - ((number/parts)-1)*parts;
 	    Random random = new Random();
 	    for (int i = 0; i < parts - 1 && remainder > 0; ++i) {
 	        int diff = random.nextInt(remainder);
