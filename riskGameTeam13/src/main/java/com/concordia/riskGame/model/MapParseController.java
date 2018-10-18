@@ -62,6 +62,7 @@ public class MapParseController {
 	private int initialArmies;
 	private MapEditView mapEditView;
 	private MapValidator mapValidator;
+	private List<Player> playerListClone;
 
 	/**
 	 * This method reads the map file and set the corresponding continents and
@@ -113,6 +114,7 @@ public class MapParseController {
 				System.out.println("");
 			}
 
+			playerList=armyAssignment(playerList);
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase(playerList, countryAndNeighbors);
 
@@ -340,5 +342,40 @@ public class MapParseController {
 	 * 
 	 * }
 	 */
+	
+	
+	public List<Player> armyAssignment(List<Player> listPlayer)
+	{
+	
+		playerListClone  = new ArrayList();
+		
+		int assignedArmies;
+		
+		
+		for (Player player : listPlayer )
+		{
+			System.out.println("######### The name of the player is ######### :"+player.getName());
+			System.out.println("    ");
+			System.out.println("######### The assigned armies are  ######### :"+player.getTotalArmies());
+			Player playerObject = new Player();
+			playerObject = player;
+			assignedArmies = playerObject.getTotalArmies();
+			
+			for (Country countryObject : playerObject.getAssignedCountries())
+			{
+				countryObject.setArmies(1);
+				assignedArmies = assignedArmies - 1;
+			}
+			playerObject.setTotalArmies(assignedArmies);
+			playerListClone.add(playerObject);
+		}
+				
+		
+		
+		
+		return playerListClone;
+	}
+	
+	
 
 }
