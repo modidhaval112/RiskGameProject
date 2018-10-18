@@ -77,7 +77,7 @@ public class MapParseController {
 
 			MapValidator mapValidator = new MapValidator();
 			mapValidator.init(fileObject);
-			
+
 			if (!mapValidator.getValidMapFlag()) {
 				throw new InvalidMapFileException("Invalid Map File");
 			}
@@ -96,21 +96,14 @@ public class MapParseController {
 			RandomAssignment randonAssignment = new RandomAssignment();
 			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
 
-			if (Integer.parseInt(numberCombo) == 3)
-				initialArmies = 35;
-
-			if (Integer.parseInt(numberCombo) == 4)
-				initialArmies = 30;
-
-			if (Integer.parseInt(numberCombo) == 5)
-				initialArmies = 25;
+			initialArmies = initialArmyAssignment(Integer.parseInt(numberCombo));
+			
+			
 			playerList = new ArrayList();
 
 			for (Player key : playerObject.getPlayerAssign().keySet()) {
 				System.out.println("Player Name : " + key.getName());
 				System.out.println("     Assigned Of Countries  :" + key.getAssignedCountries().size());
-
-				initialArmies = initialArmies;
 				key.setTotalArmies(initialArmies);
 				System.out.println("     Assigned Armies            :" + initialArmies);
 				for (int i = 0; i < key.getAssignedCountries().size(); i++) {
@@ -123,9 +116,6 @@ public class MapParseController {
 				System.out.println("");
 			}
 
-			/* displayPlayerDetails(); */
-
-			/* playerNameAssignment(); */
 
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase(playerList, countryAndNeighbors);
@@ -140,8 +130,36 @@ public class MapParseController {
 	}
 
 	
-	public void editMapParsermapParser(String filePath)
-	{
+	/**
+	 * This method get the number of players and returns initial armies
+	 * 
+	 * @param intialArmies initial number of army assigned.
+	 */
+	public int initialArmyAssignment(int intialArmies) {
+
+		if (intialArmies == 3)
+			initialArmies = 35;
+
+		else if (intialArmies == 3)
+			initialArmies = 35;
+
+		else if (intialArmies == 4)
+			initialArmies = 30;
+
+		else if (intialArmies == 5)
+			initialArmies = 25;
+
+		else if (intialArmies == 6)
+			initialArmies = 20;
+
+		else
+			initialArmies = 15;
+
+		return initialArmies;
+	}
+	
+	
+	public void editMapParsermapParser(String filePath) {
 
 		fileObject = new File(filePath);
 		System.out.println("File Path is  " + filePath);
@@ -156,30 +174,22 @@ public class MapParseController {
 		MapValidator mapValidator = new MapValidator();
 		mapValidator.init(fileObject);
 
-
 		readMapElements(bufferReaderForFile);
-
 
 		countryAndNeighboursMap();
 
 		contitentAndCountriesMap();
-
 
 		mapContentObject = new MapContents();
 
 		mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 		mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 
-
-
 		mapEditView = new MapEditView();
 		mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries);
 
-
-
-
-
 	}
+
 	/**
 	 * This method reads the selected map's elements
 	 * 
@@ -289,8 +299,9 @@ public class MapParseController {
 			e.printStackTrace();
 		}
 	}
+
 	/**
-	 *This method prints Continent list 
+	 * This method prints Continent list
 	 */
 	public void contitentAndCountriesMap() {
 		try {
@@ -348,7 +359,6 @@ public class MapParseController {
 			return null;
 		}
 	}
-
 
 	public void playerNameAssignment() {
 
