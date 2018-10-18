@@ -36,7 +36,6 @@ public class RandomAssignment {
 		}
 		
 		RandomAssignment inputObject = new RandomAssignment();
-		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		
 		Map<Continent, List<Country>> continentAssign = new HashMap<>();
 		List<Country> newCountryList = new ArrayList<>(countryList);
@@ -50,7 +49,7 @@ public class RandomAssignment {
 		    System.out.println("");
 		}
 				
-		dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
+		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		Map<Player, List<Country>> playerAssign = new HashMap<>();
 		newCountryList = new ArrayList<>(countryList);
 		Player player = new Player();
@@ -82,8 +81,8 @@ public class RandomAssignment {
 	int[] divider(int number, int parts)
     {
 		int[] randoms = new int[parts];
-	    Arrays.fill(randoms, 1); // At least one
-	    int remainder = number - parts;
+	    Arrays.fill(randoms, 2); // At least one
+	    int remainder = number - parts*2;
 	    Random random = new Random();
 	    for (int i = 0; i < parts - 1 && remainder > 0; ++i) {
 	        int diff = random.nextInt(remainder);
@@ -99,6 +98,9 @@ public class RandomAssignment {
 	       randoms[i] = randoms[j];
 	       randoms[j] = temp;
 	   }
+	   
+	   System.out.println("Randoms : " + randoms[0]);
+	   System.out.println("Randoms : " + randoms[1]);
         return randoms;
     }
 }
