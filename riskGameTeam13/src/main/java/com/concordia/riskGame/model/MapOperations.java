@@ -1,4 +1,4 @@
-package com.concordia.riskGame.Model;
+package com.concordia.riskGame.model;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
