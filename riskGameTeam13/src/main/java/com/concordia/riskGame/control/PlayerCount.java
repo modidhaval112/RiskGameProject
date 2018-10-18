@@ -30,7 +30,7 @@ import com.concordia.riskGame.util.ReadConfiguration;
  */
 public class PlayerCount extends JFrame implements ActionListener {
 	
-	private String[] playerCounterArray = {"3","4","5"};
+	private String[] playerCounterArray = {"2","3","4","5","6"};
 	private ReadConfiguration readConfigurationObject;
 	private int noOfPlayers;
 	private JFrame countFrame;
@@ -149,22 +149,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 
 	}
 
-	/**
-	 * This function gets the number of players from ReadConfiguration class and
-	 * @return playerCounterArray String Array of Players
-	 */
-	public String[] arrayOfPlayer() {
-		int playerSize = Integer.parseInt(readConfigurationObject.getPlayerCount());
-		playerCounterArray = new String[playerSize];
-		
-		for (int i = 0; i < playerSize; i++) {
-			number = number + 1;
-			playerCounterArray[i] = Integer.toString(number);
-		}
-
-		return playerCounterArray;
-
-	}
+	
 
 	/**
 	 * This method get the filePath
