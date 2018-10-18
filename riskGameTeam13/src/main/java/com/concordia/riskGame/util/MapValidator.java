@@ -45,7 +45,7 @@ public class MapValidator {
 	public boolean checkWinCount(GameMap gameMap) {
 
 		for (Entry<String, Integer> entry : gameMap.getMapWinCount().entrySet()) {
-			if (entry.getValue() <= 0) {
+			if (entry.getValue() < 0) {
 				return false;
 			}
 		}
