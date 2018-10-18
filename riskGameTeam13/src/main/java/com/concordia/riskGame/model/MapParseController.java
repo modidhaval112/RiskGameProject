@@ -101,7 +101,7 @@ public class MapParseController {
 
 			for (Player key : playerObject.getPlayerAssign().keySet()) {
 				System.out.println("Player Name : " + key.getName());
-				System.out.println("     Assigned Of Countries  :" + key.getAssignedCountries().size());
+				System.out.println("     Assigned no Of Countries  :" + key.getAssignedCountries().size());
 				key.setTotalArmies(initialArmies);
 				System.out.println("     Assigned Armies            :" + initialArmies);
 				for (int i = 0; i < key.getAssignedCountries().size(); i++) {
@@ -114,9 +114,9 @@ public class MapParseController {
 				System.out.println("");
 			}
 
-			playerList=armyAssignment(playerList);
+			armyAssignment(playerList);
 			gameDriverObject = new GameDriver();
-			gameDriverObject.gamePhase(playerList, countryAndNeighbors);
+			gameDriverObject.gamePhase(playerListClone, countryAndNeighbors);
 
 		} catch (InvalidMapFileException e) {
 			e.printStackTrace();
@@ -136,8 +136,8 @@ public class MapParseController {
 	 */
 	public int initialArmyAssignment(int intialArmies) {
 
-		if (intialArmies == 3)
-			initialArmies = 35;
+		if (intialArmies == 2)
+			initialArmies = 40;
 
 		else if (intialArmies == 3)
 			initialArmies = 35;
@@ -344,7 +344,7 @@ public class MapParseController {
 	 */
 	
 	
-	public List<Player> armyAssignment(List<Player> listPlayer)
+	public void armyAssignment(List<Player> listPlayer)
 	{
 	
 		playerListClone  = new ArrayList();
@@ -373,7 +373,6 @@ public class MapParseController {
 		
 		
 		
-		return playerListClone;
 	}
 	
 	
