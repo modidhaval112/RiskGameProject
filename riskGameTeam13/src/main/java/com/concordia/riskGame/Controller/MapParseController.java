@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 
 import com.concordia.riskGame.Model.MapContents;
 import com.concordia.riskGame.View.GameDriver;
+import com.concordia.riskGame.View.MapEditView;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;
@@ -60,6 +61,7 @@ public class MapParseController {
 	private ReadConfiguration readConfigurationObject;
 	private List<Player> playerList;
 	private int initialArmies;
+	private MapEditView mapEditView;
 
 	public MapContents mapParser(String filePath, String numberCombo) {
 		try {
@@ -138,6 +140,47 @@ public class MapParseController {
 
 	}
 
+	
+	public void editMapParsermapParser(String filePath)
+	{
+
+		fileObject = new File(filePath);
+		System.out.println("File Path is  " + filePath);
+
+		try {
+			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		MapValidator mapValidator = new MapValidator();
+		mapValidator.init(fileObject);
+
+
+		readMapElements(bufferReaderForFile);
+
+
+		countryAndNeighboursMap();
+
+		contitentAndCountriesMap();
+
+
+		mapContentObject = new MapContents();
+
+		mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
+		mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
+
+
+
+		mapEditView = new MapEditView();
+		mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries);
+
+
+
+
+
+	}
 	/**
 	 * This method reads the selected map's elements
 	 * 
