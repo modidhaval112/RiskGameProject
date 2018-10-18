@@ -50,6 +50,9 @@ public class GameDriver {
 			playerInstance = forfeitPhase(playerInstance);
 			updatedPlayerList.add(playerInstance);
 		}
+		List<Player> gdPlayerList = new ArrayList();
+		gdPlayerList=updatedPlayerList;
+		gamePhase(gdPlayerList,countryAndConnected);
 
 	}
 
