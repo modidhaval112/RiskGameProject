@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,6 +55,8 @@ public class MapEditView extends java.awt.Frame {
 	private JButton renameCountry = new JButton();
 	private JButton addAdjacentCountry = new JButton();
 	private JButton removeAdjacentCountry = new JButton();
+	private JButton saveMap = new JButton();
+
 	private JTextArea log = new JTextArea(30,30);
 	private JFileChooser fileChooser;
 	private FileNameExtensionFilter filenameFilter;
@@ -66,8 +69,11 @@ public class MapEditView extends java.awt.Frame {
 	private MapEditView mapEditView;
 	private HashMap<Country, List<Country>> countryAndNeighbors;
 	private HashMap<String, List<String>> countryAndNeighborsMap = new  HashMap<String, List<String>> () ;
+	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
+
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 	private HashMap<String, List<String>> continentsAndCountriesMap = new  HashMap<String, List<String>> () ;
+	private HashMap<Continent, List<Country>> continentsWithItsCountries= new HashMap<>();
 
 	private List<String> Continents = new ArrayList<String>();
 	private DefaultListModel<String> countries = new DefaultListModel<>(); 
@@ -133,6 +139,10 @@ public class MapEditView extends java.awt.Frame {
 		removeAdjacentCountry.setText("RemoveAdjacentCountry");
 		removeAdjacentCountry.setName("removeAdjacentCountryButton");
 		removeAdjacentCountry.setVisible(true);
+		
+		saveMap.setText("SaveMap");
+		saveMap.setName("saveMap");
+		saveMap.setVisible(true);
 
 
 		JScrollPane scroll = new JScrollPane(log);
@@ -210,6 +220,19 @@ public class MapEditView extends java.awt.Frame {
 
 
 		panel.add(removeAdjacentCountry,gbc);
+		
+		gbc.gridx = 8;
+		gbc.gridy = 3;
+		gbc.gridwidth = 4;
+		gbc.gridheight = 2;
+
+		panel.add(saveMap,gbc);
+
+		
+	
+
+
+		
 
 		gbc.gridx = 0;
 		gbc.gridy = 7;
@@ -521,6 +544,80 @@ public class MapEditView extends java.awt.Frame {
 
 			}
 		});
+		
+		saveMap.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+			
+			for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
+			{
+				 List<Country> countries = new ArrayList<>() ;
+
+				
+				Continent continent = new Continent(entry.getKey());
+				List<String>  continentCountries= entry.getValue();
+
+				for (int i=0 ;i<continentCountries.size();i++) {
+
+
+					
+					 Country country = new Country(continentCountries.get(i).toString(), 0, 0, entry.getKey());
+
+						countries.add(country);
+
+					}
+				continentsWithItsCountries.put(continent, countries);
+
+
+				}
+			
+			for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
+			{
+				List<Country> neighbourCountries = new ArrayList<>();
+ 
+				Country country = new Country(entry.getKey());
+
+				List<String>  countryCountries= entry.getValue();
+				List<String> CountriesList = new ArrayList<String>();
+
+
+
+				for (int i=0 ;i<countryCountries.size();i++) {
+
+					
+					
+						 Country countries = new Country(countryCountries.get(i).toString(), 0, 0, entry.getKey());
+						 neighbourCountries.add(countries);
+					
+
+				}
+				countriesWithItsNeighbours.put(country,neighbourCountries);
+
+
+			}
+			
+			
+			
+			
+			MapContents mapContents = new MapContents();
+			System.out.println(continentsWithItsCountries.keySet());
+			System.out.println(countriesWithItsNeighbours.keySet());
+
+			mapContents.setContinentAndItsCountries(continentsWithItsCountries);
+	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
+			MapOperations mapOperations = new MapOperations();
+			System.out.println("In operations");
+			try {
+				mapOperations.writeMapFile(mapContents, "testmap123");
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+
+			
+			}
+		});
+		
 
 
 	}
