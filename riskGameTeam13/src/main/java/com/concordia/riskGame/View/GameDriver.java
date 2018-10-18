@@ -98,11 +98,11 @@ public class GameDriver {
 		String fromCountry = utilString[0];
 		String toCountry = utilString[1];
 		
-		if(fromCountry.equals(toCountry)) {
+		/*if(fromCountry.equals(toCountry)) {
 			System.out.println("xxxxxxx----From and to country cannot be the same----xxxxxx");
 			forfeitPhase(player);
 			
-		}
+		}*/
 		
 		System.out.println("Enter the number of armies to be moved");
 		int movingArmies= sc.nextInt();
@@ -286,10 +286,10 @@ public class GameDriver {
 		gmPlayerList = new ArrayList();
 		int additionalArmies;
 		System.out.println("######## Player  reinforces ########");
-		System.out.println("#### The player name is #####" + player.getName());
+		System.out.println("#### The player's name is #####" + player.getName());
 		System.out.println("#### The total number of armies are #### " + player.getTotalArmies());
 
-		System.out.println("##### Adding armies based on countries owned ######");
+		System.out.println("##### Adding armies based on the countries owned ######");
 		
 		assignedArmies=  player.getAssignedCountries().size()/3;
 		if(assignedArmies<3) {
@@ -310,9 +310,9 @@ public class GameDriver {
 		int armiesCounter;
 		while (counter > 0) {
 
-			System.out.println("Select the country name and armies(comma , seperated ) in which you want assign armies");
+			System.out.println("Select the country name and armies (comma , seperated) in which you want to assign armies");
 
-			System.out.println("##### The totoal number of armies are ##### " + counter);
+			System.out.println("##### The total number of armies are ##### " + counter);
 
 			nameArmiesSpilt = scanner.nextLine().split(",");
 			countryName = nameArmiesSpilt[0];
@@ -321,8 +321,8 @@ public class GameDriver {
 			System.out.println("The selected country name is" + countryName);
 
 			armiesCounter = Integer.parseInt(armiesCount);
-			System.out.println("The give reinforcement armies are " + armiesCounter);
-			System.out.println("The value if counter is  " + counter);
+			System.out.println("The given reinforcement armies are " + armiesCounter);
+			System.out.println("The value of counter is  " + counter);
 			int armyCount =0;
 			
 			if (armiesCounter <= counter) {
@@ -346,10 +346,10 @@ public class GameDriver {
 				System.out.println("The counter value is "+counter);
 				System.out.println("the armiesCounter value is "+armiesCounter);
 				counter = counter - armiesCounter;
-				System.out.println("The total value after subracting "+counter);
+				System.out.println("The total value after subtracting "+counter);
 
 			} else {
-				System.out.println("The entered army counter is greater than the reamaining armies");
+				System.out.println("The entered army counter is greater than the remaining armies");
 			}
 			
 		}
@@ -380,7 +380,7 @@ public class GameDriver {
 	
 	public boolean isNeighbour(String sourceCountry,String destCountry)
 	{
-		System.out.println("##### Checking the country if it neoghbour of the country or not #####");;
+		System.out.println("##### Checking the country, if its a neighbour of the country or not #####");;
 		System.out.println("##### Source country is        : ##### :"+sourceCountry);
 		System.out.println("##### Destination country is : ##### :"+destCountry);
 
@@ -390,7 +390,7 @@ public class GameDriver {
 		for(Map.Entry<Country, List<Country>> entry : gmcountryAndNeighbours.entrySet())
 		{
 			
-			System.out.println("##### The country name is                     ##### "+entry.getKey().getCountryName());
+			System.out.println("##### The country's name is                     ##### "+entry.getKey().getCountryName());
 			if(entry.getKey().getCountryName().equalsIgnoreCase(sourceCountry))
 				
 			{
