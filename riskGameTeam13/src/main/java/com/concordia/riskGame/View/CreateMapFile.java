@@ -62,9 +62,11 @@ public class CreateMapFile {
 			boolean errorWhileReadingCountry = false;
 			for(String neighbour : neighbouringCountries) {
 				if(neighbour.equals(countries.get(i).getCountryName())) {
+					System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 					errorWhileReadingCountry = true;
 					neighbourCountries=reenterCountries(countries.get(i).getCountryName(),scanner,countries.get(i).getBelongsToContinent());
 				}else if(!nameOfCountries.contains(neighbour)) {
+					System.out.println("A country is not in the list. Please enter the neighbouring countries again ");
 					errorWhileReadingCountry = true;
 					neighbourCountries=reenterCountries(countries.get(i).getCountryName(),scanner,countries.get(i).getBelongsToContinent());
 				}else {
@@ -105,7 +107,7 @@ public class CreateMapFile {
 	 * @return neighbourCountries list of neighbor countries
 	 */
 	private List<Country> reenterCountries(String countryName,Scanner scanner,String continent) {
-		System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
+		//System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 		String[] neighbouringCountries = scanner.nextLine().split(",");
 		List<Country> neighbourCountries = new ArrayList<>();
 		boolean errorWhileReadingCountry = false;
