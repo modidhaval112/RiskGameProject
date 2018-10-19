@@ -388,6 +388,9 @@ public class MapEditView extends java.awt.Frame {
 				System.out.println("Continent Selected: " + s);
 				setLog("Continent Removed: " + s);
 				removeContinent(s);
+				frame.validate();
+				frame.repaint();
+				panel.repaint();
 
 			}
 		});
@@ -493,7 +496,19 @@ public class MapEditView extends java.awt.Frame {
 		addAdjacentCountry.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
+		
 			{
+				  String flag="F";
+				  
+				  for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
+					{
+
+	                 if(entry.getKey().equals(AddText.getText()))
+	                 {
+	                	 flag="T";
+
+					}
+					}
 				String s =  countriesJList.getSelectedValue();
 
 				if(AddText.getText().isEmpty())
@@ -503,9 +518,18 @@ public class MapEditView extends java.awt.Frame {
 				}
 				else
 				{
+					if(flag.equals("T"))
+					{
 					setLog("Adding Adjacent Country");
 					addAdjacentCountry(s,AddText.getText());
+					}
 					
+					else
+					{
+						setLog("Enter Country in the list");
+
+					}
+						
 					
 				}
 
@@ -516,9 +540,11 @@ public class MapEditView extends java.awt.Frame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+		
 				String country =  countriesJList.getSelectedValue();
 				String adjacentCountry=   jCN.getSelectedValue();
-
+				
+				
 				if(AddText.getText().isEmpty())
 				{
 					setLog("Enter Adjacent Country in Textbox");
@@ -526,8 +552,13 @@ public class MapEditView extends java.awt.Frame {
 				}
 				else
 				{
-					setLog("Adding Adjacent Country");
+					
+					
+					setLog("Remvoing Adjacent Country");
 					removeAdjacentCountry(country,adjacentCountry);
+					
+					
+					
 					
 					
 				}
@@ -553,6 +584,8 @@ public class MapEditView extends java.awt.Frame {
 				
 				Continent continent = new Continent(entry.getKey());
 				List<String>  continentCountries= entry.getValue();
+				if(continentCountries!=null)
+				{
 
 				for (int i=0 ;i<continentCountries.size();i++) {
 
@@ -563,8 +596,9 @@ public class MapEditView extends java.awt.Frame {
 						countries.add(country);
 
 					}
-				continentsWithItsCountries.put(continent, countries);
 
+				}
+				continentsWithItsCountries.put(continent, countries);
 
 				}
 			
@@ -579,7 +613,8 @@ public class MapEditView extends java.awt.Frame {
 				List<String> CountriesList = new ArrayList<String>();
 
 
-
+				if(countryCountries!=null)
+				{
 				for (int i=0 ;i<countryCountries.size();i++) {
 
 					
@@ -588,6 +623,7 @@ public class MapEditView extends java.awt.Frame {
 						 neighbourCountries.add(countries);
 					
 
+				}
 				}
 				countriesWithItsNeighbours.put(country,neighbourCountries);
 
@@ -638,6 +674,9 @@ public class MapEditView extends java.awt.Frame {
 
 			List<String>  continentCountries= entry.getValue();
 			List<String> CountriesList = new ArrayList<String>();
+			
+			if(continentCountries!=null)
+			{
 
 			for (int i=0 ;i<continentCountries.size();i++) {
 
@@ -647,6 +686,7 @@ public class MapEditView extends java.awt.Frame {
 						}
 				
 
+			}
 			}
 
 
@@ -664,11 +704,13 @@ public class MapEditView extends java.awt.Frame {
 		continentRemoveCountries= continentsAndCountriesMap.get(Continent);
 
 
-
+        if(continentRemoveCountries!=null)
+        {
 		for (int i=0 ;i<continentRemoveCountries.size();i++) {
 
 			removeCountry(continentRemoveCountries.get(i));
 		}
+        }
 
 		System.out.println("In removing Continent");
 		continentsAndCountriesMap.remove(Continent);
@@ -694,6 +736,9 @@ public class MapEditView extends java.awt.Frame {
 
 			List<String>  continentCountries= entry.getValue();
 			List<String> CountriesList = new ArrayList<String>();
+			
+			if(continentCountries!=null)
+			{
 
 			for (int i=0 ;i<continentCountries.size();i++) {
 
@@ -704,6 +749,7 @@ public class MapEditView extends java.awt.Frame {
 					CountriesList.add(continentCountries.get(i).toString());
 				}
 
+			}
 			}
 			continentsAndCountriesMap.put(entry.getKey().toString(), CountriesList);
 
