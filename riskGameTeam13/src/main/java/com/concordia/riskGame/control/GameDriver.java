@@ -195,6 +195,7 @@ public class GameDriver {
 		
 
 		System.out.println("##### End of Fortify ###### ");
+		forfeitPhase(player);
 		return player;
 		}
 		else {
