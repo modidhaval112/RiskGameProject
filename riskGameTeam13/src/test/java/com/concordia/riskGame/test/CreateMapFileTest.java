@@ -103,7 +103,7 @@ public class CreateMapFileTest {
 			
 			testBuilder = mapOperations.getMapFileContents();
 						
-			if(testBuilder.toString().contains("[MAP]") && testBuilder.toString().contains("[Continents]") && testBuilder.toString().contains("con1=1") && testBuilder.toString().contains("con2=1") && 
+			if(testBuilder.toString().contains("[Map]") && testBuilder.toString().contains("[Continents]") && testBuilder.toString().contains("con1=1") && testBuilder.toString().contains("con2=1") && 
 				testBuilder.toString().contains("[Territories]")  && testBuilder.toString().contains("c1,0,0,con1,c2") && testBuilder.toString().contains("c2,0,0,con2,c1")) {
 				mapCreationValid = true;
 			}
