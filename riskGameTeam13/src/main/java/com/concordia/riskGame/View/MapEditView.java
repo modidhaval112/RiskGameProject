@@ -57,10 +57,8 @@ public class MapEditView extends java.awt.Frame {
 	private String filePath = null;	
 	private HashMap<Country, List<Country>> countryAndNeighbors;
 	private HashMap<String, List<String>> countryAndNeighborsMap = new  HashMap<String, List<String>> () ;
-	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 	private HashMap<String, List<String>> continentsAndCountriesMap = new  HashMap<String, List<String>> () ;
-	private HashMap<Continent, List<Country>> continentsWithItsCountries= new HashMap<>();
 	private List<String> Continents = new ArrayList<String>();
 	private DefaultListModel<String> countries = new DefaultListModel<>(); 
 	private DefaultListModel<String> countryNeighbours = new DefaultListModel<>();  
@@ -539,12 +537,17 @@ public class MapEditView extends java.awt.Frame {
 		
 		
 		saveMap.addActionListener(new ActionListener()
+		
 		{
+			
 			public void actionPerformed(ActionEvent e)
 			{
-			
+				 HashMap<Continent, List<Country>> continentsWithItsCountries= new HashMap<>();
+				 HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
+
 			for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
 			{
+
 				 List<Country> countries = new ArrayList<>() ;
 
 				
@@ -567,9 +570,10 @@ public class MapEditView extends java.awt.Frame {
 			
 			for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
 			{
+
 				List<Country> neighbourCountries = new ArrayList<>();
  
-				Country country = new Country(entry.getKey());
+				Country country = new Country(entry.getKey(),getContinet(entry.getKey().toString()));
 
 				List<String>  countryCountries= entry.getValue();
 				List<String> CountriesList = new ArrayList<String>();
@@ -580,7 +584,7 @@ public class MapEditView extends java.awt.Frame {
 
 					
 					
-						 Country countries = new Country(countryCountries.get(i).toString(), 0, 0, entry.getKey());
+						 Country countries = new Country(countryCountries.get(i).toString(), 0, 0, getContinet(countryCountries.get(i).toString()));
 						 neighbourCountries.add(countries);
 					
 
@@ -622,6 +626,34 @@ public class MapEditView extends java.awt.Frame {
 		
 
 
+	}
+	
+	public String getContinet(String country)
+	
+	{
+		String Country = null;
+		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
+		{
+
+
+			List<String>  continentCountries= entry.getValue();
+			List<String> CountriesList = new ArrayList<String>();
+
+			for (int i=0 ;i<continentCountries.size();i++) {
+
+				if(continentCountries.get(i).equals(country))
+						{
+					Country=entry.getKey();
+						}
+				
+
+			}
+
+
+		}
+		return Country;
+		
+		
 	}
 
 	public void removeContinent(String Continent)
