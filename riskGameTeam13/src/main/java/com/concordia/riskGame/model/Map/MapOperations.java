@@ -45,10 +45,10 @@ public class MapOperations {
 		for(Map.Entry<Country, List<Country>> countryAndNeighbours : mapContents.getCountryAndNeighbors().entrySet()) {
 			mapFileContents.append(System.lineSeparator()+countryAndNeighbours.getKey().getCountryName()+",");
 			mapFileContents.append("0,0");
-			
+			mapFileContents.append("," + countryAndNeighbours.getKey().getBelongsToContinent());
+
 			List<Country> neighbours = countryAndNeighbours.getValue();
 			if(neighbours !=null && !neighbours.isEmpty()) {
-			mapFileContents.append("," + neighbours.get(0).getBelongsToContinent());
 			for(Country country : neighbours) {
 			mapFileContents.append("," + country.getCountryName());
 			}
