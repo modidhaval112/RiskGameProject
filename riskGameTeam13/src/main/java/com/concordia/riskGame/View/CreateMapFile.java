@@ -113,8 +113,10 @@ public class CreateMapFile {
 		boolean errorWhileReadingCountry = false;
 		for(String neighbour : neighbouringCountries) {
 			if(neighbour.equals(countryName)) {
+				System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 				reenterCountries(countryName,scanner,continent);
 			}else if(!nameOfCountries.contains(neighbour)) {
+				System.out.println("A country is not in the list. Please enter the neighbouring countries again ");
 				errorWhileReadingCountry = true;
 				neighbourCountries=reenterCountries(countryName,scanner,continent);
 			}else {
