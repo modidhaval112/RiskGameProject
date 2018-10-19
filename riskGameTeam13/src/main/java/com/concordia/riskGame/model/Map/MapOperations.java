@@ -1,6 +1,7 @@
 package com.concordia.riskGame.model.Map;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -29,7 +30,7 @@ public class MapOperations {
 	 * @return fileName name of the file
 	 * @throws FileNotFoundException
 	 */
-	public String writeMapFile(MapContents mapContents,String fileName) throws FileNotFoundException {
+	public String writeMapFile(MapContents mapContents,String fileName,String filePath) throws FileNotFoundException {
 		mapFileContents = new StringBuilder();
 		mapFileContents.append("[Map]");
 		mapFileContents.append(System.lineSeparator());
@@ -60,8 +61,18 @@ public class MapOperations {
 				throw new FileNotFoundException();
 			}
 		}
-		
-		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
+		File file;
+		 String currentDir = System.getProperty("user.dir");
+	        System.out.println("Current dir using System:" +currentDir);
+	        currentDir = currentDir+fileName;
+		if(filePath!=null && !filePath.isEmpty()) {
+			filePath= filePath+fileName;
+			file = new File(filePath);
+		}
+		else {
+			file = new File(currentDir);
+		}
+		try (PrintWriter out = new PrintWriter(file)) {
             out.print(mapFileContents);
             out.close();
         }
