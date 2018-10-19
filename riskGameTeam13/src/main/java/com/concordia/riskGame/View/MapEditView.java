@@ -911,7 +911,7 @@ public class MapEditView extends java.awt.Frame {
 		countryAndNeighborsMap.put(renamedCountry,CountriesRenameList);
 		
 
-
+//ffd
 		
 		frame.validate();
 		frame.repaint();
