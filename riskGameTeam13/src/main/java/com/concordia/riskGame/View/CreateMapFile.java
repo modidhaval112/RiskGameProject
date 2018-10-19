@@ -44,7 +44,7 @@ public class CreateMapFile {
 		for(int i=0;i<numberOfContinents;i++) {
 			System.out.println("Enter the number of Countries in the Continent : " + nameOfContinents.get(i));
 			int numberOfCountries = scanner.nextInt(); // add number format exception
-			System.out.println("Enter the countries that belong to the Continent : "+nameOfContinents.get(i));
+			System.out.println("Enter the name of countries that belong to the Continent : "+nameOfContinents.get(i));
 			for(int j=0;j<numberOfCountries;j++) {
 				 String countryName = scanner.next();
 				 nameOfCountries.add(countryName);
@@ -80,13 +80,13 @@ public class CreateMapFile {
 		}
 		}catch (Exception InputMismatchException) {
 			System.out.println("Please enter a valid input ");
-			//main(null);
+			
 		} 
 			
 		
 		
 		System.out.println("Please Enter the Name of The Map that you want to create");
-       // Scanner scanMapFileName = new Scanner(System.in);
+       
         String fileName = scanner.nextLine();
         MapContents mapContents = new MapContents();
         mapContents.setContinentAndItsCountries(continentsWithItsCountries);
@@ -107,7 +107,7 @@ public class CreateMapFile {
 	 * @return neighbourCountries list of neighbor countries
 	 */
 	private List<Country> reenterCountries(String countryName,Scanner scanner,String continent) {
-		//System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
+		
 		String[] neighbouringCountries = scanner.nextLine().split(",");
 		List<Country> neighbourCountries = new ArrayList<>();
 		boolean errorWhileReadingCountry = false;

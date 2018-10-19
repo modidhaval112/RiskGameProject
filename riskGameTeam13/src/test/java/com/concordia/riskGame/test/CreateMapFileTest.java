@@ -1,10 +1,10 @@
 package com.concordia.riskGame.test;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +35,6 @@ public class CreateMapFileTest {
 	StringBuilder testBuilder= new StringBuilder();
 	Boolean mapCreationValid;
 
-	
 	/**
 	 * This method sets up the context for creating the map file
 	 */
@@ -44,36 +43,26 @@ public class CreateMapFileTest {
 		
 		nameOfContinents.add("con1");
 		nameOfContinents.add("con2");
-		
 		String countryName = "c1";
 		nameOfCountries.add(countryName);
 		Country country = new Country(countryName, 0, 0, "con1");
 		countries.add(country);
-		
 		Continent continent = new Continent(nameOfContinents.get(0));
 		continent.setNumberOfCountries(1);
 		continentsWithItsCountries.put(continent, countries);
-		
 		String countryName2 = "c2";
 		nameOfCountries.add(countryName2);
 		Country country2 = new Country(countryName2, 0, 0, "con2");
 		countries.add(country2);
-		
 		Continent continent2 = new Continent(nameOfContinents.get(1));
 		continent2.setNumberOfCountries(1);
 		continentsWithItsCountries.put(continent2, countries);
-		
 		Country neighbouringCountry= new Country("c2", 0, 0, "con1");
 		neighbourCountries1.add(neighbouringCountry);
-		
 		Country neighbouringCountry2= new Country("c1", 0, 0, "con2");
 		neighbourCountries2.add(neighbouringCountry2);
-		
 		countriesWithItsNeighbours.put(countries.get(0), neighbourCountries1);
 		countriesWithItsNeighbours.put(countries.get(1), neighbourCountries2);
-		
-		
-		
 				
 	}
 	
@@ -84,10 +73,9 @@ public class CreateMapFileTest {
 	@Test
 	public void testWriteMapFilePositive() {
 		
-			//MapOperations mapOperationObj= new MapOperations();
+			
 		try {
 		    MapContents mapContents = new MapContents();
-		    
 		    Set<Continent> continentList = continentsWithItsCountries.keySet();
 			for (Continent s : continentList) {
 			    s.setNumberOfCountries(1);
@@ -95,12 +83,8 @@ public class CreateMapFileTest {
 		    
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
-	        
 	        MapOperations mapOperations = new MapOperations();
-			mapOperations.writeMapFile(mapContents, null);
-			
-			
-			
+			mapOperations.writeMapFile(mapContents,"TesttempMap" ,null);
 			testBuilder = mapOperations.getMapFileContents();
 						
 			if(testBuilder.toString().contains("[Map]") && testBuilder.toString().contains("[Continents]") && testBuilder.toString().contains("con1=1") && testBuilder.toString().contains("con2=1") && 
@@ -111,7 +95,7 @@ public class CreateMapFileTest {
 			assertTrue(mapCreationValid);
 		}
 		catch (FileNotFoundException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -127,12 +111,9 @@ public class CreateMapFileTest {
 		    MapContents mapContents = new MapContents();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
-	        
 	        MapOperations mapOperations = new MapOperations();
-			mapOperations.writeMapFile(mapContents, null);
-			
+			mapOperations.writeMapFile(mapContents, "TesttempMap", null);
 			testBuilder = mapOperations.getMapFileContents();
-			
 			String removeString = "[MAP]";
 			int i = testBuilder.indexOf(removeString);
 		    if (i != -1) {
@@ -148,7 +129,7 @@ public class CreateMapFileTest {
 			assertFalse(mapCreationValid);
 		}
 		catch (FileNotFoundException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -159,16 +140,13 @@ public class CreateMapFileTest {
 	@Test
 	public void testWriteMapFileExtentionPositive() {
 		
-			//MapOperations mapOperationObj= new MapOperations();
+			
 		try {
 		    MapContents mapContents = new MapContents();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
-	        
 	        MapOperations mapOperations = new MapOperations();
-			String fileName = mapOperations.writeMapFile(mapContents, "Africa");
-			
-			//System.out.println("File name  : " + fileName);
+			String fileName = mapOperations.writeMapFile(mapContents, "Africa", null);
 			String[] splitArray = fileName.split("\\.");
 
 			if(splitArray[splitArray.length-1].equalsIgnoreCase("map")) {
@@ -178,7 +156,7 @@ public class CreateMapFileTest {
 			assertTrue(mapCreationValid);
 		}
 		catch (FileNotFoundException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -189,16 +167,12 @@ public class CreateMapFileTest {
 	@Test
 	public void testWriteMapFileExtentionNegative() {
 		
-			//MapOperations mapOperationObj= new MapOperations();
 		try {
 		    MapContents mapContents = new MapContents();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
-	        
 	        MapOperations mapOperations = new MapOperations();
-			String fileName = mapOperations.writeMapFile(mapContents, "Africa");
-			
-			//System.out.println("File name  : " + fileName);
+			String fileName = mapOperations.writeMapFile(mapContents, "Africa", null);
 			fileName = fileName.concat("1");
 			String[] splitArray = fileName.split("\\.");
 			mapCreationValid = false;
@@ -208,7 +182,7 @@ public class CreateMapFileTest {
 			assertFalse(mapCreationValid);
 		}
 		catch (FileNotFoundException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -220,11 +194,10 @@ public class CreateMapFileTest {
 	@Test(expected=FileNotFoundException.class)
 	public void testWriteMapFileExtentionNegative1() throws FileNotFoundException {
 		
-			//MapOperations mapOperationObj= new MapOperations();
 		    MapContents mapContents = new MapContents();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
-			mapOperations.writeMapFile(mapContents, "Africa?");
+			mapOperations.writeMapFile(mapContents, "Africa?", null);
 	}
 }

@@ -10,7 +10,11 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({CreateMapFileTest.class,MapParserTest.class, MapValidatorTest.class,RandomAssignmentTest.class})
+@SuiteClasses({CreateMapFileTest.class,
+			   MapValidatorTest.class,
+			   RandomAssignmentTest.class, 
+			   ReinforcementTest.class})
+
 public class TestSuite {
 
 }
