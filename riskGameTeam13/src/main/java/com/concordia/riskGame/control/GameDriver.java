@@ -80,7 +80,7 @@ public class GameDriver {
 	 */
 	public Player forfeitPhase(Player playerObject) {
 
-		System.out.println("###### Do you wish to enter the fortification phase : yes/no #######");
+		System.out.println("###### Do you wish to enter the fortification phase: yes/no #######");
 		String choice = null;
 		Scanner sc = new Scanner(System.in);
 		choice = sc.nextLine();
@@ -109,7 +109,7 @@ public class GameDriver {
 
 				if (fromCountry.equalsIgnoreCase(toCountry)) {
 					System.out.println("xxxxxxx----From and to country cannot be the same----xxxxxx");
-					forfeitPhase(player);
+					throw new Exception();
 
 				}
 
@@ -182,7 +182,6 @@ public class GameDriver {
 				player.setAssignedCountries(assignedCountriesClone);
 
 				System.out.println("##### Armies have been moved between countries ###### ");
-				forfeitPhase(player);
 				return player;
 			} catch (Exception e) {
 				forfeitPhase(playerObject);
