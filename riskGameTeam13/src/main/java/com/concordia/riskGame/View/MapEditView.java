@@ -60,11 +60,11 @@ public class MapEditView extends java.awt.Frame {
 	private JButton addAdjacentCountry = new JButton();
 	private JButton removeAdjacentCountry = new JButton();
 	private JButton saveMap = new JButton();
+	private JButton exitMap = new JButton();
 
 	private JTextArea log = new JTextArea(30,30);
 	private JFileChooser fileChooser;
 	private FileNameExtensionFilter filenameFilter;
-	private JFrame countFrame;
 	private String filePath = null;
 
 
@@ -146,6 +146,9 @@ public class MapEditView extends java.awt.Frame {
 		saveMap.setName("saveMap");
 		saveMap.setVisible(true);
 
+		exitMap.setText("ExitMap");
+		exitMap.setName("exitMap");
+		exitMap.setVisible(true);
 
 		JScrollPane scroll = new JScrollPane(log);
 
@@ -215,11 +218,9 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridy = 6;
 		gbc.gridwidth = 4;
 		panel.add(addAdjacentCountry,gbc);
-
 		gbc.gridx = 4;
 		gbc.gridy = 6;
 		gbc.gridwidth = 4;
-
 
 		panel.add(removeAdjacentCountry,gbc);
 		
@@ -227,22 +228,19 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridy = 3;
 		gbc.gridwidth = 4;
 		gbc.gridheight = 2;
-
 		panel.add(saveMap,gbc);
-
-		
-	
-
-
-		
+         
+		gbc.gridx = 8;
+		gbc.gridy = 5;
+		gbc.gridwidth = 4;
+		gbc.gridheight = 2;
+		panel.add(exitMap,gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.gridwidth = 12;
-
 		panel.add(AddText,gbc);
-
-
+		
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.gridwidth = 12;
@@ -553,7 +551,7 @@ public class MapEditView extends java.awt.Frame {
 
 				if(AddText.getText().isEmpty())
 				{
-					setLog("Enter Continent in Textbox");
+					setLog("Enter Country in Textbox");
 
 				}
 				else
@@ -574,18 +572,43 @@ public class MapEditView extends java.awt.Frame {
 
 				if(AddText.getText().isEmpty())
 				{
-					setLog("Enter Continent in Textbox");
+					setLog("Enter Adjacent Country in Textbox");
 
 				}
 				else
 				{
-					setLog("Renaming County");
-					renameCountry(s, AddText.getText());
+					setLog("Adding Adjacent Country");
+					addAdjacentCountry(s,AddText.getText());
+					
 					
 				}
 
 			}
 		});
+		
+		removeAdjacentCountry.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String country =  countriesJList.getSelectedValue();
+				String adjacentCountry=   jCN.getSelectedValue();
+
+				if(AddText.getText().isEmpty())
+				{
+					setLog("Enter Adjacent Country in Textbox");
+
+				}
+				else
+				{
+					setLog("Adding Adjacent Country");
+					removeAdjacentCountry(country,adjacentCountry);
+					
+					
+				}
+
+			}
+		});
+		
 		
 		saveMap.addActionListener(new ActionListener()
 		{
@@ -640,7 +663,15 @@ public class MapEditView extends java.awt.Frame {
 			}
 			
 			
-			
+			exitMap.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					System.exit(0);
+
+
+				}
+			});
 			
 			MapContents mapContents = new MapContents();
 			System.out.println();
@@ -939,11 +970,48 @@ public class MapEditView extends java.awt.Frame {
 		panel.repaint();
 
 	}
-	//fsfsfsffs
 	public void addAdjacentCountry(String country, String adjacentCountry)
 	{
 		
+		for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
+		{
+
+
+			List<String>  continentCountries= entry.getValue();
+			
+			if(entry.getKey().equals(country))
+			{
+				continentCountries.add(adjacentCountry);
+				countryAndNeighborsMap.put(country,continentCountries);
+			}
+			
+		}
+
+         
+			
 	}
+	
+	public void removeAdjacentCountry(String country, String adjacentCountry)
+	{
+		
+		for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
+		{
+
+
+			List<String>  continentCountries= entry.getValue();
+			
+			if(entry.getKey().equals(country) & continentCountries!=null)
+			{
+				continentCountries.remove(adjacentCountry);
+				countryAndNeighborsMap.put(country,continentCountries);
+			}
+			
+		}
+
+         
+			
+	}
+
 
 	public void EditMapFileChoose() {	
 		try {
