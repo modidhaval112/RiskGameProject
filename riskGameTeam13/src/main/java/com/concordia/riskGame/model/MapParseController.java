@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JOptionPane;
@@ -63,6 +64,8 @@ public class MapParseController {
 	private MapEditView mapEditView;
 	private MapValidator mapValidator;
 	private List<Player> playerListClone;
+	private Random randomObject;
+	private List<Country> countryList2 = new CopyOnWriteArrayList();
 
 	/**
 	 * This method reads the map file and set the corresponding continents and
@@ -74,11 +77,11 @@ public class MapParseController {
 	 * @return the mapContent Object with map details enriched
 	 */
 
-	public MapContents mapParser(String filePath, String numberCombo) {
+	public MapContents mapParser(String filePath, String numberOfPlayer) {
 		try {
 
 			fileObject = new File(filePath);
-			numberOfPlayers = Integer.parseInt(numberCombo);
+			numberOfPlayers = Integer.parseInt(numberOfPlayer);
 			System.out.println("File Path " + filePath);
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			mapValidator = new MapValidator();
@@ -89,14 +92,13 @@ public class MapParseController {
 			}
 
 			readMapElements(bufferReaderForFile);
-
 			setcontitentAndCountriesMap();
 			mapContentObject = new MapContents();
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			RandomAssignment randonAssignment = new RandomAssignment();
-			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
-			initialArmies = initialArmyAssignment(Integer.parseInt(numberCombo));
+			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList);
+			initialArmies = initialArmyAssignment(numberOfPlayers);
 			playerList = new ArrayList();
 
 			for (Player key : playerObject.getPlayerAssign().keySet()) {
@@ -117,7 +119,6 @@ public class MapParseController {
 			armyAssignment(playerList);
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase(playerListClone, countryAndNeighbors);
-
 		} catch (InvalidMapFileException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -138,19 +139,14 @@ public class MapParseController {
 
 		if (intialArmies == 2)
 			initialArmies = 40;
-
 		else if (intialArmies == 3)
 			initialArmies = 35;
-
 		else if (intialArmies == 4)
 			initialArmies = 30;
-
 		else if (intialArmies == 5)
 			initialArmies = 25;
-
 		else if (intialArmies == 6)
 			initialArmies = 20;
-
 		else
 			initialArmies = 15;
 
@@ -229,11 +225,6 @@ public class MapParseController {
 							String[] adjCountries = territoryValues[1].split(",", 2);
 							String[] adjCountries2 = adjCountries[1].split(",", 2);
 							String[] adjCountries3 = adjCountries2[1].split(",", 2);
-							System.out.println("###### The value of split one is ###### :" + territoryValues[0]);
-							System.out.println(
-									"###### The value of adj split adjCountries3[0] is ###### :" + adjCountries3[0]);
-							System.out.println(
-									"###### The value of adj split adjCountries3[1] is ###### :" + adjCountries3[1]);
 							Country cc = new Country(territoryValues[0], adjCountries3[0]);
 							adjCountry = new ArrayList<Country>();
 							StringTokenizer st = new StringTokenizer(adjCountries3[1], ", ");
@@ -324,57 +315,76 @@ public class MapParseController {
 		}
 	}
 
-	/*
-	 * public void playerNameAssignment() {
+	/**
+	 * The following method assigns the intial number of armies to each player
 	 * 
-	 * readConfigurationObject = new ReadConfiguration(); System.out.println(
-	 * "##### Number of Players are                     ###### :" +
-	 * readConfigurationObject.getPlayerCount()); playerList = new ArrayList();
-	 * 
-	 * for (int i = 0; i < numberOfPlayers; i++) { playerObject = new Player();
-	 * playerObject.setName("Player" + "-" + i);
-	 * 
-	 * playerList.add(playerObject);
-	 * System.out.println("####### The player name is #########" +
-	 * playerObject.getName());
-	 * 
-	 * }
-	 * 
-	 * }
+	 * @param listPlayer
 	 */
-	
-	
-	public void armyAssignment(List<Player> listPlayer)
-	{
-	
-		playerListClone  = new ArrayList();
-		
+
+	public void armyAssignment(List<Player> listPlayer) {
+
+		playerListClone = new ArrayList();
+		List<Country> assignedCountry = new ArrayList();
+
 		int assignedArmies;
-		
-		
-		for (Player player : listPlayer )
-		{
-			System.out.println("######### The name of the player is ######### :"+player.getName());
+
+		for (Player player : listPlayer) {
+			
+			System.out.println("                                               " );
+			System.out.println("######### The name of the player is ######### :" + player.getName());
 			System.out.println("    ");
-			System.out.println("######### The assigned armies are  ######### :"+player.getTotalArmies());
+			System.out.println("######### The assigned armies are  #########  :" + player.getTotalArmies());
 			Player playerObject = new Player();
 			playerObject = player;
 			assignedArmies = playerObject.getTotalArmies();
-			
-			for (Country countryObject : playerObject.getAssignedCountries())
-			{
-				countryObject.setArmies(1);
+
+			assignedCountry = new ArrayList();
+			for (Country countryInstance : playerObject.getAssignedCountries()) {
+				countryInstance.setArmies(1);
 				assignedArmies = assignedArmies - 1;
+				assignedCountry.add(countryInstance);
+
 			}
+
+			while (assignedArmies > 0) {
+				int index = getRandomNumber(0, playerObject.getAssignedCountries().size());
+				Country c = new Country();
+				c = assignedCountry.get(index);
+				int armies = c.getArmies();
+				armies = armies + 1;
+				c.setArmies(armies);
+				assignedArmies = assignedArmies - 1;
+				Collections.replaceAll(assignedCountry, assignedCountry.get(index), c);
+			}
+
+			playerObject.setAssignedCountries(assignedCountry);
 			playerObject.setTotalArmies(assignedArmies);
 			playerListClone.add(playerObject);
 		}
-				
-		
-		
-		
+
+		for (Player playerObj : listPlayer) {
+			System.out.println("######### The name of the player is ######### :" + playerObj.getName());
+			for (Country countryObject : playerObj.getAssignedCountries()) {
+				System.out.println("###### The name of the country is    ##### :" + countryObject.getCountryName());
+				System.out.println("###### The number of assigned armies ##### :" + countryObject.getArmies());
+			}
+
+		}
+
 	}
+
 	
+	/**
+	 * The following method is used to random number
+	 * @param start start range of the random number
+	 * @param end  end range of the random number
+	 * @return
+	 */
 	
+	public int getRandomNumber(int start, int end) {
+		randomObject = new Random();
+
+		return randomObject.nextInt(end - start) + start;
+	}
 
 }
