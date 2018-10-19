@@ -89,7 +89,6 @@ public class MapEditView extends java.awt.Frame {
 
 
 
-//ffdf
 
 
 	private JFrame frame = new JFrame();
