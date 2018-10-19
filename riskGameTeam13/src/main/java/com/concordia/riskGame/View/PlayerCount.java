@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.concordia.riskGame.model.Map.MapParseController;
-import com.concordia.riskGame.util.ReadConfiguration;
+
 
 /**
  * This Class performs actions for selecting the number of players from property
@@ -31,7 +31,7 @@ import com.concordia.riskGame.util.ReadConfiguration;
 public class PlayerCount extends JFrame implements ActionListener {
 	
 	private String[] playerCounterArray = {"2","3","4","5","6"};
-	private ReadConfiguration readConfigurationObject;
+	
 	private int noOfPlayers;
 	private JFrame countFrame;
 	private JLabel countLabel;
@@ -65,8 +65,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 
 		countFrame = new JFrame("Concordia Conquest");
 		countFrame.setVisible(true);
-		readConfigurationObject = new ReadConfiguration();
-
+		
 		// set Background Image
 		try {
 			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
@@ -75,7 +74,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		System.out.println("### Read Config value ####" + readConfigurationObject.getPlayerCount());
+		
 		/*playerCounterArray = arrayOfPlayer();*/
 
 		countFrame.getContentPane().setLayout(null);
@@ -187,17 +186,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 	 * method to get ReadConfiguration object
 	 * @return readConfigurationObject ReadConfiguration  object
 	 */
-	public ReadConfiguration getReadConfig() {
-		return readConfigurationObject;
-	}
-
-	/**
-	 * method to set ReadConfiguration object
-	 * @param readConfig ReadConfiguration  object
-	 */
-	public void setReadConfig(ReadConfiguration readConfig) {
-		this.readConfigurationObject = readConfig;
-	}
+	
 
 	/**
 	 * method to get numberOfPlayers
