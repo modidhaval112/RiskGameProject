@@ -32,7 +32,7 @@ public class RandomAssignment {
 		
 		List<Player> playersList = new ArrayList<>();
 		for (int i = 0; i < noOfPlayers; i++) {
-			Player playerObject = new Player("p"+(i+1));
+			Player playerObject = new Player("Player-"+(i+1));
 			playersList.add(playerObject);
 		}
 		
@@ -83,8 +83,8 @@ public class RandomAssignment {
 	int[] divider(int number, int parts)
     {
 		int[] randoms = new int[parts];
-	    Arrays.fill(randoms, (number/parts)-1); // At least one
-	    int remainder = number - ((number/parts)-1)*parts;
+	    Arrays.fill(randoms, (number/parts));
+	    int remainder = number - (number/parts)*parts;
 	    Random random = new Random();
 	    for (int i = 0; i < parts - 1 && remainder > 0; ++i) {
 	        int diff = random.nextInt(remainder);
