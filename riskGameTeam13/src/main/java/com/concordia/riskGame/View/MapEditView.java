@@ -659,7 +659,7 @@ public class MapEditView extends java.awt.Frame {
 			try {
 				mapOperations.writeMapFile(mapContents,fileName.substring(0, fileName.lastIndexOf(".")),filePath.substring(0,filePath.lastIndexOf("\\")));
 			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
+				System.out.println("Error Message  : " + e1.getMessage());
 			}
 
 			
@@ -1056,7 +1056,7 @@ public class MapEditView extends java.awt.Frame {
 
 
 		catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 

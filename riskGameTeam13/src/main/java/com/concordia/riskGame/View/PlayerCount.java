@@ -52,7 +52,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 		try {
 			Count();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 
@@ -71,7 +71,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
 			countFrame.setContentPane(label);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 
 		
@@ -143,7 +143,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 
 	}
