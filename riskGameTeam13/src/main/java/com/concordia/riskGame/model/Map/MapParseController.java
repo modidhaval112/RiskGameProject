@@ -28,7 +28,7 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.util.MapValidator;
 import com.concordia.riskGame.util.RandomAssignment;
-import com.concordia.riskGame.util.ReadConfiguration;
+
 
 /**
  * This Class has the implementation of reading the .map file and setting
@@ -59,7 +59,7 @@ public class MapParseController {
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 	private GameDriver gameDriverObject;
 	private Player playerObject;
-	private ReadConfiguration readConfigurationObject;
+	
 	private List<Player> playerList;
 	private int initialArmies;
 	private MapEditView mapEditView;
