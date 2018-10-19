@@ -951,6 +951,7 @@ public class MapEditView extends java.awt.Frame {
 				fileChooser.setDialogTitle("Select the desired map file");
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				fileChooser.setFileFilter(filenameFilter);
+				fileChooser.g
 
 				int result = fileChooser.showOpenDialog(fileChooser);
 				fileChooser.setLocation(500, 200);
