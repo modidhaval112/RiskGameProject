@@ -31,17 +31,18 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
-import com.concordia.riskGame.model.Map.MapContents;
-import com.concordia.riskGame.model.Map.MapOperations;
-import com.concordia.riskGame.model.Map.MapParseController;
-import com.concordia.riskGame.model.Continent.Continent;
-import com.concordia.riskGame.model.Country.Country;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.hamcrest.core.IsNull;
+
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
+import com.concordia.riskGame.model.Map.MapOperations;
+import com.concordia.riskGame.model.Map.MapParseController;
 /**
  * @author saich
  *
@@ -65,7 +66,6 @@ public class MapEditView extends java.awt.Frame {
 	private FileNameExtensionFilter filenameFilter;
 	private JFrame countFrame;
 	private String filePath = null;
-	private MapParseController mapParseObject;
 
 
 	private List<Country> CountriesList;
@@ -85,7 +85,7 @@ public class MapEditView extends java.awt.Frame {
 	private DefaultListModel<String> continents = new DefaultListModel<>(); 
 	private DefaultListModel<String> continentCountries = new DefaultListModel<>(); 
 	private String labels[]=new String [30];
-
+	private MapParseController mapParseObject;
 
 
 
@@ -567,6 +567,26 @@ public class MapEditView extends java.awt.Frame {
 			}
 		});
 		
+		addAdjacentCountry.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String s =  countriesJList.getSelectedValue();
+
+				if(AddText.getText().isEmpty())
+				{
+					setLog("Enter Continent in Textbox");
+
+				}
+				else
+				{
+					setLog("Renaming County");
+					renameCountry(s, AddText.getText());
+					
+				}
+
+			}
+		});
 		
 		saveMap.addActionListener(new ActionListener()
 		{
@@ -914,12 +934,16 @@ public class MapEditView extends java.awt.Frame {
 		countryAndNeighborsMap.put(renamedCountry,CountriesRenameList);
 		
 
-//ffddsdsds
 		
 		frame.validate();
 		frame.repaint();
 		panel.repaint();
 
+	}
+	//fsfsfsffs
+	public void addAdjacentCountry(String country, String adjacentCountry)
+	{
+		
 	}
 
 	public void EditMapFileChoose() {	
