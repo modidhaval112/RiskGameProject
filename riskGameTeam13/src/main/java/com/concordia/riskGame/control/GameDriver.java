@@ -194,7 +194,7 @@ public class GameDriver {
 			player.setAssignedCountries(connectedCountries);
 		
 
-		System.out.println("##### End of Fortify ###### ");
+		System.out.println("##### Armies have been moved between countries ###### ");
 		forfeitPhase(player);
 		return player;
 		}
