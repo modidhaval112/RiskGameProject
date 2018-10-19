@@ -80,6 +80,12 @@ public class GameDriver {
 	 */
 	 	public Player forfeitPhase(Player playerObject) {
 
+	 	System.out.println("###### Do you wish to enter the forfeit phase : yes/no #######");
+		String choice = null;
+		Scanner sc = new Scanner(System.in);
+		choice = sc.nextLine();
+
+		if (choice.equalsIgnoreCase("yes")) {
 		Player player = new Player();
 		player = playerObject;
 		System.out.println(player.getName() + " is in fortify phase ");
@@ -189,6 +195,11 @@ public class GameDriver {
 
 		System.out.println("##### End of Fortify ###### ");
 		return player;
+		}
+		else {
+			System.out.println("##### End of Fortify ###### ");
+			return playerObject;
+		}
 	 	}
 	 	
 	 	/**
