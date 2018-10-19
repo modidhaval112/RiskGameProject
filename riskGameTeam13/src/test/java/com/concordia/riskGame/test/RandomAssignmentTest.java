@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 
 import org.junit.Before;
 import org.junit.Test;
-import com.concordia.riskGame.Controller.MapParseController;
-import com.concordia.riskGame.Model.MapContents;
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.Player;

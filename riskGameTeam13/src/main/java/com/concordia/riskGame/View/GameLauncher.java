@@ -133,9 +133,6 @@ public class GameLauncher extends JFrame implements ActionListener {
 		String action = event.getActionCommand();
 		if (event.getSource() == startGameButton) {
 			System.out.println("####  startGameButton is clicked ####");
-			/*PlayerCounter pc = new PlayerCounter();
-			
-			pc.setVisible(true);*/
 			gameFrame.setVisible(false);
 			playerCount = new PlayerCount();
 			playerCount.setVisible(true);
