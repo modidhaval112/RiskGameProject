@@ -221,7 +221,6 @@ public class MapEditView extends java.awt.Frame {
 		gbc.gridx = 4;
 		gbc.gridy = 6;
 		gbc.gridwidth = 4;
-
 		panel.add(removeAdjacentCountry,gbc);
 		
 		gbc.gridx = 8;
