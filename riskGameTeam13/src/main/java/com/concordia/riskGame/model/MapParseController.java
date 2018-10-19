@@ -329,6 +329,8 @@ public class MapParseController {
 		int assignedArmies;
 
 		for (Player player : listPlayer) {
+			
+			System.out.println("                                               " );
 			System.out.println("######### The name of the player is ######### :" + player.getName());
 			System.out.println("    ");
 			System.out.println("######### The assigned armies are  #########  :" + player.getTotalArmies());
@@ -346,7 +348,6 @@ public class MapParseController {
 
 			while (assignedArmies > 0) {
 				int index = getRandomNumber(0, playerObject.getAssignedCountries().size());
-				System.out.println("index is " + index);
 				Country c = new Country();
 				c = assignedCountry.get(index);
 				int armies = c.getArmies();
