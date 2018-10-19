@@ -181,6 +181,7 @@ public class GameDriver {
 
 		} else {
 			System.out.println("Invalid Option");
+			System.out.println("#### Moving to the next phase ####");
 		}
 
 		return pObject;
@@ -207,7 +208,7 @@ public class GameDriver {
 
 			System.out.println(
 					"##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
-			System.out.println("#### The number of armies to be reinforced are  #### :" + assignedArmies);
+			System.out.println("#### The number of armies to be reinforced are  #### :" + counter);
 
 			nameArmiesSpilt = scanner.nextLine().split(",");
 			countryName = nameArmiesSpilt[0];
