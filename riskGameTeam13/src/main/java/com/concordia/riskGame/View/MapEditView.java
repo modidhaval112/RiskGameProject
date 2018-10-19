@@ -327,10 +327,13 @@ public class MapEditView extends java.awt.Frame {
 						List<String>countryNeighboursList=countryAndNeighborsMap.get(selectionValues[i].toString());
 						System.out.println(countryNeighboursList);
 						countryNeighbours.removeAllElements();
+						if(countryNeighboursList!=null)
+						{
 						for(int k=0; k<countryNeighboursList.size(); k++)
 						{
 							countryNeighbours.addElement(countryNeighboursList.get(k));
 
+						}
 						}
 					}
 					frame.getContentPane().validate();
@@ -363,11 +366,14 @@ public class MapEditView extends java.awt.Frame {
 						List<String>countinentCountriesList=continentsAndCountriesMap.get(selectionValues[i].toString());
 						System.out.println(countinentCountriesList);
 						continentCountries.removeAllElements();
+						if(countinentCountriesList!=null)
+						{
 						for(int k=0; k<countinentCountriesList.size(); k++)
 						{
 							continentCountries.addElement(countinentCountriesList.get(k));
 
 						}
+					}
 					}
 					frame.getContentPane().validate();
 					frame.getContentPane().repaint();
