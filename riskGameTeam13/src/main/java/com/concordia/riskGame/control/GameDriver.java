@@ -2,7 +2,7 @@ package com.concordia.riskGame.control;
 
 import java.util.Scanner;
 
-import com.concordia.riskGame.util.ReadConfiguration;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import java.util.Scanner;
 import com.concordia.riskGame.View.PlayerCount;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
-import com.concordia.riskGame.util.ReadConfiguration;
+
 
 /**
  * This class implements the Game phases in a round robin fashion
@@ -26,7 +26,7 @@ import com.concordia.riskGame.util.ReadConfiguration;
 public class GameDriver {
 
 	private PlayerCount playerCountOBject;
-	private ReadConfiguration readConfigObject;
+	
 	private Scanner scanner;
 	private String[] nameArmiesSpilt;
 	private String countryName;
