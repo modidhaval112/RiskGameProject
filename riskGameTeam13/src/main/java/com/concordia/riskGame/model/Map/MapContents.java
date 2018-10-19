@@ -1,11 +1,10 @@
-package com.concordia.riskGame.model;
+package com.concordia.riskGame.model.Map;
 
 import java.util.HashMap;
 import java.util.List;
 
 import com.concordia.riskGame.entity.Continent;
 import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.model.MapContents;
 
 
 /**
