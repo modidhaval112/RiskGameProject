@@ -1,11 +1,8 @@
 package com.concordia.riskGame.View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,11 +12,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,14 +25,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import org.hamcrest.core.IsNull;
-
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -61,42 +51,28 @@ public class MapEditView extends java.awt.Frame {
 	private JButton removeAdjacentCountry = new JButton();
 	private JButton saveMap = new JButton();
 	private JButton exitMap = new JButton();
-
 	private JTextArea log = new JTextArea(30,30);
 	private JFileChooser fileChooser;
 	private FileNameExtensionFilter filenameFilter;
-	private String filePath = null;
-
-
-	private List<Country> CountriesList;
-	private MapEditView mapEditView;
+	private String filePath = null;	
 	private HashMap<Country, List<Country>> countryAndNeighbors;
 	private HashMap<String, List<String>> countryAndNeighborsMap = new  HashMap<String, List<String>> () ;
 	private HashMap<Country, List<Country>> countriesWithItsNeighbours = new HashMap<>();
-
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 	private HashMap<String, List<String>> continentsAndCountriesMap = new  HashMap<String, List<String>> () ;
 	private HashMap<Continent, List<Country>> continentsWithItsCountries= new HashMap<>();
-
 	private List<String> Continents = new ArrayList<String>();
 	private DefaultListModel<String> countries = new DefaultListModel<>(); 
 	private DefaultListModel<String> countryNeighbours = new DefaultListModel<>();  
-
 	private DefaultListModel<String> continents = new DefaultListModel<>(); 
 	private DefaultListModel<String> continentCountries = new DefaultListModel<>(); 
 	private String labels[]=new String [30];
 	private MapParseController mapParseObject;
-
-
-
-
-
 	private JFrame frame = new JFrame();
 	private JPanel   panel = new JPanel();
 
 	private JTextField AddText = new JTextField("Enter Country or Continent to add or rename", 20);
 	public MapEditView() {
-		//MapDefinition();
 	}
 
 	public void MapDefinition(HashMap<Country, List<Country>> countryAndNeighbors,HashMap<Continent, List<Country>> continentAndItsCountries) {
@@ -113,7 +89,6 @@ public class MapEditView extends java.awt.Frame {
 		removeCountry.setName("removeCountryButton");
 		removeCountry.setVisible(true);
 
-
 		addCountry.setText("AddCountry");
 		addCountry.setName("addCountryButton");
 		addCountry.setVisible(true);
@@ -121,7 +96,6 @@ public class MapEditView extends java.awt.Frame {
 		addContinent.setText("AddContinent");
 		addContinent.setName("addContinentButton");
 		addContinent.setVisible(true);
-
 
 		renameContinent.setText("RenameContinent");
 		renameContinent.setName("renameContinentButton");
@@ -131,12 +105,9 @@ public class MapEditView extends java.awt.Frame {
 		renameCountry.setName("renameCountryButton");
 		renameCountry.setVisible(true);
 
-
-
 		addAdjacentCountry.setText("AddAdjacentCountry");
 		addAdjacentCountry.setName("addAdjacentCountryButton");
 		addAdjacentCountry.setVisible(true);
-
 
 		removeAdjacentCountry.setText("RemoveAdjacentCountry");
 		removeAdjacentCountry.setName("removeAdjacentCountryButton");
@@ -158,61 +129,46 @@ public class MapEditView extends java.awt.Frame {
 		frame.setLocationRelativeTo(null);
 		frame.setSize(800,800);
 		panel.setSize(700,700);
-
 		panel.setBackground(Color.cyan);
 		GridBagLayout layout = new GridBagLayout();
-
-
 		panel.setLayout(layout);        
 		GridBagConstraints gbc = new GridBagConstraints();
-
 		gbc.fill = GridBagConstraints.BOTH;
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		panel.add(labecountries,gbc);
 
-
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.gridwidth = 4;
-
 		panel.add(addCountry,gbc);
-
 
 		gbc.gridx = 4;
 		gbc.gridy = 4;
 		gbc.gridwidth = 4;
-
 		panel.add(addContinent,gbc);
 
 
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.gridwidth = 4;
-
 		panel.add(renameCountry,gbc);
 
 		gbc.gridx = 4;
 		gbc.gridy = 3;
 		gbc.gridwidth = 4;
-
 		panel.add(renameContinent,gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.gridwidth = 4;
-
 		panel.add(removeCountry,gbc);
 
 		gbc.gridx = 4;
 		gbc.gridy = 5;
 		gbc.gridwidth = 4;
-
 		panel.add(removeContinent,gbc);
-
-
-
 
 		gbc.gridx = 0;
 		gbc.gridy = 6;
@@ -253,7 +209,6 @@ public class MapEditView extends java.awt.Frame {
 		for (Map.Entry<Country, List<Country>> entry : countryAndNeighbors.entrySet())
 		{
 
-
 			List<Country>  countryNeighbours= entry.getValue();
 			List<String> neighboursList = new ArrayList<String>();
 
@@ -293,86 +248,59 @@ public class MapEditView extends java.awt.Frame {
 		}
 
 
-
-
-
 		JList<String> countriesJList = new JList<>(countries);  
 		countriesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		countriesJList.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane listScroller = new JScrollPane(countriesJList);
-		//list.setBounds(100,100, 75,75);  
 		listScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Countries List",TitledBorder.CENTER, TitledBorder.TOP));
-
-
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.weighty=2;
 		gbc.weightx=0.5;
-
 		panel.add(listScroller,gbc);
-
-
-
-
-
 
 		JList<String> jCN = new JList<>(countryNeighbours);  
 		jCN.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jCN.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane listScroller2 = new JScrollPane(jCN);
-		//listScroller2.setBounds(100,100, 75,75);  
 		listScroller2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Neighbours",TitledBorder.CENTER, TitledBorder.TOP));
-
 
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.weighty=2;
 		gbc.weightx=0.5;
-
 		panel.add(listScroller2,gbc);
-
 
 		JList<String> continentsJList = new JList<>(continents);  
 		continentsJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		continentsJList.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane ContinentslistScroller = new JScrollPane(continentsJList);
-		//list.setBounds(100,100, 75,75);  
 		ContinentslistScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Countnents List",TitledBorder.CENTER, TitledBorder.TOP));
-
-
-
+		
 		gbc.gridx = 6;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.weightx=0.5;
 		gbc.weighty=2;
-
 		panel.add(ContinentslistScroller,gbc);
-
 
 		JList<String> countinentCountriesJList = new JList<>(continentCountries);  
 		countinentCountriesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		countinentCountriesJList.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane countinentCountrieslistScroller = new JScrollPane(countinentCountriesJList);
-		//list.setBounds(100,100, 75,75);  
 		countinentCountrieslistScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "ContinentCountries",TitledBorder.CENTER, TitledBorder.TOP));
-
-
-
 		gbc.gridx = 9;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.weightx=0.5;
 		gbc.weighty=2;
-
 		panel.add(countinentCountrieslistScroller,gbc);
 
 
 		frame.add(panel);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -1023,6 +951,7 @@ public class MapEditView extends java.awt.Frame {
 				fileChooser.setDialogTitle("Select the desired map file");
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				fileChooser.setFileFilter(filenameFilter);
+				fileChooser.g
 
 				int result = fileChooser.showOpenDialog(fileChooser);
 				fileChooser.setLocation(500, 200);
