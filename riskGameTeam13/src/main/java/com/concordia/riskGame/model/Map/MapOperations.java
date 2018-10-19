@@ -46,9 +46,11 @@ public class MapOperations {
 			mapFileContents.append("0,0");
 			
 			List<Country> neighbours = countryAndNeighbours.getValue();
+			if(neighbours !=null && !neighbours.isEmpty()) {
 			mapFileContents.append("," + neighbours.get(0).getBelongsToContinent());
 			for(Country country : neighbours) {
 			mapFileContents.append("," + country.getCountryName());
+			}
 			}
 		}
 		fileName = fileName + ".map";
