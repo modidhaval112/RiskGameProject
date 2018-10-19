@@ -73,7 +73,7 @@ public class GameDriver {
 	}
 
 	/**
-	 * The following method implements the forfeit phase of the risk game.
+	 * The following method implements the fortify phase of the risk game.
 	 * 
 	 * @param playerObject Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
@@ -173,20 +173,13 @@ public class GameDriver {
 
 				System.out.println("#### Displaying country and its neighbouring countries #####");
 
-				System.out.println("Displaying player armies count before forfeit");
-
-				for (Country country : player.getAssignedCountries()) {
-
-					System.out.println("######## The country name is ########   :" + country.getCountryName());
-					System.out.println("######## The country armies is ######   :" + country.getArmies());
-				}
-
-				System.out.println("############### Displaying player armies count after forfeit ###########");
+	
+				System.out.println("############### Displaying player armies count after fortify ###########");
 				for (Country country : assignedCountriesClone) {
 					System.out.println("######## The country name is ########   :" + country.getCountryName());
 					System.out.println("######## The country armies is ######   :" + country.getArmies());
 				}
-				player.setAssignedCountries(connectedCountries);
+				player.setAssignedCountries(assignedCountriesClone);
 
 				System.out.println("##### Armies have been moved between countries ###### ");
 				forfeitPhase(player);
