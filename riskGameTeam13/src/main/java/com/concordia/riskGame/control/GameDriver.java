@@ -33,7 +33,7 @@ public class GameDriver {
 	private String armiesCount;
 	private List<Player> gmPlayerList;
 	private HashMap<Country, List<Country>> gmcountryAndNeighbours;
-	private List<Player> updatedPlayerList = new ArrayList<Player>();
+	private List<Player> updatedPlayerList;
 	private int assignedArmies;
 	
 	/**
@@ -49,6 +49,7 @@ public class GameDriver {
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
 		gmcountryAndNeighbours = countryAndConnected;
 		scanner =  new Scanner(System.in);
+		updatedPlayerList = new ArrayList<Player>();
 
 		for (Player p : player) {
 
@@ -67,7 +68,7 @@ public class GameDriver {
 		{
 			System.exit(0);	
 		}
-		gamePhase(gdPlayerList, countryAndConnected);
+		gamePhase(gdPlayerList, gmcountryAndNeighbours);
 
 	}
 
