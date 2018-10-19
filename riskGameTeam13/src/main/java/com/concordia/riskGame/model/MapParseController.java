@@ -77,11 +77,11 @@ public class MapParseController {
 	 * @return the mapContent Object with map details enriched
 	 */
 
-	public MapContents mapParser(String filePath, String numberCombo) {
+	public MapContents mapParser(String filePath, String numberOfPlayer) {
 		try {
 
 			fileObject = new File(filePath);
-			numberOfPlayers = Integer.parseInt(numberCombo);
+			numberOfPlayers = Integer.parseInt(numberOfPlayer);
 			System.out.println("File Path " + filePath);
 			bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 			mapValidator = new MapValidator();
@@ -98,8 +98,8 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			RandomAssignment randonAssignment = new RandomAssignment();
-			playerObject = randonAssignment.randonAssignmentMethod(Integer.parseInt(numberCombo), countryList);
-			initialArmies = initialArmyAssignment(Integer.parseInt(numberCombo));
+			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList);
+			initialArmies = initialArmyAssignment(numberOfPlayers);
 			playerList = new ArrayList();
 
 			for (Player key : playerObject.getPlayerAssign().keySet()) {
