@@ -19,6 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JOptionPane;
 
+import com.concordia.riskGame.View.GameLauncher;
 import com.concordia.riskGame.View.MapEditView;
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.exception.InvalidMapFileException;
@@ -120,7 +121,8 @@ public class MapParseController {
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase(playerListClone, countryAndNeighbors);
 		} catch (InvalidMapFileException e) {
-			e.printStackTrace();
+			System.out.println("Please select a valid map");
+			GameLauncher gameLauncherObject = new GameLauncher();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

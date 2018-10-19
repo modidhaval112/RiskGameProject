@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import com.concordia.riskGame.View.GameLauncher;
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 
@@ -75,7 +76,10 @@ public class MapOperations {
 		try (PrintWriter out = new PrintWriter(file)) {
             out.print(mapFileContents);
             out.close();
+            System.out.println("File has been created");
+            GameLauncher gameLauncher = new GameLauncher();
         }
+		
 		catch (FileNotFoundException e) {
 			throw new FileNotFoundException();
         } 
