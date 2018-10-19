@@ -141,6 +141,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 			System.out.println("#### createMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			createMapFile = new CreateMapFile();
+			createMapFile.createMap();
 			
 			
 		} else if (event.getSource() == editMapButton) {

@@ -32,19 +32,19 @@ public class CreateMapFile {
 	 * In this method we start the creation of the Map by asking the inputs from the user.
 	 * 
 	 */
-	public CreateMapFile() {
-		System.out.println("Enter the number of Continents");
-		Scanner scanner = new Scanner(System.in);
-		numberOfContinents = scanner.nextInt();
+	public void createMap() {
+		Scanner  scanner = new Scanner(System.in);
 		try {
+		System.out.println("Enter the number of Continents");
+		numberOfContinents = scanner.nextInt();
 		for(int i=1;i<=numberOfContinents;i++) {
 			System.out.println("Enter the name of the Continent"+ i);
 			nameOfContinents.add(scanner.next());
 		}
 		for(int i=0;i<numberOfContinents;i++) {
-			System.out.println("Enter the number of Countries in the Continent : " + nameOfContinents.get(i));
+			System.out.println("Enter the Number of Countries in the Continent : " + nameOfContinents.get(i));
 			int numberOfCountries = scanner.nextInt(); // add number format exception
-			System.out.println("Enter the name of countries that belong to the Continent : "+nameOfContinents.get(i));
+			System.out.println("Enter the Name of countries that belong to the Continent : "+nameOfContinents.get(i));
 			for(int j=0;j<numberOfCountries;j++) {
 				 String countryName = scanner.next();
 				 nameOfCountries.add(countryName);
@@ -80,7 +80,7 @@ public class CreateMapFile {
 		}
 		}catch (Exception InputMismatchException) {
 			System.out.println("Please enter a valid input ");
-			
+			createMap();
 		} 
 			
 		
