@@ -75,9 +75,10 @@ public class MapEditView extends java.awt.Frame {
 	public MapEditView() {
 	}
 
-	public void MapDefinition(HashMap<Country, List<Country>> countryAndNeighbors,HashMap<Continent, List<Country>> continentAndItsCountries) {
+	public void MapDefinition(HashMap<Country, List<Country>> countryAndNeighbors,HashMap<Continent, List<Country>> continentAndItsCountries,String filePath) {
 		this.countryAndNeighbors=countryAndNeighbors;
 		this.continentAndItsCountries=continentAndItsCountries;
+		this.filePath=filePath;
 		headingLabel.setText(" Please Choose your operation to rename,remove or add Continent or Country from Map  ");
 		headingLabel.setVisible(true);
 
@@ -594,7 +595,8 @@ public class MapEditView extends java.awt.Frame {
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					System.exit(0);
+					frame.setVisible(false);
+					frame.dispose();
 
 
 				}
@@ -607,8 +609,9 @@ public class MapEditView extends java.awt.Frame {
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 			MapOperations mapOperations = new MapOperations();
 			System.out.println("In operations");
+			String fileName=filePath.substring(filePath.lastIndexOf("\\")+1,filePath.length());
 			try {
-				mapOperations.writeMapFile(mapContents, "testmap123");
+				mapOperations.writeMapFile(mapContents,fileName.substring(0, fileName.lastIndexOf(".")),filePath.substring(0,filePath.lastIndexOf("\\")));
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -951,8 +954,6 @@ public class MapEditView extends java.awt.Frame {
 				fileChooser.setDialogTitle("Select the desired map file");
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				fileChooser.setFileFilter(filenameFilter);
-				fileChooser.g
-
 				int result = fileChooser.showOpenDialog(fileChooser);
 				fileChooser.setLocation(500, 200);
 				fileChooser.setSize(500, 500);

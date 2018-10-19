@@ -172,7 +172,7 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapEditView = new MapEditView();
-			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries);
+			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries,filePath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
