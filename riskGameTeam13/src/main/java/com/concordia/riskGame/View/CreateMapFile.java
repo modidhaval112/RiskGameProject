@@ -91,7 +91,7 @@ public class CreateMapFile {
         mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 		MapOperations mapOperations = new MapOperations();
 		try {
-			mapOperations.writeMapFile(mapContents, fileName);
+			mapOperations.writeMapFile(mapContents, fileName,null);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
