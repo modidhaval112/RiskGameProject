@@ -9,9 +9,9 @@ import java.util.Map.Entry;
 
 import org.junit.Before;
 import org.junit.Test;
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.entity.Player;
+
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.util.RandomAssignment;
 
 /**

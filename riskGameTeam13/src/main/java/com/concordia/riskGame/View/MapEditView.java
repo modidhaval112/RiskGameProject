@@ -31,9 +31,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
-import com.concordia.riskGame.model.*;
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
+import com.concordia.riskGame.model.Map.MapContents;
+import com.concordia.riskGame.model.Map.MapOperations;
+import com.concordia.riskGame.model.Map.MapParseController;
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;

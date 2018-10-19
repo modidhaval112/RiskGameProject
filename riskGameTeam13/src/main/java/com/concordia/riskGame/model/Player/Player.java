@@ -1,8 +1,10 @@
-package com.concordia.riskGame.entity;
+package com.concordia.riskGame.model.Player;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import com.concordia.riskGame.model.Country.Country;
 
 /**
  * This is entity class to set and get properties of player.

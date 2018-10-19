@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.model.MapContents;
-import com.concordia.riskGame.model.MapOperations;
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
+import com.concordia.riskGame.model.Map.MapOperations;
+
 
 /**
  * This class is for the user driven creation of the Map File

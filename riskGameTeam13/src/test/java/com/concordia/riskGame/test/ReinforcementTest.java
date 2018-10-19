@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.concordia.riskGame.View.GameDriver;
+import com.concordia.riskGame.control.GameDriver;
+
+
 /**
  * This class implements the test cases for testing the computation of
  * reinforcement armies
