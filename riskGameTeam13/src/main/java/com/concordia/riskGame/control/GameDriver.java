@@ -118,22 +118,20 @@ public class GameDriver {
 
 		List<Country> connectedCountries = new ArrayList<Country>();
 
-		System.out.println("#### Displaying country and its neighbouring countries #####");
-
-		System.out.println("Displaying player armies count before forfeit");
-
-		for (Country country : player.getAssignedCountries()) {
-
-			System.out.println("######## The country name is ########   :" + country.getCountryName());
-			System.out.println("######## The country armies is ######   :" + country.getArmies());
-		}
+		
 
 		int destArmies = 0;
 		int sourcesArmies = 0;
+		if (!isNeighbour(fromCountry, toCountry)) {
+			System.out.println("##### The  Countries are not neighbours ######");
+			forfeitPhase(player);
+		}
+		
 
+			
 		List<Country> assignedCountriesClone = new ArrayList<Country>();
 		List<Country> assignedCountriesClone2 = new ArrayList<Country>();
-		if (isNeighbour(fromCountry, toCountry)) {
+		
 			for (Country countryInstance : player.getAssignedCountries()) {
 				if (countryInstance.getCountryName().equalsIgnoreCase(fromCountry)) {
 					Country sourceCountry = new Country();
@@ -170,16 +168,24 @@ public class GameDriver {
 				if (!assignedCountriesClone.contains(x))
 					assignedCountriesClone.add(x);
 			}
+			
+			System.out.println("#### Displaying country and its neighbouring countries #####");
+
+			System.out.println("Displaying player armies count before forfeit");
+
+			for (Country country : player.getAssignedCountries()) {
+
+				System.out.println("######## The country name is ########   :" + country.getCountryName());
+				System.out.println("######## The country armies is ######   :" + country.getArmies());
+			}
+			
 			System.out.println("############### Displaying player armies count after forfeit ###########");
 			for (Country country : assignedCountriesClone) {
 				System.out.println("######## The country name is ########   :" + country.getCountryName());
 				System.out.println("######## The country armies is ######   :" + country.getArmies());
 			}
 			player.setAssignedCountries(connectedCountries);
-		} else {
-			System.out.println("##### The  Countries are not neighbours ######");
-			forfeitPhase(player);
-		}
+		
 
 		System.out.println("##### End of Fortify ###### ");
 		return player;
@@ -309,16 +315,10 @@ public class GameDriver {
 		System.out.println("##### Checking the country, if its a neighbour of the country or not #####");
 		System.out.println("##### Source country is        : ##### :" + sourceCountry);
 		System.out.println("##### Destination country is : ##### :" + destCountry);
-
 		List<Country> connectedCountries = new ArrayList<Country>();
 		boolean returnValue = false;
-
 		for (Map.Entry<Country, List<Country>> entry : gmcountryAndNeighbours.entrySet()) {
-
-			System.out.println(
-					"##### The country's name is " + entry.getKey().getCountryName() + "  ##### ");
 			if (entry.getKey().getCountryName().equalsIgnoreCase(sourceCountry))
-
 			{
 				connectedCountries = entry.getValue();
 				for (Country countryInstance : connectedCountries) {
@@ -330,7 +330,6 @@ public class GameDriver {
 			}
 		}
 		return returnValue;
-
 	}
 
 	/**
