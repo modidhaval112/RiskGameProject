@@ -33,7 +33,7 @@ public class GameDriver {
 	private String armiesCount;
 	private List<Player> gmPlayerList;
 	private HashMap<Country, List<Country>> gmcountryAndNeighbours;
-	private List<Player> updatedPlayerList = new ArrayList();
+	private List<Player> updatedPlayerList = new ArrayList<Player>();
 	private int assignedArmies;
 	
 	/**
@@ -45,8 +45,8 @@ public class GameDriver {
 	
 	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) {
 
-		List<Player> playerList = new ArrayList();
-		gmcountryAndNeighbours = new HashMap();
+		List<Player> playerList = new ArrayList<Player>();
+		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
 		gmcountryAndNeighbours = countryAndConnected;
 		scanner =  new Scanner(System.in);
 
@@ -58,7 +58,7 @@ public class GameDriver {
 			playerInstance = forfeitPhase(playerInstance);
 			updatedPlayerList.add(playerInstance);
 		}
-		List<Player> gdPlayerList = new ArrayList();
+		List<Player> gdPlayerList = new ArrayList<Player>();
 		gdPlayerList = updatedPlayerList;
 		System.out.println("######## Do you want to exit : yes  #########");
 		String choice = scanner.nextLine();
@@ -113,8 +113,10 @@ public class GameDriver {
 		System.out.println("###########    Source country      	 ############### :" + fromCountry);
 		System.out.println("###########  Destination Country   	 ############### :" + toCountry);
 		System.out.println("###########   Armies to be moved    ###############  :" + movingArmies);
+		
+		
 
-		List<Country> connectedCountries = new ArrayList();
+		List<Country> connectedCountries = new ArrayList<Country>();
 
 		System.out.println("#### Displaying country and its neighbouring countries #####");
 
@@ -129,9 +131,8 @@ public class GameDriver {
 		int destArmies = 0;
 		int sourcesArmies = 0;
 
-		List<Country> assignedCountriesClone = new ArrayList();
-		List<Country> assignedCountriesClone2 = new ArrayList();
-
+		List<Country> assignedCountriesClone = new ArrayList<Country>();
+		List<Country> assignedCountriesClone2 = new ArrayList<Country>();
 		if (isNeighbour(fromCountry, toCountry)) {
 			for (Country countryInstance : player.getAssignedCountries()) {
 				if (countryInstance.getCountryName().equalsIgnoreCase(fromCountry)) {
@@ -139,16 +140,22 @@ public class GameDriver {
 					sourceCountry = countryInstance;
 					sourcesArmies = sourceCountry.getArmies();
 					if (sourcesArmies == 1) {
+						System.out.println("You cannot move the only army from this Country");
+						forfeitPhase(player);
+					}
+					if(sourcesArmies<movingArmies) {
+						System.out.println("The country doesnt have the mentioned number of armies, please enter a lesser number");
+						forfeitPhase(player);
+					}
+					if(sourcesArmies==movingArmies) {
+						System.out.println("You cannot move all the armies from this Country, please enter a lesser number");
 						forfeitPhase(player);
 					}
 					sourcesArmies = sourcesArmies - movingArmies;
 					sourceCountry.setArmies(sourcesArmies);
-
 				}
 				assignedCountriesClone.add(countryInstance);
-
 			}
-
 			for (Country countryInstance : player.getAssignedCountries()) {
 				if (countryInstance.getCountryName().equalsIgnoreCase(toCountry)) {
 					Country destCountry = new Country();
@@ -157,33 +164,26 @@ public class GameDriver {
 					destArmies = destArmies + movingArmies;
 					destCountry.setArmies(destArmies);
 				}
-
 				assignedCountriesClone2.add(countryInstance);
-
 			}
-
 			for (Country x : assignedCountriesClone2) {
 				if (!assignedCountriesClone.contains(x))
 					assignedCountriesClone.add(x);
 			}
-
 			System.out.println("############### Displaying player armies count after forfeit ###########");
-
 			for (Country country : assignedCountriesClone) {
 				System.out.println("######## The country name is ########   :" + country.getCountryName());
 				System.out.println("######## The country armies is ######   :" + country.getArmies());
 			}
-
 			player.setAssignedCountries(connectedCountries);
 		} else {
 			System.out.println("##### The  Countries are not neighbours ######");
+			forfeitPhase(player);
 		}
 
 		System.out.println("##### End of Fortify ###### ");
-
 		return player;
-
-	}
+	 	}
 	 	
 	 	/**
 		 * The following method implements the attack phase of the risk game.
@@ -227,7 +227,7 @@ public class GameDriver {
 	public Player reinforcePhase(Player player) {
 
 		scanner = new Scanner(System.in);
-		gmPlayerList = new ArrayList();
+		gmPlayerList = new ArrayList<Player>();
 		int additionalArmies;
 		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
 		
@@ -307,29 +307,25 @@ public class GameDriver {
 
 	public boolean isNeighbour(String sourceCountry, String destCountry) {
 		System.out.println("##### Checking the country, if its a neighbour of the country or not #####");
-		;
 		System.out.println("##### Source country is        : ##### :" + sourceCountry);
 		System.out.println("##### Destination country is : ##### :" + destCountry);
 
-		List<Country> connectedCountries = new ArrayList();
+		List<Country> connectedCountries = new ArrayList<Country>();
 		boolean returnValue = false;
 
 		for (Map.Entry<Country, List<Country>> entry : gmcountryAndNeighbours.entrySet()) {
 
 			System.out.println(
-					"##### The country's name is                     ##### " + entry.getKey().getCountryName());
+					"##### The country's name is " + entry.getKey().getCountryName() + "  ##### ");
 			if (entry.getKey().getCountryName().equalsIgnoreCase(sourceCountry))
 
 			{
 				connectedCountries = entry.getValue();
-
 				for (Country countryInstance : connectedCountries) {
-
-					if (countryInstance.getCountryName().equalsIgnoreCase(destCountry))
-						;
+					if (countryInstance.getCountryName().equalsIgnoreCase(destCountry)) {
 					System.out.println("#### Country is a neighbour ######");
 					returnValue = true;
-
+					}
 				}
 			}
 		}
