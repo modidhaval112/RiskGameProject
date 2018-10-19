@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.concordia.riskGame.model.Country.Country;
+
 
 /**
  * This class contains setters and getters for different attributes of GameMap Object

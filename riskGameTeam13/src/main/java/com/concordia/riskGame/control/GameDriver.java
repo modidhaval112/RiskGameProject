@@ -1,4 +1,4 @@
-package com.concordia.riskGame.View;
+package com.concordia.riskGame.control;
 
 import java.util.Scanner;
 
@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.concordia.riskGame.control.PlayerCount;
-import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.entity.Player;
+import com.concordia.riskGame.View.PlayerCount;
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.util.ReadConfiguration;
 
 /**

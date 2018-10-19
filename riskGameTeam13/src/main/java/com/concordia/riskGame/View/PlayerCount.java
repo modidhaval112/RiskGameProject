@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.concordia.riskGame.model.MapParseController;
+import com.concordia.riskGame.model.Map.MapParseController;
 import com.concordia.riskGame.util.ReadConfiguration;
 
 /**

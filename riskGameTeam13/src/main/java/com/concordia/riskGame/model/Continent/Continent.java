@@ -1,6 +1,8 @@
-package com.concordia.riskGame.entity;
+package com.concordia.riskGame.model.Continent;
 
 import java.util.List;
+
+import com.concordia.riskGame.model.Country.Country;
 
 /**
  * Continent Class go get and set all properties of a continent.

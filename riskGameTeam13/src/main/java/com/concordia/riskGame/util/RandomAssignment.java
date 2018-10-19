@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.entity.Player;
+
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Player.Player;
 
 
 /**

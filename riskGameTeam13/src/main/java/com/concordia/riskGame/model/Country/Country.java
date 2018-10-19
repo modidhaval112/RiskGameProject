@@ -1,4 +1,4 @@
-package com.concordia.riskGame.entity;
+package com.concordia.riskGame.model.Country;
 
 import java.util.List;
 

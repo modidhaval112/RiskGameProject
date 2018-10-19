@@ -1,4 +1,4 @@
-package com.concordia.riskGame.model;
+package com.concordia.riskGame.model.Map;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -7,8 +7,9 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+
 
 
 /**

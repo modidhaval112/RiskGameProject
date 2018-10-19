@@ -7,10 +7,11 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.concordia.riskGame.entity.Continent;
-import com.concordia.riskGame.entity.Country;
-import com.concordia.riskGame.model.MapContents;
-import com.concordia.riskGame.model.MapParseController;
+import com.concordia.riskGame.model.Continent.Continent;
+import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
+import com.concordia.riskGame.model.Map.MapParseController;
+
 
 /**
  * Test to check if reading the map is functioning properly

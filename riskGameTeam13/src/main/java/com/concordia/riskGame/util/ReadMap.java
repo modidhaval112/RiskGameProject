@@ -11,8 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.GameMap;
+import com.concordia.riskGame.model.Country.Country;
 
 /**
  * This class reads the .map file and Returns the GameMap object

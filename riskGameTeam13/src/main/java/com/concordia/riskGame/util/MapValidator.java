@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.concordia.riskGame.entity.Country;
 import com.concordia.riskGame.entity.GameMap;
+import com.concordia.riskGame.model.Country.Country;
 
 /**
  * This class contains all the methods to validate the map file.
