@@ -537,13 +537,33 @@ public class MapEditView extends java.awt.Frame {
 				{
 					setLog("Renaming Continent");
 					renameContinent(s, AddText.getText());
-					frame.validate();
-					frame.repaint();
-					panel.repaint();
+					
 				}
 
 			}
 		});
+		
+		renameCountry.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String s =  countriesJList.getSelectedValue();
+
+				if(AddText.getText().isEmpty())
+				{
+					setLog("Enter Continent in Textbox");
+
+				}
+				else
+				{
+					setLog("Renaming County");
+					renameCountry(s, AddText.getText());
+					
+				}
+
+			}
+		});
+		
 		
 		saveMap.addActionListener(new ActionListener()
 		{
@@ -638,10 +658,7 @@ public class MapEditView extends java.awt.Frame {
 		System.out.println("In removing Continent");
 		continentsAndCountriesMap.remove(Continent);
 		continents.removeElement(Continent);
-		frame.validate();
-		frame.repaint();
-		panel.repaint();
-
+		
 	}
 
 
@@ -797,12 +814,105 @@ public class MapEditView extends java.awt.Frame {
 			continentsAndCountriesMap.remove(continent);
 			continents.removeElement(continent);
 			continentsAndCountriesMap.put(renameContinent, continentCountriesList);
-
-
-
 			continents.addElement(renameContinent);
 		}
 
+		frame.validate();
+		frame.repaint();
+		panel.repaint();
+
+	} 
+	
+	
+	public void renameCountry(String Country,String renamedCountry)
+	{
+		System.out.println("In renaming Country");
+		
+
+		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
+		{
+
+
+			List<String>  continentCountries= entry.getValue();
+			List<String> CountriesList = new ArrayList<String>();
+
+			for (int i=0 ;i<continentCountries.size();i++) {
+
+
+				if(!continentCountries.get(i).toString().equals(Country))
+				{
+
+					CountriesList.add(continentCountries.get(i).toString());
+				}
+				
+				if(continentCountries.get(i).toString().equals(Country))
+				{
+					CountriesList.add(renamedCountry);
+					
+				}
+				
+
+			}
+			continentsAndCountriesMap.put(entry.getKey().toString(), CountriesList);
+
+
+		}
+
+		List<String> CountriesRenameList = new ArrayList<String>();
+
+		for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
+		{
+
+
+			List<String>  continentCountries= entry.getValue();
+			List<String> CountriesList = new ArrayList<String>();
+			
+			if(entry.getKey().equals(Country))
+			{
+				System.out.println("before put");
+				CountriesRenameList= continentCountries;
+				//countryAndNeighborsMap.put(renamedCountry,continentCountries);
+				System.out.println("after put");
+			}
+
+
+			for (int i=0 ;i<continentCountries.size();i++) {
+
+				if(!continentCountries.get(i).equals(Country))
+				{
+
+					CountriesList.add(continentCountries.get(i).toString());
+					System.out.println("after put1");
+
+				}
+				
+				if(continentCountries.get(i).equals(Country))
+				{
+
+					CountriesList.add(renamedCountry);
+					System.out.println("after put2");
+
+				}
+
+			}
+			System.out.println("after put3");
+
+		countryAndNeighborsMap.put(entry.getKey().toString(), CountriesList);
+			System.out.println("after put4");
+
+
+
+		}
+
+		countries.removeElement(Country);
+
+		countries.addElement(renamedCountry);
+		countryAndNeighborsMap.remove(Country);
+		countryAndNeighborsMap.put(renamedCountry,CountriesRenameList);
+		
+
+
+		
 		frame.validate();
 		frame.repaint();
 		panel.repaint();
