@@ -38,22 +38,6 @@ public class MapValidator {
 	}
 
 	/**
-	 * method to check if Continent count is greater than zero or not
-	 * @param gameMap : GameMap object
-	 * @return true if winCount is greater than zero, otherwise false
-	 */
-	public boolean checkWinCount(GameMap gameMap) {
-
-		for (Entry<String, Integer> entry : gameMap.getMapWinCount().entrySet()) {
-			if (entry.getValue() < 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * method to check if Country Continent if from Continent list only
 	 * @param gameMap : GameMap object
 	 * @return true if Country Continent is from Continent List, otherwise false
@@ -190,15 +174,6 @@ public class MapValidator {
 		} else {
 			validMapFlag = true;
 			statusMessage = "Map is valid";
-		}
-
-		if (mapValidator.checkWinCount(gameMap)) {
-			validMapFlag = true;
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as Continent win count should be greater than zero";
-			System.out.println("Message : " + statusMessage);
-			return;
 		}
 
 		if (mapValidator.checkContinent(gameMap)) {
