@@ -102,6 +102,7 @@ public class GameDriver {
 					System.out.print(countryObj.getCountryName() + ",");
 
 				}
+				System.out.println("\n");
 				System.out.println("##### Enter source country and destination country(comma seperated) ###### :");
 				utilString = scanner.nextLine().split(",");
 				String fromCountry = utilString[0].trim();
