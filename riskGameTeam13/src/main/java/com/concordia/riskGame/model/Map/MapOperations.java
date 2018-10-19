@@ -64,9 +64,9 @@ public class MapOperations {
 		File file;
 		 String currentDir = System.getProperty("user.dir");
 	        System.out.println("Current dir using System:" +currentDir);
-	        currentDir = currentDir+fileName;
+	        currentDir = currentDir+File.separator+fileName;
 		if(filePath!=null && !filePath.isEmpty()) {
-			filePath= filePath+fileName;
+			filePath= filePath+File.separator+fileName;
 			file = new File(filePath);
 		}
 		else {
