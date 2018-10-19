@@ -77,7 +77,7 @@ public class GameDriver {
 		String fromCountry = utilString[0].trim();
 		String toCountry = utilString[1].trim();
 
-		if (fromCountry.equals(toCountry)) {
+		if (fromCountry.equalsIgnoreCase(toCountry)) {
 			System.out.println("xxxxxxx----From and to country cannot be the same----xxxxxx");
 			forfeitPhase(player);
 
@@ -107,14 +107,14 @@ public class GameDriver {
 
 		List<Country> assignedCountriesClone = new ArrayList();
 		List<Country> assignedCountriesClone2 = new ArrayList();
-		if(!isSourceDestCountrySame(fromCountry,toCountry))
-		{
+		
 		if (isNeighbour(fromCountry, toCountry)) {
 			for (Country countryInstance : player.getAssignedCountries()) {
 				if (countryInstance.getCountryName().equalsIgnoreCase(fromCountry)) {
 					Country sourceCountry = new Country();
 					sourceCountry = countryInstance;
 					sourcesArmies = sourceCountry.getArmies();
+					System.out.println("##### Source Armies count is #####"+sourcesArmies);
 					if(sourcesArmies == 1)
 					{
 						System.out.println(" Source Armies has only one amry. Hence you choose another another.");
@@ -157,10 +157,7 @@ public class GameDriver {
 		} else {
 			System.out.println("##### Both the countries are not neighbours ######");
 		}
-		}
-		else {
-			System.out.println("##### Source Country and Destination Country can not be the same ######");
-		}
+		
 
 		System.out.println("##### End of Fortify ###### ");
 		
@@ -197,46 +194,35 @@ public class GameDriver {
 		scanner = new Scanner(System.in);
 		gmPlayerList = new ArrayList();
 		int additionalArmies;
-		System.out.println("######## Player  reinforces ########");
-		System.out.println("#### The player's name is #####" + player.getName());
+		System.out.println("########" +player.getName() +"  reinforcement phase begins ########");
 		System.out.println("#### The total number of armies are #### " + player.getTotalArmies());
-
 		System.out.println("##### Adding armies based on the countries owned ######");
 
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
-
 		additionalArmies = player.getTotalArmies() + assignedArmies;
-
 		player.setTotalArmies(additionalArmies);
-
 		System.out.println(
 				"#### The total number of armies after adding additional armies is  #### " + player.getTotalArmies());
 
-		System.out.println("### Countries Owned #####");
-		for (Country country : player.getAssignedCountries()) {
-			System.out.print(country.getCountryName() + " ,");
-		}
-
+		countriesOwnedByPlayer(player);
 		int counter = player.getTotalArmies();
 		int armiesCounter;
 		while (counter > 0) {
 
+			System.out.println("##### The total number of armies are ##### " + counter);
 			System.out.println(
 					"Select the country name and armies (comma , seperated) in which you want to assign armies");
 
-			System.out.println("##### The total number of armies are ##### " + counter);
+			
 
 			nameArmiesSpilt = scanner.nextLine().split(",");
 			countryName = nameArmiesSpilt[0];
 			armiesCount = nameArmiesSpilt[1];
 
-			System.out.println("The selected country name is" + countryName);
+			System.out.println("##### The selected country name is ######" + countryName);
 
 			armiesCounter = Integer.parseInt(armiesCount);
-			System.out.println("The given reinforcement armies are " + armiesCounter);
-			System.out.println("The value of counter is  " + counter);
 			int armyCount = 0;
-
 			if (armiesCounter <= counter) {
 
 				for (Country country : player.getAssignedCountries()) {
@@ -244,8 +230,6 @@ public class GameDriver {
 						System.out.println("Country Matched");
 						Country c = new Country();
 						c = country;
-						System.out.println(" Country get armies is         ###### :" + c.getArmies());
-						System.out.println(" Country armies counter is  ###### :" + armiesCounter);
 
 						armyCount = country.getArmies() + armiesCounter;
 						c.setArmies(armyCount);
@@ -255,13 +239,10 @@ public class GameDriver {
 					}
 				}
 
-				System.out.println("The counter value is " + counter);
-				System.out.println("the armiesCounter value is " + armiesCounter);
 				counter = counter - armiesCounter;
-				System.out.println("The total value after subtracting " + counter);
-
+	
 			} else {
-				System.out.println("The entered army counter is greater than the remaining armies");
+				System.out.println("##### The entered army count is greater than the remaining armies ######");
 			}
 
 		}
@@ -279,7 +260,7 @@ public class GameDriver {
 			}
 		}
 
-		System.out.println("Repeat the process to reinforce  untill armies are zero");
+		System.out.println("########" +player.getName() +"  reinforcement phase ended ########");
 		return player;
 
 	}
@@ -349,6 +330,15 @@ public class GameDriver {
 	}
 	
 	
+	
+	public void countriesOwnedByPlayer(Player player)
+	{
+		System.out.println("### Countries Owned #####");
+		for (Country country : player.getAssignedCountries()) {
+			System.out.print(country.getCountryName() + " ,");
+		}
+
+	}
 	
 	
 }
