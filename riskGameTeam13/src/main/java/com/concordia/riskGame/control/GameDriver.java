@@ -2,8 +2,6 @@ package com.concordia.riskGame.control;
 
 import java.util.Scanner;
 
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,7 +14,6 @@ import com.concordia.riskGame.View.PlayerCount;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 
-
 /**
  * This class implements the Game phases in a round robin fashion
  * 
@@ -26,7 +23,6 @@ import com.concordia.riskGame.model.Player.Player;
 public class GameDriver {
 
 	private PlayerCount playerCountOBject;
-	
 	private Scanner scanner;
 	private String[] nameArmiesSpilt;
 	private String countryName;
@@ -43,7 +39,6 @@ public class GameDriver {
 	 * @param countryAndConnected countries and their respective connected
 	 *                            countries.
 	 */
-
 	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) {
 
 		List<Player> playerList = new ArrayList<Player>();
@@ -53,13 +48,13 @@ public class GameDriver {
 		updatedPlayerList = new ArrayList<Player>();
 
 		for (Player p : player) {
-
 			Player playerInstance = new Player();
 			playerInstance = reinforcePhase(p);
 			playerInstance = attackPhase(playerInstance);
 			playerInstance = forfeitPhase(playerInstance);
 			updatedPlayerList.add(playerInstance);
 		}
+
 		List<Player> gdPlayerList = new ArrayList<Player>();
 		gdPlayerList = updatedPlayerList;
 		System.out.println("######## Do you want to exit : yes  #########");
@@ -94,14 +89,13 @@ public class GameDriver {
 				System.out.println("##### Fortification Phase begins ######");
 				String[] utilString;
 				scanner = new Scanner(System.in);
-
 				System.out.println("#### List of countries owned by the player #####");
 
 				for (Country countryObj : player.getAssignedCountries()) {
-
 					System.out.print(countryObj.getCountryName() + ",");
 
 				}
+
 				System.out.println("\n");
 				System.out.println("##### Enter source country and destination country(comma seperated) ###### :");
 				utilString = scanner.nextLine().split(",");
@@ -116,13 +110,11 @@ public class GameDriver {
 
 				System.out.println("###### Enter the number of armies to be moved #######");
 				int movingArmies = scanner.nextInt();
-
 				System.out.println("###########    Source country      	 ############### :" + fromCountry);
 				System.out.println("###########  Destination Country   	 ############### :" + toCountry);
 				System.out.println("###########   Armies to be moved    ###############  :" + movingArmies);
 
 				List<Country> connectedCountries = new ArrayList<Country>();
-
 				int destArmies = 0;
 				int sourcesArmies = 0;
 				if (!isNeighbour(fromCountry, toCountry)) {
@@ -157,6 +149,7 @@ public class GameDriver {
 					}
 					assignedCountriesClone.add(countryInstance);
 				}
+
 				for (Country countryInstance : player.getAssignedCountries()) {
 					if (countryInstance.getCountryName().equalsIgnoreCase(toCountry)) {
 						Country destCountry = new Country();
@@ -167,21 +160,20 @@ public class GameDriver {
 					}
 					assignedCountriesClone2.add(countryInstance);
 				}
+
 				for (Country x : assignedCountriesClone2) {
 					if (!assignedCountriesClone.contains(x))
 						assignedCountriesClone.add(x);
 				}
 
-				System.out.println("#### Displaying country and its neighbouring countries #####");
-
-	
 				System.out.println("############### Displaying player armies count after fortify ###########");
+
 				for (Country country : assignedCountriesClone) {
 					System.out.println("######## The country name is ########   :" + country.getCountryName());
 					System.out.println("######## The country armies is ######   :" + country.getArmies());
 				}
-				player.setAssignedCountries(assignedCountriesClone);
 
+				player.setAssignedCountries(assignedCountriesClone);
 				System.out.println("##### Armies have been moved between countries ###### ");
 				return player;
 			} catch (Exception e) {
@@ -200,13 +192,11 @@ public class GameDriver {
 	 * @param playerObject Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
 	 */
-
 	public Player attackPhase(Player player) {
 
 		System.out.println("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
 		pObject = player;
-
 		String choice = null;
 		Scanner sc = new Scanner(System.in);
 		choice = sc.nextLine();
@@ -231,30 +221,23 @@ public class GameDriver {
 	 * @param playerObject Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
 	 */
-
 	public Player reinforcePhase(Player player) {
 
 		scanner = new Scanner(System.in);
 		gmPlayerList = new ArrayList<Player>();
 		int additionalArmies;
 		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
-
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
-
 		System.out.println("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 		player.setTotalArmies(assignedArmies);
-
 		int counter = player.getTotalArmies();
 		int armiesCounter;
 
 		while (counter > 0) {
-
 			countriesOwnedByPlayer(player);
-
 			System.out.println(
 					"##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
 			System.out.println("#### The number of armies to be reinforced are  #### :" + counter);
-
 			nameArmiesSpilt = scanner.nextLine().split(",");
 			countryName = nameArmiesSpilt[0];
 			armiesCount = nameArmiesSpilt[1];
@@ -263,16 +246,15 @@ public class GameDriver {
 				System.out.println("#### It is not valid Integer . Please enter a integer #####");
 				armiesCount = scanner.nextLine();
 			}
+
 			System.out.println("##### The selected country name is  #### :" + countryName);
 			System.out.println("##### The army count  name is       #### :" + armiesCount);
-
 			armiesCounter = Integer.parseInt(armiesCount);
 			int armyCount = 0;
-			if (armiesCounter <= counter) {
 
+			if (armiesCounter <= counter) {
 				for (Country country : player.getAssignedCountries()) {
 					if (countryName.equalsIgnoreCase(country.getCountryName())) {
-
 						Country c = new Country();
 						c = country;
 						armyCount = country.getArmies() + armiesCounter;
@@ -281,9 +263,7 @@ public class GameDriver {
 						player.setTotalArmies(armyCount);
 					}
 				}
-
 				counter = counter - armiesCounter;
-
 			} else {
 				System.out.println(
 						"##### The entered army count is greater than the remaining armies. Please enter a value below the ramining armies ######");
@@ -308,10 +288,25 @@ public class GameDriver {
 
 	}
 
+	/**
+	 * The following checks if the string is number or not
+	 * 
+	 * @param str String value is passed which is used to check as number or not.
+	 * @return Returns true if the string is a number else it returns false.
+	 */
 	public boolean isNumeric(String str) {
 		return str.matches("-?\\d+(\\.\\d+)?");
 	}
 
+	/**
+	 * The following method checks the countries passed in the forfeit phase are
+	 * neighbour or not.
+	 * 
+	 * @param sourceCountry The country from which armies have to moved.
+	 * @param destCountry   The country which receives armies.
+	 * @return returns true if both the countries are countries else it returns
+	 *         false.
+	 */
 	public boolean isNeighbour(String sourceCountry, String destCountry) {
 		System.out.println("##### Checking the country, if its a neighbour of the country or not #####");
 		System.out.println("##### Source country is        : ##### :" + sourceCountry);
@@ -333,7 +328,7 @@ public class GameDriver {
 	}
 
 	/**
-	 * Method to Calculate Number of armiesin reinforcement Phase
+	 * Method to Calculate Number of armies in reinforcement Phase
 	 * 
 	 * @param numberOfCountriesOwned
 	 * @return number of reinforced armies
@@ -349,15 +344,11 @@ public class GameDriver {
 		return armiesToAssign;
 	}
 
-	public boolean isSourceDestCountrySame(String sourceCountry, String destinationCountry) {
-		boolean returnValue = true;
-
-		if (sourceCountry.equalsIgnoreCase(destinationCountry))
-			returnValue = false;
-
-		return returnValue;
-	}
-
+	/**
+	 * The following method displays the countries assigned to a player.
+	 * 
+	 * @param player The instance of the player is taken as the parameter.
+	 */
 	public void countriesOwnedByPlayer(Player player) {
 		System.out.println("### Countries Owned by the player are ##### :");
 		for (Country country : player.getAssignedCountries()) {
