@@ -204,7 +204,7 @@ public class GameMap {
 	/**
 	 * method to set the Continent and belonging countries
 	 * 
-	 * @param mapContinentCountry : Continent and belonging Countries
+	 * @param mapContinentCountry2 : Continent and belonging Countries
 	 */
 	public void setMapContinentCountry(Map<String, List<Country>> mapContinentCountry2) {
 		this.mapContinentCountry = mapContinentCountry2;
