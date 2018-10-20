@@ -52,7 +52,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * this method initilize the UI of the game
+	 * this method initialize the UI of the game
 	 */
 	public void initUI() {
 
@@ -126,7 +126,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * This method taked event as an input and perform task depending on the event
+	 * This method takes an event as an input and performs task depending on the event
 	 */
 	public void actionPerformed(ActionEvent event) {
 

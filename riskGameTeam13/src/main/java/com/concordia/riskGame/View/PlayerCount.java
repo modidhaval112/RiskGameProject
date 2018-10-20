@@ -84,7 +84,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 		countLabel.setMaximumSize(new Dimension(300, 300));
 		countLabel.setForeground(new Color(255, 255, 255));
 		countLabel.setFont(new Font("Georgia", Font.BOLD, 15));
-		countLabel.setBounds(100, 101, 190, 30);
+		countLabel.setBounds(60, 101, 230, 30);
 
 		countFrame.getContentPane().add(countLabel);
 
