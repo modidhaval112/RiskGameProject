@@ -417,28 +417,28 @@ public class MapEditView extends java.awt.Frame {
 				}
 				else
 				{
-					
-				if(   !AddText.getText().equals(""))
-				{
-					if(!countries.contains(AddText.getText()) )
+
+					if(   !AddText.getText().equals(""))
 					{
-						setLog("Country Input is : " + AddText.getText());
-						addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
-						frame.validate();
-						frame.repaint();
-						panel.repaint();
+						if(!countries.contains(AddText.getText()) )
+						{
+							setLog("Country Input is : " + AddText.getText());
+							addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
+							frame.validate();
+							frame.repaint();
+							panel.repaint();
+						}
+						else
+						{
+							setLog("Country with name already exists");
+
+						}
 					}
 					else
 					{
-						setLog("Country with name already exists");
+						setLog(" Give the new country name in input box");
 
 					}
-				}
-				else
-				{
-					setLog(" Give the new country name in input box");
-
-				}
 
 				}
 			}
@@ -573,9 +573,10 @@ public class MapEditView extends java.awt.Frame {
 				String adjacentCountry=   jCN.getSelectedValue();
 
 
-				if(AddText.getText().isEmpty())
+
+				if(jCN.getSelectedValue().isEmpty() | countriesJList.getSelectedValue().isEmpty() )
 				{
-					setLog("Enter Adjacent Country in Textbox");
+					setLog("Select Country and Adjacent Country");
 
 				}
 				else
@@ -658,19 +659,9 @@ public class MapEditView extends java.awt.Frame {
 				}
 
 
-				exitMap.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{	
-						frame.setVisible(false);
-						frame.dispose();
-						System.exit(0);
 
-					}
-				});
 
 				MapContents mapContents = new MapContents();
-				System.out.println();
 
 				mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 				mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
@@ -687,7 +678,18 @@ public class MapEditView extends java.awt.Frame {
 			}
 		});
 
+		exitMap.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("In exit map");
+				frame.dispose();
+				System.exit(0);
 
+
+
+			}
+		});
 
 	}
 
@@ -1049,7 +1051,7 @@ public class MapEditView extends java.awt.Frame {
 			List<String>  continentCountries = new ArrayList<String>();
 			if(entry.getValue()!= null)
 			{
-			 continentCountries= entry.getValue();
+				continentCountries= entry.getValue();
 			}
 
 			if(entry.getKey().equals(country))
