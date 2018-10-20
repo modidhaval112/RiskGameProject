@@ -46,10 +46,10 @@ public class MapValidatorTest {
    /**
     * This method check if map is valid 
     * The input used is a valid map
-    * @throws InvalidMapFileException 
+    * @throws InvalidMapFileException  Map is Invalid.
     */
 	@Test
-	public void validMapTest() {
+	public void validMapTest() throws InvalidMapFileException {
 		
 		 mapValidatorObject.init(fileValid);
 		 validFlag=mapValidatorObject.getValidMapFlag();
@@ -59,10 +59,10 @@ public class MapValidatorTest {
 	
 	/**
 	 * This method checks if a disconnected map is considered to be invalid
-	 * @throws InvalidMapFileException 
+	 * @throws InvalidMapFileException  Map is Invalid.
 	 */
 	@Test
-	public void testDisconnectedMap() {
+	public void testDisconnectedMap() throws InvalidMapFileException {
 		
 		 mapValidatorObject.init(fileInvalidDisconnected);
 		 validFlag=mapValidatorObject.getValidMapFlag();

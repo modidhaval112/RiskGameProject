@@ -27,7 +27,7 @@ public class RandomAssignmentTest {
 	
 	/**
 	 * Before method to set initialize objects
-	 * @throws Exception
+	 * @throws Exception Exception is thrown.
 	 */
 	@Before
 	public void before() throws Exception {

@@ -1,4 +1,4 @@
-package com.concordia.riskGame.View;
+ package com.concordia.riskGame.View;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -118,7 +118,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 	/**
 	 * main method
-	 * @param args 
+	 * @param args String array.
 	 */
 	public static void main(String[] args) {
 		GameLauncher ex = new GameLauncher();

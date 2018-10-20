@@ -188,7 +188,7 @@ public class CreateMapFileTest {
 	
 	/**
 	 * This test method checks for negative scenario for file name format
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException Exception is thrown when file is not found.
 	 * 
 	 */
 	@Test(expected=FileNotFoundException.class)

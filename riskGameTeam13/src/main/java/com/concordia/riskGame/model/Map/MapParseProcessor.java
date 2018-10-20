@@ -64,7 +64,7 @@ public class MapParseProcessor {
 	 * countries in their respective entity classes.
 	 * 
 	 * @param filePath    Path of the map file
-	 * @param numberCombo Number of players returned from the drop down menu
+	 * @param numberOfPlayer Number of players returned from the drop down menu
 	 * 
 	 * @return the mapContent Object with map details enriched
 	 */
@@ -284,7 +284,8 @@ public class MapParseProcessor {
 	/**
 	 * This method gets the List of countries for the corresponding continent.
 	 *
-	 * @param belongsToContinent Continent Name
+	 * @param continentName Continent Name
+	 * @return Returns list of Country Objects.
 	 */
 	public List<Country> getContinentCountries(String continentName) {
 
@@ -308,7 +309,7 @@ public class MapParseProcessor {
 	/**
 	 * The following method assigns the intial number of armies to each player
 	 * 
-	 * @param listPlayer
+	 * @param listPlayer List of Player Instances.
 	 */
 
 	public void armyAssignment(List<Player> listPlayer) {
@@ -366,7 +367,7 @@ public class MapParseProcessor {
 	 * 
 	 * @param start start range of the random number
 	 * @param end   end range of the random number
-	 * @return
+	 * @return Random Integer.
 	 */
 
 	public int getRandomNumber(int start, int end) {
