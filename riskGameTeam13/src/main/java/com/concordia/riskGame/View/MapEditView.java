@@ -833,7 +833,6 @@ public class MapEditView extends java.awt.Frame {
 	public void setLog(String logger)
 	{
 		String currentText = log.getText();
-		System.out.println("In set log");
 		String newLog = new Date() + " " +  logger;
 		String appendLog =newLog + "\n" + currentText;
 		log.setText(appendLog);
