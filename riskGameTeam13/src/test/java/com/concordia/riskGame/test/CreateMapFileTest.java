@@ -146,7 +146,7 @@ public class CreateMapFileTest {
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
-			String fileName = mapOperations.writeMapFile(mapContents, "Africa", null);
+			String fileName = mapOperations.writeMapFile(mapContents, "AfricaTest1", null);
 			String[] splitArray = fileName.split("\\.");
 
 			if(splitArray[splitArray.length-1].equalsIgnoreCase("map")) {
@@ -172,7 +172,7 @@ public class CreateMapFileTest {
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
-			String fileName = mapOperations.writeMapFile(mapContents, "Africa", null);
+			String fileName = mapOperations.writeMapFile(mapContents, "AfricaTest2", null);
 			fileName = fileName.concat("1");
 			String[] splitArray = fileName.split("\\.");
 			mapCreationValid = false;
@@ -198,6 +198,6 @@ public class CreateMapFileTest {
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
-			mapOperations.writeMapFile(mapContents, "Africa?", null);
+			mapOperations.writeMapFile(mapContents, "AfricaTest?", null);
 	}
 }
