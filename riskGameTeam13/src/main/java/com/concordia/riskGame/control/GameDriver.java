@@ -215,7 +215,7 @@ public class GameDriver {
 	public Player reinforcePhase(Player player) {
 
 		scanner = new Scanner(System.in);
-		gmPlayerList = new ArrayList<Player>();
+		 gmPlayerList = new ArrayList<Player>();
 		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
 		System.out.println("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
