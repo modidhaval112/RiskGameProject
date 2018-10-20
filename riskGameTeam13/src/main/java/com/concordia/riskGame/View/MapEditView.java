@@ -661,12 +661,10 @@ public class MapEditView extends java.awt.Frame {
 				exitMap.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
-					{
+					{	
 						frame.setVisible(false);
 						frame.dispose();
 						System.exit(0);
-
-
 
 					}
 				});
