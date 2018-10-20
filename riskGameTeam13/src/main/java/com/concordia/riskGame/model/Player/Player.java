@@ -30,7 +30,7 @@ public class Player implements Serializable {
 	/**
 	 * Parameterized constructor to set player Name
 	 * 
-	 * @param name
+	 * @param name Name of the player.
 	 */
 	public Player(String name) {
 		this.name = name;
@@ -47,8 +47,8 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets map of player and countries assigned to him.
-	 * 
-	 * @param playerAssign
+	 *  
+	 * @param playerAssign Map of player and its list of assigned armies.
 	 */
 	public void setPlayerAssign(Map<Player, List<Country>> playerAssign) {
 		this.playerAssign = playerAssign;
