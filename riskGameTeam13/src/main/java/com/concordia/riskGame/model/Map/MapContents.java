@@ -29,7 +29,7 @@ public class MapContents {
 	
 	/**
 	 * This method is to set map author name
-	 * @param  mapAuthorName
+	 * @param  mapAuthorName Name of the map author.
 	 */
 	public void setMapAuthorName(String mapAuthorName) {
 		this.mapAuthorName = mapAuthorName;

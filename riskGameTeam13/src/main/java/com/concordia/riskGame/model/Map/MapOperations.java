@@ -29,8 +29,9 @@ public class MapOperations {
 	 * 
 	 * @param mapContents Map Content
 	 * @param fileName    name of the file
-	 * @return fileName name of the file
-	 * @throws FileNotFoundException
+	 * @param filePath    Path of the file.
+	 * @return fileName  name of the file
+	 * @throws FileNotFoundException File when found in its path.
 	 */
 	public String writeMapFile(MapContents mapContents, String fileName, String filePath) throws FileNotFoundException {
 		mapFileContents = new StringBuilder();
