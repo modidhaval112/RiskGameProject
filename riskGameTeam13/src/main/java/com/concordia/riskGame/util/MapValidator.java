@@ -25,6 +25,7 @@ public class MapValidator {
 
 	/**
 	 * method to check if all the labels are described properly
+	 * 
 	 * @param gameMap : GameMap object
 	 * @return true if all labels are described properly, otherwise false
 	 */
@@ -39,6 +40,7 @@ public class MapValidator {
 
 	/**
 	 * method to check if Country Continent if from Continent list only
+	 * 
 	 * @param gameMap : GameMap object
 	 * @return true if Country Continent is from Continent List, otherwise false
 	 */
@@ -55,6 +57,7 @@ public class MapValidator {
 
 	/**
 	 * method to check if all continent have at least one country
+	 * 
 	 * @param gameMap : GameMap object
 	 * @return true if all continent has at least one country, otherwise false
 	 */
@@ -74,6 +77,7 @@ public class MapValidator {
 
 	/**
 	 * method to check if country is assigned to only one country
+	 * 
 	 * @param gameMap : GameMap object
 	 * @return true if all countries are assigned to only one country, otherwise
 	 *         false
@@ -88,9 +92,11 @@ public class MapValidator {
 
 	/**
 	 * method to check if map is connected graph or not
-	 * @param parent starting node of the graph
+	 * 
+	 * @param parent     starting node of the graph
 	 * @param mapCountry map of Country and neighboring Countries
-	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if not visited
+	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
+	 *                   not visited
 	 * @return true if graph is connected, otherwise false
 	 */
 	public Map<String, Integer> checkConnectedGraph(Country parent, Map<Country, List<Country>> mapCountry,
@@ -117,6 +123,7 @@ public class MapValidator {
 
 	/**
 	 * method to check all the output returned by above described method
+	 * 
 	 * @param file : File Object
 	 */
 	public void init(File file) {
@@ -225,6 +232,7 @@ public class MapValidator {
 
 	/**
 	 * This method returns boolean value for Valid Map
+	 * 
 	 * @return validMapFlag true if map is valid otherwise false
 	 */
 	public Boolean getValidMapFlag() {
