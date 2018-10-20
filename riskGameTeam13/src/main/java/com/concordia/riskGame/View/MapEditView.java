@@ -32,7 +32,7 @@ import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapOperations;
-import com.concordia.riskGame.model.Map.MapParseController;
+import com.concordia.riskGame.model.Map.MapParseProcessor;
 /**
  * @author saich
  *
@@ -65,7 +65,7 @@ public class MapEditView extends java.awt.Frame {
 	private DefaultListModel<String> continents = new DefaultListModel<>(); 
 	private DefaultListModel<String> continentCountries = new DefaultListModel<>(); 
 	private String labels[]=new String [30];
-	private MapParseController mapParseObject;
+	private MapParseProcessor mapParseObject;
 	private JFrame frame = new JFrame();
 	private JPanel   panel = new JPanel();
 
@@ -1047,7 +1047,7 @@ public class MapEditView extends java.awt.Frame {
 					File selectedFile = fileChooser.getSelectedFile();
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
-					mapParseObject = new MapParseController();
+					mapParseObject = new MapParseProcessor();
 					mapParseObject.editMapParsermapParser(selectedFile.getAbsolutePath().toString());
 
 				}

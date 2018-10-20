@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
-import com.concordia.riskGame.model.Map.MapParseController;
+import com.concordia.riskGame.model.Map.MapParseProcessor;
 
 
 /**
@@ -20,7 +20,7 @@ import com.concordia.riskGame.model.Map.MapParseController;
 public class MapParserTest {
 
 	private String filePath;
-	private MapParseController mapParserObject;
+	private MapParseProcessor mapParserObject;
 	private MapContents mapContents;
 	String playerCount;
 	
@@ -31,7 +31,7 @@ public class MapParserTest {
 	@Before
 	public void before() throws Exception {
 	    filePath="src/main/resources/Africa.map";
-		mapParserObject = new MapParseController();
+		mapParserObject = new MapParseProcessor();
 		playerCount = "5";
 	}
 	

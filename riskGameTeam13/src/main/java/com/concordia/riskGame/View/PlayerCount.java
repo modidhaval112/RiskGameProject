@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.concordia.riskGame.model.Map.MapParseController;
+import com.concordia.riskGame.model.Map.MapParseProcessor;
 
 
 /**
@@ -43,7 +43,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 	private JFrame playerFrame;
 	private String filePath = null;
 	private int number = 1;
-	private MapParseController mapParseObject;
+	private MapParseProcessor mapParseObject;
 
 	/**
 	 * This constructor calls the Count method
@@ -135,7 +135,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 					File selectedFile = fileChooser.getSelectedFile();
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
-					mapParseObject = new MapParseController();
+					mapParseObject = new MapParseProcessor();
 					mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),playerCountCombo.getSelectedItem().toString());
 
 				}

@@ -30,7 +30,7 @@ import com.concordia.riskGame.util.RandomAssignment;
  * @author Dheeraj As - Team 13
  * @author Darwin Anirudh G - Team 13
  */
-public class MapParseController {
+public class MapParseProcessor {
 
 	private File file;
 	private String currentLine;
