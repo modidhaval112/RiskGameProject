@@ -1,16 +1,11 @@
 package com.concordia.riskGame.control;
 
-import java.util.Scanner;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import com.concordia.riskGame.View.PlayerCount;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 
@@ -22,7 +17,6 @@ import com.concordia.riskGame.model.Player.Player;
  */
 public class GameDriver {
 
-	private PlayerCount playerCountOBject;
 	private Scanner scanner;
 	private String[] nameArmiesSpilt;
 	private String countryName;
@@ -41,7 +35,6 @@ public class GameDriver {
 	 */
 	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) {
 
-		List<Player> playerList = new ArrayList<Player>();
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
 		gmcountryAndNeighbours = countryAndConnected;
 		scanner = new Scanner(System.in);
@@ -79,7 +72,6 @@ public class GameDriver {
 		String choice = null;
 		Scanner sc = new Scanner(System.in);
 		choice = sc.nextLine();
-		boolean flag = false;
 
 		if (choice.equalsIgnoreCase("yes")) {
 			try {
@@ -114,7 +106,6 @@ public class GameDriver {
 				System.out.println("###########  Destination Country   	 ############### :" + toCountry);
 				System.out.println("###########   Armies to be moved    ###############  :" + movingArmies);
 
-				List<Country> connectedCountries = new ArrayList<Country>();
 				int destArmies = 0;
 				int sourcesArmies = 0;
 				if (!isNeighbour(fromCountry, toCountry)) {
@@ -225,7 +216,6 @@ public class GameDriver {
 
 		scanner = new Scanner(System.in);
 		gmPlayerList = new ArrayList<Player>();
-		int additionalArmies;
 		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
 		System.out.println("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
