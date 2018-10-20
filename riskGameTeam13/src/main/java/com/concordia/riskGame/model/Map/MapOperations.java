@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.concordia.riskGame.View.GameLauncher;
+import com.concordia.riskGame.exception.InvalidMapFileException;
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.util.MapValidator;
 
 /**
  * This class is created to perform different operations on the map file
@@ -23,7 +25,7 @@ public class MapOperations {
 	private StringBuilder mapFileContents;
 	private static final String[] ILLEGAL_CHARACTERS = { "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<",
 			">", "|", "\"", ":" };
-
+	private MapValidator mapValidator = new MapValidator();
 	/**
 	 * This method is used to create map file after taking inputs from the user
 	 * 
@@ -75,15 +77,31 @@ public class MapOperations {
 		}
 		try (PrintWriter out = new PrintWriter(file)) {
 			out.print(mapFileContents);
-			out.close();
-			System.out.println("File has been created");
-			GameLauncher gameLauncher = new GameLauncher();
+			
+			
 		}
-
 		catch (FileNotFoundException e) {
 			throw new FileNotFoundException();
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
+		}
+		
+		try {
+		 
+		mapValidator.init(file);
+		if(!mapValidator.getValidMapFlag()) {
+			throw new InvalidMapFileException("Invalid Map File");
+		}
+		}catch (Exception e) {
+			System.out.println("Please start over the map creation");
+			System.out.println("Fileexists"+file.exists());
+			System.out.println("File deleted "+file.delete());
+			GameLauncher gameLauncher = new GameLauncher();
+		}
+		if(mapValidator.getValidMapFlag()) {
+		System.out.println("File has been created");
+		GameLauncher gameLauncher = new GameLauncher();
 		}
 		return fileName;
 	}
