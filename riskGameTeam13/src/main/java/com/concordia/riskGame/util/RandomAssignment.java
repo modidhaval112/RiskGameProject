@@ -32,7 +32,7 @@ public class RandomAssignment {
 
 		List<Player> playersList = new ArrayList<>();
 		for (int i = 0; i < noOfPlayers; i++) {
-			Player playerObject = new Player("Player-" + (i + 1));
+			Player playerObject = new Player("Player - " + (i + 1));
 			playersList.add(playerObject);
 		}
 
@@ -45,7 +45,7 @@ public class RandomAssignment {
 		for (Continent key : continentAssign.keySet()) {
 			System.out.println("Continent Name : " + key.getContinentName());
 			for (int i = 0; i < key.getCountries().size(); i++) {
-				System.out.println("     Assigned Countries : " + continentAssign.get(key).get(i).getCountryName());
+				System.out.println("Assigned Countries : " + continentAssign.get(key).get(i).getCountryName());
 			}
 			System.out.println("");
 		}

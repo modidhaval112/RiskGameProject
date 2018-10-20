@@ -61,7 +61,7 @@ public class Continent {
 	/**
 	 * method to set the countries which belong to this continent
 	 * 
-	 * @param countries
+	 * @param countries List of country objects 
 	 */
 	public void setCountries(List<Country> countries) {
 		this.countries = countries;
@@ -79,7 +79,7 @@ public class Continent {
 	/**
 	 * method to set the name of the continent
 	 * 
-	 * @param continentName
+	 * @param continentName Continent Name
 	 */
 	public void setContinentName(String continentName) {
 		this.continentName = continentName;
@@ -97,7 +97,7 @@ public class Continent {
 	/**
 	 * Set the count of countries in this continent
 	 * 
-	 * @param numberOfCountries
+	 * @param numberOfCountries Number of countries.
 	 */
 	public void setNumberOfCountries(int numberOfCountries) {
 		this.numberOfCountries = numberOfCountries;
@@ -116,7 +116,7 @@ public class Continent {
 	/**
 	 * Set the control value of the Continent
 	 * 
-	 * @param continentControlValue
+	 * @param continentControlValue Control Value of the continent.
 	 */
 
 	public void setContinentControlValue(int continentControlValue) {
