@@ -101,7 +101,10 @@ public class MapOperations {
 		}
 		if(mapValidator.getValidMapFlag()) {
 		System.out.println("File has been created");
-		GameLauncher gameLauncher = new GameLauncher();
+		GameLauncher gameLauncher;
+			if(filePath==null) {
+		 gameLauncher = new GameLauncher();
+			}
 		}
 		return fileName;
 	}
