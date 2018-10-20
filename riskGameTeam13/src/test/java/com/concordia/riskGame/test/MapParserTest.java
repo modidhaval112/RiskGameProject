@@ -15,6 +15,7 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
 
 /**
  * Test to check if reading the map is functioning properly
+ * @author Dheeraj
  * 
  */
 public class MapParserTest {
@@ -26,8 +27,8 @@ public class MapParserTest {
 	
 	/**
 	 * Before method to set initialize objects
-	 * @throws Exception
-	 */
+	 * @throws Exception Exception is thrown
+ 	 */
 	@Before
 	public void before() throws Exception {
 	    filePath="src/main/resources/Africa.map";
