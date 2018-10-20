@@ -196,7 +196,7 @@ public class GameDriver {
 			System.out.println("Player attacks");
 			attackPhase(player);
 		} else if (choice.equalsIgnoreCase("no")) {
-			System.out.println("Player enter into forfeits phase");
+			System.out.println("Player enter into fortify phase");
 
 		} else {
 			System.out.println("Invalid Option");
