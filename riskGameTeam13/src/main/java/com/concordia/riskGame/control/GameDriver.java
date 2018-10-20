@@ -180,7 +180,7 @@ public class GameDriver {
 	/**
 	 * The following method implements the attack phase of the risk game.
 	 * 
-	 * @param playerObject Instance of current player in the forfeit phase.
+	 * @param player Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player attackPhase(Player player) {
@@ -209,7 +209,7 @@ public class GameDriver {
 	/**
 	 * The following method implements the reinforcement phase of the risk game.
 	 * 
-	 * @param playerObject Instance of current player in the forfeit phase.
+	 * @param player Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player reinforcePhase(Player player) {
@@ -319,8 +319,8 @@ public class GameDriver {
 
 	/**
 	 * Method to Calculate Number of armies in reinforcement Phase
-	 * 
-	 * @param numberOfCountriesOwned
+	 *  
+	 * @param numberOfCountriesOwned Number of countries owned.
 	 * @return number of reinforced armies
 	 */
 	public int calculateReiforcementArmies(int numberOfCountriesOwned) {
