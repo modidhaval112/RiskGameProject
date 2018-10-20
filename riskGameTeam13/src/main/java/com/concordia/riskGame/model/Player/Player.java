@@ -29,6 +29,7 @@ public class Player implements Serializable {
 
 	/**
 	 * Parameterized constructor to set player Name
+	 * 
 	 * @param name
 	 */
 	public Player(String name) {
@@ -37,6 +38,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method is used to return Map of Player and Countries assigned to him.
+	 * 
 	 * @return playerAssign Players and assigned countries to him
 	 */
 	public Map<Player, List<Country>> getPlayerAssign() {
@@ -45,6 +47,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets map of player and countries assigned to him.
+	 * 
 	 * @param playerAssign
 	 */
 	public void setPlayerAssign(Map<Player, List<Country>> playerAssign) {
@@ -53,6 +56,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method returns player name
+	 * 
 	 * @return name Player Name
 	 */
 	public String getName() {
@@ -61,6 +65,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets player name
+	 * 
 	 * @param name Player Name
 	 */
 	public void setName(String name) {
@@ -69,6 +74,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method returns number of Armies player have
+	 * 
 	 * @return currentPlayerReinforceArmies number of Armies player have
 	 */
 	public int getCurrentPlayerReinforceArmies() {
@@ -77,7 +83,8 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets number of Armies player have
-	 * @param currentPlayerReinforceArmies  number of armies player have
+	 * 
+	 * @param currentPlayerReinforceArmies number of armies player have
 	 */
 	public void setCurrentPlayerReinforceArmies(int currentPlayerReinforceArmies) {
 		this.currentPlayerReinforceArmies = currentPlayerReinforceArmies;
@@ -85,6 +92,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method returns number of players
+	 * 
 	 * @return playerCount no of players
 	 */
 	public int getPlayerCount() {
@@ -93,6 +101,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets number of players
+	 * 
 	 * @param playerCount number of players
 	 */
 	public void setPlayerCount(int playerCount) {
@@ -101,6 +110,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method is returns total number of armies
+	 * 
 	 * @return totalArmies number of Armies
 	 */
 	public int getTotalArmies() {
@@ -109,6 +119,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets total number of armies
+	 * 
 	 * @param totalArmies number of armies
 	 */
 	public void setTotalArmies(int totalArmies) {
@@ -117,6 +128,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method returns number of reinforcement armies.
+	 * 
 	 * @return reinforcementArmies number of reinforcement armies
 	 */
 	public int getReinforcementArmies() {
@@ -125,6 +137,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets number of reinforcement armies
+	 * 
 	 * @param reinforcementArmies number of reinforcement armies
 	 */
 	public void setReinforcementArmies(int reinforcementArmies) {
@@ -133,6 +146,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method returns list of countries assigned to player
+	 * 
 	 * @return assignedCountries list of countries
 	 */
 	public List<Country> getAssignedCountries() {
@@ -141,6 +155,7 @@ public class Player implements Serializable {
 
 	/**
 	 * This method sets list of countries assigned to player
+	 * 
 	 * @param assignedCountries list of countries
 	 */
 	public void setAssignedCountries(List<Country> assignedCountries) {
