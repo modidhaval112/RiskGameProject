@@ -95,7 +95,7 @@ public class CreateMapFile {
 		try {
 			mapOperations.writeMapFile(mapContents, fileName,null);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 

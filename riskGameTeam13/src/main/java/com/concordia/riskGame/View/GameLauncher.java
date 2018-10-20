@@ -46,7 +46,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		try {
 			initUI();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 
 	}
@@ -62,7 +62,7 @@ public class GameLauncher extends JFrame implements ActionListener {
             JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
             gameFrame.setContentPane(label);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error Message : " + e.getMessage());
         }
 		gameFrame.setSize(500, 500);
 		gameFrame.setLocation(500,200);

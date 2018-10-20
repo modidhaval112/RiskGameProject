@@ -122,12 +122,12 @@ public class ReadMap {
 			}
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 		return gameMap;
 	}

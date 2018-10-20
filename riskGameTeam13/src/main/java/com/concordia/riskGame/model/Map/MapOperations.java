@@ -84,7 +84,7 @@ public class MapOperations {
 			throw new FileNotFoundException();
         } 
 		catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error Message : " + e.getMessage());
         }
 		return fileName;
 	}
