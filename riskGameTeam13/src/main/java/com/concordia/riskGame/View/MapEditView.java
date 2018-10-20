@@ -415,25 +415,32 @@ public class MapEditView extends java.awt.Frame {
 					setLog("Select Continent to add Country");
 
 				}
-
-				if(!countries.contains(AddText.getText()))
+				else
 				{
-					if(!s.equals("null"))
+					
+				if(   !AddText.getText().equals(""))
+				{
+					if(!countries.contains(AddText.getText()) )
 					{
-						setLog("Country Input is : " + s);
+						setLog("Country Input is : " + AddText.getText());
 						addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
 						frame.validate();
 						frame.repaint();
 						panel.repaint();
 					}
+					else
+					{
+						setLog("Country with name already exists");
+
+					}
 				}
 				else
 				{
-					setLog("Country with name already exists");
+					setLog(" Give the new country name in input box");
 
 				}
 
-
+				}
 			}
 		});
 
@@ -742,7 +749,6 @@ public class MapEditView extends java.awt.Frame {
 			}
 		}
 
-		System.out.println("In removing Continent");
 		continentsAndCountriesMap.remove(Continent);
 		continents.removeElement(Continent);
 
@@ -1042,12 +1048,16 @@ public class MapEditView extends java.awt.Frame {
 		for (Map.Entry<String, List<String>> entry : countryAndNeighborsMap.entrySet())
 		{
 
-
-			List<String>  continentCountries= entry.getValue();
+			List<String>  continentCountries = new ArrayList<String>();
+			if(entry.getValue()!= null)
+			{
+			 continentCountries= entry.getValue();
+			}
 
 			if(entry.getKey().equals(country))
 			{
 				continentCountries.add(adjacentCountry);
+				System.out.println(adjacentCountry);
 				countryAndNeighborsMap.put(country,continentCountries);
 			}
 
