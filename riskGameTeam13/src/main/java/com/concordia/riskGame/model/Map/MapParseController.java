@@ -1,24 +1,17 @@
 package com.concordia.riskGame.model.Map;
 
 import java.io.BufferedReader;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.swing.JOptionPane;
-
 import com.concordia.riskGame.View.GameLauncher;
 import com.concordia.riskGame.View.MapEditView;
 import com.concordia.riskGame.control.GameDriver;
@@ -28,7 +21,6 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.util.MapValidator;
 import com.concordia.riskGame.util.RandomAssignment;
-
 
 /**
  * This Class has the implementation of reading the .map file and setting
@@ -59,7 +51,6 @@ public class MapParseController {
 	private HashMap<Continent, List<Country>> continentAndItsCountries;
 	private GameDriver gameDriverObject;
 	private Player playerObject;
-	
 	private List<Player> playerList;
 	private int initialArmies;
 	private MapEditView mapEditView;
@@ -110,9 +101,7 @@ public class MapParseController {
 				for (int i = 0; i < key.getAssignedCountries().size(); i++) {
 					System.out.println("     Assigned Of Countries : "
 							+ playerObject.getPlayerAssign().get(key).get(i).getCountryName());
-
 				}
-
 				playerList.add(key);
 				System.out.println("");
 			}
@@ -127,7 +116,6 @@ public class MapParseController {
 			System.out.println("Error Message : " + e.getMessage());
 		}
 		return mapContentObject;
-
 	}
 
 	/**
@@ -174,7 +162,7 @@ public class MapParseController {
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapEditView = new MapEditView();
-			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries,filePath);
+			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries, filePath);
 		} catch (FileNotFoundException e) {
 			System.out.println("Error Message : " + e.getMessage());
 		} catch (Exception e) {
@@ -250,7 +238,7 @@ public class MapParseController {
 	}
 
 	/**
-	 * Method prints out the countries and its neighbours'
+	 * Method prints out the countries and its neighbours.
 	 */
 	public void countryAndNeighboursMap() {
 		try {
@@ -285,8 +273,8 @@ public class MapParseController {
 			}
 
 			for (Map.Entry<Continent, List<Country>> entry : continentAndItsCountries.entrySet()) {
-				System.out.println("##### Key is ##### :" + entry.getKey().getContinentName() + "value size is   "
-						+ entry.getValue().size());
+				System.out.println("##### Key is ##### :" + entry.getKey().getContinentName()
+						+ "### value size is   ### :" + entry.getValue().size());
 			}
 		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
@@ -327,19 +315,17 @@ public class MapParseController {
 
 		playerListClone = new ArrayList();
 		List<Country> assignedCountry = new ArrayList();
-
 		int assignedArmies;
 
 		for (Player player : listPlayer) {
-			
-			System.out.println("                                               " );
+
+			System.out.println("                                               ");
 			System.out.println("######### The name of the player is ######### :" + player.getName());
 			System.out.println("    ");
 			System.out.println("######### The assigned armies are  #########  :" + player.getTotalArmies());
 			Player playerObject = new Player();
 			playerObject = player;
 			assignedArmies = playerObject.getTotalArmies();
-
 			assignedCountry = new ArrayList();
 			for (Country countryInstance : playerObject.getAssignedCountries()) {
 				countryInstance.setArmies(1);
@@ -365,7 +351,7 @@ public class MapParseController {
 		}
 
 		for (Player playerObj : listPlayer) {
-			System.out.println("######### The name of the player is ######### :" + playerObj.getName());
+			System.out.println("######### The name of the player is #########  :" + playerObj.getName());
 			for (Country countryObject : playerObj.getAssignedCountries()) {
 				System.out.println("###### The name of the country is    ##### :" + countryObject.getCountryName());
 				System.out.println("###### The number of assigned armies ##### :" + countryObject.getArmies());
@@ -375,14 +361,14 @@ public class MapParseController {
 
 	}
 
-	
 	/**
 	 * The following method is used to random number
+	 * 
 	 * @param start start range of the random number
-	 * @param end  end range of the random number
+	 * @param end   end range of the random number
 	 * @return
 	 */
-	
+
 	public int getRandomNumber(int start, int end) {
 		randomObject = new Random();
 
