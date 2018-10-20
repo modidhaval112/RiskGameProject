@@ -124,7 +124,7 @@ public class MapParseController {
 			System.out.println("Please select a valid map");
 			GameLauncher gameLauncherObject = new GameLauncher();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 		return mapContentObject;
 
@@ -176,9 +176,9 @@ public class MapParseController {
 			mapEditView = new MapEditView();
 			mapEditView.MapDefinition(countryAndNeighbors, continentAndItsCountries,filePath);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 
@@ -243,7 +243,7 @@ public class MapParseController {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 
 		}
 
@@ -260,7 +260,7 @@ public class MapParseController {
 						+ entry.getValue().size());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 
@@ -289,7 +289,7 @@ public class MapParseController {
 						+ entry.getValue().size());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 		}
 	}
 
@@ -312,7 +312,7 @@ public class MapParseController {
 			}
 			return countriesList;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error Message : " + e.getMessage());
 			return null;
 		}
 	}
