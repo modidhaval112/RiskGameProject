@@ -35,9 +35,10 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapOperations;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
+
 /**
- * @author saich
- *
+ * This class is used for editing the map based on user inputs.
+ * @author Sai Krishna
  */
 public class MapEditView extends java.awt.Frame {
 
@@ -72,9 +73,14 @@ public class MapEditView extends java.awt.Frame {
 
 	private JTextField AddText = new JTextField(20);
 
-	public MapEditView() {
-	}
 
+
+	/**
+	 * This method is used to edit the map taking input of continent and country values.
+	 * @param countryAndNeighbors Country with neighboring countries to be passed of type hashmap.
+	 * @param continentAndItsCountries Continent with counties is to be passed of type hashmap.
+	 * @param filePath Filename from which game is loaded
+	 */
 	public void MapDefinition(HashMap<Country, List<Country>> countryAndNeighbors,HashMap<Continent, List<Country>> continentAndItsCountries,String filePath) {
 		this.countryAndNeighbors=countryAndNeighbors;
 		this.continentAndItsCountries=continentAndItsCountries;
@@ -409,24 +415,24 @@ public class MapEditView extends java.awt.Frame {
 					setLog("Select Continent to add Country");
 
 				}
-				
+
 				if(!countries.contains(AddText.getText()))
 				{
-				if(!s.equals("null"))
-				{
-					setLog("Country Input is : " + s);
-					addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
-					frame.validate();
-					frame.repaint();
-					panel.repaint();
-				}
+					if(!s.equals("null"))
+					{
+						setLog("Country Input is : " + s);
+						addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
+						frame.validate();
+						frame.repaint();
+						panel.repaint();
+					}
 				}
 				else
 				{
 					setLog("Country with name already exists");
 
 				}
-				
+
 
 			}
 		});
@@ -435,7 +441,6 @@ public class MapEditView extends java.awt.Frame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				String s =  continentsJList.getSelectedValue();
 
 				if(AddText.getText().isEmpty())
 				{
@@ -626,7 +631,6 @@ public class MapEditView extends java.awt.Frame {
 					Country country = new Country(entry.getKey(),getContinet(entry.getKey().toString()));
 
 					List<String>  countryCountries= entry.getValue();
-					List<String> CountriesList = new ArrayList<String>();
 
 
 					if(countryCountries!=null)
@@ -682,6 +686,11 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * This method is used to get the continent of the country passed as input.
+	 * @param country Country input to get the continent value.
+	 * @return Continent value of the country passed.
+	 */
 	public String getContinet(String country)
 
 	{
@@ -691,7 +700,6 @@ public class MapEditView extends java.awt.Frame {
 
 
 			List<String>  continentCountries= entry.getValue();
-			List<String> CountriesList = new ArrayList<String>();
 
 			if(continentCountries!=null)
 			{
@@ -714,6 +722,10 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * It remove the continent from Map based on the selected value
+	 * @param Continent Continent value that to be removedfrom Map.
+	 */
 	public void removeContinent(String Continent)
 	{
 
@@ -742,6 +754,10 @@ public class MapEditView extends java.awt.Frame {
 
 
 
+	/**
+	 * It is used to remove the country from Map based on selected continent.
+	 * @param Country The value of the country to be removed.
+	 */
 	public void removeCountry(String Country)
 	{
 		System.out.println("In removing Continent");
@@ -806,6 +822,10 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * This method is used to set the log and append the log to frame.
+	 * @param logger log value to be set
+	 */
 	public void setLog(String logger)
 	{
 		String currentText = log.getText();
@@ -818,6 +838,11 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * This method is used to add country to map
+	 * @param Country Country value that  is to be added to the continent.
+	 * @param Continent Continent for addition of country to it.
+	 */
 	public void addCountry(String Country,String Continent)
 	{
 		System.out.println("In Adding Country");
@@ -866,6 +891,11 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * This method is used to rename the Continent based on the value passed from UI
+	 * @param continent original continent value.
+	 * @param renameContinent Value of the continent to be renamed.
+	 */
 	public void renameContinent(String continent, String renameContinent)
 
 	{
@@ -907,6 +937,11 @@ public class MapEditView extends java.awt.Frame {
 	} 
 
 
+	/**
+	 * This method renames the country
+	 * @param Country original country to be renamed.
+	 * @param renamedCountry renamed country value.
+	 */
 	public void renameCountry(String Country,String renamedCountry)
 	{
 		System.out.println("In renaming Country");
@@ -958,7 +993,7 @@ public class MapEditView extends java.awt.Frame {
 			}
 
 			if (continentCountries!= null)
-				
+
 			{
 				for (int i=0 ;i<continentCountries.size();i++) {
 
@@ -996,6 +1031,11 @@ public class MapEditView extends java.awt.Frame {
 		panel.repaint();
 
 	}
+	/**
+	 * This method is used to add  neighboring country to country.
+	 * @param country Country to which adjacent country need to be passed.
+	 * @param adjacentCountry Adjacent country for adding it to country.
+	 */
 	public void addAdjacentCountry(String country, String adjacentCountry)
 	{
 
@@ -1017,6 +1057,11 @@ public class MapEditView extends java.awt.Frame {
 
 	}
 
+	/**
+	 * This method is used to add the remove the adjacent country.
+	 * @param country Country value where the adjacent country have to be removed.
+	 * @param adjacentCountry Adjacent country value to add to country.
+	 */
 	public void removeAdjacentCountry(String country, String adjacentCountry)
 	{
 
@@ -1039,6 +1084,10 @@ public class MapEditView extends java.awt.Frame {
 	}
 
 
+	/**
+	 * 
+	 * It is used to read the file from the location and pass the file location to map parser.
+	 */
 	public void EditMapFileChoose() {	
 		try {
 
