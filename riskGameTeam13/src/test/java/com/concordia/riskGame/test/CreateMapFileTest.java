@@ -75,7 +75,8 @@ public class CreateMapFileTest {
 		
 			
 		try {
-		    MapContents mapContents = new MapContents();
+		   MapContents.setMapContents(null);
+		   MapContents mapContents = MapContents.getInstance();
 		    Set<Continent> continentList = continentsWithItsCountries.keySet();
 			for (Continent s : continentList) {
 			    s.setNumberOfCountries(1);
@@ -108,7 +109,8 @@ public class CreateMapFileTest {
 		
 			//MapOperations mapOperationObj= new MapOperations();
 		try {
-		    MapContents mapContents = new MapContents();
+			MapContents.setMapContents(null);
+			MapContents mapContents = MapContents.getInstance();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
@@ -142,7 +144,8 @@ public class CreateMapFileTest {
 		
 			
 		try {
-		    MapContents mapContents = new MapContents();
+			MapContents.setMapContents(null);
+			MapContents mapContents = MapContents.getInstance();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
@@ -168,7 +171,8 @@ public class CreateMapFileTest {
 	public void testWriteMapFileExtentionNegative() {
 		
 		try {
-		    MapContents mapContents = new MapContents();
+			MapContents.setMapContents(null);
+			MapContents mapContents = MapContents.getInstance();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();
@@ -194,7 +198,8 @@ public class CreateMapFileTest {
 	@Test(expected=FileNotFoundException.class)
 	public void testWriteMapFileExtentionNegative1() throws FileNotFoundException {
 		
-		    MapContents mapContents = new MapContents();
+			MapContents.setMapContents(null);
+			MapContents mapContents = MapContents.getInstance();
 	        mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 	        mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 	        MapOperations mapOperations = new MapOperations();

@@ -88,7 +88,8 @@ public class CreateMapFile {
 		System.out.println("Please Enter the Name of The Map that you want to create");
        
         String fileName = scanner.nextLine();
-        MapContents mapContents = new MapContents();
+        MapContents.setMapContents(null);
+		MapContents mapContents = MapContents.getInstance();
         mapContents.setContinentAndItsCountries(continentsWithItsCountries);
         mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 		MapOperations mapOperations = new MapOperations();

@@ -85,7 +85,8 @@ public class MapParseProcessor {
 
 			readMapElements(bufferReaderForFile);
 			setcontitentAndCountriesMap();
-			mapContentObject = new MapContents();
+			MapContents.setMapContents(null);
+			mapContentObject = MapContents.getInstance();
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			RandomAssignment randonAssignment = new RandomAssignment();
@@ -158,7 +159,8 @@ public class MapParseProcessor {
 			mapValidator.init(fileObject);
 			readMapElements(bufferReaderForFile);
 			setcontitentAndCountriesMap();
-			mapContentObject = new MapContents();
+			MapContents.setMapContents(null);
+			mapContentObject = MapContents.getInstance();
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapEditView = new MapEditView();

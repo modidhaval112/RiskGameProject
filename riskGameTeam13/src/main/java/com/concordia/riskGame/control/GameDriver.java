@@ -32,8 +32,9 @@ public class GameDriver {
 	 * @param player              List of players playing the game
 	 * @param countryAndConnected countries and their respective connected
 	 *                            countries.
+	 * @throws Exception 
 	 */
-	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) {
+	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) throws Exception {
 
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
 		gmcountryAndNeighbours = countryAndConnected;

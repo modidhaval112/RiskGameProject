@@ -2,6 +2,10 @@ package com.concordia.riskGame.model.Country;
 
 import java.util.List;
 
+import com.concordia.riskGame.model.Player.Player;
+
+
+
 /**
  * Country Class go get and set all properties of a country.
  * 
@@ -17,7 +21,7 @@ public class Country {
 	private int startPixel;
 	private int endPixel;
 	private int armies;
-
+	public Player belongsToPlayer;
 	/***
 	 * Default Constructor
 	 **/

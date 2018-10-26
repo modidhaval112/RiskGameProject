@@ -8,6 +8,7 @@ import com.concordia.riskGame.model.Country.Country;
 
 
 
+
 /**
  * This class contains getters and setters for MapContents attributes
  * 
@@ -15,9 +16,27 @@ import com.concordia.riskGame.model.Country.Country;
  */
 public class MapContents {
 
+	private static MapContents mapContents;
+	
+
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 	private String mapAuthorName;
+	
+	
+	 /**
+     * Default Constructor
+     */
+    private MapContents() {
+        //To Prevent Other classes from creating object.
+    }
+    
+	 public static MapContents getInstance() {
+	        if (null == mapContents) {
+	            	mapContents = new MapContents();
+	        }
+	        return mapContents;
+	    }
 	
 	/**
 	 * This method is to get map author name
@@ -65,5 +84,13 @@ public class MapContents {
 	 */
 	public void setContinentAndItsCountries(HashMap<Continent, List<Country>> continentAndItsCountries) {
 		this.continentAndItsCountries = continentAndItsCountries;
+	}
+	
+	/**
+	 * To set the MapContentsObject
+	 * @param mapContents object is set
+	 */
+	public static void setMapContents(MapContents mapContents) {
+		MapContents.mapContents = mapContents;
 	}
 }

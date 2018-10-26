@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
 
 /**
  * This is entity class to set and get properties of player.
@@ -300,23 +301,39 @@ public class Player implements Serializable {
 	 * 
 	 * @param player Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
+	 * @throws Exception 
 	 */
-	public Player attackPhase(Player player) {
+	public Player attackPhase(Player player) throws Exception {
 
 		System.out.println("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
 		pObject = player;
 		String choice = null;
-		Scanner sc = new Scanner(System.in);
-		choice = sc.nextLine();
-
+		Scanner scanner = new Scanner(System.in);
+		choice = scanner.nextLine();
+		String sourceCountry;
+		Country sourceCountryObject;
+		String destinationCountry;
+		Country destinationCountryObject;
 		if (choice.equalsIgnoreCase("yes")) {
 			System.out.println("#### List of countries owned by the player #####");
 
 			for (Country countryObj : player.getAssignedCountries()) {
 				System.out.print(countryObj.getCountryName() + ",");
-
 			}
+			System.out.println("Enter the name of the country through which you want to attack");
+			sourceCountry = scanner.nextLine();
+			sourceCountryObject = getCountryOfPlayerFromString(player, sourceCountry);
+			if(sourceCountryObject == null) {
+				System.out.println("The country with the given name is not owned by the player");
+				sourceCountryObject = reenterTheCountry(player);  // declare custom exceptions in the future
+			}	
+			
+			System.out.println("#### The neighbouring attackable countries are #####");
+			printNeighbouringAttackableCountriesAndArmies(sourceCountryObject,player);
+			System.out.println("Enter the name of the country through which you want to attack");
+			destinationCountry = scanner.nextLine();
+			destinationCountryObject = getCountryOfCountryListFromString(sourceCountry);
 			System.out.println("Player attacks");
 			
 			attackPhase(player);
@@ -329,6 +346,31 @@ public class Player implements Serializable {
 		}
 
 		return pObject;
+	}
+	
+	
+	public Country getCountryOfCountryListFromString(String sourceCountry) {
+		MapContents contents = MapContents.getInstance();
+		HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
+		for(Country country : countriesAndItsNeighbours.keySet()) {
+			if(sourceCountry!=null && !sourceCountry.isEmpty() && sourceCountry.equals(country.getCountryName())) {
+				return country;
+			}
+		}
+		return null;
+	}
+
+	public Country reenterTheCountry(Player player) {
+		Scanner scanner = new Scanner(System.in);
+		String Country;
+		Country CountryObject;
+		System.out.println("Enter the name of the country through which you want to attack");
+		Country = scanner.nextLine();
+		CountryObject = getCountryOfPlayerFromString(player, Country);
+		if(CountryObject==null) {
+			reenterTheCountry(player);
+		}
+		return CountryObject;
 	}
 
 	/**
@@ -498,5 +540,39 @@ public class Player implements Serializable {
 	 */
 	public void setCanContinue(boolean canContinue) {
 		this.canContinue = canContinue;
+	}
+	
+	/**
+	 * To get the country object from the string value of the country
+	 * @param player the player object to which the country belongs
+	 * @param country string value of the country
+	 * @return the country object
+	 */
+	public Country getCountryOfPlayerFromString(Player player, String country) {
+		for(Country playerAssignedCountry : player.getAssignedCountries()) {
+			if(country!=null && !country.isEmpty() && country.equals(playerAssignedCountry.getCountryName())) {
+				return playerAssignedCountry;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * This method prints all countries owned by a player
+	 * @param player the Player object
+	 */
+	public void printAllCountriesOwnedByPlayer(Player player) {
+		for (Country countryObj : player.getAssignedCountries()) {
+			System.out.print(countryObj.getCountryName() + ",");
+		}
+	}
+	
+	public void printNeighbouringAttackableCountriesAndArmies(Country country,Player player) {
+		System.out.println("######Neighbouring Countries on which you can attack and its armies are :#####");
+		for(Country countryObject : country.getNeighbouringCountries()) {
+			if(!player.getAssignedCountries().contains(countryObject)) {
+			System.out.println(countryObject.getCountryName() +"  :  " + countryObject.getArmies());
+			}
+		}
 	}
 }
