@@ -58,6 +58,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gameFrame = new JFrame("Concordia Conquest");
+		gameFrame.setVisible(true);
 		try {
             JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
             gameFrame.setContentPane(label);
@@ -112,7 +113,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		gameFrame.getContentPane().add(editMapButton);
 		gameFrame.getContentPane().add(exitButton);
 		gameFrame.getContentPane().add(gamePanel);
-		gameFrame.setVisible(true);
+		
 
 	}
 
