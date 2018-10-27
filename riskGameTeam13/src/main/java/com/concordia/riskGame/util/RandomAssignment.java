@@ -60,7 +60,9 @@ public class RandomAssignment {
 			List<Country> countryList1 = new ArrayList<>();
 			for (int j = 0; j < dividedValuesList[i]; j++) {
 				int rando = (int) ((Math.random() * newCountryList.size()));
-				countryList1.add(newCountryList.get(rando));
+				Country tempCountry = newCountryList.get(rando);
+				tempCountry.setBelongsToPlayer(playersList.get(i));
+				countryList1.add(tempCountry);
 				newCountryList.remove(rando);
 			}
 			playersList.get(i).setAssignedCountries(countryList1);
