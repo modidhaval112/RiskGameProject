@@ -21,7 +21,7 @@ public class Country {
 	private int startPixel;
 	private int endPixel;
 	private int armies;
-	public Player belongsToPlayer;
+	private Player belongsToPlayer;
 	/***
 	 * Default Constructor
 	 **/
@@ -173,4 +173,23 @@ public class Country {
 		this.armies = armies;
 	}
 
+	/**
+	 * This method returns number of armies.
+	 * 
+	 * @return Player Name to which this country belongs.
+	 */
+	public Player getBelongsToPlayer() {
+		return belongsToPlayer;
+	}
+
+	/**
+	 * This method set the number of armies.
+	 * 
+	 * @param belongsToPlayer Player Name to which this country belongs.
+	 */
+	public void setBelongsToPlayer(Player belongsToPlayer) 
+	{
+		this.belongsToPlayer = belongsToPlayer;
+	}
+	
 }
