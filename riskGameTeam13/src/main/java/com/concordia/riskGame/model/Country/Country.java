@@ -174,18 +174,18 @@ public class Country {
 	}
 
 	/**
-	 * This method returns number of armies.
+	 * This method returns the player to which the country belongs.
 	 * 
-	 * @return Player Name to which this country belongs.
+	 * @return Player Returns the player to which this country belongs.
 	 */
 	public Player getBelongsToPlayer() {
 		return belongsToPlayer;
 	}
 
 	/**
-	 * This method set the number of armies.
+	 * This method sets the player to which the country belongs.
 	 * 
-	 * @param belongsToPlayer Player Name to which this country belongs.
+	 * @param belongsToPlayer The player to which this country belongs.
 	 */
 	public void setBelongsToPlayer(Player belongsToPlayer) 
 	{
