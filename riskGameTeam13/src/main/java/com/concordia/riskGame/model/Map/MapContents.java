@@ -1,10 +1,13 @@
 package com.concordia.riskGame.model.Map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Player.Player;
+
 
 
 
@@ -22,9 +25,11 @@ public class MapContents {
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 	private String mapAuthorName;
+	public List<Player> playerList = new ArrayList<>();
 	
-	
-	 /**
+	 
+
+	/**
      * Default Constructor
      */
     private MapContents() {
@@ -92,5 +97,21 @@ public class MapContents {
 	 */
 	public static void setMapContents(MapContents mapContents) {
 		MapContents.mapContents = mapContents;
+	}
+	
+	/**
+	 * This method returns the Player List
+	 * @return List of Players in the game.
+	 */
+	public List<Player> getPlayerList() {
+		return playerList;
+	}
+
+	/**
+	 * This method sets the Player List
+	 * @param playerList The list of players to be set.
+	 */
+	public void setPlayerList(List<Player> playerList) {
+		this.playerList = playerList;
 	}
 }

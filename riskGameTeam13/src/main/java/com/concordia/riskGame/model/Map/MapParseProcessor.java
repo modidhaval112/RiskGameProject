@@ -108,8 +108,9 @@ public class MapParseProcessor {
 			}
 
 			armyAssignment(playerList);
+			mapContentObject.setPlayerList(playerList);
 			gameDriverObject = new GameDriver();
-			gameDriverObject.gamePhase(playerListClone, countryAndNeighbors);
+			gameDriverObject.gamePhase();
 		} catch (InvalidMapFileException e) {
 			System.out.println("Please select a valid map");
 			GameLauncher gameLauncherObject = new GameLauncher();

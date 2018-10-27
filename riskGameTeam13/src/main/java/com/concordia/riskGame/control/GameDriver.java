@@ -3,10 +3,12 @@ package com.concordia.riskGame.control;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 /**
@@ -34,44 +36,47 @@ public class GameDriver {
 	 *                            countries.
 	 * @throws Exception 
 	 */
-	public void gamePhase(List<Player> player, HashMap<Country, List<Country>> countryAndConnected) throws Exception {
-
+	public void gamePhase() throws Exception {
+		MapContents mapContents =MapContents.getInstance();
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
-		gmcountryAndNeighbours = countryAndConnected;
+		gmcountryAndNeighbours = mapContents.getCountryAndNeighbors();
 		scanner = new Scanner(System.in);
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
-		for (Player p : player) {
+		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
+		while(iterator.hasNext()) {
 			Player playerInstance = new Player();
-			if(p.getCanContinue()) {
+			Player p = iterator.next();
+			
 			playerInstance = playerInstance.reinforcePhase(p);
-			if(!playerInstance.getHasWon()) {
+			if(playerInstance.getCanAttack()) {
 			playerInstance = playerInstance.attackPhase(playerInstance);
 			}
-			else {
+			/*else {
 				System.out.println(playerInstance.getName()+"has won the game");
 				System.out.println("###### Game has been ended ######");
 				endTheGame = true;
 				break;
-			}
+			}*/
+			if(playerInstance.getCanFortify()) {
 			playerInstance = playerInstance.forfeitPhase(playerInstance);
-			updatedPlayerList.add(playerInstance);
 			}
+			//updatedPlayerList.add(playerInstance);
 			
 		}
 		
 		if(endTheGame) {
 			System.exit(0);
 		}
-		List<Player> gdPlayerList = new ArrayList<Player>();
-		gdPlayerList = updatedPlayerList;
+		/*List<Player> gdPlayerList = new ArrayList<Player>();
+		gdPlayerList = updatedPlayerList;*/
 		System.out.println("######## Do you want to exit : yes  #########");
 		String choice = scanner.nextLine();
 
 		if (choice.equalsIgnoreCase("yes")) {
 			System.exit(0);
 		}
-		gamePhase(gdPlayerList, gmcountryAndNeighbours);
+		gamePhase();
 
 	}
 
