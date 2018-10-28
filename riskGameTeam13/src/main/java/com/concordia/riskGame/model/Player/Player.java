@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Scanner;
 
+import com.concordia.riskGame.View.PhaseView;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
@@ -17,7 +19,7 @@ import com.concordia.riskGame.model.dice.Dice;
  *
  * @author Darwin Anirudh G and sande
  */
-public class Player implements Serializable {
+public class Player extends Observable implements Serializable {
 
 	private String name;
 	private int currentPlayerReinforceArmies;
@@ -83,6 +85,8 @@ public class Player implements Serializable {
 	 */
 	public void setPlayerAssign(Map<Player, List<Country>> playerAssign) {
 		this.playerAssign = playerAssign;
+		PhaseView phaseView = new PhaseView();
+		this.addObserver(phaseView);
 	}
 
 	/**
