@@ -119,8 +119,10 @@ public class Player extends Observable implements Serializable {
         notifyObservers();
  	}
 	
-	public void setDomination(String dominationMessage ) {
-		dominationPrint=dominationMessage;
+	/**
+	 * This method sets the message for observer of domination and knows them when it is changed.
+	 */
+	public void setDomination() {
 		setChanged();
         notifyObservers();
  	}
@@ -683,6 +685,7 @@ public class Player extends Observable implements Serializable {
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player reinforcePhase(Player player) {
+		setDomination();
 		Scanner scanner;
 		scanner = new Scanner(System.in);
 		 gamePlayerList = new ArrayList<Player>();
