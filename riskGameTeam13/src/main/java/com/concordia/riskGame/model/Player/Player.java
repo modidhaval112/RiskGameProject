@@ -403,8 +403,8 @@ public class Player extends Observable implements Serializable {
 			System.out.println("#### The neighbouring attackable countries are #####");
 			attackableCountryList=printNeighboringAttackableCountriesAndArmies(sourceCountryObject,player);
 			if(attackableCountryList==null || attackableCountryList.isEmpty()) {
-				System.out.println("Attack not possible as there are no neighboring countries. Please reenter the country");
-				sourceCountryObject = reenterTheCountry(player); 
+				System.out.println("Attack not possible as there are no neighboring countries.");
+				throw new  Exception();
 			}
 			System.out.println("Enter the name of the country on which you want to attack");
 			destinationCountry = scanner.nextLine();
