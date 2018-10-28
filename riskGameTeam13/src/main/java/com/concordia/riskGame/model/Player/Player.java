@@ -43,7 +43,6 @@ public class Player extends Observable implements Serializable {
 	private boolean canAttack = false;
 	private boolean canFortify = false;
 	private boolean canReinforce = true;
-	public String phasePrint;
 	/**
 	 * default constructor
 	 */
@@ -104,22 +103,10 @@ public class Player extends Observable implements Serializable {
 	 * 
 	 * @param name Player Name
 	 */
-	
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
-	/**
-	 * This method sets the message for observers and knows them when it is changed.
-	 * @param phaseMessage
-	 */
-	public void phaseView(String phaseMessage ) {
-		phasePrint=phaseMessage;
-		setChanged();
-        notifyObservers();
-
-	}
 	/**
 	 * This method returns number of Armies player have
 	 * 
@@ -334,6 +321,7 @@ public class Player extends Observable implements Serializable {
 				System.out.println("##### Armies have been moved between countries ###### ");
 				return player;
 			} catch (Exception e) {
+				System.out.println("Exception***************");
 				forfeitPhase(playerObject);
 			}
 		} else {
@@ -376,7 +364,8 @@ public class Player extends Observable implements Serializable {
 			System.out.println("#### List of countries owned by the player #####");
 
 			for (Country countryObj : player.getAssignedCountries()) {
-				System.out.print(countryObj.getCountryName() + ",");
+				Country country = getSourceCountryFromString(countryObj.getCountryName());
+				System.out.println(country.getCountryName() + " : "+country.getArmies());
 			}
 			
 			System.out.println("Enter the name of the country through which you want to attack");
@@ -393,6 +382,10 @@ public class Player extends Observable implements Serializable {
 			}
 			System.out.println("#### The neighbouring attackable countries are #####");
 			attackableCountryList=printNeighboringAttackableCountriesAndArmies(sourceCountryObject,player);
+			if(attackableCountryList==null || attackableCountryList.isEmpty()) {
+				System.out.println("Attack not possible as there are no neighboring countries. Please reenter the country");
+				sourceCountryObject = reenterTheCountry(player); 
+			}
 			System.out.println("Enter the name of the country on which you want to attack");
 			destinationCountry = scanner.nextLine();
 			destinationCountryObject = getAttackableCountryOfCountryListFromString(destinationCountry,attackableCountryList);
@@ -449,17 +442,30 @@ public class Player extends Observable implements Serializable {
 			for(Integer result : attackerDiceResults) {
 				System.out.print(result + " ");
 			}
+			System.out.println();
 			System.out.println("Defender Dice Roll results");
 			for(Integer result : defenderDiceResults) {
 				System.out.print(result + " ");
 			}
-			
+			System.out.println();
 			Collections.sort(attackerDiceResults);
+			Collections.reverse(attackerDiceResults);
 			Collections.sort(defenderDiceResults);
-			int maximumDiceValue = attackerDice > defenderDice ? attackerDice : defenderDice;
-			for(int i=0;i<maximumDiceValue;i++) {
+			Collections.reverse(defenderDiceResults);
+			int minimumDiceValue = attackerDice < defenderDice ? attackerDice : defenderDice;
+			/*if(attackerDiceResults.size()<3) {
+				while(attackerDiceResults.size()!=3) {
+					attackerDiceResults.add(null);
+					}
+				}
+			if(defenderDiceResults.size()<3) {
+				while(defenderDiceResults.size()!=3) {
+					defenderDiceResults.add(null);
+					}
+				}*/
+			for(int i=0;i<minimumDiceValue;i++) {
 				if(attackerDiceResults.get(i)!=null && defenderDiceResults.get(i)!=null) {
-					System.out.println("Result number "+"i");
+					System.out.println("Result number "+(i+1));
 					System.out.println("Attacker Dice value "+attackerDiceResults.get(i));
 					System.out.println("Defender Dice value "+defenderDiceResults.get(i));
 					if(attackerDiceResults.get(i)>defenderDiceResults.get(i)) {
@@ -474,9 +480,11 @@ public class Player extends Observable implements Serializable {
 					break;
 				}
 			}
-			
+			System.out.println("Number of armies in "+sourceCountryObject.getCountryName()+" is "+sourceCountryObject.getArmies());
+			System.out.println("Number of armies in "+destinationCountryObject.getCountryName()+" is "+destinationCountryObject.getArmies());
 			if(destinationCountryObject.getArmies()<1) {
 				playerLosesTheCountry(sourceCountryObject,destinationCountryObject);
+				printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 			}
 			if(player.getAssignedCountries().size()==MapContents.getInstance().getCountryAndNeighbors().keySet().size()) {
 				System.out.println("Player "+player.getName()+"has won the game");
@@ -489,13 +497,16 @@ public class Player extends Observable implements Serializable {
 		} 
 		else if (choice.equalsIgnoreCase("no")) {
 			System.out.println("Player enter into fortify phase");
+			player.setCanFortify(true);
 			}
 		else {
 			System.out.println("Invalid Option");
 			System.out.println("#### Moving to the next phase ####");
+			player.setCanFortify(true);
 			}
 		}
 		catch (Exception e) {
+			System.out.println("Exception***************");
 			attackPhase(player);
 		}
 
@@ -503,6 +514,14 @@ public class Player extends Observable implements Serializable {
 	}
 	
 	
+	private void printAllCountriesOfaPlayer(Player player) {
+		System.out.println("Countries assigned to this player are");
+		for (Country countryObj : player.getAssignedCountries()) {
+			System.out.println(countryObj.getCountryName() + " : "+countryObj.getArmies());
+		}
+	}
+
+
 	private void checkPlayerTurnCanContinue(Player player) {
         for (Country c : player.getAssignedCountries()) {
             setCanAttack(false);
@@ -664,7 +683,7 @@ public class Player extends Observable implements Serializable {
 		System.out.println("##### Destination country is : ##### :" + destCountry);
 		List<Country> connectedCountries = new ArrayList<Country>();
 		boolean returnValue = false;
-		for (Map.Entry<Country, List<Country>> entry : gamecountryAndNeighbours.entrySet()) {
+		for (Map.Entry<Country, List<Country>> entry : MapContents.getInstance().getCountryAndNeighbors().entrySet()) {
 			if (entry.getKey().getCountryName().equalsIgnoreCase(sourceCountry)) {
 				connectedCountries = entry.getValue();
 				for (Country countryInstance : connectedCountries) {

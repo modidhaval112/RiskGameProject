@@ -34,6 +34,7 @@ public class MapParseProcessor {
 
 	private File file;
 	private String currentLine;
+	private int labelCount;
 	private String filePath;
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
@@ -178,13 +179,15 @@ public class MapParseProcessor {
 	 * 
 	 * @param bufferReader BufferedReader to read text from the file
 	 */
-	public void readMapElements(BufferedReader bufferReader) {
+	public MapContents readMapElements(BufferedReader bufferReader) {
 		try {
 			contitentList = new ArrayList<>();
 			countryList = new ArrayList<>();
 			countryAndNeighbors = new HashMap<>();
+			labelCount = 0;
 			while ((currentLine = bufferReader.readLine()) != null) {
 				if (currentLine.contains("[Map]")) {
+					labelCount++;
 					while ((currentLine = bufferReader.readLine()) != null && !currentLine.contains("[")) {
 						if (currentLine.contains("author")) {
 							splitUtllityString = currentLine.split("=");
@@ -198,6 +201,7 @@ public class MapParseProcessor {
 				bufferReader.reset();
 
 				if (currentLine.contains("[Continents]")) {
+					labelCount++;
 					while ((currentLine = bufferReader.readLine()) != null && !currentLine.contains("[")) {
 						if (!currentLine.isEmpty()) {
 							String[] continentValues = currentLine.split("=");
@@ -212,6 +216,7 @@ public class MapParseProcessor {
 				bufferReader.reset();
 
 				if (currentLine.contains("[Territories]")) {
+					labelCount++;
 					while ((currentLine = bufferReader.readLine()) != null) {
 						if (!currentLine.isEmpty()) {
 							String[] territoryValues = currentLine.split(",", 2);
@@ -232,11 +237,19 @@ public class MapParseProcessor {
 					}
 				}
 			}
-
+			
+			MapContents.setMapContents(null);
+			mapContentObject = MapContents.getInstance();
+			setcontitentAndCountriesMap();
+			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
+			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
+			mapContentObject.setLabelCount(labelCount);
+			
 		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
 
 		}
+		return mapContentObject;
 
 	}
 

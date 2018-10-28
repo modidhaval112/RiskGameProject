@@ -23,7 +23,7 @@ public class PhaseView implements Observer{
        Player player = (Player) arg0;
 
 
-		System.out.println("Phase View " + player.phasePrint);
+		System.out.println("In Phase View ");
 	}
 
 }

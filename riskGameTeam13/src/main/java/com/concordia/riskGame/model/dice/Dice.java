@@ -14,6 +14,7 @@ public class Dice {
 	
 	public List<Integer> rollDice(int numberOfDice){
 		this.numberOfDice = numberOfDice;
+		results = new ArrayList<>();
 		while(numberOfDice>0) {
 			Random random = new Random();
 			int result = random.nextInt(max - min + 1) + min;

@@ -25,6 +25,7 @@ public class MapContents {
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 	private String mapAuthorName;
+	private int labelCount;
 	public List<Player> playerList = new ArrayList<>();
 	
 	 
@@ -114,4 +115,21 @@ public class MapContents {
 	public void setPlayerList(List<Player> playerList) {
 		this.playerList = playerList;
 	}
+
+	/**
+	 * Returns number of labels in the map
+	 * @return
+	 */
+	public int getLabelCount() {
+		return labelCount;
+	}
+
+	/**
+	 * Sets number of labels in the map
+	 * @param labelCount
+	 */
+	public void setLabelCount(int labelCount) {
+		this.labelCount = labelCount;
+	}
+
 }

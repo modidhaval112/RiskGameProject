@@ -43,11 +43,12 @@ public class GameDriver {
 		scanner = new Scanner(System.in);
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
+		while(!endTheGame) {
 		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
 		while(iterator.hasNext()) {
 			Player playerInstance = new Player();
 			Player p = iterator.next();
-			
+			if(!p.isHasLost()) {
 			playerInstance = playerInstance.reinforcePhase(p);
 			if(playerInstance.getCanAttack()) {
 			playerInstance = playerInstance.attackPhase(playerInstance);
@@ -62,9 +63,9 @@ public class GameDriver {
 			playerInstance = playerInstance.forfeitPhase(playerInstance);
 			}
 			//updatedPlayerList.add(playerInstance);
-			
+			}
 		}
-		
+		}
 		if(endTheGame) {
 			System.exit(0);
 		}

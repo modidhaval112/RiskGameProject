@@ -1,16 +1,18 @@
 package com.concordia.riskGame.util;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import com.concordia.riskGame.entity.GameMap;
+import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
+import com.concordia.riskGame.model.Map.MapParseProcessor;
 
 /**
  * This class contains all the methods to validate the map file.
@@ -26,28 +28,33 @@ public class MapValidator {
 	/**
 	 * method to check if all the labels are described properly
 	 * 
-	 * @param gameMap : GameMap object
+	 * @param bufferReaderForFile : GameMap object
 	 * @return true if all labels are described properly, otherwise false
 	 */
-	public boolean checkMapLabel(GameMap gameMap) {
-
-		if (gameMap.getLabelCount() == 3) {
-			return true;
+	public boolean checkMapLabel(MapContents mapContents) {
+		if(mapContents.getLabelCount() != 3) {
+			return false;
 		}
-
-		return false;
+		return true;
 	}
 
 	/**
 	 * method to check if Country Continent if from Continent list only
 	 * 
-	 * @param gameMap : GameMap object
+	 * @param mapContents : GameMap object
 	 * @return true if Country Continent is from Continent List, otherwise false
 	 */
-	public boolean checkContinent(GameMap gameMap) {
+	public boolean checkContinent(MapContents mapContents) {
 
-		for (String s : gameMap.getSetContinent()) {
-			if (!gameMap.getMapWinCount().keySet().contains(s)) {
+		List<String> listContinentName = new ArrayList<>();
+		for (Continent continent : mapContents.getContinentAndItsCountries().keySet())
+		{
+			listContinentName.add(continent.getContinentName());
+		}
+		
+		for (Country country : mapContents.getCountryAndNeighbors().keySet())
+		{
+			if (!listContinentName.contains(country.getBelongsToContinent())) {
 				return false;
 			}
 		}
@@ -58,34 +65,41 @@ public class MapValidator {
 	/**
 	 * method to check if all continent have at least one country
 	 * 
-	 * @param gameMap : GameMap object
+	 * @param mapContents : GameMap object
 	 * @return true if all continent has at least one country, otherwise false
 	 */
-	public boolean checkContinentCountry(GameMap gameMap) {
-		Set<String> setContinent = gameMap.getMapWinCount().keySet();
-		for (String s : gameMap.getSetContinent()) {
-			if (setContinent.contains(s)) {
-				setContinent.remove(s);
+	public boolean checkContinentCountry(MapContents mapContents) {
+		
+		for (Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
+			if (mapContents.getContinentAndItsCountries().get(continent).isEmpty()) {
+				return false;
 			}
 		}
-
-		if (setContinent.isEmpty())
-			return true;
-		else
-			return false;
+		return true;
 	}
 
 	/**
 	 * method to check if country is assigned to only one country
 	 * 
-	 * @param gameMap : GameMap object
+	 * @param mapContents : GameMap object
 	 * @return true if all countries are assigned to only one country, otherwise
 	 *         false
 	 */
-	public boolean checkUniqueContinentCountry(GameMap gameMap) {
+	public boolean checkUniqueContinentCountry(MapContents mapContents) {
 
-		if (gameMap.getUniqueCountryCount()) {
-			return false;
+		Map<String, String> counrtyContinentValue = new HashMap<>();
+		for(Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
+			for(Country country : mapContents.getContinentAndItsCountries().get(continent)) {
+				if(!counrtyContinentValue.keySet().contains(country.getCountryName())) {
+					counrtyContinentValue.put(country.getCountryName(), continent.getContinentName());
+				}
+				else {
+					if(!continent.getContinentName().equalsIgnoreCase(counrtyContinentValue.get(country.getCountryName()))) {
+						return false;
+					}
+				}
+					
+			}
 		}
 		return true;
 	}
@@ -128,17 +142,24 @@ public class MapValidator {
 	 */
 	public void init(File file) {
 		MapValidator mapValidator = new MapValidator();
-		GameMap gameMap;
 		Map<String, Integer> visitedMap1 = new HashMap<>();
+		MapParseProcessor mapParseProcessor = new MapParseProcessor();
+		MapContents mapContents = null;
+		BufferedReader bufferReaderForFile = null;
+		
+		try {
+			bufferReaderForFile = new BufferedReader(new FileReader(file));
+			mapContents = mapParseProcessor.readMapElements(bufferReaderForFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		Map<Country, List<Country>> mapCountry = mapContents.getCountryAndNeighbors();
 
-		ReadMap readMap = new ReadMap();
-		gameMap = readMap.readMapFile(file);
-		Map<Country, List<Country>> mapCountry = gameMap.getMapCountry();
-
-		for (int i = 0; i < gameMap.getListCountry().size(); i++) {
-			if (visitedMap1.size() != gameMap.getListCountry().size()) {
+		for (int i = 0; i < mapContents.getCountryAndNeighbors().keySet().size(); i++) {
+			if (visitedMap1.size() != mapContents.getCountryAndNeighbors().keySet().size()) {
 				Map<String, Integer> visitedMap = new HashMap<>();
-				visitedMap1 = mapValidator.checkConnectedGraph(gameMap.getListCountry().get(i), mapCountry, visitedMap);
+				visitedMap1 = mapValidator.checkConnectedGraph(mapContents.getCountryAndNeighbors().keySet().iterator().next(), mapCountry, visitedMap);
 			} else {
 				break;
 			}
@@ -151,10 +172,8 @@ public class MapValidator {
 			}
 		}
 
-		System.out.println("Connected Countries : " + connectedCountries);
-		System.out.println("mapCountry : " + gameMap.getCountryCount());
-
-		if (mapValidator.checkMapLabel(gameMap)) {
+		
+		if (mapValidator.checkMapLabel(mapContents)) {
 			validMapFlag = true;
 		} else {
 			validMapFlag = false;
@@ -163,7 +182,7 @@ public class MapValidator {
 			return;
 		}
 
-		if (gameMap.getMapWinCount().isEmpty()) {
+		if (mapContents.getContinentAndItsCountries().keySet().isEmpty()) {
 			validMapFlag = false;
 			statusMessage = "Map should have atleast one Continent";
 			System.out.println("Message : " + statusMessage);
@@ -173,7 +192,7 @@ public class MapValidator {
 			statusMessage = "Map is valid";
 		}
 
-		if (gameMap.getCountryCount() == 0) {
+		if (mapContents.getCountryAndNeighbors().keySet().isEmpty()) {
 			validMapFlag = false;
 			statusMessage = "Map should have atleast one Country";
 			System.out.println("Message : " + statusMessage);
@@ -183,7 +202,7 @@ public class MapValidator {
 			statusMessage = "Map is valid";
 		}
 
-		if (mapValidator.checkContinent(gameMap)) {
+		if (mapValidator.checkContinent(mapContents)) {
 			validMapFlag = true;
 		} else {
 			validMapFlag = false;
@@ -192,7 +211,7 @@ public class MapValidator {
 			return;
 		}
 
-		if (mapValidator.checkContinentCountry(gameMap)) {
+		if (mapValidator.checkContinentCountry(mapContents)) {
 			validMapFlag = true;
 		} else {
 			validMapFlag = false;
@@ -201,7 +220,7 @@ public class MapValidator {
 			return;
 		}
 
-		if (mapValidator.checkUniqueContinentCountry(gameMap)) {
+		if (mapValidator.checkUniqueContinentCountry(mapContents)) {
 			validMapFlag = true;
 		} else {
 			validMapFlag = false;
@@ -210,7 +229,7 @@ public class MapValidator {
 			return;
 		}
 
-		if (connectedCountries == gameMap.getCountryCount()) {
+		if (connectedCountries == mapContents.getCountryAndNeighbors().keySet().size()) {
 			validMapFlag = true;
 			statusMessage = "Map is valid";
 		} else {
@@ -220,11 +239,8 @@ public class MapValidator {
 			return;
 		}
 
-		Set<String> setContinentValues = new HashSet<>();
-		for (Entry<String, String> entry : gameMap.getContinentCountry().entrySet()) {
-			setContinentValues.add(entry.getValue());
-		}
-
+		System.out.println("Connected Countries : " + connectedCountries);
+		System.out.println("mapCountry : " + mapContents.getCountryAndNeighbors().keySet().size());
 		System.out.println("Message : " + statusMessage);
 		System.out.println("validMapFlag : " + validMapFlag);
 
