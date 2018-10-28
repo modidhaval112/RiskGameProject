@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import com.concordia.riskGame.View.PhaseView;
+import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
@@ -29,7 +30,7 @@ public class Player extends Observable implements Serializable {
 	private List<Country> assignedCountries;
 	private Map<Player, List<Country>> playerAssign;
 	private List<Player> gamePlayerList;
-	
+	private List<Card> cardList = new ArrayList<>();
 
 	private HashMap<Country, List<Country>> gamecountryAndNeighbours;
 	private int assignedArmies;
@@ -43,6 +44,8 @@ public class Player extends Observable implements Serializable {
 	private boolean canAttack = false;
 	private boolean canFortify = false;
 	private boolean canReinforce = true;
+	private boolean cardGiven = false;
+	private boolean endGameForThisPlayer=false;
 	public String phasePrint;
 	public String dominationPrint;
 
@@ -230,6 +233,16 @@ public class Player extends Observable implements Serializable {
 	 */
 	public void setHasLost(boolean hasLost) {
 		this.hasLost = hasLost;
+	}
+	
+	
+	public List<Card> getCardList() {
+		return cardList;
+	}
+
+
+	public void setCardList(List<Card> cardList) {
+		this.cardList = cardList;
 	}
 	
 	/**
@@ -467,6 +480,14 @@ public class Player extends Observable implements Serializable {
 						System.out.println("Attacker Dice value "+attackerDiceResults.get(i));
 						System.out.println("Defender Dice value "+defenderDiceResults.get(i));
 						if(attackerDiceResults.get(i)>defenderDiceResults.get(i)) {
+							if(!player.isCardGiven()) {
+								if(player.getCardList()!=null) {
+									Card card = new Card();
+									card.getCarrdInfo(card);
+									player.getCardList().add(card);
+									player.setCardGiven(true);
+								}
+							}
 							System.out.println("Attacker wins this battle");
 							destinationCountryObject.setArmies(destinationCountryObject.getArmies()-1);
 						}
@@ -552,6 +573,14 @@ public class Player extends Observable implements Serializable {
 					System.out.println("Attacker Dice value "+attackerDiceResults.get(i));
 					System.out.println("Defender Dice value "+defenderDiceResults.get(i));
 					if(attackerDiceResults.get(i)>defenderDiceResults.get(i)) {
+						if(!player.isCardGiven()) {
+							if(player.getCardList()!=null) {
+								Card card = new Card();
+								card.getCarrdInfo(card);
+								player.getCardList().add(card);
+								player.setCardGiven(true);
+							}
+						}
 						System.out.println("Attacker wins this battle");
 						destinationCountryObject.setArmies(destinationCountryObject.getArmies()-1);
 					}
@@ -592,7 +621,7 @@ public class Player extends Observable implements Serializable {
 			System.out.println("Exception***************");
 			attackPhase(player);
 		}
-
+		
 		return pObject;
 	}
 	
@@ -638,7 +667,8 @@ public class Player extends Observable implements Serializable {
 
 	private void playerHasLost(Country sourceCountryObject, Country destinationCountryObject) {
 		destinationCountryObject.getBelongsToPlayer().setHasLost(true);
-		MapContents.getInstance().getPlayerList().remove(destinationCountryObject.getBelongsToPlayer());
+	//	MapContents.getInstance().getPlayerList().remove(destinationCountryObject.getBelongsToPlayer());
+		destinationCountryObject.getBelongsToPlayer().setEndGameForThisPlayer(true);
 		System.out.println("To be Implemented");
 		
 	}
@@ -935,5 +965,37 @@ public class Player extends Observable implements Serializable {
 	 */
 	public void setCanReinforce(boolean canReinforce) {
 		this.canReinforce = canReinforce;
+	}
+
+
+	/**
+	 * @return the cardGiven
+	 */
+	public boolean isCardGiven() {
+		return cardGiven;
+	}
+
+
+	/**
+	 * @param cardGiven the cardGiven to set
+	 */
+	public void setCardGiven(boolean cardGiven) {
+		this.cardGiven = cardGiven;
+	}
+
+
+	/**
+	 * @return the endGameForThisPlayer
+	 */
+	public boolean isEndGameForThisPlayer() {
+		return endGameForThisPlayer;
+	}
+
+
+	/**
+	 * @param endGameForThisPlayer the endGameForThisPlayer to set
+	 */
+	public void setEndGameForThisPlayer(boolean endGameForThisPlayer) {
+		this.endGameForThisPlayer = endGameForThisPlayer;
 	}
 }

@@ -44,9 +44,17 @@ public class GameDriver {
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
 		while(!endTheGame) {
+			Iterator<Player> iterator1 = mapContents.getPlayerList().iterator();
+			while(iterator1.hasNext())  {
+				Player player= iterator1.next();
+				if(player.isHasLost()) {
+					mapContents.getPlayerList().remove(player);
+				}
+			}
 		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
 		while(iterator.hasNext()) {
 			Player playerInstance = new Player();
+			
 			Player p = iterator.next();
 			if(!p.isHasLost()) {
 			playerInstance = playerInstance.reinforcePhase(p);
