@@ -38,7 +38,7 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
 
 /**
  * This class is used for editing the map based on user inputs.
- * @author Sai Krishna
+ * @author saich
  */
 public class MapEditView extends java.awt.Frame {
 

@@ -43,6 +43,9 @@ public class Player extends Observable implements Serializable {
 	private boolean canAttack = false;
 	private boolean canFortify = false;
 	private boolean canReinforce = true;
+	public String phasePrint;
+	public String dominationPrint;
+
 	/**
 	 * default constructor
 	 */
@@ -106,7 +109,21 @@ public class Player extends Observable implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/**
+	 * This method sets the message for observers and knows them when it is changed.
+	 * @param phaseMessage
+	 */
+	public void setPhase(String phaseMessage ) {
+		phasePrint=phaseMessage;
+		setChanged();
+        notifyObservers();
+ 	}
+	
+	public void setDomination(String dominationMessage ) {
+		dominationPrint=dominationMessage;
+		setChanged();
+        notifyObservers();
+ 	}
 	/**
 	 * This method returns number of Armies player have
 	 * 
