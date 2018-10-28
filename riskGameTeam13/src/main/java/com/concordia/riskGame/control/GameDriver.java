@@ -44,13 +44,13 @@ public class GameDriver {
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
 		while(!endTheGame) {
-			Iterator<Player> iterator1 = mapContents.getPlayerList().iterator();
-			while(iterator1.hasNext())  {
-				Player player= iterator1.next();
+			List<Player> removablePlayers = new ArrayList<>();
+			for(Player player : mapContents.getPlayerList()) {
 				if(player.isHasLost()) {
-					mapContents.getPlayerList().remove(player);
+					removablePlayers.add(player);
 				}
 			}
+			mapContents.getPlayerList().removeAll(removablePlayers);
 		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
 		while(iterator.hasNext()) {
 			Player playerInstance = new Player();
