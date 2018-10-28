@@ -354,8 +354,7 @@ public class Player extends Observable implements Serializable {
 		Country destinationCountryObject;
 		List<Country> attackableCountryList;
 		int attackerDice = 0;
-		int maximumDice = 0;
-		int maximumAttackerDice =0;
+		int maximumAttackerDice = 0;
 		int maximumDefenderDice =0;
 		int defenderDice = 0;
 		Dice dice = new Dice();
@@ -465,29 +464,40 @@ public class Player extends Observable implements Serializable {
 				}}
 			else {
 				if(sourceCountryObject.getArmies()>3) {
-					maximumDice=3;
+					maximumAttackerDice=3;
 				}
 				else if(sourceCountryObject.getArmies()==3) {
-					maximumDice=2;
+					maximumAttackerDice=2;
 				}
 				else if(sourceCountryObject.getArmies()==2) {
-					maximumDice=1;
+					maximumAttackerDice=1;
 				}
-				System.out.println("Enter the number of dice to be roled. Maximum is "+maximumDice);
+				System.out.println("Enter the number of dice to be roled. Maximum is "+maximumAttackerDice);
 				attackerDice = scanner.nextInt();
-				if(attackerDice>3 && maximumDice==3) {
+				if(attackerDice>3 && maximumAttackerDice==3) {
 					attackerDice=3;
 				}
-				else if(attackerDice > maximumDice ) {
-					attackerDice=maximumDice;
+				else if(attackerDice > maximumAttackerDice ) {
+					attackerDice=maximumAttackerDice;
 				}
 				System.out.println("Number of dice rolled by attacker : "+attackerDice);
+				
 				if(destinationCountryObject.getArmies()>=2) {
-					defenderDice=2;
+					maximumDefenderDice=2;
 				}
 				else {
-					defenderDice=1;
+					maximumDefenderDice=1;
 				}
+				
+				System.out.println("Enter the number of dice to be roled. Maximum is "+maximumDefenderDice);
+				defenderDice=scanner.nextInt();
+				if(defenderDice>2 && maximumDefenderDice==2) {
+					defenderDice=2;
+				}
+				else if(defenderDice > maximumDefenderDice ) {
+					defenderDice=maximumDefenderDice;
+				}
+				System.out.println("Number of dice rolled by defender : "+defenderDice);
 			}
 			attackerDiceResults = dice.rollDice(attackerDice);
 			defenderDiceResults = dice.rollDice(defenderDice);
