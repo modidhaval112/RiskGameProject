@@ -5,6 +5,8 @@ package com.concordia.riskGame.View;
 
 import java.util.Observable;
 import java.util.Observer;
+import com.concordia.riskGame.model.Player.*;
+
 
 /**
  * This class will display the Game phase details
@@ -18,8 +20,10 @@ public class PhaseView implements Observer{
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
+       Player player = (Player) arg0;
+
+
+		System.out.println("In Phase View ");
 	}
 
 }
