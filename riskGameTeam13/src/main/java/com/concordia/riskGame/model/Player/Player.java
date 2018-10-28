@@ -355,6 +355,8 @@ public class Player extends Observable implements Serializable {
 		List<Country> attackableCountryList;
 		int attackerDice = 0;
 		int maximumDice = 0;
+		int maximumAttackerDice =0;
+		int maximumDefenderDice =0;
 		int defenderDice = 0;
 		Dice dice = new Dice();
 		List<Integer> attackerDiceResults;
@@ -408,8 +410,59 @@ public class Player extends Observable implements Serializable {
 			}
 			
 			if(allOut) {
-				System.out.println("To be implemented");
-			}
+				while(sourceCountryObject.getArmies()>1 && destinationCountryObject.getArmies()!=0) {
+				if(sourceCountryObject.getArmies()>3) {
+					maximumAttackerDice=3;
+				}
+				else if(sourceCountryObject.getArmies()==3) {
+					maximumAttackerDice=2;
+				}
+				else if(sourceCountryObject.getArmies()==2) {
+					maximumAttackerDice=1;
+				}
+				if(destinationCountryObject.getArmies()>=2) {
+					maximumDefenderDice=2;
+				}
+				else {
+					maximumDefenderDice=1;
+				}
+				attackerDiceResults = dice.rollDice(maximumAttackerDice);
+				defenderDiceResults = dice.rollDice(maximumDefenderDice);
+				System.out.println("Attacker Dice Roll results : "+attackerDiceResults.size()+" dice has been rolled");
+				for(Integer result : attackerDiceResults) {
+					System.out.print(result + " ");
+				}
+				System.out.println();
+				System.out.println("Defender Dice Roll results"+defenderDiceResults.size()+" dice has been rolled");
+				for(Integer result : defenderDiceResults) {
+					System.out.print(result + " ");
+				}
+				System.out.println();
+				Collections.sort(attackerDiceResults);
+				Collections.reverse(attackerDiceResults);
+				Collections.sort(defenderDiceResults);
+				Collections.reverse(defenderDiceResults);
+				int minimumDiceValue = maximumAttackerDice < maximumDefenderDice ? maximumAttackerDice : maximumDefenderDice;
+				for(int i=0;i<minimumDiceValue;i++) {
+					if(attackerDiceResults.get(i)!=null && defenderDiceResults.get(i)!=null) {
+						System.out.println("Result number "+(i+1));
+						System.out.println("Attacker Dice value "+attackerDiceResults.get(i));
+						System.out.println("Defender Dice value "+defenderDiceResults.get(i));
+						if(attackerDiceResults.get(i)>defenderDiceResults.get(i)) {
+							System.out.println("Attacker wins this battle");
+							destinationCountryObject.setArmies(destinationCountryObject.getArmies()-1);
+						}
+						else {
+							System.out.println("Defender wins this battle");
+							sourceCountryObject.setArmies(sourceCountryObject.getArmies()-1);
+						}
+					}else {
+						break;
+					}
+				}
+				System.out.println("Number of armies in "+sourceCountryObject.getCountryName()+" is "+sourceCountryObject.getArmies());
+				System.out.println("Number of armies in "+destinationCountryObject.getCountryName()+" is "+destinationCountryObject.getArmies());
+				}}
 			else {
 				if(sourceCountryObject.getArmies()>3) {
 					maximumDice=3;
