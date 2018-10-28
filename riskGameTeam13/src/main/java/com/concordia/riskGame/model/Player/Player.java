@@ -501,6 +501,7 @@ public class Player extends Observable implements Serializable {
 			}
 			attackerDiceResults = dice.rollDice(attackerDice);
 			defenderDiceResults = dice.rollDice(defenderDice);
+			
 			System.out.println("Attacker Dice Roll results");
 			for(Integer result : attackerDiceResults) {
 				System.out.print(result + " ");
