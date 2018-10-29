@@ -670,9 +670,12 @@ public class Player extends Observable implements Serializable {
 	            playerHasLost(sourceCountryObject, destinationCountryObject);
 	        }
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
-		System.out.println("Enter the armies to be left behind");
+		int movableArmies=0;
+		while(movableArmies==0) {
+		System.out.println("Enter the armies to be left behind (Has to be at least 1)");
 		Scanner scanner = new Scanner(System.in);
-		int movableArmies=scanner.nextInt();  // To be refactored 
+		 movableArmies=scanner.nextInt();  // To be refactored 
+		}
 		if (movableArmies > 0) {
 			sourceCountryObject.setArmies(sourceCountryObject.getArmies()-movableArmies);
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies()+movableArmies);
