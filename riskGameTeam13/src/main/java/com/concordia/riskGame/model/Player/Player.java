@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Scanner;
 
+import com.concordia.riskGame.View.CardView;
 import com.concordia.riskGame.View.PhaseView;
 import com.concordia.riskGame.View.WorldDominationView;
 import com.concordia.riskGame.model.Card.Card;
@@ -24,6 +25,9 @@ import com.concordia.riskGame.model.dice.Dice;
  */
 public class Player extends Observable implements Serializable {
 
+	public static String reinforcePhase = "Reinforcement Phase";
+	public static String attackPhase = "Attack Phase";
+	public static String fortificationPhase = "Fortification Phase";
 	private String name;
 	private int currentPlayerReinforceArmies;
 	private int playerCount;
@@ -51,6 +55,8 @@ public class Player extends Observable implements Serializable {
 	public String phasePrint;
 	public String dominationPrint;
 	public int cardExchangeCount = 0;
+	public String currentPhase;
+
 
 
 
@@ -62,6 +68,8 @@ public class Player extends Observable implements Serializable {
 		//this.addObserver(phaseView);
 		WorldDominationView dominationView = new WorldDominationView();
 		this.addObserver(dominationView);
+		CardView cardView = new CardView();
+		this.addObserver(cardView);
 	}
 
 
@@ -84,6 +92,8 @@ public class Player extends Observable implements Serializable {
 		this.name = name;
 		setHasWon(false);
 		setCanContinue(true);
+		CardView cardView = new CardView();
+		this.addObserver(cardView);
 	}
 
 	/**
@@ -269,6 +279,15 @@ public class Player extends Observable implements Serializable {
 		this.cardExchangeCount = cardExchangeCount;
 	}
 
+
+	public String getCurrentPhase() {
+		return currentPhase;
+	}
+
+
+	public void setCurrentPhase(String currentPhase) {
+		this.currentPhase = currentPhase;
+	}
 	/**
 	 * The following method implements the fortify phase of the risk game.
 	 * 
@@ -276,6 +295,8 @@ public class Player extends Observable implements Serializable {
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player forfeitPhase(Player playerObject) {
+		setCurrentPhase(Player.fortificationPhase);
+		playerObject.setCurrentPhase(Player.fortificationPhase);
 		setDomination();
 		Scanner scanner;
 		System.out.println("###### Do you wish to enter the fortification phase: yes/no #######");
@@ -396,6 +417,8 @@ public class Player extends Observable implements Serializable {
 	 * @throws Exception 
 	 */
 	public Player attackPhase(Player player) throws Exception {
+		setCurrentPhase(Player.attackPhase);
+		player.setCurrentPhase(Player.attackPhase);
 		setDomination();
 
 		System.out.println("###### Do you wish to attack : yes/no #######");
@@ -748,6 +771,8 @@ public class Player extends Observable implements Serializable {
 	 */
 	public Player reinforcePhase(Player player) {
 		setDomination();
+		setCurrentPhase(Player.reinforcePhase);
+		player.setCurrentPhase(Player.reinforcePhase);
 		Scanner scanner;
 		scanner = new Scanner(System.in);
 		int armiesToBeGiven=0;
@@ -906,6 +931,9 @@ public class Player extends Observable implements Serializable {
 				break;
 			}
 		}
+		setCardList(player.getCardList());
+		setChanged();
+		notifyObservers(player);
 
 	}
 
