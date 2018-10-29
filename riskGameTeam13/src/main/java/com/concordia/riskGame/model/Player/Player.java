@@ -686,7 +686,10 @@ public class Player extends Observable implements Serializable {
 		destinationCountryObject.getBelongsToPlayer().setHasLost(true);
 	//	MapContents.getInstance().getPlayerList().remove(destinationCountryObject.getBelongsToPlayer());
 		destinationCountryObject.getBelongsToPlayer().setEndGameForThisPlayer(true);
-		System.out.println("To be Implemented");
+		List<Card> listOfDefenderCards = destinationCountryObject.getBelongsToPlayer().getCardList();
+        for (Card card : listOfDefenderCards)
+        	sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
+		//System.out.println("To be Implemented");
 		
 	}
 
