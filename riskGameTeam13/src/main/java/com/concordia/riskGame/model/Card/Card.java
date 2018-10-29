@@ -8,9 +8,9 @@ public class Card {
 	public  List<Card> cardList;
 	public static final int max = 3;
 	public static final int min = 1;
-	public static final String firstCard = "FirstCard";
-	public static final String secondCard = "SecondCard";
-	public static final String thirdCard = "ThirdCard";
+	public static final String firstCard = "INFANTRY";
+	public static final String secondCard = "CAVALRY";
+	public static final String thirdCard = "ARTILERRY";
 	public String cardName;
 	
 	public static Card getFirstCard() {
@@ -37,7 +37,7 @@ public class Card {
 		if(result==1) {
 			card.setCardName(firstCard);
 		}
-		else if(result==1) {
+		else if(result==2) {
 			card.setCardName(secondCard);
 		}
 		else {

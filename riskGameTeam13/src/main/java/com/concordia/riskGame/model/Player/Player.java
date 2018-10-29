@@ -835,7 +835,7 @@ public class Player extends Observable implements Serializable {
 			}
 		}
 		else if(!cardExchangePossible) {
-			System.out.println("Not enough cards to exchange , moving to the next phase");
+			System.out.println("Not enough cards to exchange , moving to reinforcement");
 		}
 		assignedArmies += armiesToBeGiven;
 		System.out.println("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
