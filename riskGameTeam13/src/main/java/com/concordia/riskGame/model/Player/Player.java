@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Scanner;
 
@@ -48,6 +49,9 @@ public class Player extends Observable implements Serializable {
 	private boolean endGameForThisPlayer=false;
 	public String phasePrint;
 	public String dominationPrint;
+	public int cardExchangeCount = 0;
+	
+
 
 	/**
 	 * default constructor
@@ -243,6 +247,16 @@ public class Player extends Observable implements Serializable {
 
 	public void setCardList(List<Card> cardList) {
 		this.cardList = cardList;
+	}
+	
+	
+	public int getCardExchangeCount() {
+		return cardExchangeCount;
+	}
+
+
+	public void setCardExchangeCount(int cardExchangeCount) {
+		this.cardExchangeCount = cardExchangeCount;
 	}
 	
 	/**
@@ -621,7 +635,7 @@ public class Player extends Observable implements Serializable {
 			System.out.println("Exception***************");
 			attackPhase(player);
 		}
-		
+		player.setCardGiven(false);
 		return pObject;
 	}
 	
@@ -718,14 +732,74 @@ public class Player extends Observable implements Serializable {
 		setDomination();
 		Scanner scanner;
 		scanner = new Scanner(System.in);
+		int armiesToBeGiven=0;
 		 gamePlayerList = new ArrayList<Player>();
 		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
+		HashMap<String, Integer> cardCount = new HashMap<>();
+		int cardTypes = 0;
+		String cardExchangeChoice;
+		boolean cardExchangePossible = false;
+		String cardAppearingMoreThanThrice = null;
+		System.out.println("The cards with this player are :");
+		for(Card card : player.getCardList()) {
+			if(!cardCount.containsKey(card.cardName)) {
+				cardCount.put(card.cardName, 1);
+				cardTypes++;
+			}else {
+				int c =cardCount.get(card.cardName);
+				c++;
+				cardCount.put(card.cardName, c);
+			}
+			System.out.print(card.getCardName()+", ");
+		}
+		
+		if(cardTypes==3) {
+			cardExchangePossible = true;
+		}
+		for(Entry<String, Integer> cardVal : cardCount.entrySet()) {
+			if(cardVal.getValue()>=3) {
+				cardExchangePossible = true;
+				cardAppearingMoreThanThrice=cardVal.getKey();
+			}
+		}
+		
+		if(player.getCardList().size()<3) {
+			System.out.println();
+			System.out.println("Not enough cards to exchange ,continuing with the reinforcement phase");
+		}
+		else if(cardExchangePossible){
+			if(player.getCardList().size()<5) {
+			System.out.println("Do you want to exchange the cards to armies(yes/no");
+			cardExchangeChoice = scanner.nextLine();
+				if(cardExchangeChoice.equals("yes")) {
+					exchangeCards(cardTypes,cardAppearingMoreThanThrice,player);
+					int count=player.getCardExchangeCount();
+					armiesToBeGiven = (count+1)*5;
+					System.out.println("Player recieves "+armiesToBeGiven+" armies for exchanging the cards");
+					player.setCardExchangeCount(player.getCardExchangeCount()+1);
+				}
+				else {
+					System.out.println("Not Exchanging the cards to armies");
+				}
+			}
+			else {
+				exchangeCards(cardTypes,cardAppearingMoreThanThrice,player);
+				int count=player.getCardExchangeCount();
+				armiesToBeGiven = (count+1)*5;
+				System.out.println("Player recieves "+armiesToBeGiven+" armies for exchanging the cards");
+				player.setCardExchangeCount(player.getCardExchangeCount()+1);
+			}
+		}
+		else if(!cardExchangePossible) {
+			System.out.println("Not enough cards to exchange , moving to the next phase");
+		}
+		assignedArmies += armiesToBeGiven;
 		System.out.println("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 		player.setTotalArmies(assignedArmies);
 		int counter = player.getTotalArmies();
 		int armiesCounter;
-
+		
 		while (counter > 0) {
 			printCountriesOwnedByPlayer(player);
 			System.out.println(
@@ -775,11 +849,46 @@ public class Player extends Observable implements Serializable {
 						"			###### The assigned army count  is 	 ######	    :" + countryObject.getArmies());
 			}
 		}
-
+		
 		System.out.println("########" + player.getName() + "  reinforcement phase ended ########");
 		player.setCanAttack(true);
 		return player;
 
+	}
+	
+	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice,Player player) {
+
+		if(cardTypes==3) {
+			player.getCardList().remove(Card.getFirstCard());
+			player.getCardList().remove(Card.getSecondCard());
+			player.getCardList().remove(Card.getThirdCard());
+			System.out.println("Three cards of all three types have been removed ");
+		}
+		else {
+			switch (cardAppearingMoreThanThrice) {
+			case Card.firstCard:
+				player.getCardList().remove(Card.getFirstCard());
+				player.getCardList().remove(Card.getFirstCard());
+				player.getCardList().remove(Card.getFirstCard());
+				System.out.println("Three cards of the type "+Card.getFirstCard().getCardName()+" have been removed ");
+				break;
+			case Card.secondCard:
+				player.getCardList().remove(Card.getSecondCard());
+				player.getCardList().remove(Card.getSecondCard());
+				player.getCardList().remove(Card.getSecondCard());
+				System.out.println("Three cards of the type "+Card.getSecondCard().getCardName()+" have been removed ");
+				break;
+			case Card.thirdCard:
+				player.getCardList().remove(Card.getThirdCard());
+				player.getCardList().remove(Card.getThirdCard());
+				player.getCardList().remove(Card.getThirdCard());
+				System.out.println("Three cards of the type "+Card.getThirdCard().getCardName()+" have been removed ");
+				break;
+			default:
+				break;
+			}
+		}
+	
 	}
 	
 	/**
