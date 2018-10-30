@@ -177,7 +177,7 @@ public class MapValidator {
 			validMapFlag = true;
 		} else {
 			validMapFlag = false;
-			statusMessage = "Map is invalid as labels are not proper described";
+			statusMessage = "Map is invalid as labels are not properly described";
 			System.out.println("Message : " + statusMessage);
 			return;
 		}
@@ -240,9 +240,9 @@ public class MapValidator {
 		}
 
 		System.out.println("Connected Countries : " + connectedCountries);
-		System.out.println("mapCountry : " + mapContents.getCountryAndNeighbors().keySet().size());
+		System.out.println("Total Countries : " + mapContents.getCountryAndNeighbors().keySet().size());
 		System.out.println("Message : " + statusMessage);
-		System.out.println("validMapFlag : " + validMapFlag);
+		System.out.println("Valid Map Flag : " + validMapFlag);
 
 	}
 
