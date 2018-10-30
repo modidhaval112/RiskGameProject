@@ -458,7 +458,7 @@ public class Player extends Observable implements Serializable {
 					sourceCountryObject = reenterTheCountry(player); 
 				}	
 				System.out.println("Number of armies in "+sourceCountryObject.getCountryName()+ " : " + sourceCountryObject.getArmies());
-				if( sourceCountryObject.getArmies()==1) {
+				while( sourceCountryObject.getArmies()==1) {
 					System.out.println("Attack not possible as the country has only 1 army. Please reenter the country");
 					sourceCountryObject = reenterTheCountry(player); 
 				}
@@ -707,7 +707,7 @@ public class Player extends Observable implements Serializable {
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
 		int movableArmies=0;
 		while(movableArmies==0 || movableArmies>=sourceCountryObject.getArmies()) {
-			System.out.println("Enter the armies to be left behind (Has to be at least 1 and cannot be equal or greaer than the armies of attacking country)");
+			System.out.println("Enter the armies to be left behind (Has to be at least 1 and cannot be equal or gretaer than the armies of attacking country)");
 			Scanner scanner = new Scanner(System.in);
 			movableArmies=scanner.nextInt();  // To be refactored 
 		}
