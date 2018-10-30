@@ -14,7 +14,7 @@ import com.concordia.riskGame.model.Player.Player;
 /**
  * This class assigns countries randomly to the different players
  * 
- * @author Dhaval
+ * @author d_modi
  *
  */
 public class RandomAssignment {
@@ -94,7 +94,6 @@ public class RandomAssignment {
 		randoms[parts - 1] += remainder;
 		Arrays.sort(randoms);
 
-		// Reverse (for getting a descending array):
 		for (int i = 0, j = parts - 1; i < j; ++i, --j) {
 			int temp = randoms[i];
 			randoms[i] = randoms[j];
