@@ -29,7 +29,7 @@ public class WorldDominationView implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
-		System.out.println("###### World  domination view ######");
+		System.out.println(System.lineSeparator()+"###### World  domination view ######");
 		List<Player> playerList=MapContents.getInstance().getPlayerList();
 		DecimalFormat df = new DecimalFormat("#.##");
 
@@ -41,10 +41,8 @@ public class WorldDominationView implements Observer {
 				countryArmies=countryArmies+country.getArmies();
 
 			}
-			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies);
+			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+System.lineSeparator());
 			//Map<Player, List<Country>> playerData=player.getPlayerAssign();
-
-
 		}
 
 		/*Map<Player, List<Country>> playerData=player.getPlayerAssign();
