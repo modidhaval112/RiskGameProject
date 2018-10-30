@@ -25,8 +25,12 @@ public class MapValidatorTest {
 	File fileInvalidContinentNotInList;
 	File fileUniDirectional;
 	MapValidator mapValidatorObject;
-	
 	Boolean validFlag;
+	
+	/**
+	 * This method loads all the maps into different file objects
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		fileValid= new File("src/main/resources/Africa.map");
