@@ -320,7 +320,7 @@ public class Player extends Observable implements Serializable {
 				}
 
 				System.out.println("\n");
-				System.out.println("##### Enter source country and destination country(comma seperated) ###### :");
+				System.out.println("##### Enter source country and destination country (comma seperated) ###### :");
 				utilString = scanner.nextLine().split(",");
 				String fromCountry = utilString[0].trim();
 				String toCountry = utilString[1].trim();
@@ -777,7 +777,7 @@ public class Player extends Observable implements Serializable {
 		scanner = new Scanner(System.in);
 		int armiesToBeGiven=0;
 		gamePlayerList = new ArrayList<Player>();
-		System.out.println("########" + player.getName() + "  reinforcement phase begins ########");
+		System.out.println("\n######## " + player.getName() + "  reinforcement phase begins ########");
 		assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
 		HashMap<String, Integer> cardCount = new HashMap<>();
 		int cardTypes = 0;
