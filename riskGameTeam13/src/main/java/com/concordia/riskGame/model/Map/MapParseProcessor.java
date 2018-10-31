@@ -368,10 +368,13 @@ public class MapParseProcessor {
 		}
 
 		for (Player playerObj : listPlayer) {
-			System.out.println("######### The name of the player is #########  :" + playerObj.getName());
+			System.out.println("																																		");
+			System.out.println("																																		");
+			System.out.println("    ######  The name of the player is #########   :  " + playerObj.getName());
 			for (Country countryObject : playerObj.getAssignedCountries()) {
-				System.out.println("###### The name of the country is    ##### :" + countryObject.getCountryName());
-				System.out.println("###### The number of assigned armies ##### :" + countryObject.getArmies());
+				System.out.println("																																		");
+				System.out.println("###### The name of the country is            #####          : " + countryObject.getCountryName());
+				System.out.println("###### The number of assigned armies   #####          : " + countryObject.getArmies());
 			}
 
 		}
