@@ -999,6 +999,7 @@ public class Player extends Observable implements Serializable {
 			int counter = player.getTotalArmies();
 			int armiesCounter;
 
+			
 			while (counter > 0) {
 				printCountriesOwnedByPlayer(player);
 				System.out.println(
