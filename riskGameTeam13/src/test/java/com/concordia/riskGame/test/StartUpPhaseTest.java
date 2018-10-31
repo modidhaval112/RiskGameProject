@@ -103,6 +103,30 @@ public class StartUpPhaseTest {
 		
 	}
 	/**
+	 * This method checks if the assigned initial armies is not zero
+	 */
+	@Test
+	public void invalidInitialArmyAssignmentTest() {
+		
+		MapParseProcessor processorObj= new MapParseProcessor();
+		armiesGot=processorObj.initialArmyAssignment(noOfPlayers2);
+		assertNotEquals(0,armiesGot);
+		
+		armiesGot=processorObj.initialArmyAssignment(noOfPlayers3);
+		assertNotEquals(0,armiesGot);
+		
+		armiesGot=processorObj.initialArmyAssignment(noOfPlayers4);
+		assertNotEquals(0,armiesGot);
+		
+		armiesGot=processorObj.initialArmyAssignment(noOfPlayers5);
+		assertNotEquals(0,armiesGot);
+		
+		armiesGot=processorObj.initialArmyAssignment(noOfPlayers6);
+		assertNotEquals(0,armiesGot);
+				
+		
+	}
+	/**
 	 * This test method checks if all the countries owned by players are assigned with armies randomly
 	 */
 	@Test

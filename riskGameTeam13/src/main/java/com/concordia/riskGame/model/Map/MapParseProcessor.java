@@ -323,7 +323,7 @@ public class MapParseProcessor {
 	}
 
 	/**
-	 * The following method assigns the intial number of armies to each player
+	 * The following method assigns the initial number of armies to each player
 	 * 
 	 * @param listPlayer List of Player Instances.
 	 */
