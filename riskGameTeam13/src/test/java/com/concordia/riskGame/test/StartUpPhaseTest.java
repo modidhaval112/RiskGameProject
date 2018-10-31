@@ -110,8 +110,8 @@ public class StartUpPhaseTest {
 		MapParseProcessor processorObj= new MapParseProcessor();
 		processorObj.armyAssignment(playerList);
 		
-		for(int i=0; i<2; i++) {
-			for(int j=0;j<2;j++) {
+		for(int i=0; i<=2; i++) {
+			for(int j=0;j<=2;j++) {
 				assertNotNull(playerList.get(i).getAssignedCountries().get(j).getArmies());
 			}
 		}
