@@ -34,10 +34,7 @@ public class StartUpPhaseTest {
 	List<Country> assignedCountries1;
 	List<Country> assignedCountries2;
 	List<Country> assignedCountries3;
-	/*Country a1,a2,a3;
-	Country b1,b2,b3;
-	Country c1,c2,c3;
-	*/
+	
 	/**
 	 * This method sets up the data for start up phase testing
 	 */
@@ -75,7 +72,6 @@ public class StartUpPhaseTest {
 		playerList.add(playerObject1);
 		playerList.add(playerObject2);
 		playerList.add(playerObject3);
-		
 		
 	}
 	/**
@@ -123,8 +119,6 @@ public class StartUpPhaseTest {
 		
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers6);
 		assertNotEquals(0,armiesGot);
-				
-		
 	}
 	/**
 	 * This test method checks if all the countries owned by players are assigned with armies randomly
