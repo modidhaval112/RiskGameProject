@@ -30,6 +30,8 @@ public class WorldDominationView implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
+		if(player.dominationPrint.equals("domination"))
+		{
 		System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");
 		List<Player> playerList=MapContents.getInstance().getPlayerList();
 		DecimalFormat df = new DecimalFormat("#.##");
@@ -82,5 +84,5 @@ public class WorldDominationView implements Observer {
 		
 		System.out.println("################################################################################################################################"+System.lineSeparator());
 	}
-
+	}
 }
