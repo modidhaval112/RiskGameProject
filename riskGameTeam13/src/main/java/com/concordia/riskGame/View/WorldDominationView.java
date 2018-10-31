@@ -15,6 +15,7 @@ import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 /**
+ * This is the world domination view class created  in observer pattern to display each player stats.
  * @author saich
  *
  */
@@ -73,7 +74,7 @@ public class WorldDominationView implements Observer {
 				countryArmies=countryArmies+country.getArmies();
 
 			}
-			System.out.println("================="+playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+" Continents occupied by the Player is  "+continentsOccupied+"=================");
+			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+" Continents occupied by the Player is  "+continentsOccupied);
 
 
 		}
