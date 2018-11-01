@@ -806,8 +806,7 @@ public class Player extends Observable implements Serializable {
 					playerLosesTheCountry(sourceCountryObject, destinationCountryObject);
 					printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
-				if (player.getAssignedCountries().size() == MapContents.getInstance().getCountryAndNeighbors().keySet()
-						.size()) {
+				if (hasPlayerWon(player)) {
 					System.out.println("Player " + player.getName() + "has won the game");
 					System.exit(0);
 				}
@@ -829,6 +828,13 @@ public class Player extends Observable implements Serializable {
 		}
 		player.setCardGiven(false);
 		return pObject;
+	}
+	
+	public boolean hasPlayerWon(Player player) {
+		if(player.getAssignedCountries().size() == MapContents.getInstance().getCountryAndNeighbors().keySet().size()) {
+			return true;
+		}
+			return false;
 	}
 
 	private void printAllCountriesOfaPlayer(Player player) {
