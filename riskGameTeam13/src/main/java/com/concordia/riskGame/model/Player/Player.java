@@ -634,7 +634,7 @@ public class Player extends Observable implements Serializable {
 				destinationCountry = scanner.nextLine();
 				destinationCountryObject = getAttackableCountryOfCountryListFromString(destinationCountry,
 						attackableCountryList);
-				if (destinationCountryObject == null) {
+				if (destinationCountryObject == null || !attackableCountryList.contains(destinationCountryObject)) {
 					System.out.println(
 							"The country with the given name is not in the list or the country does not exist");
 					destinationCountryObject = reenterTheDestinationCountry(attackableCountryList);
