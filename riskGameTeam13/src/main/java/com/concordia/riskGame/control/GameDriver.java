@@ -59,6 +59,8 @@ public class GameDriver {
 			if(!p.isHasLost()) {
 			playerInstance = playerInstance.reinforcePhase(p);
 			if(playerInstance.getCanAttack()) {
+				
+				//List<Country> sourceAndDestinationCountry = getSourceAndDestinationCountry(playerInstance);
 			playerInstance = playerInstance.attackPhase(playerInstance);
 			}
 			/*else {
@@ -90,6 +92,61 @@ public class GameDriver {
 	}
 
 
+	public List<Country> getSourceAndDestinationCountry(Player player) throws Exception {
+		String sourceCountry;
+		Country sourceCountryObject;
+		String destinationCountry;
+		Country destinationCountryObject;
+		List<Country> attackableCountryList;
+		List<Country> sourceAndDestinationCountry = new ArrayList<>();
+		System.out.println("#### List of countries owned by the player #####");
+
+		try {
+		for (Country countryObj : player.getAssignedCountries()) {
+			Country country =player.getSourceCountryFromString(countryObj.getCountryName());
+			System.out.println(country.getCountryName() + " : " + country.getArmies());
+		}
+		scanner = new Scanner(System.in);
+		System.out.println("Enter the name of the country through which you want to attack");
+		sourceCountry = scanner.nextLine();
+		sourceCountryObject = player.getSourceCountryFromPlayerUsingString(sourceCountry,player);
+		if (sourceCountryObject == null) {
+			System.out.println(
+					"The country with the given name is not owned by the player. Please reenter the country");
+			sourceCountryObject = player.reenterTheCountry(player);
+		}
+		System.out.println("Number of armies in " + sourceCountryObject.getCountryName() + " : "
+				+ sourceCountryObject.getArmies());
+		while (sourceCountryObject.getArmies() == 1) {
+			System.out
+					.println("Attack not possible as the country has only 1 army. Please reenter the country");
+			sourceCountryObject = player.reenterTheCountry(player);
+		}
+		System.out.println("#### The neighbouring attackable countries are #####");
+		attackableCountryList = player.printNeighboringAttackableCountriesAndArmies(sourceCountryObject, player);
+		if (attackableCountryList == null || attackableCountryList.isEmpty()) {
+			System.out.println("Attack not possible as there are no neighboring countries.");
+			throw new Exception();
+		}
+		System.out.println("Enter the name of the country on which you want to attack");
+		destinationCountry = scanner.nextLine();
+		destinationCountryObject = player.getAttackableCountryOfCountryListFromString(destinationCountry,
+				attackableCountryList);
+		if (destinationCountryObject == null || !attackableCountryList.contains(destinationCountryObject)) {
+			System.out.println(
+					"The country with the given name is not in the list or the country does not exist");
+			destinationCountryObject = player.reenterTheDestinationCountry(attackableCountryList);
+		}
+		
+		sourceAndDestinationCountry.add(sourceCountryObject);
+		sourceAndDestinationCountry.add(destinationCountryObject);
+		
+		}catch (Exception e) {
+			getSourceAndDestinationCountry(player);
+		}
+		return sourceAndDestinationCountry;
+		
+	}
 
 	/**
 	 * The following checks if the string is number or not

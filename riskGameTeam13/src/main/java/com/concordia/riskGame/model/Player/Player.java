@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.concordia.riskGame.View.CardView;
 import com.concordia.riskGame.View.WorldDominationView;
+import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -602,7 +603,7 @@ public class Player extends Observable implements Serializable {
 		List<Integer> defenderDiceResults;
 		try {
 			if (choice.equalsIgnoreCase("yes")) {
-				System.out.println("#### List of countries owned by the player #####");
+				/*System.out.println("#### List of countries owned by the player #####");
 
 				for (Country countryObj : player.getAssignedCountries()) {
 					Country country = getSourceCountryFromString(countryObj.getCountryName());
@@ -638,7 +639,11 @@ public class Player extends Observable implements Serializable {
 					System.out.println(
 							"The country with the given name is not in the list or the country does not exist");
 					destinationCountryObject = reenterTheDestinationCountry(attackableCountryList);
-				}
+				}*/
+				GameDriver driver = new GameDriver();
+			List<Country> sourceAndDestinationCountry = driver.getSourceAndDestinationCountry(player); 
+			sourceCountryObject=sourceAndDestinationCountry.get(0);
+			destinationCountryObject=sourceAndDestinationCountry.get(1);
 				if (sourceCountryObject.getArmies() > 3) {
 					System.out.println("Enter 1 if you want to go all out or enter 2 do a normal attack");
 					attackChoice = scanner.nextInt(); // input mismatch exception to be handled properly in future
