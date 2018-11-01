@@ -611,7 +611,7 @@ public class Player extends Observable implements Serializable {
 
 				System.out.println("Enter the name of the country through which you want to attack");
 				sourceCountry = scanner.nextLine();
-				sourceCountryObject = getSourceCountryFromString(sourceCountry);
+				sourceCountryObject = getSourceCountryFromPlayerUsingString(sourceCountry,player);
 				if (sourceCountryObject == null) {
 					System.out.println(
 							"The country with the given name is not owned by the player. Please reenter the country");
@@ -1282,6 +1282,25 @@ public class Player extends Observable implements Serializable {
 		HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
 		for (Country country : countriesAndItsNeighbours.keySet()) {
 			if (sourceCountry != null && !sourceCountry.isEmpty() && sourceCountry.equals(country.getCountryName())) {
+				return country;
+			}
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * To get the country object from the string value of the country if it belongs to the player
+	 * 
+	 * @param player  the player object to which the country belongs
+	 * @param country string value of the country
+	 * @return the country object
+	 */
+	public Country getSourceCountryFromPlayerUsingString(String sourceCountry,Player player) {
+		MapContents contents = MapContents.getInstance();
+		HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
+		for (Country country : countriesAndItsNeighbours.keySet()) {
+			if (sourceCountry != null && !sourceCountry.isEmpty() && sourceCountry.equals(country.getCountryName())&&  player.getAssignedCountries().contains(country)) {
 				return country;
 			}
 		}
