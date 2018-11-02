@@ -1444,4 +1444,12 @@ public class Player extends Observable implements Serializable {
 	public void setEndGameForThisPlayer(boolean endGameForThisPlayer) {
 		this.endGameForThisPlayer = endGameForThisPlayer;
 	}
+	
+	public String getErrorMesage() {
+		return errorMesage;
+	}
+
+	public void setErrorMesage(String errorMesage) {
+		this.errorMesage = errorMesage;
+	}
 }
