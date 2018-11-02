@@ -62,24 +62,28 @@ public class FortificationTest {
 		listCountry.add(c2);
 		listCountry.add(c3);
 		c1.setNeighbouringCountries(listCountry);
+		mapContents.getCountryAndNeighbors().put(c1, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c3);
 		listCountry.add(c4);
 		c2.setNeighbouringCountries(listCountry);
+		mapContents.getCountryAndNeighbors().put(c2, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c4);
 		listCountry.add(c1);
 		c3.setNeighbouringCountries(listCountry);
+		mapContents.getCountryAndNeighbors().put(c3, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c1);
 		listCountry.add(c2);
 		c4.setNeighbouringCountries(listCountry);
+		mapContents.getCountryAndNeighbors().put(c4, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
@@ -92,5 +96,7 @@ public class FortificationTest {
 		p2.setAssignedCountries(listCountry1);
 		
 	}
+	
+
 	
 }
