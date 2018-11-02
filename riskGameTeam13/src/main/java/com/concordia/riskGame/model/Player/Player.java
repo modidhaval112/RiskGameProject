@@ -58,6 +58,7 @@ public class Player extends Observable implements Serializable {
 	public String currentPhase;
 	private String errorMesage;
 
+	public int movableArmies; 
 	/**
 	 * default constructor
 	 */
@@ -833,6 +834,7 @@ public class Player extends Observable implements Serializable {
 				System.out.println("Number of armies in " + destinationCountryObject.getCountryName() + " is "
 						+ destinationCountryObject.getArmies());
 				if (destinationCountryObject.getArmies() < 1) {
+					this.movableArmies = 0;
 					playerLosesTheCountry(sourceCountryObject, destinationCountryObject);
 					printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
@@ -889,14 +891,14 @@ public class Player extends Observable implements Serializable {
 		 */
 	}
 
-	private void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
+	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
 		sourceCountryObject.getBelongsToPlayer().getAssignedCountries().add(destinationCountryObject);
 		if (destinationCountryObject.getBelongsToPlayer().getAssignedCountries().size() == 0) {
 			playerHasLost(sourceCountryObject, destinationCountryObject);
 		}
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
-		int movableArmies = 0;
+		/*int movableArmies = 0;*/
 		while (movableArmies == 0 || movableArmies >= sourceCountryObject.getArmies()) {
 			System.out.println(
 					"Enter the armies to be left behind (Has to be at least 1 and cannot be equal or gretaer than the armies of attacking country)");
@@ -909,13 +911,14 @@ public class Player extends Observable implements Serializable {
 		}
 	}
 
-	private void playerHasLost(Country sourceCountryObject, Country destinationCountryObject) {
+	public void playerHasLost(Country sourceCountryObject, Country destinationCountryObject) {
 		destinationCountryObject.getBelongsToPlayer().setHasLost(true);
 		// MapContents.getInstance().getPlayerList().remove(destinationCountryObject.getBelongsToPlayer());
 		destinationCountryObject.getBelongsToPlayer().setEndGameForThisPlayer(true);
 		List<Card> listOfDefenderCards = destinationCountryObject.getBelongsToPlayer().getCardList();
 		for (Card card : listOfDefenderCards)
 			sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
+			destinationCountryObject.getBelongsToPlayer().setCardList(new ArrayList<Card>());
 		// System.out.println("To be Implemented");
 
 	}
