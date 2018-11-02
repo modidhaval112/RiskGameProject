@@ -104,7 +104,7 @@ public class FortificationTest {
 			p2.getAssignedCountries().get(i).setArmies(10);
 		}
 		
-		systemInMock.provideLines("yes","c1","c2","1");
+		systemInMock.provideLines("yes","c1","c1","c2","1");
 	    p1.forfeitPhase(p1);
 		assertEquals("Armies have been moved between countries", p1.getErrorMesage());
 		
