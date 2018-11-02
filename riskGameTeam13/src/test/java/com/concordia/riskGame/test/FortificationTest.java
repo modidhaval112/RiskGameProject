@@ -92,6 +92,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for 'From and To Country Can not Be Same' test case
+	 */
 	@Test
 	public void testFromAndToCountryCanNotBeTheSameNegative() {
 			
@@ -105,6 +108,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for 'Countries are not neighbour' test case
+	 */
 	@Test
 	public void testCountriesAreNotNeighbourNegative() {
 
@@ -118,6 +124,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for 'Country has only one army left' test case
+	 */
 	@Test
 	public void testMoveOnlyLeftOneArmyNegative() {
 
@@ -131,6 +140,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for 'Country have less number of armies than user input' test case
+	 */
 	@Test
 	public void testLessNoOfArmiesNegative() {
 
@@ -144,6 +156,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for 'Country can not move all armies' test case
+	 */
 	@Test
 	public void testCanNotMoveAllArmiesNegative() {
 
@@ -157,6 +172,9 @@ public class FortificationTest {
 		
 	}
 	
+	/**
+	 * Test method for successful fortification scenario 
+	 */
 	@Test
 	public void testMoveArmyPositive() {
 
