@@ -123,4 +123,17 @@ public class FortificationTest {
 		
 	}
 	
+	@Test
+	public void testMoveOnlyLeftOneArmyNegative() {
+
+		for(int i=0; i < p2.getAssignedCountries().size(); i++) {
+			p2.getAssignedCountries().get(i).setArmies(1);
+		}
+		
+	    systemInMock.provideLines("yes","c3","1","no");
+	    p2.forfeitPhase(p2);
+		assertEquals("You cannot move the only army from this Country", p2.getErrorMesage());
+		
+	}
+	
 }
