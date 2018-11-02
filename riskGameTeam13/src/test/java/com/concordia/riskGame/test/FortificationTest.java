@@ -109,5 +109,18 @@ public class FortificationTest {
 		assertEquals("Armies have been moved between countries", p1.getErrorMesage());
 		
 	}
+	
+	@Test
+	public void testCountriesAreNotNeighbourNegative() {
+
+		for(int i=0; i < p2.getAssignedCountries().size(); i++) {
+			p2.getAssignedCountries().get(i).setArmies(10);
+		}		
 		
+		systemInMock.provideLines("yes","c3","c4","1");
+	    p2.forfeitPhase(p2);
+		assertEquals("Armies have been moved between countries", p2.getErrorMesage());
+		
+	}
+	
 }
