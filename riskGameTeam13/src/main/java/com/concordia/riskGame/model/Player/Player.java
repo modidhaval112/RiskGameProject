@@ -1445,10 +1445,16 @@ public class Player extends Observable implements Serializable {
 		this.endGameForThisPlayer = endGameForThisPlayer;
 	}
 	
+	/**
+	 * @return errorMessage returns error message
+	 */
 	public String getErrorMesage() {
 		return errorMesage;
 	}
 
+	/**
+	 * @param errorMesage sets error message
+	 */
 	public void setErrorMesage(String errorMesage) {
 		this.errorMesage = errorMesage;
 	}
