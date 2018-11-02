@@ -414,6 +414,7 @@ public class Player extends Observable implements Serializable {
 						sourcesArmies = sourceCountry.getArmies();
 						if (sourcesArmies == 1) {
 							System.out.println("You cannot move the only army from this Country");
+							setErrorMesage("You cannot move the only army from this Country");
 							throw new Exception();
 						}
 						if (sourcesArmies < movingArmies) {
@@ -565,6 +566,7 @@ public class Player extends Observable implements Serializable {
 		String destCountry = null;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("#### Please enter a valid destination country #####");
+		setErrorMesage("Please enter a valid destination country");
 		destCountry = sc.nextLine();
 		destCountry = destCountry.trim();
 
