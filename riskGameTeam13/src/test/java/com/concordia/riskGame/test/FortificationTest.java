@@ -149,4 +149,18 @@ public class FortificationTest {
 		
 	}
 	
+	@Test
+	public void testCanNotMoveAllArmiesNegative() {
+
+		for(int i=0; i < p2.getAssignedCountries().size(); i++) {
+			p2.getAssignedCountries().get(i).setArmies(3);
+		}
+		
+	    systemInMock.provideLines("yes","c3","c4","3","no");
+	    p2.forfeitPhase(p2);
+		assertEquals("You cannot move all the armies from this Country, please enter a lesser number", p2.getErrorMesage());
+		
+	}
+
+	
 }
