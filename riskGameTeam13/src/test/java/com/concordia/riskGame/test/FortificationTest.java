@@ -136,4 +136,17 @@ public class FortificationTest {
 		
 	}
 	
+	@Test
+	public void testLessNoOfArmiesNegative() {
+
+		for(int i=0; i < p2.getAssignedCountries().size(); i++) {
+			p2.getAssignedCountries().get(i).setArmies(2);
+		}
+		
+	    systemInMock.provideLines("yes","c3","c4","3","no");
+	    p2.forfeitPhase(p2);
+		assertEquals("The country doesnt have the mentioned number of armies, please enter a lesser number", p2.getErrorMesage());
+		
+	}
+	
 }
