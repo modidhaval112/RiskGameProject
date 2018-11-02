@@ -28,11 +28,6 @@ public class FortificationTest {
 	List<Country> listCountry, listCountry1;
 	MapContents mapContents;
 	
-	private String initiateValue;
-    private String country1;
-    private String country2;
-    private String endValue;
-    
     @Rule
     public final TextFromStandardInputStream systemInMock
       = TextFromStandardInputStream.emptyStandardInputStream();
