@@ -399,7 +399,8 @@ public class Player extends Observable implements Serializable {
 				int destArmies = 0;
 				int sourcesArmies = 0;
 				if (!isNeighbour(fromCountry, toCountry)) {
-					System.out.println("##### The  Countries are not neighbours ######");
+					System.out.println("##### The Countries are not neighbours ######");
+					setErrorMesage("The Countries are not neighbours");
 					throw new Exception();
 				}
 
