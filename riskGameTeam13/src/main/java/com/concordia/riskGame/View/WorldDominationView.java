@@ -32,6 +32,7 @@ public class WorldDominationView implements Observer {
 		Player player = (Player) arg0;
 		if(player.dominationPrint.equals("domination"))
 		{
+			player.dominationPrint="";
 		System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");
 		List<Player> playerList=MapContents.getInstance().getPlayerList();
 		DecimalFormat df = new DecimalFormat("#.##");
