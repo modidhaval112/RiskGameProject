@@ -321,14 +321,39 @@ public class Player extends Observable implements Serializable {
 				System.out.println("#### Enter the country name , you want to move armies from ###### ");
 				String srcCountry = scanner.nextLine();
 				srcCountry = srcCountry.trim();
+				
+				
+				System.out.println(" ##### Printing List of neighouring countries ###### ");
+				List<Country> destNeighborCountryList = new ArrayList();
+				destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
+				
+				
+				if(destNeighborCountryList.size() == 0)
+				{
+					System.out.println("##### The source country has zero neighboring countries ######");
+					srcCountry = reEnterSourceCountry(player);
+					srcCountry = srcCountry.trim();
+					
+				}
+				
+				
 
+				System.out.println(
+						"																												  ");
+				
 				if (!checkValidSourceCountry(srcCountry, player)) {
 					srcCountry = reEnterSourceCountry(player);
 					srcCountry = srcCountry.trim();
 				}
-				System.out.println(
-						"																												  ");
-				System.out.println(" ##### Printing List of neighouring countries ###### ");
+
+				printNeighbouringCountry(srcCountry, player);
+				
+				System.out.println("###### Please enter destination country where you want to move armies #####");
+				String destinationCountry = scanner.nextLine();
+				destinationCountry = destinationCountry.trim();
+
+							
+				/*System.out.println(" ##### Printing List of neighouring countries ###### ");
 				List<Country> destNeighborCountryList = new ArrayList();
 				destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
 
@@ -336,7 +361,7 @@ public class Player extends Observable implements Serializable {
 						"																												  ");
 				System.out.println("###### Please enter destination country where you want to move armies #####");
 				String destinationCountry = scanner.nextLine();
-				destinationCountry = destinationCountry.trim();
+				destinationCountry = destinationCountry.trim();*/
 
 				if (!checkValidDestinationCountry(destNeighborCountryList, destinationCountry)) {
 					destinationCountry = reEnterDestinationCountry(destNeighborCountryList);
