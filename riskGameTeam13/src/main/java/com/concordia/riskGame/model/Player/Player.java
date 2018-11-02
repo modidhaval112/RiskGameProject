@@ -56,6 +56,7 @@ public class Player extends Observable implements Serializable {
 	public String dominationPrint;
 	public int cardExchangeCount = 0;
 	public String currentPhase;
+	private String errorMesage;
 
 	/**
 	 * default constructor
