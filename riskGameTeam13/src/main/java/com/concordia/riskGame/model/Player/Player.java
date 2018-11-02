@@ -458,7 +458,7 @@ public class Player extends Observable implements Serializable {
 				}
 
 				player.setAssignedCountries(assignedCountriesClone);
-				System.out.println("##### Armies have been moved between countries ###### ");
+				System.out.println("##### Armies have been moved between countries ######");
 				setErrorMesage("Armies have been moved between countries");
 				return player;
 			} catch (Exception e) {
