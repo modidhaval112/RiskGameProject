@@ -381,6 +381,7 @@ public class Player extends Observable implements Serializable {
 
 				if (fromCountry.equalsIgnoreCase(toCountry)) {
 					System.out.println("xxxxxxx----From and to country cannot be the same----xxxxxx");
+					setErrorMesage("From and To country can not be the same");
 					throw new Exception();
 
 				}
