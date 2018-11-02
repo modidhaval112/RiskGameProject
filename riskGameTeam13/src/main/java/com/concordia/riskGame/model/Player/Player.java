@@ -421,11 +421,13 @@ public class Player extends Observable implements Serializable {
 						if (sourcesArmies < movingArmies) {
 							System.out.println(
 									"The country doesnt have the mentioned number of armies, please enter a lesser number");
+							setErrorMesage("The country doesnt have the mentioned number of armies, please enter a lesser number");
 							throw new Exception();
 						}
 						if (sourcesArmies == movingArmies) {
 							System.out.println(
 									"You cannot move all the armies from this Country, please enter a lesser number");
+							setErrorMesage("You cannot move all the armies from this Country, please enter a lesser number");
 							throw new Exception();
 						}
 						sourcesArmies = sourcesArmies - movingArmies;
