@@ -1159,7 +1159,7 @@ public class Player extends Observable implements Serializable {
 			}
 
 		} catch (Exception e) {
-			//System.out.println("Exception Message : " + e.getMessage());
+			//System.out.println("Exception Message : " + e.getMessage()); 
 			e.printStackTrace();
 			reinforcePhase(player);
 		}
