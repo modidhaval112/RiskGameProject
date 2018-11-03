@@ -680,6 +680,12 @@ public class Player extends Observable implements Serializable {
 				}*/
 				GameDriver driver = new GameDriver();
 			List<Country> sourceAndDestinationCountry = driver.getSourceAndDestinationCountry(player); 
+			if(sourceAndDestinationCountry==null) {
+				System.out.println("#### Moving to the next phase ####");
+				player.setCanFortify(true);
+				player.setCardGiven(false);
+				return pObject;
+			}
 			sourceCountryObject=sourceAndDestinationCountry.get(0);
 			destinationCountryObject=sourceAndDestinationCountry.get(1);
 				if (sourceCountryObject.getArmies() > 3) {
@@ -946,8 +952,11 @@ public class Player extends Observable implements Serializable {
 
 	public Country reenterTheDestinationCountry(List<Country> attackableCountryList) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter the name of the country on which you want to attack");
+		System.out.println("Enter the name of the country on which you want to attack or enter 'quit' to exit the attack");
 		String destinationCountry = scanner.nextLine();
+		if(destinationCountry.equals("quit")) {
+			return null;
+		}
 		Country destinationCountryObject = getAttackableCountryOfCountryListFromString(destinationCountry,
 				attackableCountryList);
 		if (destinationCountryObject == null) {
@@ -960,8 +969,11 @@ public class Player extends Observable implements Serializable {
 		Scanner scanner = new Scanner(System.in);
 		String Country;
 		Country CountryObject;
-		System.out.println("Enter the name of the country through which you want to attack");
+		System.out.println("Enter the name of the country through which you want to attack or enter 'quit' to exit the attack");
 		Country = scanner.nextLine();
+		if(Country.equals("quit")) {
+			return null;
+		}
 		CountryObject = getSourceCountryFromString(Country);
 		if (CountryObject == null) {
 			reenterTheCountry(player);

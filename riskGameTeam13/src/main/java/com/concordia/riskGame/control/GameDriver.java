@@ -112,13 +112,19 @@ public class GameDriver {
 			System.out.println(country.getCountryName() + " : " + country.getArmies());
 		}
 		scanner = new Scanner(System.in);
-		System.out.println("Enter the name of the country through which you want to attack");
+		System.out.println("Enter the name of the country through which you want to attack or enter 'quit' to exit the attack");
 		sourceCountry = scanner.nextLine();
+		if(sourceCountry.equals("quit")) {
+			return null;
+		}
 		sourceCountryObject = player.getSourceCountryFromPlayerUsingString(sourceCountry,player);
 		if (sourceCountryObject == null) {
 			System.out.println(
 					"The country with the given name is not owned by the player. Please reenter the country");
 			sourceCountryObject = player.reenterTheCountry(player);
+		}
+		if(sourceCountryObject==null) {
+			return null;
 		}
 		System.out.println("Number of armies in " + sourceCountryObject.getCountryName() + " : "
 				+ sourceCountryObject.getArmies());
@@ -133,8 +139,11 @@ public class GameDriver {
 			System.out.println("Attack not possible as there are no neighboring countries.");
 			throw new Exception();
 		}
-		System.out.println("Enter the name of the country on which you want to attack");
+		System.out.println("Enter the name of the country on which you want to attack or enter 'quit' to exit the attack");
 		destinationCountry = scanner.nextLine();
+		if(destinationCountry.equals("quit")) {
+			return null;
+		}
 		destinationCountryObject = player.getAttackableCountryOfCountryListFromString(destinationCountry,
 				attackableCountryList);
 		if (destinationCountryObject == null || !attackableCountryList.contains(destinationCountryObject)) {
@@ -142,7 +151,9 @@ public class GameDriver {
 					"The country with the given name is not in the list or the country does not exist");
 			destinationCountryObject = player.reenterTheDestinationCountry(attackableCountryList);
 		}
-		
+		if(destinationCountryObject==null) {
+			return null;
+		}
 		sourceAndDestinationCountry.add(sourceCountryObject);
 		sourceAndDestinationCountry.add(destinationCountryObject);
 		
