@@ -337,7 +337,7 @@ public class Player extends Observable implements Serializable {
 				if(destNeighborCountryList.size() == 0)
 				{
 					System.out.println("##### The source country has zero neighboring countries ######");
-					srcCountry = reEnterSourceCountry(player);
+					srcCountry = reEnterSourceCountryforListCheck(player);
 					srcCountry = srcCountry.trim();
 					
 				}
@@ -352,7 +352,7 @@ public class Player extends Observable implements Serializable {
 					srcCountry = srcCountry.trim();
 				}
 
-				printNeighbouringCountry(srcCountry, player);
+				destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
 				
 				System.out.println("###### Please enter destination country where you want to move armies #####");
 				String destinationCountry = scanner.nextLine();
@@ -497,6 +497,44 @@ public class Player extends Observable implements Serializable {
 
 		return soruceCountry;
 	}
+	
+	
+	/**
+	 * The following method requests the user to renter the source country in event
+	 * of  zero list for destination country.
+	 * 
+	 * @param player Player Instance.
+	 * @return Returns a valid source country name.
+	 */
+
+	public String reEnterSourceCountryforListCheck(Player player) {
+		String soruceCountry = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("#### Please enter a valid source country #####");
+		soruceCountry = sc.nextLine();
+		List<Country> destCountryList = new ArrayList();
+		
+		if (checkZeroDestinationCountryList(soruceCountry,player).size() == 0 )
+			soruceCountry = reEnterSourceCountryforListCheck(player);
+
+		return soruceCountry;
+	}
+	
+	/**
+	 * The following returns the list of destination countries.
+	 * @param countryName Name of the country to which you want to get destination country.
+	 * @param player Player Instance.
+	 * @return List of Destination Countries.
+	 */
+	
+	public  List<Country> checkZeroDestinationCountryList(String countryName, Player player)
+	{
+		
+		List<Country> desCountryList  = new ArrayList();
+		desCountryList=printNeighbouringCountry(countryName, player);
+		return desCountryList;
+	}
+	
 
 	/**
 	 * The following method checks if it is a valid source country.
