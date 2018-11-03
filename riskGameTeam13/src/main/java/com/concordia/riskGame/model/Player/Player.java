@@ -1044,7 +1044,7 @@ public class Player extends Observable implements Serializable {
 						for(int c : cardNumbers) {
 							exchangeCards.add(player.getCardList().get(c-1));
 						}
-						if(checkCardDifferentTypes(exchangeCards,cardTypes) || checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
+						if(checkCardDifferentTypes(exchangeCards,cardTypes) && checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
 							System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 							throw new Exception();
 						}
