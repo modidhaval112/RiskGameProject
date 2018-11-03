@@ -24,7 +24,7 @@ public class CardView implements Observer{
 		System.out.println("Cards after exchanging the cards");
 
 		for(Card card : cardList) {
-			System.out.println(card.getCardName());
+			System.out.println(card.getName());
 		}
 
 	}

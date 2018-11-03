@@ -27,7 +27,7 @@ public class MapContents {
 	private String mapAuthorName;
 	private int labelCount;
 	public List<Player> playerList = new ArrayList<>();
-	
+	private List<Country> countryList = new ArrayList<>();
 	 
 
 	/**
@@ -130,6 +130,20 @@ public class MapContents {
 	 */
 	public void setLabelCount(int labelCount) {
 		this.labelCount = labelCount;
+	}
+
+	/**
+	 * @return the countryList
+	 */
+	public List<Country> getCountryList() {
+		return countryList;
+	}
+
+	/**
+	 * @param countryList the countryList to set
+	 */
+	public void setCountryList(List<Country> countryList) {
+		this.countryList = countryList;
 	}
 
 }

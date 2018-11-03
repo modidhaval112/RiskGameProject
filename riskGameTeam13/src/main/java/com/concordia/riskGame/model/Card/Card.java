@@ -3,77 +3,46 @@ package com.concordia.riskGame.model.Card;
 import java.util.List;
 import java.util.Random;
 
+import com.concordia.riskGame.model.Country.Country;
+
+
 public class Card {
 
-	public  List<Card> cardList;
-	public static final int max = 3;
-	public static final int min = 1;
-	public static final String firstCard = "INFANTRY";
-	public static final String secondCard = "CAVALRY";
-	public static final String thirdCard = "ARTILERRY";
-	public String cardName;
-	
-	public static Card getFirstCard() {
-		Card card = new Card();
-		card.setCardName(firstCard); 
-		return card;
-	}
+    private final String type;
+    private final Country country;
 
-	public static Card getSecondCard() {
-		Card card = new Card();
-		card.setCardName(secondCard); 
-		return card;
-	}
-	
-	public static Card getThirdCard() {
-		Card card = new Card();
-		card.setCardName(thirdCard); 
-		return card;
-	}
-	
-	public Card getCarrdInfo(Card card) {
-		Random random = new Random();
-		int result = random.nextInt(max - min + 1) + min;
-		if(result==1) {
-			card.setCardName(firstCard);
-		}
-		else if(result==2) {
-			card.setCardName(secondCard);
-		}
-		else {
-			card.setCardName(thirdCard);
-		}
-		
-		return card;
-	}
-	
-	public String getCardName() {
-		return cardName;
-	}
+    /**
+     * this setter method assigning the country and the card  type
+     * @param type card type
+     * @param country name of the country
+     */
+    public Card(String type, Country country) {
+        this.type = type;
+        this.country = country;
+    }
 
-	public void setCardName(String cardName) {
-		this.cardName = cardName;
-	}
-	
-	@Override
-    public boolean equals(Object o) { 
-  
-        // If the object is compared with itself then return true   
-        if (o == this) { 
-            return true; 
-        } 
-  
-        /* Check if o is an instance of Complex or not 
-          "null instanceof [type]" also returns false */
-        if (!(o instanceof Card)) { 
-            return false; 
-        } 
-          
-        // typecast o to Card so that we can compare data members  
-        Card c = (Card) o; 
-          
-        // Compare the data members and return accordingly  
-        return cardName.equals(c.getCardName()); 
-    } 
+    /**
+     * getter method gives the country name and card type
+     * @return name of country and type
+     */
+    public String getName() {
+        return country.getCountryName() + ", " + type;
+    }
+
+    /**
+     * getter method gives type of the card
+     * @return string card object
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * getter method gives name of the country
+     * @return string country object
+     */
+    public Country getCountry() {
+        return country;
+    }
 } 
 

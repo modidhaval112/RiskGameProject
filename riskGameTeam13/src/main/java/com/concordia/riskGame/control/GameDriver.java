@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
@@ -43,6 +45,9 @@ public class GameDriver {
 		scanner = new Scanner(System.in);
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
+		
+		Deck deck = Deck.getInstance();
+		deck.setDeckOfCards(mapContents.getCountryList());
 		while(!endTheGame) {
 			List<Player> removablePlayers = new ArrayList<>();
 			for(Player player : mapContents.getPlayerList()) {
@@ -142,7 +147,7 @@ public class GameDriver {
 		sourceAndDestinationCountry.add(destinationCountryObject);
 		
 		}catch (Exception e) {
-			getSourceAndDestinationCountry(player);
+			sourceAndDestinationCountry=	getSourceAndDestinationCountry(player);
 		}
 		return sourceAndDestinationCountry;
 		

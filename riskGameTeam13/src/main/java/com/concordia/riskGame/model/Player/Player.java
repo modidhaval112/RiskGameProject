@@ -14,6 +14,7 @@ import com.concordia.riskGame.View.CardView;
 import com.concordia.riskGame.View.WorldDominationView;
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Card.Card;
+import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
@@ -37,7 +38,8 @@ public class Player extends Observable implements Serializable {
 	private Map<Player, List<Country>> playerAssign;
 	private List<Player> gamePlayerList;
 	private List<Card> cardList = new ArrayList<>();
-
+	private Deck deck = Deck.getInstance();
+	
 	private HashMap<Country, List<Country>> gamecountryAndNeighbours;
 	private int assignedArmies;
 	private String[] nameArmiesSpilt;
@@ -90,6 +92,8 @@ public class Player extends Observable implements Serializable {
 		this.name = name;
 		setHasWon(false);
 		setCanContinue(true);
+		WorldDominationView dominationView = new WorldDominationView();
+		this.addObserver(dominationView);
 		CardView cardView = new CardView();
 		this.addObserver(cardView);
 	}
@@ -112,8 +116,8 @@ public class Player extends Observable implements Serializable {
 		this.playerAssign = playerAssign;
 		// PhaseView phaseView = new PhaseView();
 		// this.addObserver(phaseView);
-		WorldDominationView dominationView = new WorldDominationView();
-		this.addObserver(dominationView);
+		/*WorldDominationView dominationView = new WorldDominationView();
+		this.addObserver(dominationView);*/
 	}
 
 	/**
@@ -732,8 +736,8 @@ public class Player extends Observable implements Serializable {
 								if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
 									if (!player.isCardGiven()) {
 										if (player.getCardList() != null) {
-											Card card = new Card();
-											card.getCarrdInfo(card);
+											Card card = deck.draw();
+											//card.getCarrdInfo(card);
 											player.getCardList().add(card);
 											player.setCardGiven(true);
 										}
@@ -816,8 +820,8 @@ public class Player extends Observable implements Serializable {
 						if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
 							if (!player.isCardGiven()) {
 								if (player.getCardList() != null) {
-									Card card = new Card();
-									card.getCarrdInfo(card);
+									Card card = deck.draw();
+								//	card.getCarrdInfo(card);
 									player.getCardList().add(card);
 									player.setCardGiven(true);
 								}
@@ -859,6 +863,7 @@ public class Player extends Observable implements Serializable {
 			}
 		} catch (Exception e) {
 			System.out.println("Exception***************");
+			e.printStackTrace();
 			attackPhase(player);
 		}
 		player.setCardGiven(false);
@@ -974,6 +979,7 @@ public class Player extends Observable implements Serializable {
 
 		try {
 			setDomination();
+			
 			setCurrentPhase(Player.reinforcePhase);
 			player.setCurrentPhase(Player.reinforcePhase);
 			Scanner scanner;
@@ -991,15 +997,15 @@ public class Player extends Observable implements Serializable {
 			String cardAppearingMoreThanThrice = null;
 			System.out.println("The cards with this player are :");
 			for (Card card : player.getCardList()) {
-				if (!cardCount.containsKey(card.cardName)) {
-					cardCount.put(card.cardName, 1);
+				if (!cardCount.containsKey(card.getType())) {
+					cardCount.put(card.getType(), 1);
 					cardTypes++;
 				} else {
-					int c = cardCount.get(card.cardName);
+					int c = cardCount.get(card.getType());
 					c++;
-					cardCount.put(card.cardName, c);
+					cardCount.put(card.getType(), c);
 				}
-				System.out.print(card.getCardName() + ", ");
+				System.out.print(card.getType() + ", ");
 			}
 
 			if (cardTypes == 3) {
@@ -1020,7 +1026,29 @@ public class Player extends Observable implements Serializable {
 					System.out.println("Do you want to exchange the cards to armies(yes/no");
 					cardExchangeChoice = scanner.nextLine();
 					if (cardExchangeChoice.equals("yes")) {
-						exchangeCards(cardTypes, cardAppearingMoreThanThrice, player);
+						int i=0;
+						for (Card card : player.getCardList()) {
+							System.out.println(card.getName() + " : "+ (++i));
+						}
+						System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
+						String[] cardsList = scanner.nextLine().split(",");
+						List<Card> exchangeCards = new ArrayList<>();
+						List<Integer> cardNumbers = new ArrayList<>();
+						for(String card  : cardsList) {
+							cardNumbers.add(Integer.parseInt(card));
+						}
+						if(cardNumbers.size()<3) {
+							System.out.println("Please enter at least 3 numbers for exchanging cards.");
+							throw new Exception();
+						}
+						for(int c : cardNumbers) {
+							exchangeCards.add(player.getCardList().get(c-1));
+						}
+						if(checkCardDifferentTypes(exchangeCards,cardTypes) || checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
+							System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+							throw new Exception();
+						}
+						exchangeCards(cardTypes, cardAppearingMoreThanThrice, player,cardNumbers);
 						int count = player.getCardExchangeCount();
 						armiesToBeGiven = (count + 1) * 5;
 						System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
@@ -1029,7 +1057,29 @@ public class Player extends Observable implements Serializable {
 						System.out.println("Not Exchanging the cards to armies");
 					}
 				} else {
-					exchangeCards(cardTypes, cardAppearingMoreThanThrice, player);
+					int i=0;
+					for (Card card : player.getCardList()) {
+						System.out.println(card.getName() + " : "+ (++i));
+					}
+					System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
+					String[] cardsList = scanner.nextLine().split(",");
+					List<Card> exchangeCards = new ArrayList<>();
+					List<Integer> cardNumbers = new ArrayList<>();
+					for(String card  : cardsList) {
+						cardNumbers.add(Integer.parseInt(card));
+					}
+					if(cardNumbers.size()<3) {
+						System.out.println("Please enter at least 3 numbers for exchanging cards.");
+						throw new Exception();
+					}
+					for(int c : cardNumbers) {
+						exchangeCards.add(player.getCardList().get(c-1));
+					}
+					if(checkCardDifferentTypes(exchangeCards,cardTypes) || checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
+						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+						throw new Exception();
+					}
+					exchangeCards(cardTypes, cardAppearingMoreThanThrice, player,cardNumbers);
 					int count = player.getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
 					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
@@ -1109,7 +1159,8 @@ public class Player extends Observable implements Serializable {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Exception Message : " + e.getMessage());
+			//System.out.println("Exception Message : " + e.getMessage());
+			e.printStackTrace();
 			reinforcePhase(player);
 		}
 		System.out.println("########" + player.getName() + "  reinforcement phase ended ########");
@@ -1120,6 +1171,39 @@ public class Player extends Observable implements Serializable {
 
 	
 	
+	private boolean checkCardDifferentTypes(List<Card> exchangeCards, int cardTypes) {
+		if(cardTypes<3) {
+			return false;
+		}
+		int typesCount=0;
+		List<String> types = new ArrayList<>();
+		for(Card card : exchangeCards) {
+			types.add(card.getType());
+		}
+		if(types.get(0).equals(types.get(1)) && !types.get(1).equals(types.get(2)) && !types.get(2).equals(types.get(0))) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkCardSameType(List<Card> exchangeCards,  String cardAppearingThrice) {
+		int cardAppearingCount=0;
+		if(exchangeCards.size()<3) {
+			return false;
+		}
+		else {
+			for(Card card : exchangeCards) {
+				if(card.getType().equals(cardAppearingThrice)) {
+					cardAppearingCount++;
+				}
+			}
+			if(cardAppearingCount==3) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * The following method requests the user to re enter the army count in event of
 	 * invalid input in the first attempt.
@@ -1180,9 +1264,22 @@ public class Player extends Observable implements Serializable {
 		return returnValue;
 	}
 
-	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player) {
+	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player, List<Integer> cardNumbers) {
 
-		if (cardTypes == 3) {
+		Card card1 = player.getCardList().get(cardNumbers.get(0)-1);
+		Card card2 = player.getCardList().get(cardNumbers.get(1)-1);
+		Card card3 = player.getCardList().get(cardNumbers.get(2)-1);
+		int a=cardNumbers.get(0)-1;
+		int b=cardNumbers.get(1)-1;
+		int c =cardNumbers.get(2)-1;
+		boolean s=  player.getCardList().remove(card1);
+		player.getCardList().remove(card2);
+		player.getCardList().remove(card3);
+		
+		deck.add(card1);
+		deck.add(card2);
+		deck.add(card3);
+		/*if (cardTypes == 3) {
 			player.getCardList().remove(Card.getFirstCard());
 			player.getCardList().remove(Card.getSecondCard());
 			player.getCardList().remove(Card.getThirdCard());
@@ -1213,7 +1310,7 @@ public class Player extends Observable implements Serializable {
 			default:
 				break;
 			}
-		}
+		}*/
 		setCardList(player.getCardList());
 		setChanged();
 		notifyObservers(player);
