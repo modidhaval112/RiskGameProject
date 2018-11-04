@@ -13,7 +13,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({CreateMapFileTest.class,
 			   MapValidatorTest.class,
 			   RandomAssignmentTest.class, 
-			   ReinforcementTest.class})
+			   ReinforcementTest.class,
+			   StartUpPhaseTest.class,
+			   AttackPhaseTest.class,
+			   FortificationTest.class})
 
 public class TestSuite {
 
