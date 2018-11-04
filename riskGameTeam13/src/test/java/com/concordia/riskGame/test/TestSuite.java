@@ -16,7 +16,8 @@ import org.junit.runners.Suite.SuiteClasses;
 			   ReinforcementTest.class,
 			   StartUpPhaseTest.class,
 			   AttackPhaseTest.class,
-			   FortificationTest.class})
+			   FortificationTest.class,
+			   CardsTest.class})
 
 public class TestSuite {
 
