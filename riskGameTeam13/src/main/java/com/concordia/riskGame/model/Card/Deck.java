@@ -54,7 +54,7 @@ public class Deck implements Serializable{
     /**
      * Public default constructor to access other methods.
      */
-    private Deck(){
+    public Deck(){
        // deck = new ArrayList<>();
     }
     

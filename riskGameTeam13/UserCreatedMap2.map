@@ -1,0 +1,16 @@
+[Map]
+[Continents]
+con2=0
+con4=0
+con3=0
+con1=0
+
+[Territories]
+c2,0,0,con3,a2,b2,d2,c1
+d1,0,0,con4,a1,b1,c1,d2
+a1,0,0,con1,a2,b1,c1,d1
+d2,0,0,con4,d1,a2,b2,c2
+b2,0,0,con2,a2,b1,c2,d2
+b1,0,0,con2,a1,b2,c1,d1
+a2,0,0,con1,a1,b2,c2,d2
+c1,0,0,con3,a1,b1,d1,c2
