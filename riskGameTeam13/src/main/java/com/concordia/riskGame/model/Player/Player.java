@@ -39,7 +39,8 @@ public class Player extends Observable implements Serializable {
 	private List<Player> gamePlayerList;
 	private List<Card> cardList = new ArrayList<>();
 	private Deck deck = Deck.getInstance();
-	
+	private int cardExchangeTypeCount = 0;
+	private String cardExchangeAppearingMoreThanThrice = "";
 	private HashMap<Country, List<Country>> gamecountryAndNeighbours;
 	private int assignedArmies;
 	private String[] nameArmiesSpilt;
@@ -337,7 +338,7 @@ public class Player extends Observable implements Serializable {
 				if(destNeighborCountryList.size() == 0)
 				{
 					System.out.println("##### The source country has zero neighboring countries ######");
-					srcCountry = reEnterSourceCountry(player);
+					srcCountry = reEnterSourceCountryforListCheck(player);
 					srcCountry = srcCountry.trim();
 					
 				}
@@ -352,7 +353,7 @@ public class Player extends Observable implements Serializable {
 					srcCountry = srcCountry.trim();
 				}
 
-				printNeighbouringCountry(srcCountry, player);
+				destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
 				
 				System.out.println("###### Please enter destination country where you want to move armies #####");
 				String destinationCountry = scanner.nextLine();
@@ -497,6 +498,44 @@ public class Player extends Observable implements Serializable {
 
 		return soruceCountry;
 	}
+	
+	
+	/**
+	 * The following method requests the user to renter the source country in event
+	 * of  zero list for destination country.
+	 * 
+	 * @param player Player Instance.
+	 * @return Returns a valid source country name.
+	 */
+
+	public String reEnterSourceCountryforListCheck(Player player) {
+		String soruceCountry = null;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("#### Please enter a valid source country #####");
+		soruceCountry = sc.nextLine();
+		List<Country> destCountryList = new ArrayList();
+		
+		if (checkZeroDestinationCountryList(soruceCountry,player).size() == 0 )
+			soruceCountry = reEnterSourceCountryforListCheck(player);
+
+		return soruceCountry;
+	}
+	
+	/**
+	 * The following returns the list of destination countries.
+	 * @param countryName Name of the country to which you want to get destination country.
+	 * @param player Player Instance.
+	 * @return List of Destination Countries.
+	 */
+	
+	public  List<Country> checkZeroDestinationCountryList(String countryName, Player player)
+	{
+		
+		List<Country> desCountryList  = new ArrayList();
+		desCountryList=printNeighbouringCountry(countryName, player);
+		return desCountryList;
+	}
+	
 
 	/**
 	 * The following method checks if it is a valid source country.
@@ -1004,6 +1043,8 @@ public class Player extends Observable implements Serializable {
 			assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
 			HashMap<String, Integer> cardCount = new HashMap<>();
 			int cardTypes = 0;
+			cardExchangeTypeCount=0;
+			cardExchangeAppearingMoreThanThrice = "";
 			String cardExchangeChoice;
 			boolean cardExchangePossible = false;
 			String cardAppearingMoreThanThrice = null;
@@ -1056,11 +1097,15 @@ public class Player extends Observable implements Serializable {
 						for(int c : cardNumbers) {
 							exchangeCards.add(player.getCardList().get(c-1));
 						}
-						if(checkCardDifferentTypes(exchangeCards,cardTypes) && checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
+						if(!checkCardDifferentTypes(exchangeCards,cardTypes) && !checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
 							System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 							throw new Exception();
 						}
-						exchangeCards(cardTypes, cardAppearingMoreThanThrice, player,cardNumbers);
+						if(cardExchangeTypeCount<3 && (cardExchangeAppearingMoreThanThrice==null && cardExchangeAppearingMoreThanThrice.isEmpty())){
+							System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+							throw new Exception();
+						}
+						exchangeCards(cardExchangeTypeCount, cardExchangeAppearingMoreThanThrice, player,cardNumbers);
 						int count = player.getCardExchangeCount();
 						armiesToBeGiven = (count + 1) * 5;
 						System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
@@ -1087,11 +1132,15 @@ public class Player extends Observable implements Serializable {
 					for(int c : cardNumbers) {
 						exchangeCards.add(player.getCardList().get(c-1));
 					}
-					if(checkCardDifferentTypes(exchangeCards,cardTypes) || checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
+					if(!checkCardDifferentTypes(exchangeCards,cardTypes) && !checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
 						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 						throw new Exception();
 					}
-					exchangeCards(cardTypes, cardAppearingMoreThanThrice, player,cardNumbers);
+					if(cardExchangeTypeCount==3 || (cardExchangeAppearingMoreThanThrice!=null && !cardExchangeAppearingMoreThanThrice.isEmpty())){
+						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+						throw new Exception();
+					}
+					exchangeCards(cardExchangeTypeCount, cardExchangeAppearingMoreThanThrice, player,cardNumbers);
 					int count = player.getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
 					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
@@ -1171,8 +1220,8 @@ public class Player extends Observable implements Serializable {
 			}
 
 		} catch (Exception e) {
-			//System.out.println("Exception Message : " + e.getMessage()); 
-			e.printStackTrace();
+			System.out.println("Exception Message : " + e.getMessage()); 
+			//e.printStackTrace();
 			reinforcePhase(player);
 		}
 		System.out.println("########" + player.getName() + "  reinforcement phase ended ########");
@@ -1192,7 +1241,8 @@ public class Player extends Observable implements Serializable {
 		for(Card card : exchangeCards) {
 			types.add(card.getType());
 		}
-		if(types.get(0).equals(types.get(1)) && !types.get(1).equals(types.get(2)) && !types.get(2).equals(types.get(0))) {
+		if(!types.get(0).equals(types.get(1)) && !types.get(1).equals(types.get(2)) && !types.get(2).equals(types.get(0))) {
+			cardExchangeTypeCount = 3;
 			return true;
 		}
 		return false;
@@ -1210,6 +1260,7 @@ public class Player extends Observable implements Serializable {
 				}
 			}
 			if(cardAppearingCount==3) {
+				cardExchangeAppearingMoreThanThrice = cardAppearingThrice;
 				return true;
 			}
 		}
@@ -1276,21 +1327,28 @@ public class Player extends Observable implements Serializable {
 		return returnValue;
 	}
 
-	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player, List<Integer> cardNumbers) {
+	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player, List<Integer> cardNumbers) throws Exception {
 
-		Card card1 = player.getCardList().get(cardNumbers.get(0)-1);
-		Card card2 = player.getCardList().get(cardNumbers.get(1)-1);
-		Card card3 = player.getCardList().get(cardNumbers.get(2)-1);
-		int a=cardNumbers.get(0)-1;
-		int b=cardNumbers.get(1)-1;
-		int c =cardNumbers.get(2)-1;
-		boolean s=  player.getCardList().remove(card1);
-		player.getCardList().remove(card2);
-		player.getCardList().remove(card3);
+		if(cardTypes==3 || (cardAppearingMoreThanThrice!=null && !cardAppearingMoreThanThrice.isEmpty())){
+			Card card1 = player.getCardList().get(cardNumbers.get(0)-1);
+			Card card2 = player.getCardList().get(cardNumbers.get(1)-1);
+			Card card3 = player.getCardList().get(cardNumbers.get(2)-1);
+			int a=cardNumbers.get(0)-1;
+			int b=cardNumbers.get(1)-1;
+			int c =cardNumbers.get(2)-1;
+			boolean s=  player.getCardList().remove(card1);
+			player.getCardList().remove(card2);
+			player.getCardList().remove(card3);
+			
+			deck.add(card1);
+			deck.add(card2);
+			deck.add(card3);
+		}
 		
-		deck.add(card1);
-		deck.add(card2);
-		deck.add(card3);
+		else{
+			System.out.println("Exchange not possible as the numbers are wrong");
+			throw new Exception();
+		}
 		/*if (cardTypes == 3) {
 			player.getCardList().remove(Card.getFirstCard());
 			player.getCardList().remove(Card.getSecondCard());
