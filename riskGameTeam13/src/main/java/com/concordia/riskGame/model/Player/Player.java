@@ -994,7 +994,8 @@ public class Player extends Observable implements Serializable {
 		System.out.println("Enter the name of the country on which you want to attack or enter 'quit' to exit the attack");
 		String destinationCountry = scanner.nextLine();
 		if(destinationCountry.equals("quit")) {
-			return null;
+			Country country = new Country("quit");
+			return country;
 		}
 		Country destinationCountryObject = getAttackableCountryOfCountryListFromString(destinationCountry,
 				attackableCountryList);

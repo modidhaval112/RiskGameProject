@@ -146,12 +146,13 @@ public class GameDriver {
 		}
 		destinationCountryObject = player.getAttackableCountryOfCountryListFromString(destinationCountry,
 				attackableCountryList);
-		if (destinationCountryObject == null || !attackableCountryList.contains(destinationCountryObject)) {
+		while(destinationCountryObject == null || !attackableCountryList.contains(destinationCountryObject)) {
 			System.out.println(
 					"The country with the given name is not in the list or the country does not exist");
 			destinationCountryObject = player.reenterTheDestinationCountry(attackableCountryList);
 		}
-		if(destinationCountryObject==null) {
+		
+		if(destinationCountryObject.getCountryName().equals("quit")) {
 			return null;
 		}
 		sourceAndDestinationCountry.add(sourceCountryObject);
