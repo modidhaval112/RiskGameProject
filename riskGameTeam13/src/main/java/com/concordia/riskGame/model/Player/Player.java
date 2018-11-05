@@ -69,8 +69,8 @@ public class Player extends Observable implements Serializable {
 	 * default constructor
 	 */
 	public Player() {
-		PhaseView phaseView = new PhaseView();
-		this.addObserver(phaseView);
+		/*PhaseView phaseView = new PhaseView();
+		this.addObserver(phaseView);*/
 		WorldDominationView dominationView = new WorldDominationView();
 		this.addObserver(dominationView);
 		CardView cardView = new CardView();
@@ -1051,7 +1051,7 @@ public class Player extends Observable implements Serializable {
 			List<Continent> currcontControlList = new ArrayList();
 			int armiesContControl = 0;
 			currcontControlList = contienentControlList(player);
-			if(currcontControlList.size() > 0)
+			if(currcontControlList!=null)
 			{
 				for(Continent cont : currcontControlList)
 				{
@@ -1274,7 +1274,7 @@ public class Player extends Observable implements Serializable {
 
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage()); 
-			//e.printStackTrace();
+			e.printStackTrace();
 			reinforcePhase(player);
 		}
 		System.out.println("########" + player.getName() + "  reinforcement phase ended ########");
