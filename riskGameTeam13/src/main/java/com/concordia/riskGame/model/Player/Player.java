@@ -75,8 +75,7 @@ public class Player extends Observable implements Serializable {
 	}
 
 	public List<Player> getGamePlayerList() {
-		WorldDominationView dominationView = new WorldDominationView();
-		this.addObserver(dominationView);
+
 		return gamePlayerList;
 	}
 
