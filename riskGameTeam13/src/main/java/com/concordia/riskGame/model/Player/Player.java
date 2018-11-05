@@ -16,6 +16,7 @@ import com.concordia.riskGame.View.WorldDominationView;
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Card.Deck;
+import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
@@ -1043,6 +1044,25 @@ public class Player extends Observable implements Serializable {
 					"																													");
 			System.out.println("\n######## " + player.getName() + "  reinforcement phase begins ########");
 			assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
+			
+			
+			
+			
+			List<Continent> currcontControlList = new ArrayList();
+			int armiesContControl = 0;
+			currcontControlList = contienentControlList(player);
+			if(currcontControlList.size() > 0)
+			{
+				for(Continent cont : currcontControlList)
+				{
+					System.out.println(" ##### continent name is ###### "+cont.getContinentName()  +"     control value is "+cont.getContinentControlValue() );
+					armiesContControl = armiesContControl + cont.getContinentControlValue();
+				}
+			}
+			
+			
+			
+			
 			HashMap<String, Integer> cardCount = new HashMap<>();
 			int cardTypes = 0;
 			cardExchangeTypeCount=0;
@@ -1110,6 +1130,23 @@ public class Player extends Observable implements Serializable {
 						exchangeCards(cardExchangeTypeCount, cardExchangeAppearingMoreThanThrice, player,cardNumbers);
 						int count = player.getCardExchangeCount();
 						armiesToBeGiven = (count + 1) * 5;
+						
+						
+						
+						
+						player = exChangeCardTerritoryExist(exchangeCards,player);
+						
+						System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+						
+						for(Country c : player.getAssignedCountries())
+						{
+							System.out.println("######## Army Assignment after card exchange ###### ");
+							System.out.println("######## Country Name  ########## :"+c.getCountryName());
+							System.out.println("######## Country Armies #########   :"+c.getArmies());
+							
+						}
+						
+						
 						System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 						player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 					} else {
@@ -1145,6 +1182,20 @@ public class Player extends Observable implements Serializable {
 					exchangeCards(cardExchangeTypeCount, cardExchangeAppearingMoreThanThrice, player,cardNumbers);
 					int count = player.getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
+					
+					player = exChangeCardTerritoryExist(exchangeCards,player);
+					
+					System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+					
+					for(Country c : player.getAssignedCountries())
+					{
+						System.out.println("######## Army Assignment after card exchange ###### ");
+						System.out.println("######## Country Name  ########## :"+c.getCountryName());
+						System.out.println("######## Country Armies #########   :"+c.getArmies());
+						
+					}
+					
+					
 					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 					player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 				}
@@ -1233,6 +1284,100 @@ public class Player extends Observable implements Serializable {
 	}
 
 	
+public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player) {
+		
+
+		Player playerObject = new Player();
+		playerObject = player;
+		
+		List<Country> countryList = new ArrayList();
+		countryList = player.getAssignedCountries();
+		
+		List<Country> updatedCountryList = new ArrayList();
+		
+		List<Card> exchangeCardsLocal = new ArrayList();
+		
+		
+		System.out.println(" ###### Inside Exchange card Territory ####### ");
+		
+		for(Country c : countryList)
+		{
+			for (Card card : exchangeCards)
+			{
+				String[] utilString = card.getName().split(",");
+				String countryName = utilString[0]; 
+				if(countryName.equalsIgnoreCase(c.getCountryName()))
+				{
+					System.out.println(" ###### country name inside exchnage is  #######  :"+c.getCountryName());
+					System.out.println(" ###### armies before inside exchnage is  ####### : "+c.getArmies());
+					int armies = c.getArmies();
+					armies = armies + 2;
+					c.setArmies(armies);
+					System.out.println(" ###### armies after inside exchnage is  ####### : "+c.getArmies());
+				}
+			}
+			updatedCountryList.add(c);
+		}
+
+		playerObject.setAssignedCountries(updatedCountryList);
+		return playerObject;
+		
+	}
+
+	public List<Continent> contienentControlList(Player player)
+	{
+		
+		System.out.println("####### calculateReinforcementArmiesContienentand ########");
+		MapContents contents = MapContents.getInstance();
+		System.out.println("########## Printing contienet and its countries #############");
+		HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
+		HashMap<String , Integer> continentAndControlValue = new  HashMap<>();
+		
+		continentAndItsCountries= contents.getContinentAndItsCountries();
+		List<String> continentName = new ArrayList();
+		Map<Player,List<String>> playerContinentControl = new HashMap();
+		List<Continent> continentList = new ArrayList();
+		int armies = 0;
+
+		for (Map.Entry<Continent, List<Country>> entryKeyValue : continentAndItsCountries.entrySet())
+		{
+			String name = entryKeyValue.getKey().getContinentName();
+			int controlValue = entryKeyValue.getKey().getContinentControlValue();
+			System.out.println("																				");
+			System.out.println("####### The  contienent name is ####### :"+name);
+			System.out.println("																				");
+			System.out.println("###### The continent control value is #### :"+entryKeyValue.getKey().getContinentControlValue());
+			int coutryContinentCount = 0;
+			int playerOwnedCountryCount = 0;
+			coutryContinentCount = entryKeyValue.getValue().size();
+			for (Country c : entryKeyValue.getValue())
+			{
+				System.out.println("     "+c.getCountryName()  + "   owned by player "+c.getBelongsToPlayer().getName() );
+				if(c.getBelongsToPlayer().getName().equalsIgnoreCase(player.getName()))
+				{
+					playerOwnedCountryCount = playerOwnedCountryCount + 1;
+				}
+				
+				
+			}
+			if(playerOwnedCountryCount == coutryContinentCount)
+			{
+				
+				continentList.add(entryKeyValue.getKey());
+				
+			}
+			
+			System.out.println("######### No of countries in the continent          ######## : "+coutryContinentCount);
+			System.out.println("######### No of countries owned by the player  ######## : "+playerOwnedCountryCount);
+	
+			
+		}
+		
+		System.out.println("####### List size before returning is ####### : "+continentList.size());
+		
+		return continentList;
+	}
+
 	
 	private boolean checkCardDifferentTypes(List<Card> exchangeCards, int cardTypes) {
 		if(cardTypes<3) {
