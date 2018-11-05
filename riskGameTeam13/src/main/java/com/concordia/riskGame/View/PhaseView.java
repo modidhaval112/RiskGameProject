@@ -20,12 +20,14 @@ public class PhaseView implements Observer{
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-       Player player = (Player) arg0;
+		Player player = (Player) arg0;
 
+		if(player.phasePrint.equals("phase"))
+		{
+			player.phasePrint="";
+			System.out.println("Phase View " + player.phaseMsg);
 
-		System.out.println("\nIn Phase View ");
-		System.out.println("Phase View " + player.phasePrint);
-
+		}
 	}
 
 }

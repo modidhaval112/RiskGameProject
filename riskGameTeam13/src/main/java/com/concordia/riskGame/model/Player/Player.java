@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import com.concordia.riskGame.View.CardView;
+import com.concordia.riskGame.View.PhaseView;
 import com.concordia.riskGame.View.WorldDominationView;
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Card.Card;
@@ -56,6 +57,7 @@ public class Player extends Observable implements Serializable {
 	private boolean cardGiven = false;
 	private boolean endGameForThisPlayer = false;
 	public String phasePrint;
+	public String phaseMsg;
 	public String dominationPrint;
 	public int cardExchangeCount = 0;
 	public String currentPhase;
@@ -66,8 +68,8 @@ public class Player extends Observable implements Serializable {
 	 * default constructor
 	 */
 	public Player() {
-		// PhaseView phaseView = new PhaseView();
-		// this.addObserver(phaseView);
+		PhaseView phaseView = new PhaseView();
+		this.addObserver(phaseView);
 		WorldDominationView dominationView = new WorldDominationView();
 		this.addObserver(dominationView);
 		CardView cardView = new CardView();
@@ -92,6 +94,8 @@ public class Player extends Observable implements Serializable {
 		this.name = name;
 		setHasWon(false);
 		setCanContinue(true);
+		PhaseView phaseView = new PhaseView();
+		this.addObserver(phaseView);
 		WorldDominationView dominationView = new WorldDominationView();
 		this.addObserver(dominationView);
 		CardView cardView = new CardView();
@@ -141,7 +145,8 @@ public class Player extends Observable implements Serializable {
 	 * @param phaseMessage
 	 */
 	public void setPhase(String phaseMessage) {
-		phasePrint = phaseMessage;
+		phasePrint = "phase";
+		phaseMsg=phaseMessage;
 		setChanged();
 		notifyObservers();
 	}
