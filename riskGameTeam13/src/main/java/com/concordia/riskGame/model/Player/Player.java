@@ -115,10 +115,7 @@ public class Player extends Observable implements Serializable {
 	 */
 	public void setPlayerAssign(Map<Player, List<Country>> playerAssign) {
 		this.playerAssign = playerAssign;
-		// PhaseView phaseView = new PhaseView();
-		// this.addObserver(phaseView);
-		/*WorldDominationView dominationView = new WorldDominationView();
-		this.addObserver(dominationView);*/
+	
 	}
 
 	/**
