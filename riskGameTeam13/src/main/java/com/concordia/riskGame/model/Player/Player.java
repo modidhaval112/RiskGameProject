@@ -301,9 +301,9 @@ public class Player extends Observable implements Serializable {
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player forfeitPhase(Player playerObject) {
-		setCurrentPhase(Player.fortificationPhase);
+		/*setCurrentPhase(Player.fortificationPhase);
 		playerObject.setCurrentPhase(Player.fortificationPhase);
-		setDomination();
+		setDomination();*/
 		Scanner scanner;
 		System.out.println("###### Do you wish to enter the fortification phase: yes/no #######");
 		String choice = null;
@@ -656,9 +656,9 @@ public class Player extends Observable implements Serializable {
 	 * @throws Exception
 	 */
 	public Player attackPhase(Player player) throws Exception {
-		setCurrentPhase(Player.attackPhase);
+	/*	setCurrentPhase(Player.attackPhase);
 		player.setCurrentPhase(Player.attackPhase);
-		setDomination();
+		setDomination();*/
 
 		System.out.println("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
@@ -1032,10 +1032,10 @@ public class Player extends Observable implements Serializable {
 	public Player reinforcePhase(Player player) {
 
 		try {
-			setDomination();
+			/*setDomination();
 			
 			setCurrentPhase(Player.reinforcePhase);
-			player.setCurrentPhase(Player.reinforcePhase);
+			player.setCurrentPhase(Player.reinforcePhase);*/
 			Scanner scanner;
 			scanner = new Scanner(System.in);
 			int armiesToBeGiven = 0;
