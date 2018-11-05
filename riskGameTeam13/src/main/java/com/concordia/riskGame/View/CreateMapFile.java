@@ -35,6 +35,9 @@ public class CreateMapFile {
 	public void createMap() {
 		Scanner  scanner = new Scanner(System.in);
 		try {
+		countries = new ArrayList<>() ;
+		 continentsWithItsCountries= new HashMap<>();
+		 countriesWithItsNeighbours = new HashMap<>();
 		System.out.println("Enter the number of Continents");
 		numberOfContinents = scanner.nextInt();
 		for(int i=1;i<=numberOfContinents;i++) {
