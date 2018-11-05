@@ -782,7 +782,8 @@ public class Player extends Observable implements Serializable {
 								System.out.println("Defender Dice value " + defenderDiceResults.get(i));
 								if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
 									if (!player.isCardGiven()) {
-										if (player.getCardList() != null) {
+										if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
+											
 											Card card = deck.draw();
 											//card.getCarrdInfo(card);
 											player.getCardList().add(card);
@@ -866,7 +867,7 @@ public class Player extends Observable implements Serializable {
 						System.out.println("Defender Dice value " + defenderDiceResults.get(i));
 						if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
 							if (!player.isCardGiven()) {
-								if (player.getCardList() != null) {
+								if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
 									Card card = deck.draw();
 								//	card.getCarrdInfo(card);
 									player.getCardList().add(card);
