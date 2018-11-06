@@ -22,7 +22,7 @@ public class PhaseView implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
 
-		if(player.phasePrint.equals("phase"))
+		if("phase".equals(player.phasePrint))
 		{
 			player.phasePrint="";
 			System.out.println("Phase View " + player.phaseMsg);

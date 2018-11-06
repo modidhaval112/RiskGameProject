@@ -926,8 +926,9 @@ public class Player extends Observable implements Serializable {
 				player.setCanFortify(true);
 			} else {
 				System.out.println("Invalid Option");
-				System.out.println("#### Moving to the next phase ####");
-				player.setCanFortify(true);
+				/*System.out.println("#### Moving to the next phase ####");
+				player.setCanFortify(true);*/
+				throw new Exception();
 			}
 		} catch (Exception e) {
 			System.out.println("Exception***************");
@@ -1514,6 +1515,10 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 			deck.add(card1);
 			deck.add(card2);
 			deck.add(card3);
+			this.currentPhase = Player.reinforcePhase;
+			setCardList(player.getCardList());
+			setChanged();
+			notifyObservers(player);
 		}
 		
 		else{
@@ -1552,9 +1557,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 				break;
 			}
 		}*/
-		setCardList(player.getCardList());
-		setChanged();
-		notifyObservers(player);
+		
 
 	}
 
