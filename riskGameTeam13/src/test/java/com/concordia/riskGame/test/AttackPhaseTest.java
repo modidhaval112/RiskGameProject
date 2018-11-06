@@ -148,22 +148,20 @@ public class AttackPhaseTest {
 		Deck deck = Deck.getInstance();
 		System.out.println("#### The country list size is ###### : "+MapContents.getInstance().getCountryList());
 		deck.setDeckOfCards(MapContents.getInstance().getCountryList());
-		cd1 = new Card();
+		
 		/*cd1 = cd1.getCarrdInfo(cd1);*/
-		cd1 = deck.draw();
+		Card cd1 = deck.draw();
 				
 
-		cd2 = new Card();
-		cd2 =deck.draw();
+		
+		Card cd2 =deck.draw();
 
 		playerOneCard.add(cd1);
 		playerOneCard.add(cd2);
 
-		 cd3 = new Card();
-		cd3 = deck.draw();
-
-		cd4 = new Card();
-		cd4 = deck.draw();
+		
+		 Card cd3 = deck.draw();
+    	 Card cd4 = deck.draw();
 
 		playerTwoCard.add(cd3);
 		playerTwoCard.add(cd4);
