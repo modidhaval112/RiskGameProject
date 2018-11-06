@@ -22,7 +22,7 @@ public class CardView implements Observer{
 		Scanner scanner = new Scanner(System.in);
 		HashMap<String, Integer> cardCount = new HashMap<>();
 		int cardTypes = 0;
-		player.setCardExchangeCount(0);
+		player.setCardExchangeTypeCount(0);
 		player.setCardExchangeAppearingMoreThanThrice("");
 		String cardExchangeChoice;
 		boolean cardExchangePossible = false;

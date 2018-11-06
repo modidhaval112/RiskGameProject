@@ -76,7 +76,7 @@ public class Player extends Observable implements Serializable {
 	public String phasePrint;
 	public String phaseMsg;
 	public String dominationPrint;
-	public int cardExchangeCount = 0;
+	private int cardExchangeCount = 0;
 	public String currentPhase;
 	private String errorMesage;
 
