@@ -952,7 +952,7 @@ public class Player extends Observable implements Serializable {
 		for (Country c : player.getAssignedCountries()) {
 			setCanAttack(false);
 			setCanFortify(false);
-			if (c.getArmies() > 1) {
+			if (c.getArmies() > 1 && checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				setCanAttack(true);
 				setCanFortify(true);
 				break;
@@ -1719,6 +1719,19 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 		return neighbouringAttackableCountries;
 	}
 
+	public List<Country> checkNeighboringAttackableCountriesAndArmies(Country country, Player player) {
+		System.out.println("######Neighbouring Countries on which you can attack and its armies are :#####");
+		List<Country> neighbouringAttackableCountries = new ArrayList<>();
+		for (Country countryObject : country.getNeighbouringCountries()) {
+			Country neighboringCountry = getSourceCountryFromString(countryObject.getCountryName());
+			if (!neighboringCountry.getBelongsToPlayer().equals(player)) {
+				//System.out.println(neighboringCountry.getCountryName() + "  :  " + neighboringCountry.getArmies());
+				neighbouringAttackableCountries.add(neighboringCountry);
+			}
+		}
+		return neighbouringAttackableCountries;
+	}
+	
 	/**
 	 * @return the canAttack
 	 */
