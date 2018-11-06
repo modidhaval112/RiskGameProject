@@ -16,6 +16,11 @@ public class Continent {
 	private int numberOfCountries;
 	private int continentControlValue;
 
+	
+	public Continent()
+	{
+		
+	}
 	/**
 	 * This is a constructor to create the Continent given only the continent.
 	 * 
