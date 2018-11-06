@@ -10,14 +10,7 @@ public class Card {
 
     private final String type;
     private final Country country;
-    
 
-    public Card() {
-        this.type = null;
-        this.country = null;
-    }
-    
-    
     /**
      * this setter method assigning the country and the card  type
      * @param type card type
@@ -51,7 +44,5 @@ public class Card {
     public Country getCountry() {
         return country;
     }
-    
- 
 } 
 

@@ -56,7 +56,6 @@ public class CreateMapFile {
 			}
 			scanner.nextLine();
 			Continent continent = new Continent(nameOfContinents.get(i));
-			continent.setContinentControlValue(numberOfCountries);
 			continentsWithItsCountries.put(continent, countries);
 		}
 		for(int i=0;i<countries.size();i++) {

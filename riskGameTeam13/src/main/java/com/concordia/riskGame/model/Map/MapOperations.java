@@ -43,7 +43,7 @@ public class MapOperations {
 		for (Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
 			mapFileContents.append(continent.getContinentName());
 			mapFileContents.append("=");
-			mapFileContents.append(continent.getContinentControlValue());
+			mapFileContents.append(continent.getNumberOfCountries());
 			mapFileContents.append(System.lineSeparator());
 		}
 		mapFileContents.append(System.lineSeparator() + "[Territories]");
