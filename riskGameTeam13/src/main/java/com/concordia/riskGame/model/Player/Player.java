@@ -76,7 +76,7 @@ public class Player extends Observable implements Serializable {
 	public String phasePrint;
 	public String phaseMsg;
 	public String dominationPrint;
-	private int cardExchangeCount = 0;
+	
 	public String currentPhase;
 	private String errorMesage;
 
@@ -294,13 +294,13 @@ public class Player extends Observable implements Serializable {
 		this.cardList = cardList;
 	}
 
-	public int getCardExchangeCount() {
+	/*public int getCardExchangeCount() {
 		return cardExchangeCount;
 	}
 
 	public void setCardExchangeCount(int cardExchangeCount) {
 		this.cardExchangeCount = cardExchangeCount;
-	}
+	}*/
 
 	public String getCurrentPhase() {
 		return currentPhase;
