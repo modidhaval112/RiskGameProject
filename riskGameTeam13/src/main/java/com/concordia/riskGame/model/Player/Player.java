@@ -915,8 +915,12 @@ public class Player extends Observable implements Serializable {
 				}
 				checkPlayerTurnCanContinue(player);
 
-				if (player.getCanAttack())
+				if (player.getCanAttack()) {
 					attackPhase(player);
+				}
+				else {
+					System.out.println("Exiting Attack as attack is not possible anymore");
+				}
 			} else if (choice.equalsIgnoreCase("no")) {
 				System.out.println("Player enter into fortify phase");
 				player.setCanFortify(true);
