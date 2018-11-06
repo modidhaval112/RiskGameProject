@@ -30,7 +30,7 @@ public class WorldDominationView implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
-		if(player.dominationPrint.equals("domination"))
+		if("domination".equals(player.dominationPrint))
 		{
 			player.dominationPrint="";
 		System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");

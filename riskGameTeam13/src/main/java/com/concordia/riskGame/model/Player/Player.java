@@ -42,7 +42,23 @@ public class Player extends Observable implements Serializable {
 	private List<Card> cardList = new ArrayList<>();
 	private Deck deck = Deck.getInstance();
 	private int cardExchangeTypeCount = 0;
+	public int getCardExchangeTypeCount() {
+		return cardExchangeTypeCount;
+	}
+
+	public void setCardExchangeTypeCount(int cardExchangeTypeCount) {
+		this.cardExchangeTypeCount = cardExchangeTypeCount;
+	}
+
 	private String cardExchangeAppearingMoreThanThrice = "";
+	public String getCardExchangeAppearingMoreThanThrice() {
+		return cardExchangeAppearingMoreThanThrice;
+	}
+
+	public void setCardExchangeAppearingMoreThanThrice(String cardExchangeAppearingMoreThanThrice) {
+		this.cardExchangeAppearingMoreThanThrice = cardExchangeAppearingMoreThanThrice;
+	}
+
 	private HashMap<Country, List<Country>> gamecountryAndNeighbours;
 	private int assignedArmies;
 	private String[] nameArmiesSpilt;
@@ -1033,10 +1049,10 @@ public class Player extends Observable implements Serializable {
 	public Player reinforcePhase(Player player) {
 
 		try {
-			/*setDomination();
+			setDomination();
 			
 			setCurrentPhase(Player.reinforcePhase);
-			player.setCurrentPhase(Player.reinforcePhase);*/
+			/*player.setCurrentPhase(Player.reinforcePhase);*/
 			Scanner scanner;
 			scanner = new Scanner(System.in);
 			int armiesToBeGiven = 0;
@@ -1064,7 +1080,7 @@ public class Player extends Observable implements Serializable {
 			
 			
 			
-			HashMap<String, Integer> cardCount = new HashMap<>();
+			/*HashMap<String, Integer> cardCount = new HashMap<>();
 			int cardTypes = 0;
 			cardExchangeTypeCount=0;
 			cardExchangeAppearingMoreThanThrice = "";
@@ -1202,7 +1218,10 @@ public class Player extends Observable implements Serializable {
 				}
 			} else if (!cardExchangePossible) {
 				System.out.println("Not enough cards to exchange , moving to reinforcement");
-			}
+			}*/
+			
+			CardView cardView= new CardView();
+			armiesToBeGiven=cardView.exchangeCards(player);
 			assignedArmies += armiesToBeGiven;
 			System.out.println(
 					"																													");
@@ -1380,7 +1399,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 	}
 
 	
-	private boolean checkCardDifferentTypes(List<Card> exchangeCards, int cardTypes) {
+	public boolean checkCardDifferentTypes(List<Card> exchangeCards, int cardTypes) {
 		if(cardTypes<3) {
 			return false;
 		}
@@ -1396,7 +1415,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 		return false;
 	}
 
-	private boolean checkCardSameType(List<Card> exchangeCards,  String cardAppearingThrice) {
+	public boolean checkCardSameType(List<Card> exchangeCards,  String cardAppearingThrice) {
 		int cardAppearingCount=0;
 		if(exchangeCards.size()<3) {
 			return false;
