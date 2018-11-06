@@ -279,7 +279,8 @@ public class MapParseProcessor {
 			Collections.shuffle(contitentList);
 			for (Continent continentInstance : contitentList) {
 				System.out.println("Continent Name is " + continentInstance.getContinentName());
-				Continent contientObj = new Continent(continentInstance.getContinentName());
+				Continent contientObj = new Continent();
+				contientObj = continentInstance;
 				List<Country> counList = new ArrayList<Country>();
 				for (Country countryInstance : countryList) {
 					if (countryInstance.getBelongsToContinent().equals(continentInstance.getContinentName())) {
