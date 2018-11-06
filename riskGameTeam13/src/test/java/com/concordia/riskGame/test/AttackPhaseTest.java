@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Card.Card;
+import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
@@ -55,6 +56,7 @@ public class AttackPhaseTest {
 	private List<Country> c4;
 	private List<Card> playerOneCard;
 	private List<Card> playerTwoCard;
+	private List<Country> countryList;
 	private Card cd1;
 	private Card cd2;
 	private Card cd3;
@@ -64,6 +66,7 @@ public class AttackPhaseTest {
 	public void setUp() {
 		playerOne = new Player("playerOne");
 		playerTwo = new Player("playerTwo");
+		countryList = new ArrayList();
 
 		countryOne = new Country();
 		countryOne.setCountryName("countryOne");
@@ -84,6 +87,11 @@ public class AttackPhaseTest {
 		countryFour.setCountryName("countryFour");
 		countryFour.setArmies(5);
 		countryFour.setBelongsToPlayer(playerTwo);
+		
+		countryList.add(countryOne);
+		countryList.add(countryTwo);
+		countryList.add(countryThree);
+		countryList.add(countryFour);
 
 		neighborCountryOne = new ArrayList();
 		neighborCountryOne.add(countryThree);
@@ -115,7 +123,8 @@ public class AttackPhaseTest {
 
 		contents = MapContents.getInstance();
 		HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
-
+		contents.setCountryList(countryList);
+		
 		c1 = new ArrayList();
 		c1.add(countryThree);
 
@@ -133,23 +142,28 @@ public class AttackPhaseTest {
 		countriesAndItsNeighbours.put(countryThree, c3);
 		countriesAndItsNeighbours.put(countryFour, c4);
 
+		
 		playerOneCard = new ArrayList();
 		playerTwoCard = new ArrayList();
-
+		Deck deck = Deck.getInstance();
+		System.out.println("#### The country list size is ###### : "+MapContents.getInstance().getCountryList());
+		deck.setDeckOfCards(MapContents.getInstance().getCountryList());
 		cd1 = new Card();
-		cd1 = cd1.getCarrdInfo(cd1);
+		/*cd1 = cd1.getCarrdInfo(cd1);*/
+		cd1 = deck.draw();
+				
 
 		cd2 = new Card();
-		cd2 = cd2.getCarrdInfo(cd2);
+		cd2 =deck.draw();
 
 		playerOneCard.add(cd1);
 		playerOneCard.add(cd2);
 
 		 cd3 = new Card();
-		cd3 = cd3.getCarrdInfo(cd3);
+		cd3 = deck.draw();
 
 		cd4 = new Card();
-		cd4 = cd4.getCarrdInfo(cd4);
+		cd4 = deck.draw();
 
 		playerTwoCard.add(cd3);
 		playerTwoCard.add(cd4);
@@ -197,4 +211,18 @@ public class AttackPhaseTest {
 		assertEquals(countryOne.getArmies(), armies - 1);
 		
 	}
+	
+	
+	@Test
+	public void checkAttackerDefenderDice()
+	{
+		int armies = countryOne.getArmies();
+		assertEquals(3, playerOne.getMaxAttackerDiceCount(armies));
+		
+		int armiesDef = countryThree.getArmies();
+		assertEquals(2, playerOne.getMaxDefenderDiceCount(armiesDef));
+		
+	}
+	
+	
 }
