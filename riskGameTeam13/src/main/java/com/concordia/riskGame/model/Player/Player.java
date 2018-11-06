@@ -1137,7 +1137,7 @@ public class Player extends Observable implements Serializable {
 			}
 			
 			
-			
+			assignedArmies = assignedArmies + armiesContControl;
 			
 			/*HashMap<String, Integer> cardCount = new HashMap<>();
 			int cardTypes = 0;
