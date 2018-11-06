@@ -759,7 +759,9 @@ public class Player extends Observable implements Serializable {
 
 				if (allOut) {
 					while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0) {
-						if (sourceCountryObject.getArmies() > 3) {
+						
+						
+						/*if (sourceCountryObject.getArmies() > 3) {
 							maximumAttackerDice = 3;
 						} else if (sourceCountryObject.getArmies() == 3) {
 							maximumAttackerDice = 2;
@@ -770,7 +772,15 @@ public class Player extends Observable implements Serializable {
 							maximumDefenderDice = 2;
 						} else {
 							maximumDefenderDice = 1;
-						}
+						}*/
+						
+						maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
+						maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
+						
+						System.out.println("###### The max attacker dice count is  #### : "+maximumAttackerDice);
+						System.out.println("###### The max attacker dice count is  #### : "+maximumDefenderDice);
+						
+						
 						attackerDiceResults = dice.rollDice(maximumAttackerDice);
 						defenderDiceResults = dice.rollDice(maximumDefenderDice);
 						System.out.println(
@@ -791,6 +801,7 @@ public class Player extends Observable implements Serializable {
 						Collections.reverse(defenderDiceResults);
 						int minimumDiceValue = maximumAttackerDice < maximumDefenderDice ? maximumAttackerDice
 								: maximumDefenderDice;
+						
 						for (int i = 0; i < minimumDiceValue; i++) {
 							if (attackerDiceResults.get(i) != null && defenderDiceResults.get(i) != null) {
 								System.out.println("Result number " + (i + 1));
@@ -816,19 +827,30 @@ public class Player extends Observable implements Serializable {
 								break;
 							}
 						}
+						
+						
 						System.out.println("Number of armies in " + sourceCountryObject.getCountryName() + " is "
 								+ sourceCountryObject.getArmies());
 						System.out.println("Number of armies in " + destinationCountryObject.getCountryName() + " is "
 								+ destinationCountryObject.getArmies());
 					}
 				} else {
-					if (sourceCountryObject.getArmies() > 3) {
+					
+					/*if (sourceCountryObject.getArmies() > 3) {
 						maximumAttackerDice = 3;
 					} else if (sourceCountryObject.getArmies() == 3) {
 						maximumAttackerDice = 2;
 					} else if (sourceCountryObject.getArmies() == 2) {
 						maximumAttackerDice = 1;
-					}
+					}*/
+					
+					maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
+					maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
+					
+					System.out.println("###### The max attacker dice count is  #### : "+maximumAttackerDice);
+					System.out.println("###### The max attacker dice count is  #### : "+maximumDefenderDice);
+					
+					
 					System.out.println("Enter the number of dice to be roled. Maximum is " + maximumAttackerDice);
 					attackerDice = scanner.nextInt();
 					if (attackerDice > 3 && maximumAttackerDice == 3) {
@@ -838,11 +860,11 @@ public class Player extends Observable implements Serializable {
 					}
 					System.out.println("Number of dice rolled by attacker : " + attackerDice);
 
-					if (destinationCountryObject.getArmies() >= 2) {
+				/*	if (destinationCountryObject.getArmies() >= 2) {
 						maximumDefenderDice = 2;
 					} else {
 						maximumDefenderDice = 1;
-					}
+					}*/
 
 					System.out.println("Enter the number of dice to be roled. Maximum is " + maximumDefenderDice);
 					defenderDice = scanner.nextInt();
@@ -937,6 +959,39 @@ public class Player extends Observable implements Serializable {
 		player.setCardGiven(false);
 		return pObject;
 	}
+	
+	public int getMaxAttackerDiceCount(int armies)
+	{
+		int maximumAttackerDice = 0;
+		
+		if (armies > 3) {
+		maximumAttackerDice = 3;
+	} else if (armies== 3) {
+		maximumAttackerDice = 2;
+	} else if (armies == 2) {
+		maximumAttackerDice = 1;
+	}
+		System.out.println("### The maximumDefenderDice value is #### : "+maximumAttackerDice);
+		return maximumAttackerDice;
+	}
+	
+	
+	
+	public int getMaxDefenderDiceCount(int armies)
+	{
+		int maximumDefenderDice = 0;
+		
+		if (armies >= 2) {
+			maximumDefenderDice = 2;
+		} else {
+			maximumDefenderDice = 1;
+		}
+		
+		System.out.println("### The maximumDefenderDice value is #### : "+maximumDefenderDice);
+		return maximumDefenderDice;
+	
+	}
+	
 	
 	public boolean hasPlayerWon(Player player) {
 		if(player.getAssignedCountries().size() == MapContents.getInstance().getCountryAndNeighbors().keySet().size()) {
