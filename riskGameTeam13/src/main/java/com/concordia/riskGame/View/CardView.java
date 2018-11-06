@@ -132,7 +132,7 @@ public class CardView implements Observer{
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
-				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()!=null && !player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
+				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null && player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
