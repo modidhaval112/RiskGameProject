@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 
@@ -22,7 +23,7 @@ public class CardView implements Observer{
 		Scanner scanner = new Scanner(System.in);
 		HashMap<String, Integer> cardCount = new HashMap<>();
 		int cardTypes = 0;
-		player.setCardExchangeCount(0);
+		player.setCardExchangeTypeCount(0);
 		player.setCardExchangeAppearingMoreThanThrice("");
 		String cardExchangeChoice;
 		boolean cardExchangePossible = false;
@@ -85,7 +86,7 @@ public class CardView implements Observer{
 						throw new Exception();
 					}
 					player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
-					int count = player.getCardExchangeCount();
+					int count = MapContents.getInstance().getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
 					
 					
@@ -105,7 +106,7 @@ public class CardView implements Observer{
 					
 					
 					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
-					player.setCardExchangeCount(player.getCardExchangeCount() + 1);
+					MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount() + 1);
 				} else {
 					System.out.println("Not Exchanging the cards to armies");
 				}
@@ -132,12 +133,12 @@ public class CardView implements Observer{
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
-				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()!=null && !player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
+				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null && player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
 				player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
-				int count = player.getCardExchangeCount();
+				int count = MapContents.getInstance().getCardExchangeCount();
 				armiesToBeGiven = (count + 1) * 5;
 				
 				player = player.exChangeCardTerritoryExist(exchangeCards,player);
@@ -154,7 +155,7 @@ public class CardView implements Observer{
 				
 				
 				System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
-				player.setCardExchangeCount(player.getCardExchangeCount() + 1);
+				MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount() + 1);
 			}
 		} else if (!cardExchangePossible) {
 			System.out.println("Not enough cards to exchange , moving to reinforcement");

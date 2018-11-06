@@ -12,7 +12,7 @@ import com.concordia.riskGame.model.Country.Country;
 /**
  * Allows the creation of the Risk deck containing the 42 Risk cards.
  *
- * @author Akshay Shah
+ * @author sande
  */
 public class Deck implements Serializable{
 
