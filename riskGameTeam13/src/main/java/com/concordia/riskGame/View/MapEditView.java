@@ -519,9 +519,16 @@ public class MapEditView extends java.awt.Frame {
 				}
 				else
 				{
+					if(countries.contains(AddText.getText().toString().toLowerCase()))
+					{
+						setLog("Country withthe name already exists");
+
+					}
+					else
+					{
 					setLog("Renaming Country");
 					renameCountry(s, AddText.getText());
-
+					}
 				}
 
 			}
