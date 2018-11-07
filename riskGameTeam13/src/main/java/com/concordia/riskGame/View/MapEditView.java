@@ -701,6 +701,7 @@ public class MapEditView extends java.awt.Frame {
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
+				
 
 
 			}
