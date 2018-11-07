@@ -168,7 +168,7 @@ public class CardView implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
        Player player = (Player) arg0;
-       if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase())) {
+       if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && player.getExchanged()) {
        
 		System.out.println("**************In Card View*************** ");
 		List<Card> cardList = player.getCardList();
