@@ -223,13 +223,13 @@ public class MapEditView extends java.awt.Frame {
 			for (int i=0 ;i<countryNeighbours.size();i++) {
 
 
-				neighboursList.add(countryNeighbours.get(i).getCountryName().toString());
+				neighboursList.add(countryNeighbours.get(i).getCountryName().toString().toLowerCase());
 
 
 			}
-			countries.addElement(entry.getKey().getCountryName().toString());
+			countries.addElement(entry.getKey().getCountryName().toString().toLowerCase());
 
-			countryAndNeighborsMap.put(entry.getKey().getCountryName().toString(), neighboursList);
+			countryAndNeighborsMap.put(entry.getKey().getCountryName().toString().toLowerCase(), neighboursList);
 
 
 		}
@@ -244,13 +244,13 @@ public class MapEditView extends java.awt.Frame {
 			for (int i=0 ;i<continentCountries.size();i++) {
 
 
-				CountriesList.add(continentCountries.get(i).getCountryName().toString());
+				CountriesList.add(continentCountries.get(i).getCountryName().toString().toLowerCase());
 
 
 			}
-			continents.addElement(entry.getKey().getContinentName().toString());
+			continents.addElement(entry.getKey().getContinentName().toString().toLowerCase());
 
-			continentsAndCountriesMap.put(entry.getKey().getContinentName().toString(), CountriesList);
+			continentsAndCountriesMap.put(entry.getKey().getContinentName().toString().toLowerCase(), CountriesList);
 
 
 		}
@@ -420,10 +420,10 @@ public class MapEditView extends java.awt.Frame {
 
 					if(   !AddText.getText().equals(""))
 					{
-						if(!countries.contains(AddText.getText()) )
+						if(!countries.contains(AddText.getText().toLowerCase()) )
 						{
 							setLog("Country Input is : " + AddText.getText());
-							addCountry(AddText.getText(),continentsJList.getSelectedValue().toString());
+							addCountry(AddText.getText().toLowerCase(),continentsJList.getSelectedValue().toString());
 							frame.validate();
 							frame.repaint();
 							panel.repaint();
@@ -455,10 +455,10 @@ public class MapEditView extends java.awt.Frame {
 
 				}
 				else
-				{   if(!continents.contains(AddText.getText()))
+				{   if(!continents.contains(AddText.getText().toLowerCase()))
 				{
-					continentsAndCountriesMap.put(AddText.getText(),null);
-					continents.addElement(AddText.getText());
+					continentsAndCountriesMap.put(AddText.getText().toLowerCase(),null);
+					continents.addElement(AddText.getText().toLowerCase());
 					frame.validate();
 					frame.repaint();
 					panel.repaint();
@@ -489,12 +489,18 @@ public class MapEditView extends java.awt.Frame {
 				}
 				else
 				{
+					if(continents.contains(AddText.getText().toString().toLowerCase()))
+					{
+						setLog("Continent with the name already exist");
+
+					}
+					else {
 					setLog("Renaming Continent");
 					renameContinent(s, AddText.getText());
 					frame.validate();
 					frame.repaint();
 					panel.repaint();
-
+					}
 				}
 
 			}
@@ -536,6 +542,7 @@ public class MapEditView extends java.awt.Frame {
 						flag="T";
 
 					}
+					
 				}
 				String s =  countriesJList.getSelectedValue();
 
@@ -548,8 +555,23 @@ public class MapEditView extends java.awt.Frame {
 				{
 					if(flag.equals("T"))
 					{
+						List<String > countryNeighbours=countryAndNeighborsMap.get(countriesJList.getSelectedValue().toLowerCase());
+						if(countryNeighbours.contains(AddText.getText().toString().toLowerCase()))
+						{
+							setLog("Adjacent Country already exist");
+						}
+						else {
+							if(AddText.getText().toString().toLowerCase().equals(countriesJList.getSelectedValue().toLowerCase()))
+							{
+								setLog("Country cannot be adjacent to itself");
+
+							}
+							else
+							{
 						setLog("Adding Adjacent Country");
-						addAdjacentCountry(s,AddText.getText());
+						addAdjacentCountry(s,AddText.getText().toString().toLowerCase());
+							}
+						}
 					}
 
 					else
