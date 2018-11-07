@@ -915,7 +915,7 @@ public class Player extends Observable implements Serializable {
 	} else if (armies == 2) {
 		maximumAttackerDice = 1;
 	}
-		System.out.println("### The maximumDefenderDice value is #### : "+maximumAttackerDice);
+		//System.out.println("### The maximumDefenderDice value is #### : "+maximumAttackerDice);
 		return maximumAttackerDice;
 	}
 	
@@ -931,7 +931,7 @@ public class Player extends Observable implements Serializable {
 			maximumDefenderDice = 1;
 		}
 		
-		System.out.println("### The maximumDefenderDice value is #### : "+maximumDefenderDice);
+		//System.out.println("### The maximumDefenderDice value is #### : "+maximumDefenderDice);
 		return maximumDefenderDice;
 	
 	}
