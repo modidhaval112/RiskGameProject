@@ -729,8 +729,8 @@ public class Player extends Observable implements Serializable {
 						maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 						maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
 						
-						setPhase("###### The max attacker dice count is  #### : "+maximumAttackerDice);
-						setPhase("###### The max attacker dice count is  #### : "+maximumDefenderDice);
+						setPhase("###### The maximum number of dice attacker can roll is  #### : "+maximumAttackerDice);
+						setPhase("###### The maximum number of dice defender can roll is  #### : "+maximumDefenderDice);
 						
 						
 						attackerDiceResults = dice.rollDice(maximumAttackerDice);
