@@ -1,9 +1,9 @@
 [Map]
 [Continents]
-con2=0
-con4=0
-con3=0
-con1=0
+con2=10
+con4=20
+con3=30
+con1=5
 
 [Territories]
 c2,0,0,con3,a2,b2,d2,c1

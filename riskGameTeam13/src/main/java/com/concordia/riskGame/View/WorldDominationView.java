@@ -81,7 +81,7 @@ public class WorldDominationView implements Observer {
 				countryArmies=countryArmies+country.getArmies();
 
 			}
-			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+" Continents occupied by the Player is  "+continentsOccupied + " Occupied Countries are" +StringUtils.join(continentsOcuupied, ','));
+			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+", Continents occupied by the Player is:  "+continentsOccupied + " Occupied Countries are: " +StringUtils.join(continentsOcuupied, ','));
 
 
 		}
