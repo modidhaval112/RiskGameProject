@@ -835,7 +835,11 @@ public class Player extends Observable implements Serializable {
 				Collections.sort(defenderDiceResults);
 				Collections.reverse(defenderDiceResults);
 				int minimumDiceValue = attackerDice < defenderDice ? attackerDice : defenderDice;
-				
+				/*
+				 * if(attackerDiceResults.size()<3) { while(attackerDiceResults.size()!=3) {
+				 * attackerDiceResults.add(null); } } if(defenderDiceResults.size()<3) {
+				 * while(defenderDiceResults.size()!=3) { defenderDiceResults.add(null); } }
+				 */
 				for (int i = 0; i < minimumDiceValue; i++) {
 					if (attackerDiceResults.get(i) != null && defenderDiceResults.get(i) != null) {
 						setPhase("Result number " + (i + 1));
