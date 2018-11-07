@@ -150,9 +150,7 @@ public class MapValidator {
 		try {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 			mapContents = mapParseProcessor.readMapElements(bufferReaderForFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		
 		
 		Map<Country, List<Country>> mapCountry = mapContents.getCountryAndNeighbors();
 
@@ -243,6 +241,12 @@ public class MapValidator {
 		System.out.println("Total Countries : " + mapContents.getCountryAndNeighbors().keySet().size());
 		System.out.println("Message : " + statusMessage);
 		System.out.println("Valid Map Flag : " + validMapFlag);
+		} catch (FileNotFoundException e) {
+			validMapFlag = false;
+		}
+		catch (Exception e) {
+			validMapFlag = false;
+		}
 
 	}
 
