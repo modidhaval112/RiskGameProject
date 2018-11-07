@@ -31,7 +31,7 @@ public class Player extends Observable implements Serializable {
 	public static String reinforcePhase = "Reinforcement Phase";
 	public static String attackPhase = "Attack Phase";
 	public static String fortificationPhase = "Fortification Phase";
-	private String name;
+	public String name;
 	private int currentPlayerReinforceArmies;
 	private int playerCount;
 	private int totalArmies;

@@ -25,7 +25,12 @@ public class PhaseView implements Observer{
 		if(player.phasePrint.equals("phase"))
 		{
 			player.phasePrint="";
-			System.out.println("Phase View " + player.phaseMsg);
+			System.out.println(System.lineSeparator()+"############################################### Phase view ##################################################");
+
+			System.out.println("Current Phase is  " +player.getCurrentPhase() + " Current Player is  " +player.name + " Current action taking place is " +player.phaseMsg);
+			
+			System.out.println("################################################################################################################################"+System.lineSeparator());
+
 
 		}
 	}
