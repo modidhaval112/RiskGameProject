@@ -13,6 +13,8 @@ import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * This is the world domination view class created  in observer pattern to display each player stats.
@@ -40,6 +42,7 @@ public class WorldDominationView implements Observer {
 		for (int i = 0; i < playerList.size(); i++) {
 			HashMap<Continent, List<Country>> continentCountries=MapContents.getInstance().getContinentAndItsCountries();
 			int continentsOccupied=0;
+			List <String> continentsOcuupied= new ArrayList();
 			for (Entry<Continent, List<Country>> entry : continentCountries.entrySet()) 
 			{
 				List<Country> countries=entry.getValue();
@@ -67,6 +70,7 @@ public class WorldDominationView implements Observer {
 				if(isCountryCaptured)
 				{
 					continentsOccupied=continentsOccupied+1;
+					continentsOcuupied.add(entry.getKey().getContinentName().toString());
 				}
 
 			}
@@ -77,7 +81,7 @@ public class WorldDominationView implements Observer {
 				countryArmies=countryArmies+country.getArmies();
 
 			}
-			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+" Continents occupied by the Player is  "+continentsOccupied);
+			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+" Continents occupied by the Player is  "+continentsOccupied + " Occupied Countries are" +StringUtils.join(continentsOcuupied, ','));
 
 
 		}
