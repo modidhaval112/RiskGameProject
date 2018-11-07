@@ -874,7 +874,7 @@ public class Player extends Observable implements Serializable {
 						defenderDice = maximumDefenderDice;
 					}
 					System.out.println("Number of dice rolled by defender : " + defenderDice);
-				}
+				
 				attackerDiceResults = dice.rollDice(attackerDice);
 				defenderDiceResults = dice.rollDice(defenderDice);
 
@@ -926,6 +926,8 @@ public class Player extends Observable implements Serializable {
 						+ sourceCountryObject.getArmies());
 				System.out.println("Number of armies in " + destinationCountryObject.getCountryName() + " is "
 						+ destinationCountryObject.getArmies());
+				
+			}
 				if (destinationCountryObject.getArmies() < 1) {
 					this.movableArmies = 0;
 					playerLosesTheCountry(sourceCountryObject, destinationCountryObject);
@@ -1111,7 +1113,7 @@ public class Player extends Observable implements Serializable {
 			setDomination();
 			
 			setCurrentPhase(Player.reinforcePhase);
-			/*player.setCurrentPhase(Player.reinforcePhase);*/
+			player.setCurrentPhase(Player.reinforcePhase);
 			Scanner scanner;
 			scanner = new Scanner(System.in);
 			int armiesToBeGiven = 0;
@@ -1779,7 +1781,6 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 	}
 
 	public List<Country> checkNeighboringAttackableCountriesAndArmies(Country country, Player player) {
-		System.out.println("######Neighbouring Countries on which you can attack and its armies are :#####");
 		List<Country> neighbouringAttackableCountries = new ArrayList<>();
 		for (Country countryObject : country.getNeighbouringCountries()) {
 			Country neighboringCountry = getSourceCountryFromString(countryObject.getCountryName());
