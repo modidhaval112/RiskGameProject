@@ -85,6 +85,7 @@ public class MapOperations {
 		} 
 		catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
+			e.printStackTrace();
 		}
 		
 		try {
@@ -96,7 +97,7 @@ public class MapOperations {
 		}catch (Exception e) {
 			System.out.println("Please start over the map creation");
 			System.out.println("Fileexists"+file.exists());
-			System.out.println("File deleted "+file.delete());
+			//System.out.println("File deleted "+file.delete());
 			GameLauncher gameLauncher = new GameLauncher();
 		}
 		if(mapValidator.getValidMapFlag()) {
