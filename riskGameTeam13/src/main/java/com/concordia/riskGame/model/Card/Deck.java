@@ -16,85 +16,85 @@ import com.concordia.riskGame.model.Country.Country;
  */
 public class Deck implements Serializable{
 
-    private int i;
-    private static Deck deck;
+	private int i;
+	private static Deck deck;
 
-    private String input;
-    private String name;
+	private String input;
+	private String name;
 
-    private String[] typesArray;
+	private String[] typesArray;
 
-    public  ArrayList<Card> deckOfCards;
+	public  ArrayList<Card> deckOfCards;
 
-    private Card drawCard;
+	private Card drawCard;
 
-   /**
-    *  Creates all cards, one for each territory. Each card has either
-     * a type of Infantry, Cavalry, or Artillery.
-    * @param list list of country names
- * @return 
-    */
-    public void setDeckOfCards(List<Country> list) {
+	/**
+	 *  Creates all cards, one for each territory. Each card has either
+	 * a type of Infantry, Cavalry, or Artillery.
+	 * @param list list of country names
+	 * @return 
+	 */
+	public void setDeckOfCards(List<Country> list) {
 
-        Collections.shuffle(list);
+		Collections.shuffle(list);
 
-        //Types of cards
-        typesArray = new String[]{"Infantry", "Cavalry", "Artillery"};
+		//Types of cards
+		typesArray = new String[]{"Infantry", "Cavalry", "Artillery"};
 
-        deckOfCards = new ArrayList<Card>();
+		deckOfCards = new ArrayList<Card>();
 
-        for (i = 0; i < list.size(); i++) {
-            // Add new cards to deck
-        	deckOfCards.add(new Card(typesArray[i % 3], list.get(i)));
-            //System.out.println("Added new card to deck: " + deck.get(i).getName());
-        }
-        Collections.shuffle(deckOfCards);
-    }
+		for (i = 0; i < list.size(); i++) {
+			// Add new cards to deck
+			deckOfCards.add(new Card(typesArray[i % 3], list.get(i)));
+			//System.out.println("Added new card to deck: " + deck.get(i).getName());
+		}
+		Collections.shuffle(deckOfCards);
+	}
 
-    /**
-     * Public default constructor to access other methods.
-     */
-    public Deck(){
-       // deck = new ArrayList<>();
-    }
-    
-    /**
-     * Intialization of the instance.
-     * @return It is returning of type deck
-     */
-    public static Deck getInstance() {
-        if (null == deck) {
-            	deck = new Deck();
-        }
-        return deck;
-    }
+	/**
+	 * Public default constructor to access other methods.
+	 */
+	public Deck(){
+		// deck = new ArrayList<>();
+	}
 
-    /**
-     * Removes a card from the deck and return it
-     * @return card object
-     */
-    public Card draw() {
+	/**
+	 * Intialization of the instance.
+	 * @return It is returning of type deck
+	 */
+	public static Deck getInstance() {
+		if (null == deck) {
+			deck = new Deck();
+		}
+		return deck;
+	}
 
-        drawCard = deckOfCards.get(0);
-        deckOfCards.remove(0);
+	/**
+	 * Removes a card from the deck and return it
+	 * @return card object
+	 */
+	public Card draw() {
 
-        return drawCard;
-    }
+		drawCard = deckOfCards.get(0);
+		deckOfCards.remove(0);
 
-   /**
-    * Add a card to the deck
-    * @param card name of the card which is to be added to deck
-    */
-    public void add(Card card) {
+		return drawCard;
+	}
 
-        deckOfCards.add(card);
-    }
+	/**
+	 * Add a card to the deck
+	 * @param card name of the card which is to be added to deck
+	 */
+	public void add(Card card) {
 
-   /**
-    * Shuffle the deck of cards
-    */
-    public void shuffle() {
+		deckOfCards.add(card);
+	}
 
-        Collections.shuffle(deckOfCards);
-    }
+	/**
+	 * Shuffle the deck of cards
+	 */
+	public void shuffle() {
+
+		Collections.shuffle(deckOfCards);
+	}
 }

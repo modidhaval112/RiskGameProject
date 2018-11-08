@@ -65,27 +65,19 @@ public class GameDriver {
 			playerInstance = playerInstance.reinforcePhase(p);
 			if(playerInstance.getCanAttack()) {
 				
-				//List<Country> sourceAndDestinationCountry = getSourceAndDestinationCountry(playerInstance);
 			playerInstance = playerInstance.attackPhase(playerInstance);
 			}
-			/*else {
-				System.out.println(playerInstance.getName()+"has won the game");
-				System.out.println("###### Game has been ended ######");
-				endTheGame = true;
-				break;
-			}*/
+			
 			if(playerInstance.getCanFortify()) {
 			playerInstance = playerInstance.forfeitPhase(playerInstance);
 			}
-			//updatedPlayerList.add(playerInstance);
 			}
 		}
 		}
 		if(endTheGame) {
 			System.exit(0);
 		}
-		/*List<Player> gdPlayerList = new ArrayList<Player>();
-		gdPlayerList = updatedPlayerList;*/
+		
 		System.out.println("######## Do you want to exit : yes  #########");
 		String choice = scanner.nextLine();
 
