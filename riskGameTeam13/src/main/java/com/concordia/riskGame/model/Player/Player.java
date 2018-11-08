@@ -317,6 +317,12 @@ public class Player extends Observable implements Serializable {
 	 * @param playerObject Instance of current player in the forfeit phase.
 	 * @return Instance of the player is returned to the next phase
 	 */
+	/**
+	 * The following method implements the fortify phase of the risk game.
+	 * 
+	 * @param playerObject Instance of current player in the forfeit phase.
+	 * @return Instance of the player is returned to the next phase
+	 */
 	public Player forfeitPhase(Player playerObject) {
 		setCurrentPhase(Player.fortificationPhase);
 		playerObject.setCurrentPhase(Player.fortificationPhase);
@@ -353,7 +359,6 @@ public class Player extends Observable implements Serializable {
 				{
 				srcCountry = srcCountry.trim();
 				
-				
 				setPhase(" ##### Printing List of neighouring countries ###### ");
 				List<Country> destNeighborCountryList = new ArrayList();
 				destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
@@ -367,8 +372,8 @@ public class Player extends Observable implements Serializable {
 					
 				}
 				
-				
-
+				if(!srcCountry.equalsIgnoreCase("quit"))
+				{
 				System.out.println(
 						"																												  ");
 				
@@ -376,7 +381,8 @@ public class Player extends Observable implements Serializable {
 					srcCountry = reEnterSourceCountry(player);
 					srcCountry = srcCountry.trim();
 				}
-
+				if(!srcCountry.equalsIgnoreCase("quit"))
+				{
 				destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
 				
 				setPhase("###### Please enter destination country where you want to move armies #####");
@@ -490,7 +496,16 @@ public class Player extends Observable implements Serializable {
 				player.setAssignedCountries(assignedCountriesClone);
 				setPhase("##### Armies have been moved between countries ######");
 				setErrorMesage("Armies have been moved between countries");
-				return player;
+				return player;}
+				else
+				{
+					return player;
+				}
+				}
+				else
+				{
+					return player;
+				}
 				}
 				else
 				{
