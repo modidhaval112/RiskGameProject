@@ -1093,11 +1093,12 @@ public class Player extends Observable implements Serializable {
 			{
 				for(Continent cont : currcontControlList)
 				{
-					setPhase(" ##### continent name is ###### "+cont.getContinentName()  +"     control value is "+cont.getContinentControlValue() );
+					setPhase(" ##### continent name is ###### "+cont.getContinentName()  +" and     control value is "+cont.getContinentControlValue() );
 					armiesContControl = armiesContControl + cont.getContinentControlValue();
 				}
 			}
 			
+			System.out.println("#### The armies to be assigned from control value of continent is ###### : "+armiesContControl);
 			
 			assignedArmies = assignedArmies + armiesContControl;
 			
