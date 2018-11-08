@@ -180,6 +180,7 @@ public class MapParseProcessor {
 	 * This method reads the selected map's elements
 	 * 
 	 * @param bufferReader BufferedReader to read text from the file
+	 * @return It retuns of type mapcontent object
 	 */
 	public MapContents readMapElements(BufferedReader bufferReader) {
 		try {

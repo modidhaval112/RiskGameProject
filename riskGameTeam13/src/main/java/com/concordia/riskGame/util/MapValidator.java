@@ -27,6 +27,7 @@ public class MapValidator {
 
 	/**
 	 * method to check if all the labels are described properly
+	 * @param mapContents It is of type map Contents Object
 	 * 
 	 * @param bufferReaderForFile : GameMap object
 	 * @return true if all labels are described properly, otherwise false

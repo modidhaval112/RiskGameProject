@@ -1373,7 +1373,16 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 		return returnValue;
 	}
 
+	/**
+	 * Check for exchange cards
+	 * @param cardTypes pass card input type
+	 * @param cardAppearingMoreThanThrice check card appear string
+	 * @param player player object
+	 * @param cardNumbers pass the cardnumbers
+	 * @throws Exception exception of method
+	 */
 	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player, List<Integer> cardNumbers) throws Exception {
+
 
 		if(cardTypes==3 || (cardAppearingMoreThanThrice!=null && !cardAppearingMoreThanThrice.isEmpty())){
 			Card card1 = player.getCardList().get(cardNumbers.get(0)-1);
@@ -1502,6 +1511,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 
 	/**
 	 * To get the country object from the string value of the country
+	 * @param sourceCountry Pass the source country
 	 * 
 	 * @param player  the player object to which the country belongs
 	 * @param country string value of the country
@@ -1521,6 +1531,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 	
 	/**
 	 * To get the country object from the string value of the country if it belongs to the player
+	 * @param sourceCountry source country of the player
 	 * 
 	 * @param player  the player object to which the country belongs
 	 * @param country string value of the country

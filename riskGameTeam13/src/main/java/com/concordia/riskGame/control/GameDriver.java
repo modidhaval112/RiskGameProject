@@ -97,6 +97,12 @@ public class GameDriver {
 	}
 
 
+	/**
+	 * Checks for player attack possibility based on source and destination countries
+	 * @param player Accept the player object as Input
+	 * @return It returns the countries list
+	 * @throws Exception
+	 */
 	public List<Country> getSourceAndDestinationCountry(Player player) throws Exception {
 		String sourceCountry;
 		Country sourceCountryObject;
