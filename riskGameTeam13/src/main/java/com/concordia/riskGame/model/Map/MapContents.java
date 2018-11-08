@@ -20,7 +20,7 @@ import com.concordia.riskGame.model.Player.Player;
 public class MapContents {
 
 	private static MapContents mapContents;
-	
+
 
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
 	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
@@ -30,22 +30,26 @@ public class MapContents {
 	private List<Country> countryList = new ArrayList<>();
 	private int cardExchangeCount = 0;
 
-	
+
 
 	/**
-     * Default Constructor
-     */
-    private MapContents() {
-        //To Prevent Other classes from creating object.
-    }
-    
-	 public static MapContents getInstance() {
-	        if (null == mapContents) {
-	            	mapContents = new MapContents();
-	        }
-	        return mapContents;
-	    }
-	
+	 * Default Constructor
+	 */
+	private MapContents() {
+		//To Prevent Other classes from creating object.
+	}
+
+	/**
+	 * It creates the Instance of the mapContents
+	 * @return returns mapContents object
+	 */
+	public static MapContents getInstance() {
+		if (null == mapContents) {
+			mapContents = new MapContents();
+		}
+		return mapContents;
+	}
+
 	/**
 	 * This method is to get map author name
 	 * @return  mapAuthorName
@@ -53,7 +57,7 @@ public class MapContents {
 	public String getMapAuthorName() {
 		return mapAuthorName;
 	}
-	
+
 	/**
 	 * This method is to set map author name
 	 * @param  mapAuthorName Name of the map author.
@@ -61,7 +65,7 @@ public class MapContents {
 	public void setMapAuthorName(String mapAuthorName) {
 		this.mapAuthorName = mapAuthorName;
 	}
-	
+
 	/**
 	 * This method is to get Hashmap of countries and its list of neighbors.
 	 * @return  countryAndNeighbors Hashmap of countries and its list of neighbors.
@@ -69,7 +73,7 @@ public class MapContents {
 	public HashMap<Country, List<Country>> getCountryAndNeighbors() {
 		return countryAndNeighbors;
 	}
-	
+
 	/**
 	 * This method is to set Hashmap of countries and its list of neighbors.
 	 * @param countryAndNeighbors Hashmap of countries and its list of neighbors.
@@ -77,7 +81,7 @@ public class MapContents {
 	public void setCountryAndNeighbors(HashMap<Country, List<Country>> countryAndNeighbors) {
 		this.countryAndNeighbors = countryAndNeighbors;
 	}
-	
+
 	/**
 	 * Method to get Continent and its countries
 	 * @return  continentAndItsCountries Hashmap of continents and its list of countries.
@@ -85,7 +89,7 @@ public class MapContents {
 	public HashMap<Continent, List<Country>> getContinentAndItsCountries() {
 		return continentAndItsCountries;
 	}
-	
+
 	/**
 	 * Method to set Continent and its countries
 	 * @param continentAndItsCountries Hashmap of continents and its list of countries.
@@ -93,7 +97,7 @@ public class MapContents {
 	public void setContinentAndItsCountries(HashMap<Continent, List<Country>> continentAndItsCountries) {
 		this.continentAndItsCountries = continentAndItsCountries;
 	}
-	
+
 	/**
 	 * To set the MapContentsObject
 	 * @param mapContents object is set
@@ -101,7 +105,7 @@ public class MapContents {
 	public static void setMapContents(MapContents mapContents) {
 		MapContents.mapContents = mapContents;
 	}
-	
+
 	/**
 	 * This method returns the Player List
 	 * @return List of Players in the game.
@@ -120,7 +124,7 @@ public class MapContents {
 
 	/**
 	 * Returns number of labels in the map
-	 * @return
+	 * @return It returns labelCount
 	 */
 	public int getLabelCount() {
 		return labelCount;
@@ -135,6 +139,7 @@ public class MapContents {
 	}
 
 	/**
+	 * Get the country list
 	 * @return the countryList
 	 */
 	public List<Country> getCountryList() {
@@ -142,23 +147,24 @@ public class MapContents {
 	}
 
 	/**
-	 * @param countryList the countryList to set
+	 * Setting the country list
+	 * @param countryList The countryList to set
 	 */
 	public void setCountryList(List<Country> countryList) {
 		this.countryList = countryList;
 	}
-	
+
 	/**
-	 * 
-	 * @return
+	 * Getting the cardexchangecount
+	 * @return It returns the CardExchange count
 	 */
 	public int getCardExchangeCount() {
 		return cardExchangeCount;
 	}
 
 	/**
-	 * 
-	 * @param armyExchangeCount
+	 * Setting the army exchnage count
+	 * @param armyExchangeCount  Army exchange count
 	 */
 	public void setCardExchangeCount(int armyExchangeCount) {
 		this.cardExchangeCount = armyExchangeCount;
