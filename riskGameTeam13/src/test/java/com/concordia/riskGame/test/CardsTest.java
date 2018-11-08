@@ -12,12 +12,19 @@ import org.junit.Test;
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
-
+/**
+ * This Class implements the test methods to test deck of cards
+ * @author Dheeraj As
+ *
+ */
 public class CardsTest {
 	private List<Country> list;
 	private Deck deckObj;
 	private Card cardObj;
-	
+	/**
+	 * sets up the data for card test methods 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		deckObj= new Deck();
@@ -29,7 +36,9 @@ public class CardsTest {
 		list.add(new Country("c5"));
 		cardObj= new Card("Infantry",new Country("c1"));
 	}
-
+	/**
+	 * Method to check for setting of the deck of cards
+	 */
 	@Test
 	public void setDeckOfCardsTest() {
 		deckObj.setDeckOfCards(list);
@@ -37,7 +46,9 @@ public class CardsTest {
 			assertNotNull(deckObj.draw());
 		}
 	}
-	
+	/**
+	 * Method to check drawing of cards
+	 */
 	@Test
 	public void DeckOfCardsDrawTest() {
 		deckObj.setDeckOfCards(list);
@@ -46,7 +57,9 @@ public class CardsTest {
 		}
 			assertTrue(deckObj.deckOfCards.isEmpty());
 	}
-	
+	/**
+	 * Method to check if card can be added to the deck
+	 */
 	@Test
 	public void addCardTest() {
 		deckObj.setDeckOfCards(list);
