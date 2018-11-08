@@ -495,11 +495,11 @@ public class MapEditView extends java.awt.Frame {
 
 					}
 					else {
-					setLog("Renaming Continent");
-					renameContinent(s, AddText.getText());
-					frame.validate();
-					frame.repaint();
-					panel.repaint();
+						setLog("Renaming Continent");
+						renameContinent(s, AddText.getText());
+						frame.validate();
+						frame.repaint();
+						panel.repaint();
 					}
 				}
 
@@ -526,8 +526,8 @@ public class MapEditView extends java.awt.Frame {
 					}
 					else
 					{
-					setLog("Renaming Country");
-					renameCountry(s, AddText.getText());
+						setLog("Renaming Country");
+						renameCountry(s, AddText.getText());
 					}
 				}
 
@@ -549,7 +549,7 @@ public class MapEditView extends java.awt.Frame {
 						flag="T";
 
 					}
-					
+
 				}
 				String s =  countriesJList.getSelectedValue();
 
@@ -575,8 +575,8 @@ public class MapEditView extends java.awt.Frame {
 							}
 							else
 							{
-						setLog("Adding Adjacent Country");
-						addAdjacentCountry(s,AddText.getText().toString().toLowerCase());
+								setLog("Adding Adjacent Country");
+								addAdjacentCountry(s,AddText.getText().toString().toLowerCase());
 							}
 						}
 					}
@@ -701,7 +701,7 @@ public class MapEditView extends java.awt.Frame {
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				
+
 
 
 			}

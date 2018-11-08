@@ -1,4 +1,4 @@
- package com.concordia.riskGame.View;
+package com.concordia.riskGame.View;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -38,7 +38,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private PlayerCount playerCount;
 	private CreateMapFile createMapFile;
 	private MapEditView editObject;
-	
+
 	/**
 	 * This method launches the game and displays the start menu
 	 */
@@ -60,11 +60,11 @@ public class GameLauncher extends JFrame implements ActionListener {
 		gameFrame = new JFrame("Concordia Conquest");
 		gameFrame.setVisible(true);
 		try {
-            JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
-            gameFrame.setContentPane(label);
-        } catch (IOException e) {
-            System.out.println("Error Message : " + e.getMessage());
-        }
+			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
+			gameFrame.setContentPane(label);
+		} catch (IOException e) {
+			System.out.println("Error Message : " + e.getMessage());
+		}
 		gameFrame.setSize(500, 500);
 		gameFrame.setLocation(500,200);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +75,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		gamePanel = new JPanel();
 		gamePanel.setBorder(border);
-		
+
 		titleLabel = new JLabel("Concordia Conquest");
 		startGameButton = new JButton("Start Game");
 		startGameButton.setFont(new Font("Georgia", Font.PLAIN, 10));
@@ -94,7 +94,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		titleLabel.setForeground(Color.black);
 		titleLabel.setFont(new Font("Sans Serif", Font.PLAIN, 14));
-	
+
 		startGameButton.setBounds(200, 90, 100, 30);
 		startGameButton.addActionListener(this);
 
@@ -103,17 +103,17 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		editMapButton.setBounds(200, 290, 100, 30);
 		editMapButton.addActionListener(this);
-		
+
 		exitButton.setBounds(200, 390, 100, 30);
 		exitButton.addActionListener(this);
-		
+
 		gameFrame.getContentPane().add(titleLabel);
 		gameFrame.getContentPane().add(startGameButton);
 		gameFrame.getContentPane().add(createMapButton);
 		gameFrame.getContentPane().add(editMapButton);
 		gameFrame.getContentPane().add(exitButton);
 		gameFrame.getContentPane().add(gamePanel);
-		
+
 
 	}
 
@@ -137,23 +137,23 @@ public class GameLauncher extends JFrame implements ActionListener {
 			gameFrame.setVisible(false);
 			playerCount = new PlayerCount();
 			playerCount.setVisible(true);
-			
+
 		} else if (event.getSource() == createMapButton) {
 			System.out.println("#### createMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			createMapFile = new CreateMapFile();
 			createMapFile.createMap();
-			
-			
+
+
 		} else if (event.getSource() == editMapButton) {
 			System.out.println("#### editMapMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			editObject= new MapEditView();
 			editObject.EditMapFileChoose();
-			
+
 		} else if (event.getSource() == exitButton) {
 			System.exit(0);
-			
+
 		}
 
 	}

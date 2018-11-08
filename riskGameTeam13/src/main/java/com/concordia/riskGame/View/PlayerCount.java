@@ -75,7 +75,6 @@ public class PlayerCount extends JFrame implements ActionListener {
 		}
 
 		
-		/*playerCounterArray = arrayOfPlayer();*/
 
 		countFrame.getContentPane().setLayout(null);
 
