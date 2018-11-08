@@ -58,6 +58,10 @@ public class Deck implements Serializable{
        // deck = new ArrayList<>();
     }
     
+    /**
+     * Intialization of the instance.
+     * @return It is returning of type deck
+     */
     public static Deck getInstance() {
         if (null == deck) {
             	deck = new Deck();
