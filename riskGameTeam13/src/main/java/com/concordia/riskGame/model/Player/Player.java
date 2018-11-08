@@ -564,7 +564,7 @@ public class Player extends Observable implements Serializable {
 		if (!checkValidArmyFortification(army))
 			army = reEnterArmies();
 
-		return soruceCountry;
+		return army;
 	}
 
 
@@ -572,7 +572,7 @@ public class Player extends Observable implements Serializable {
 	 * Returns true ifarmycount is greater than zero
 	 * @param army returns the army count
 	 */
-	public void checkValidArmyFortification(int army)
+	public boolean checkValidArmyFortification(int army)
 	{ 
 		boolean returnValue = false;
 		if(army < 0)
