@@ -17,7 +17,8 @@ import org.junit.runners.Suite.SuiteClasses;
 			   StartUpPhaseTest.class,
 			   AttackPhaseTest.class,
 			   FortificationTest.class,
-			   CardsTest.class})
+			   CardsTest.class,
+			   DiceTest.class})
 
 public class TestSuiteAll {
 
