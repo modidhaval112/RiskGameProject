@@ -28,7 +28,9 @@ public class MapContents {
 	private int labelCount;
 	public List<Player> playerList = new ArrayList<>();
 	private List<Country> countryList = new ArrayList<>();
-	 
+	private int cardExchangeCount = 0;
+
+	
 
 	/**
      * Default Constructor
@@ -144,6 +146,22 @@ public class MapContents {
 	 */
 	public void setCountryList(List<Country> countryList) {
 		this.countryList = countryList;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getCardExchangeCount() {
+		return cardExchangeCount;
+	}
+
+	/**
+	 * 
+	 * @param armyExchangeCount
+	 */
+	public void setCardExchangeCount(int armyExchangeCount) {
+		this.cardExchangeCount = armyExchangeCount;
 	}
 
 }

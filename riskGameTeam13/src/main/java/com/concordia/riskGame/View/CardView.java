@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 
@@ -22,7 +23,7 @@ public class CardView implements Observer{
 		Scanner scanner = new Scanner(System.in);
 		HashMap<String, Integer> cardCount = new HashMap<>();
 		int cardTypes = 0;
-		player.setCardExchangeCount(0);
+		player.setCardExchangeTypeCount(0);
 		player.setCardExchangeAppearingMoreThanThrice("");
 		String cardExchangeChoice;
 		boolean cardExchangePossible = false;
@@ -37,7 +38,7 @@ public class CardView implements Observer{
 				c++;
 				cardCount.put(card.getType(), c);
 			}
-			System.out.print(card.getType() + ", ");
+			System.out.println(card.getType() + ", "+card.getCountry().getCountryName());
 		}
 
 		if (cardTypes == 3) {
@@ -85,10 +86,11 @@ public class CardView implements Observer{
 						throw new Exception();
 					}
 					player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
-					int count = player.getCardExchangeCount();
+					player.setExchanged(false);
+					int count = MapContents.getInstance().getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
 
-
+					MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount()+1);
 
 
 					player = player.exChangeCardTerritoryExist(exchangeCards,player);
@@ -137,8 +139,11 @@ public class CardView implements Observer{
 					throw new Exception();
 				}
 				player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
-				int count = player.getCardExchangeCount();
+				player.setExchanged(false);
+				int count = MapContents.getInstance().getCardExchangeCount();
 				armiesToBeGiven = (count + 1) * 5;
+
+				MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount()+1);
 
 				player = player.exChangeCardTerritoryExist(exchangeCards,player);
 
@@ -168,7 +173,7 @@ public class CardView implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
-		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && player.getExchanged()) {
+		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && !(player.getCardList().isEmpty()) && player.getExchanged()) {
 
 			System.out.println("**************In Card View*************** ");
 			List<Card> cardList = player.getCardList();

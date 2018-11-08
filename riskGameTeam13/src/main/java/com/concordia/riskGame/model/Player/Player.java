@@ -840,7 +840,7 @@ public class Player extends Observable implements Serializable {
 
 				setPhase("Attacker Dice Roll results");
 				for (Integer result : attackerDiceResults) {
-					System.out.print(result + " ");
+					setPhase(result + " ");
 				}
 				System.out.println();
 				setPhase("Defender Dice Roll results");
@@ -915,7 +915,7 @@ public class Player extends Observable implements Serializable {
 			}
 		} catch (Exception e) {
 			System.out.println("Exception***************");
-			e.printStackTrace();
+			//e.printStackTrace();
 			attackPhase(player);
 		}
 		player.setCardGiven(false);
@@ -1106,6 +1106,8 @@ public class Player extends Observable implements Serializable {
 			CardView cardView= new CardView();
 			armiesToBeGiven=cardView.exchangeCards(player);
 			assignedArmies += armiesToBeGiven;
+			setCardList(new ArrayList<>());
+			setExchanged(false);
 			System.out.println(
 					"																													");
 			setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
@@ -1173,7 +1175,7 @@ public class Player extends Observable implements Serializable {
 
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage()); 
-			e.printStackTrace();
+			//e.printStackTrace();
 			reinforcePhase(player);
 		}
 		setPhase("########" + player.getName() + "  reinforcement phase ended ########");
@@ -1398,7 +1400,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 			deck.add(card1);
 			deck.add(card2);
 			deck.add(card3);
-			exchanged = true;
+			setExchanged(true);
 			setCardList(player.getCardList());
 			setChanged();
 			notifyObservers(player);
