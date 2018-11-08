@@ -72,6 +72,7 @@ public class WorldDominationView implements Observer {
 						continentsOccupied=continentsOccupied+1;
 						continentsOcuupied.add(entry.getKey().getContinentName().toString());
 					}
+					
 
 				}
 				String percentage = df.format(((playerList.get(i).getAssignedCountries().size())*100)/noOfCountries);
