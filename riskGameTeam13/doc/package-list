@@ -1,11 +1,1 @@
-com.concordia.riskGame.View
-com.concordia.riskGame.control
-com.concordia.riskGame.exception
-com.concordia.riskGame.model.Card
-com.concordia.riskGame.model.Continent
-com.concordia.riskGame.model.Country
-com.concordia.riskGame.model.Map
 com.concordia.riskGame.model.Player
-com.concordia.riskGame.model.dice
-com.concordia.riskGame.test
-com.concordia.riskGame.util

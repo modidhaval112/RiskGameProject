@@ -387,7 +387,7 @@ public class Player extends Observable implements Serializable {
 				setPhase("#### List of countries owned by the player #####");
 
 				for (Country countryObj : player.getAssignedCountries()) {
-					System.out.print(countryObj.getCountryName() + ",");
+					setPhase(countryObj.getCountryName() + ": "  + countryObj.getArmies());
 
 				}
 
@@ -429,7 +429,7 @@ public class Player extends Observable implements Serializable {
 						}
 						if(!srcCountry.equalsIgnoreCase("quit"))
 						{
-						destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
+						destNeighborCountryList=printNeighbouringCountryList(srcCountry, player);
 
 						setPhase("###### Please enter destination country where you want to move armies #####");
 						String destinationCountry = scanner.nextLine();
@@ -723,11 +723,52 @@ public class Player extends Observable implements Serializable {
 			}
 		}
 
-		System.out.println("####### Printing the neighbour countries owned by the player #########");
+		/*System.out.println("####### Printing the neighbour countries owned by the player #########");*/
 
-		System.out.println("####### The size of common country list is ######## " + commonCountryList.size());
+		//System.out.println("####### The size of common country list is ######## " + commonCountryList.size());
 		for (Country countryObj : commonCountryList) {
-			System.out.print("            " + countryObj.getCountryName());
+			setPhase(countryObj.getCountryName());
+		}
+
+		return commonCountryList;
+	}
+	/**
+	 * The following method creates a valid list of neighouring countries owned by a
+	 * player for that country.
+	 * 
+	 * @param countryName Name of the Country.
+	 * @param player      Player Instance.
+	 * @return Returns the List of adjacent countries for a country owned by the
+	 *         player.
+	 */
+	public List<Country> printNeighbouringCountryList(String countryName, Player player) {
+		List<Country> countryNeighbourList = new ArrayList();
+
+		List<Country> playerCountryList = new ArrayList();
+
+		List<Country> commonCountryList = new ArrayList();
+
+		playerCountryList = player.getAssignedCountries();
+
+		for (Country countryInstance : player.getAssignedCountries()) {
+			if (countryInstance.getCountryName().equalsIgnoreCase(countryName)) {
+				countryNeighbourList = countryInstance.getNeighbouringCountries();
+			}
+
+		}
+
+		for (Country countryObj : playerCountryList) {
+			for (Country countryj : countryNeighbourList) {
+				if (countryj.getCountryName().equalsIgnoreCase(countryObj.getCountryName())) {
+					commonCountryList.add(countryj);
+				}
+			}
+		}
+
+		/*System.out.println("####### Printing the neighbour countries owned by the player #########");*/
+
+		//System.out.println("####### The size of common country list is ######## " + commonCountryList.size());
+		for (Country countryObj : commonCountryList) {
 		}
 
 		return commonCountryList;
