@@ -16,6 +16,11 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
+/**
+ * The following class performs unit tests on attack phase.
+ * @author Darwin Anirudh
+ *
+ */
 public class AttackPhaseTest {
 
 	private Player playerOne;
@@ -170,6 +175,9 @@ public class AttackPhaseTest {
 		playerTwo.setCardList(playerTwoCard);
 	}
 
+	/**
+	 * The following method checks the list of attackable countries is valid or not.
+	 */
 	@Test
 	public void printAttackAbleCountryList()
 	{
@@ -182,13 +190,19 @@ public class AttackPhaseTest {
 		assertEquals(c.getCountryName(), "countryThree");
 	}
 
-	
+	/**
+	 * The following test method checks if player has won the game or not by checking count of countries.
+	 */
 	@Test
 	public void hasPlayerWon()
 	{
 		assertFalse(playerOne.hasPlayerWon(playerOne));
 	}
 	
+	
+	/**
+	 *The following test method checks if the cards are transfered after player loses. 
+	 */
 	@Test
 	public void checkValidCards()
 	{
@@ -198,6 +212,9 @@ public class AttackPhaseTest {
 	}
 	
 	
+	/**
+	 * The following test method checks if armies are reduced after it is defeated. 
+	 */
 	@Test
 	public void checkPlayerLoses()
 	{
@@ -210,7 +227,9 @@ public class AttackPhaseTest {
 		
 	}
 	
-	
+	/**
+	 * The following test method checks if correct number of dice count is returned depending upon the number of armies.
+	 */
 	@Test
 	public void checkAttackerDefenderDice()
 	{
