@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
+import com.concordia.riskGame.model.Player.Player;
 
 /**
  * This class contains all the methods to validate the map file.
@@ -50,7 +52,7 @@ public class MapValidator {
 		{
 			listContinentName.add(continent.getContinentName());
 		}
-		
+
 		for (Country country : mapContents.getCountryAndNeighbors().keySet())
 		{
 			if (!listContinentName.contains(country.getBelongsToContinent())) {
@@ -61,6 +63,37 @@ public class MapValidator {
 		return true;
 	}
 
+
+	/**
+	 * method to check if map is connected continent graph or not
+	 * 
+	 * @param mapContinent map of continent and Countries
+	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
+	 *                   not visited
+	 * @return true if graph is connected, otherwise false
+	 */
+	public Map<String, Integer> checkConnectedContinentGraph(Map<Continent, List<Country>> mapContinent,
+			Map<String, Integer> visitedMap) {
+
+		visitedMap.put(mapContinent.keySet().iterator().next().getContinentName(), 1);
+		for(Entry<Continent, List<Country>> continent : mapContinent.entrySet()) {
+			System.out.println("Continent name  : " + continent.getKey().getContinentName());
+			for(Country country : continent.getValue()) {
+				System.out.println("Country name  : " + country.getCountryName());
+				for(Country neighbour : country.getNeighbouringCountries()) {
+					Player player = new Player();
+					Country n = player.getSourceCountryFromString(neighbour.getCountryName());
+					if(!visitedMap.containsKey(n.getBelongsToContinent()) && !(n.getBelongsToContinent().equals(country.getBelongsToContinent()))) {
+						visitedMap.put(n.getBelongsToContinent(), 1);
+					}
+				}
+
+			}
+		}
+
+		return visitedMap;
+	}
+
 	/**
 	 * method to check if all continent have at least one country
 	 * 
@@ -68,7 +101,7 @@ public class MapValidator {
 	 * @return true if all continent has at least one country, otherwise false
 	 */
 	public boolean checkContinentCountry(MapContents mapContents) {
-		
+
 		for (Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
 			if (mapContents.getContinentAndItsCountries().get(continent).isEmpty()) {
 				return false;
@@ -97,7 +130,7 @@ public class MapValidator {
 						return false;
 					}
 				}
-					
+
 			}
 		}
 		return true;
@@ -145,101 +178,101 @@ public class MapValidator {
 		MapParseProcessor mapParseProcessor = new MapParseProcessor();
 		MapContents mapContents = null;
 		BufferedReader bufferReaderForFile = null;
-		
+
 		try {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 			mapContents = mapParseProcessor.readMapElements(bufferReaderForFile);
-		
-		
-		Map<Country, List<Country>> mapCountry = mapContents.getCountryAndNeighbors();
 
-		for (int i = 0; i < mapContents.getCountryAndNeighbors().keySet().size(); i++) {
-			if (visitedMap1.size() != mapContents.getCountryAndNeighbors().keySet().size()) {
-				Map<String, Integer> visitedMap = new HashMap<>();
-				visitedMap1 = mapValidator.checkConnectedGraph(mapContents.getCountryAndNeighbors().keySet().iterator().next(), mapCountry, visitedMap);
+
+			Map<Country, List<Country>> mapCountry = mapContents.getCountryAndNeighbors();
+
+			for (int i = 0; i < mapContents.getCountryAndNeighbors().keySet().size(); i++) {
+				if (visitedMap1.size() != mapContents.getCountryAndNeighbors().keySet().size()) {
+					Map<String, Integer> visitedMap = new HashMap<>();
+					visitedMap1 = mapValidator.checkConnectedGraph(mapContents.getCountryAndNeighbors().keySet().iterator().next(), mapCountry, visitedMap);
+				} else {
+					break;
+				}
+			}
+
+			int connectedCountries = 0;
+			for (Map.Entry<String, Integer> entry : visitedMap1.entrySet()) {
+				if (entry.getValue() == 1) {
+					connectedCountries++;
+				}
+			}
+
+
+			if (mapValidator.checkMapLabel(mapContents)) {
+				validMapFlag = true;
 			} else {
-				break;
+				validMapFlag = false;
+				statusMessage = "Map is invalid as labels are not properly described";
+				System.out.println("Message : " + statusMessage);
+				return;
 			}
-		}
 
-		int connectedCountries = 0;
-		for (Map.Entry<String, Integer> entry : visitedMap1.entrySet()) {
-			if (entry.getValue() == 1) {
-				connectedCountries++;
+			if (mapContents.getContinentAndItsCountries().keySet().isEmpty()) {
+				validMapFlag = false;
+				statusMessage = "Map should have atleast one Continent";
+				System.out.println("Message : " + statusMessage);
+				return;
+			} else {
+				validMapFlag = true;
+				statusMessage = "Map is valid";
 			}
-		}
 
-		
-		if (mapValidator.checkMapLabel(mapContents)) {
-			validMapFlag = true;
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as labels are not properly described";
+			if (mapContents.getCountryAndNeighbors().keySet().isEmpty()) {
+				validMapFlag = false;
+				statusMessage = "Map should have atleast one Country";
+				System.out.println("Message : " + statusMessage);
+				return;
+			} else {
+				validMapFlag = true;
+				statusMessage = "Map is valid";
+			}
+
+			if (mapValidator.checkContinent(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Country Continent should be from only Continent List";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+
+			if (mapValidator.checkContinentCountry(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Every Continent should have atleast one country";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+
+			if (mapValidator.checkUniqueContinentCountry(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Country can assign to only one Continent";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+
+			if (connectedCountries == mapContents.getCountryAndNeighbors().keySet().size()) {
+				validMapFlag = true;
+				statusMessage = "Map is valid";
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as it is not a connected graph";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+
+			System.out.println("Connected Countries : " + connectedCountries);
+			System.out.println("Total Countries : " + mapContents.getCountryAndNeighbors().keySet().size());
 			System.out.println("Message : " + statusMessage);
-			return;
-		}
-
-		if (mapContents.getContinentAndItsCountries().keySet().isEmpty()) {
-			validMapFlag = false;
-			statusMessage = "Map should have atleast one Continent";
-			System.out.println("Message : " + statusMessage);
-			return;
-		} else {
-			validMapFlag = true;
-			statusMessage = "Map is valid";
-		}
-
-		if (mapContents.getCountryAndNeighbors().keySet().isEmpty()) {
-			validMapFlag = false;
-			statusMessage = "Map should have atleast one Country";
-			System.out.println("Message : " + statusMessage);
-			return;
-		} else {
-			validMapFlag = true;
-			statusMessage = "Map is valid";
-		}
-
-		if (mapValidator.checkContinent(mapContents)) {
-			validMapFlag = true;
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as Country Continent should be from only Continent List";
-			System.out.println("Message : " + statusMessage);
-			return;
-		}
-
-		if (mapValidator.checkContinentCountry(mapContents)) {
-			validMapFlag = true;
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as Every Continent should have atleast one country";
-			System.out.println("Message : " + statusMessage);
-			return;
-		}
-
-		if (mapValidator.checkUniqueContinentCountry(mapContents)) {
-			validMapFlag = true;
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as Country can assign to only one Continent";
-			System.out.println("Message : " + statusMessage);
-			return;
-		}
-
-		if (connectedCountries == mapContents.getCountryAndNeighbors().keySet().size()) {
-			validMapFlag = true;
-			statusMessage = "Map is valid";
-		} else {
-			validMapFlag = false;
-			statusMessage = "Map is invalid as it is not a connected graph";
-			System.out.println("Message : " + statusMessage);
-			return;
-		}
-
-		System.out.println("Connected Countries : " + connectedCountries);
-		System.out.println("Total Countries : " + mapContents.getCountryAndNeighbors().keySet().size());
-		System.out.println("Message : " + statusMessage);
-		System.out.println("Valid Map Flag : " + validMapFlag);
+			System.out.println("Valid Map Flag : " + validMapFlag);
 		} catch (FileNotFoundException e) {
 			validMapFlag = false;
 		}
