@@ -30,7 +30,7 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  */
 public class PlayerCount extends JFrame implements ActionListener {
 	
-	private String[] playerCounterArray = {"2","3","4","5","6"};
+	private String[] playerCounterArray = {"3","4","5","6"};
 	
 	private int noOfPlayers;
 	private JFrame countFrame;
