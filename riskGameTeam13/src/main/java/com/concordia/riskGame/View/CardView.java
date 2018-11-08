@@ -14,6 +14,11 @@ import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 
+/**
+ * Implemented for the Card view observer pattern
+ * @author saich
+ *
+ */
 public class CardView implements Observer{
 
 

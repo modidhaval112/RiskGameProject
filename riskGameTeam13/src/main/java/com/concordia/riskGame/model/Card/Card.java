@@ -6,6 +6,11 @@ import java.util.Random;
 import com.concordia.riskGame.model.Country.Country;
 
 
+/**
+ * Describes the different cards for the cardexchange 
+ * @author sande
+ *
+ */
 public class Card {
 
     private final String type;
