@@ -125,7 +125,7 @@ public class StartUpPhaseTest {
 	 */
 	@Test
 	public void invalidInitialArmyAssignmentTest() {
-		
+		armiesGot=0;
 		MapParseProcessor processorObj= new MapParseProcessor();
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers2);
 		assertNotEquals(0,armiesGot);
