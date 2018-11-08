@@ -359,6 +359,7 @@ public class Player extends Observable implements Serializable {
 		this.currentPhase = currentPhase;
 	}
 
+
 	/**
 	 * The following method implements the fortify phase of the risk game.
 	 * 
@@ -406,6 +407,7 @@ public class Player extends Observable implements Serializable {
 						List<Country> destNeighborCountryList = new ArrayList();
 						destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
 
+						
 
 						if(destNeighborCountryList.size() == 0)
 						{
@@ -415,7 +417,8 @@ public class Player extends Observable implements Serializable {
 
 						}
 
-
+						if(!srcCountry.equalsIgnoreCase("quit"))
+						{
 
 						System.out.println(
 								"																												  ");
@@ -424,7 +427,8 @@ public class Player extends Observable implements Serializable {
 							srcCountry = reEnterSourceCountry(player);
 							srcCountry = srcCountry.trim();
 						}
-
+						if(!srcCountry.equalsIgnoreCase("quit"))
+						{
 						destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
 
 						setPhase("###### Please enter destination country where you want to move armies #####");
@@ -529,17 +533,28 @@ public class Player extends Observable implements Serializable {
 					}
 					else
 					{
+						return player;
+					}
+					}
+					else
+					{
+						return player;
+					}
+					}
+					else
+					{
 						System.out.println("###### Quiting fortification phase ######");
 						return player;
 					}
-				}
-				else
-				{
-					System.out.println("\n                                                                                                                                      ");
-					System.out.println("##### The player has only one country and hence fortify is not possible . Moving to another phase. ######");
-					return player;
-				}
-			} catch (Exception e) {
+					}
+					else
+					{
+						System.out.println("\n                                                                                                                                      ");
+						System.out.println("##### The player has only one country and hence fortify is not possible . Moving to another phase. ######");
+						return player;
+					}
+				}	
+			catch (Exception e) {
 				System.out.println("Exception Message " + e.getMessage());
 				forfeitPhase(playerObject);
 			}
@@ -549,6 +564,7 @@ public class Player extends Observable implements Serializable {
 		}
 		return playerObject;
 	}
+
 
 	/**
 	 * Method to reenter armies incase the armies is less than zero
