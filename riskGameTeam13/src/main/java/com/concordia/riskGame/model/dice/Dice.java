@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The following dice class implementing rolling a dice and returns of a list of dice values.
+ * @author Sande
+ *
+ */
 public class Dice {
 	int numberOfDice;
 	List<Integer> results = new ArrayList<>();
@@ -11,7 +16,11 @@ public class Dice {
 	public static final int min = 1;
 	
 	
-	
+	/**
+	 * The method returns the List of dice values.
+	 * @param numberOfDice The number of dice values to be returned.
+	 * @return List of Integer Dice values.
+	 */
 	public List<Integer> rollDice(int numberOfDice){
 		this.numberOfDice = numberOfDice;
 		results = new ArrayList<>();
