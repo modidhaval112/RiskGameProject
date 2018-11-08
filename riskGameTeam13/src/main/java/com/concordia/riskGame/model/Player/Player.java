@@ -557,7 +557,7 @@ public class Player extends Observable implements Serializable {
 	public int reEnterArmies() {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Please enter a valid number greater than 0 #####");
+		System.out.println("#### Please enter a valid number of armies #####");
 		int army = sc.nextInt();
 
 
@@ -825,7 +825,7 @@ public class Player extends Observable implements Serializable {
 
 						maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 						maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
-
+						System.out.println();
 						setPhase("###### The maximum number of dice attacker can roll is  #### : "+maximumAttackerDice);
 						setPhase("###### The maximum number of dice defender can roll is  #### : "+maximumDefenderDice);
 
@@ -837,13 +837,11 @@ public class Player extends Observable implements Serializable {
 						for (Integer result : attackerDiceResults) {
 							setPhase(result + " ");
 						}
-						System.out.println();
-						System.out.println(
+						setPhase(
 								"Defender Dice Roll results" + defenderDiceResults.size() + " dice has been rolled");
 						for (Integer result : defenderDiceResults) {
 							setPhase(result + " ");
 						}
-						System.out.println();
 						Collections.sort(attackerDiceResults);
 						Collections.reverse(attackerDiceResults);
 						Collections.sort(defenderDiceResults);
