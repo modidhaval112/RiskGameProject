@@ -341,9 +341,7 @@ public class Player extends Observable implements Serializable {
 					System.out.print(countryObj.getCountryName() + ",");
 
 				}
-				
-				if(player.getAssignedCountries().size() == 1 &&  player.getAssignedCountries().size()==0)
-				{
+
 				System.out.println(
 						"																												  ");
 				setPhase("#### Enter the country name , you want to move armies from ###### ");
@@ -488,13 +486,7 @@ public class Player extends Observable implements Serializable {
 				setPhase("##### Armies have been moved between countries ######");
 				setErrorMesage("Armies have been moved between countries");
 				return player;
-				}
-			else
-			{
-				System.out.println(" ####### The Player has only one country and hence can not fortify. Moving to next phase ####### : ");
-				return player;
-			} 
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("Exception Message " + e.getMessage());
 				forfeitPhase(playerObject);
 			}
