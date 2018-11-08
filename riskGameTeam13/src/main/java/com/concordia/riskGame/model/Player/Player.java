@@ -556,10 +556,15 @@ public class Player extends Observable implements Serializable {
 	public String reEnterSourceCountry(Player player) {
 		String soruceCountry = null;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Please enter a valid source country #####");
+		System.out.println("#### Please enter a valid source country  or quit to exit fortification phase #####");
 		soruceCountry = sc.nextLine();
 
-		if (!checkValidSourceCountry(soruceCountry, player))
+		if(soruceCountry.equalsIgnoreCase("quit"))
+		{
+			soruceCountry = "quit";
+			
+		}
+		else if (!checkValidSourceCountry(soruceCountry, player))
 			soruceCountry = reEnterSourceCountry(player);
 
 		return soruceCountry;
@@ -577,12 +582,18 @@ public class Player extends Observable implements Serializable {
 	public String reEnterSourceCountryforListCheck(Player player) {
 		String soruceCountry = null;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Please enter a valid source country #####");
+		System.out.println("#### Please enter a valid source country or quit to exit fortification phase #####");
 		soruceCountry = sc.nextLine();
 		List<Country> destCountryList = new ArrayList();
 		
-		if (checkZeroDestinationCountryList(soruceCountry,player).size() == 0 )
-			soruceCountry = reEnterSourceCountryforListCheck(player);
+		if(soruceCountry.equalsIgnoreCase("quit"))
+		{
+			soruceCountry = "quit";
+			
+		}
+		
+		else if (checkZeroDestinationCountryList(soruceCountry,player).size() == 0 )
+		soruceCountry = reEnterSourceCountryforListCheck(player);
 
 		return soruceCountry;
 	}
