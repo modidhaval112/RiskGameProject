@@ -17,6 +17,9 @@ public class Continent {
 	private int continentControlValue;
 
 	
+	/**
+	 * It is default constructor of the continent class
+	 */
 	public Continent()
 	{
 		
