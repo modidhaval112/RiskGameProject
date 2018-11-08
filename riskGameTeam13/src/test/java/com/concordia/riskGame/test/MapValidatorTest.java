@@ -29,7 +29,7 @@ public class MapValidatorTest {
 	
 	/**
 	 * This method loads all the maps into different file objects
-	 * @throws Exception
+	 * @throws Exception throws exception
 	 */
 	@Before
 	public void setUp() throws Exception {

@@ -32,7 +32,6 @@ public class Deck implements Serializable{
 	 *  Creates all cards, one for each territory. Each card has either
 	 * a type of Infantry, Cavalry, or Artillery.
 	 * @param list list of country names
-	 * @return 
 	 */
 	public void setDeckOfCards(List<Country> list) {
 

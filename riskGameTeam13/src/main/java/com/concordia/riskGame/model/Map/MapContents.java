@@ -132,7 +132,7 @@ public class MapContents {
 
 	/**
 	 * Sets number of labels in the map
-	 * @param labelCount
+	 * @param labelCount label count value
 	 */
 	public void setLabelCount(int labelCount) {
 		this.labelCount = labelCount;
