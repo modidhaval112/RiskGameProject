@@ -1007,7 +1007,7 @@ public class Player extends Observable implements Serializable {
 		}
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
 		/*int movableArmies = 0;*/
-		while (movableArmies == 0 || movableArmies >= sourceCountryObject.getArmies()) {
+		while (movableArmies <= 0 || movableArmies >= sourceCountryObject.getArmies()) {
 			System.out.println(
 					"Enter the armies to be left behind (Has to be at least 1 and cannot be equal or gretaer than the armies of attacking country)");
 			Scanner scanner = new Scanner(System.in);
