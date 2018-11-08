@@ -406,6 +406,7 @@ public class Player extends Observable implements Serializable {
 						List<Country> destNeighborCountryList = new ArrayList();
 						destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
 
+						
 
 						if(destNeighborCountryList.size() == 0)
 						{
@@ -415,7 +416,8 @@ public class Player extends Observable implements Serializable {
 
 						}
 
-
+						if(!srcCountry.equalsIgnoreCase("quit"))
+						{
 
 						System.out.println(
 								"																												  ");
@@ -424,7 +426,8 @@ public class Player extends Observable implements Serializable {
 							srcCountry = reEnterSourceCountry(player);
 							srcCountry = srcCountry.trim();
 						}
-
+						if(!srcCountry.equalsIgnoreCase("quit"))
+						{
 						destNeighborCountryList=printNeighbouringCountry(srcCountry, player);
 
 						setPhase("###### Please enter destination country where you want to move armies #####");
@@ -529,17 +532,28 @@ public class Player extends Observable implements Serializable {
 					}
 					else
 					{
+						return player;
+					}
+					}
+					else
+					{
+						return player;
+					}
+					}
+					else
+					{
 						System.out.println("###### Quiting fortification phase ######");
 						return player;
 					}
-				}
-				else
-				{
-					System.out.println("\n                                                                                                                                      ");
-					System.out.println("##### The player has only one country and hence fortify is not possible . Moving to another phase. ######");
-					return player;
-				}
-			} catch (Exception e) {
+					}
+					else
+					{
+						System.out.println("\n                                                                                                                                      ");
+						System.out.println("##### The player has only one country and hence fortify is not possible . Moving to another phase. ######");
+						return player;
+					}
+				}	
+			catch (Exception e) {
 				System.out.println("Exception Message " + e.getMessage());
 				forfeitPhase(playerObject);
 			}
@@ -557,7 +571,7 @@ public class Player extends Observable implements Serializable {
 	public int reEnterArmies() {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Please enter a valid number greater than 0 #####");
+		System.out.println("#### Please enter a valid number of army #####");
 		int army = sc.nextInt();
 
 
@@ -850,7 +864,7 @@ public class Player extends Observable implements Serializable {
 						Collections.reverse(defenderDiceResults);
 						int minimumDiceValue = maximumAttackerDice < maximumDefenderDice ? maximumAttackerDice
 								: maximumDefenderDice;
-
+						
 						for (int i = 0; i < minimumDiceValue; i++) {
 							if (attackerDiceResults.get(i) != null && defenderDiceResults.get(i) != null) {
 								setPhase("Result number " + (i + 1));
