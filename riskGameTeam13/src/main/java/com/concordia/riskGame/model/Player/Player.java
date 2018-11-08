@@ -579,6 +579,8 @@ public class Player extends Observable implements Serializable {
 			returnValue = false;
 		else
 			returnValue = true;
+		
+		return returnValue;
 	}
 
 	/**

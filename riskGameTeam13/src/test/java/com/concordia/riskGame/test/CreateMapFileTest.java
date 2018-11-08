@@ -23,6 +23,7 @@ import com.concordia.riskGame.model.Map.MapOperations;
  * being done in the Conquest format
  * 
  * @author Dheeraj As
+ * @author Dhaval
  *
  */
 public class CreateMapFileTest {
