@@ -7,7 +7,7 @@ import com.concordia.riskGame.model.Country.Country;
 /**
  * Continent Class go get and set all properties of a continent.
  * 
- * @author sande
+ * @author Sande
  *
  */
 public class Continent {

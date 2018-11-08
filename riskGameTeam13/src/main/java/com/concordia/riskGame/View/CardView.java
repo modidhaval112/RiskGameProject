@@ -60,7 +60,7 @@ public class CardView implements Observer{
 				if (cardExchangeChoice.equals("yes")) {
 					int i=0;
 					for (Card card : player.getCardList()) {
-						System.out.println(card.getName() + " : "+ (++i));
+						System.out.println(card.getType() + " : "+ (++i));
 					}
 					System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
 					String[] cardsList = scanner.nextLine().split(",");
