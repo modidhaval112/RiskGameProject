@@ -557,7 +557,7 @@ public class Player extends Observable implements Serializable {
 	public int reEnterArmies() {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Please enter a valid number greater than 0 #####");
+		System.out.println("#### Please enter a valid number of armies #####");
 		int army = sc.nextInt();
 
 
