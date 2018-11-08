@@ -676,7 +676,7 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * The following method implements the attack phase of the risk game.
 	 * 
-	 * @param player Instance of current player in the forfeit phase.
+	 * @param player Instance of current player in the attack phase.
 	 * @return Instance of the player is returned to the next phase
 	 * @throws Exception
 	 */
@@ -1218,7 +1218,7 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 		
 		System.out.println("####### calculateReinforcementArmiesContienentand ########");
 		MapContents contents = MapContents.getInstance();
-		System.out.println("########## Printing contienet and its countries #############");
+		/*System.out.println("########## Printing contienet and its countries #############");*/
 		HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 		HashMap<String , Integer> continentAndControlValue = new  HashMap<>();
 		
@@ -1233,9 +1233,9 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 			String name = entryKeyValue.getKey().getContinentName();
 			int controlValue = entryKeyValue.getKey().getContinentControlValue();
 			System.out.println("																				");
-			System.out.println("####### The  contienent name is ####### :"+name);
+		/*	System.out.println("####### The  contienent name is ####### :"+name);*/
 			System.out.println("																				");
-			System.out.println("###### The continent control value is #### :"+entryKeyValue.getKey().getContinentControlValue());
+			/*System.out.println("###### The continent control value is #### :"+entryKeyValue.getKey().getContinentControlValue());*/
 			int coutryContinentCount = 0;
 			int playerOwnedCountryCount = 0;
 			coutryContinentCount = entryKeyValue.getValue().size();
@@ -1256,8 +1256,8 @@ public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player)
 				
 			}
 			
-			System.out.println("######### No of countries in the continent          ######## : "+coutryContinentCount);
-			System.out.println("######### No of countries owned by the player  ######## : "+playerOwnedCountryCount);
+			/*System.out.println("######### No of countries in the continent          ######## : "+coutryContinentCount);
+			System.out.println("######### No of countries owned by the player  ######## : "+playerOwnedCountryCount);*/
 	
 			
 		}
