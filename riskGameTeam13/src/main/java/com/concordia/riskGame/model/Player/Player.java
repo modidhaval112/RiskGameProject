@@ -346,8 +346,11 @@ public class Player extends Observable implements Serializable {
 				{
 				System.out.println(
 						"																												  ");
-				setPhase("#### Enter the country name , you want to move armies from ###### ");
+				setPhase("#### Enter the country name , you want to move armies from or quit to exit the phase ###### ");
 				String srcCountry = scanner.nextLine();
+				
+				if(!srcCountry.equalsIgnoreCase("quit"))
+				{
 				srcCountry = srcCountry.trim();
 				
 				
@@ -488,6 +491,12 @@ public class Player extends Observable implements Serializable {
 				setPhase("##### Armies have been moved between countries ######");
 				setErrorMesage("Armies have been moved between countries");
 				return player;
+				}
+				else
+				{
+					System.out.println("###### Quiting fortification phase ######");
+					return player;
+				}
 				}
 				else
 				{
