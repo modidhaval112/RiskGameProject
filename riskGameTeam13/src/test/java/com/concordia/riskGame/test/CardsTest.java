@@ -23,7 +23,7 @@ public class CardsTest {
 	private Card cardObj;
 	/**
 	 * sets up the data for card test methods 
-	 * @throws Exception
+	 * @throws Exception throws exception
 	 */
 	@Before
 	public void setUp() throws Exception {

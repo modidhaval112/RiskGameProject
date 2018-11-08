@@ -33,10 +33,7 @@ public class GameDriver {
 	/**
 	 * The following method calls each of the game phase for each player.
 	 * 
-	 * @param player              List of players playing the game
-	 * @param countryAndConnected countries and their respective connected
-	 *                            countries.
-	 * @throws Exception 
+	 * @throws Exception throws exception
 	 */
 	public void gamePhase() throws Exception {
 		MapContents mapContents =MapContents.getInstance();
@@ -93,7 +90,7 @@ public class GameDriver {
 	 * Checks for player attack possibility based on source and destination countries
 	 * @param player Accept the player object as Input
 	 * @return It returns the countries list
-	 * @throws Exception
+	 * @throws Exception throws exception
 	 */
 	public List<Country> getSourceAndDestinationCountry(Player player) throws Exception {
 		String sourceCountry;

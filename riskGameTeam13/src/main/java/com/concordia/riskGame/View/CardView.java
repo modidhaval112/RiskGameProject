@@ -27,7 +27,7 @@ public class CardView implements Observer{
 	 * Check if player can exchange the cards
 	 * @param player It accepts the input of type player 
 	 * @return It returns armies count
-	 * @throws Exception
+	 * @throws Exception throws exception
 	 */
 	public int exchangeCards(Player player) throws Exception {
 		int armiesToBeGiven =0;

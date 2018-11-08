@@ -767,7 +767,6 @@ public class Player extends Observable implements Serializable {
 	 * 
 	 * @param player Instance of current player in the attack phase.
 	 * @return Instance of the player is returned to the next phase
-	 * @throws Exception throws exception
 	 */
 	public Player attackPhase(Player player) {
 		setCurrentPhase(Player.attackPhase);
