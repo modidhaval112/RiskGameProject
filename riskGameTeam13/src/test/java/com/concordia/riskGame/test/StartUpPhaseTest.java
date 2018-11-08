@@ -75,7 +75,7 @@ public class StartUpPhaseTest {
 		
 	}
 	/**
-	 * This test method checks if the initial army assignment is done depending on the number of players
+	 * This test method checks if the initial army assignment is done for 2 players
 	 */
 	@Test
 	public void validInitialArmyAssignment2PlayerTest() {
@@ -84,36 +84,42 @@ public class StartUpPhaseTest {
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers2);
 		assertEquals(40,armiesGot);
 	}
-	
+	/**
+	 * This test method checks if the initial army assignment is done for 3 players
+	 */
 	@Test
 	public void validInitialArmyAssignment3PlayerTest() {
 		MapParseProcessor processorObj= new MapParseProcessor();
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers3);
 		assertEquals(35,armiesGot);
 	}
-
+	/**
+	 * This test method checks if the initial army assignment is done for 4 players
+	 */
 	@Test
 	public void validInitialArmyAssignment4PlayerTest() {
 		MapParseProcessor processorObj= new MapParseProcessor();
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers4);
 		assertEquals(30,armiesGot);
 	}	
-	
+	/**
+	 * This test method checks if the initial army assignment is done for 5 players
+	 */
 	@Test
 	public void validInitialArmyAssignment5PlayerTest() {
 		MapParseProcessor processorObj= new MapParseProcessor();
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers5);
 		assertEquals(25,armiesGot);
 	}	
-	
+	/**
+	 * This test method checks if the initial army assignment is done for 6 players
+	 */
 	@Test
 	public void validInitialArmyAssignment6PlayerTest() {
 		MapParseProcessor processorObj= new MapParseProcessor();
 		armiesGot=processorObj.initialArmyAssignment(noOfPlayers6);
 		assertEquals(20,armiesGot);
 	}		
-		
-	
 	/**
 	 * This method checks if the assigned initial armies is not zero
 	 */
