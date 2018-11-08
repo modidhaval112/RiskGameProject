@@ -184,7 +184,7 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * This method sets the message for observers and knows them when it is changed.
 	 * 
-	 * @param phaseMessage
+	 * @param phaseMessage phase message
 	 */
 	public void setPhase(String phaseMessage) {
 		phasePrint = "phase";
@@ -296,7 +296,7 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * To check if player has lost
 	 * 
-	 * @return
+	 * @return hasLost true if player has lost otherwise false
 	 */
 	public boolean isHasLost() {
 		return hasLost;
@@ -305,7 +305,7 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * To set if a player has lost
 	 * 
-	 * @param hasLost
+	 * @param hasLost true if player has lost otherwise false
 	 */
 	public void setHasLost(boolean hasLost) {
 		this.hasLost = hasLost;
@@ -569,8 +569,9 @@ public class Player extends Observable implements Serializable {
 
 
 	/**
-	 * Returns true ifarmycount is greater than zero
+	 * Returns true if army count is greater than zero
 	 * @param army returns the army count
+	 * @return true if armies fortification is valid otherwise false
 	 */
 	public boolean checkValidArmyFortification(int army)
 	{ 
@@ -766,9 +767,9 @@ public class Player extends Observable implements Serializable {
 	 * 
 	 * @param player Instance of current player in the attack phase.
 	 * @return Instance of the player is returned to the next phase
-	 * @throws Exception
+	 * @throws Exception throws exception
 	 */
-	public Player attackPhase(Player player) throws Exception {
+	public Player attackPhase(Player player) {
 		setCurrentPhase(Player.attackPhase);
 		player.setCurrentPhase(Player.attackPhase);
 		setDomination();
@@ -1112,7 +1113,7 @@ public class Player extends Observable implements Serializable {
 	 * This method returns the country which can be attacked from the destination country
 	 * @param destinationCountry destinations country
 	 * @param attackableCountryList list of countries
-	 * @return
+	 * @return if there is any country to attack otherwise null
 	 */
 	public Country getAttackableCountryOfCountryListFromString(String destinationCountry,
 			List<Country> attackableCountryList) {
@@ -1631,9 +1632,6 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * To get the country object from the string value of the country
 	 * @param sourceCountry Pass the source country
-	 * 
-	 * @param player  the player object to which the country belongs
-	 * @param country string value of the country
 	 * @return the country object
 	 */
 	public Country getSourceCountryFromString(String sourceCountry) {
@@ -1651,9 +1649,7 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * To get the country object from the string value of the country if it belongs to the player
 	 * @param sourceCountry source country of the player
-	 * 
 	 * @param player  the player object to which the country belongs
-	 * @param country string value of the country
 	 * @return the country object
 	 */
 	public Country getSourceCountryFromPlayerUsingString(String sourceCountry,Player player) {
@@ -1681,9 +1677,9 @@ public class Player extends Observable implements Serializable {
 	/**
 	 * Prints the neighboring attackable countries
 	 * 
-	 * @param country
-	 * @param player
-	 * @return
+	 * @param country country object
+	 * @param player player object
+	 * @return neighbouringAttackableCountries neighboring attackable country
 	 */
 	public List<Country> printNeighboringAttackableCountriesAndArmies(Country country, Player player) {
 		System.out.println("######Neighbouring Countries on which you can attack and its armies are :#####");
