@@ -118,6 +118,7 @@ public class MapParseProcessor {
 			GameLauncher gameLauncherObject = new GameLauncher();
 		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
+			e.printStackTrace();
 		}
 		return mapContentObject;
 	}
@@ -226,16 +227,20 @@ public class MapParseProcessor {
 							String[] adjCountries3 = adjCountries2[1].split(",", 2);
 							Country cc = new Country(territoryValues[0], adjCountries3[0]);
 							adjCountry = new ArrayList<Country>();
-							StringTokenizer st = new StringTokenizer(adjCountries3[1], ", ");
-							while (st.hasMoreTokens()) {
+							
+							 StringTokenizer st = null;
+							if(adjCountries3.length>1)
+							 st = new StringTokenizer(adjCountries3[1], ", ");
+							
+							while (st!= null && st.hasMoreTokens()) {
 								Country adjC = new Country(st.nextToken(","));
 								adjCountry.add(adjC);
 							}
 							cc.setNeighbouringCountries(adjCountry);
 							countryList.add(cc);
 							countryAndNeighbors.put(cc, adjCountry);
+							}
 						}
-					}
 				}
 			}
 			
@@ -248,6 +253,7 @@ public class MapParseProcessor {
 			
 		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
+			e.printStackTrace();
 
 		}
 		return mapContentObject;
