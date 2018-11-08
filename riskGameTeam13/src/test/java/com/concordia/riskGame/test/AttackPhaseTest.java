@@ -67,6 +67,9 @@ public class AttackPhaseTest {
 	private Card cd3;
 	private Card cd4;
 	
+	/**
+	 * The following method sets up the testing context for the unit tests.
+	 */
 	@Before
 	public void setUp() {
 		playerOne = new Player("playerOne");
