@@ -550,6 +550,10 @@ public class Player extends Observable implements Serializable {
 		return playerObject;
 	}
 
+	/**
+	 * Method to reenter armies incase the armies is less than zero
+	 * @return source country to be returned
+	 */
 	public int reEnterArmies() {
 
 		Scanner sc = new Scanner(System.in);
@@ -564,10 +568,14 @@ public class Player extends Observable implements Serializable {
 	}
 
 
+	/**
+	 * Returns true ifarmycount is greater than zero
+	 * @param army returns the army count
+	 */
 	public void checkValidArmyFortification(int army)
 	{ 
 		boolean returnValue = false;
-		if(army < 1)
+		if(army < 0)
 			returnValue = false;
 		else
 			returnValue = true;
