@@ -19,6 +19,9 @@ public class ReinforcementTest {
 	int noOfCountries2;
 	int noOfCountries3;
 	int result;
+	/**
+	 * Initializing the Context
+	 */
 	@Before
 	public void setUp () {
 		noOfCountries1= 10;
