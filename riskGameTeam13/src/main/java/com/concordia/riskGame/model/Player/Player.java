@@ -318,9 +318,9 @@ public class Player extends Observable implements Serializable {
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player forfeitPhase(Player playerObject) {
-		/*setCurrentPhase(Player.fortificationPhase);
+		setCurrentPhase(Player.fortificationPhase);
 		playerObject.setCurrentPhase(Player.fortificationPhase);
-		setDomination();*/
+		setDomination();
 		Scanner scanner;
 		setPhase("###### Do you wish to enter the fortification phase: yes/no #######");
 		String choice = null;
@@ -690,9 +690,9 @@ public class Player extends Observable implements Serializable {
 	 * @throws Exception
 	 */
 	public Player attackPhase(Player player) throws Exception {
-	/*	setCurrentPhase(Player.attackPhase);
+		setCurrentPhase(Player.attackPhase);
 		player.setCurrentPhase(Player.attackPhase);
-		setDomination();*/
+		setDomination();
 
 		setPhase("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
@@ -1040,7 +1040,7 @@ public class Player extends Observable implements Serializable {
 		Country destinationCountryObject = getAttackableCountryOfCountryListFromString(destinationCountry,
 				attackableCountryList);
 		if (destinationCountryObject == null) {
-			reenterTheDestinationCountry(attackableCountryList);
+			return reenterTheDestinationCountry(attackableCountryList);
 		}
 		return destinationCountryObject;
 	}
@@ -1054,9 +1054,9 @@ public class Player extends Observable implements Serializable {
 		if(Country.equals("quit")) {
 			return null;
 		}
-		CountryObject = getSourceCountryFromString(Country);
+		CountryObject = getSourceCountryFromPlayerUsingString(Country,player);
 		if (CountryObject == null) {
-			reenterTheCountry(player);
+			return reenterTheCountry(player);
 		}
 		return CountryObject;
 	}

@@ -61,7 +61,7 @@ public class CardView implements Observer{
 				if (cardExchangeChoice.equals("yes")) {
 					int i=0;
 					for (Card card : player.getCardList()) {
-						System.out.println(card.getType() + " : "+ (++i));
+						System.out.println(card.getType()+ ", "+card.getCountry().getCountryName() + " : "+ (++i));
 					}
 					System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
 					String[] cardsList = scanner.nextLine().split(",");
@@ -81,7 +81,7 @@ public class CardView implements Observer{
 						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 						throw new Exception();
 					}
-					if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null && player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
+					if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null || player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
 						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 						throw new Exception();
 					}
@@ -134,7 +134,7 @@ public class CardView implements Observer{
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
-				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()!=null && !player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
+				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null || player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
 					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
@@ -173,7 +173,7 @@ public class CardView implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		Player player = (Player) arg0;
-		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && !(player.getCardList().isEmpty()) && player.getExchanged()) {
+		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null)  && player.getExchanged()) {
 
 			System.out.println("**************In Card View*************** ");
 			List<Card> cardList = player.getCardList();
