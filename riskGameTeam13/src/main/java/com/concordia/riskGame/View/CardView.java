@@ -15,8 +15,8 @@ import com.concordia.riskGame.model.Player.Player;
 
 public class CardView implements Observer{
 
-	
-	
+
+
 	public int exchangeCards(Player player) throws Exception {
 		int armiesToBeGiven =0;
 		Scanner scanner = new Scanner(System.in);
@@ -87,23 +87,23 @@ public class CardView implements Observer{
 					player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
 					int count = player.getCardExchangeCount();
 					armiesToBeGiven = (count + 1) * 5;
-					
-					
-					
-					
+
+
+
+
 					player = player.exChangeCardTerritoryExist(exchangeCards,player);
-					
+
 					System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
-					
+
 					for(Country c : player.getAssignedCountries())
 					{
 						System.out.println("######## Army Assignment after card exchange ###### ");
 						System.out.println("######## Country Name  ########## :"+c.getCountryName());
 						System.out.println("######## Country Armies #########   :"+c.getArmies());
-						
+
 					}
-					
-					
+
+
 					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 					player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 				} else {
@@ -139,20 +139,20 @@ public class CardView implements Observer{
 				player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
 				int count = player.getCardExchangeCount();
 				armiesToBeGiven = (count + 1) * 5;
-				
+
 				player = player.exChangeCardTerritoryExist(exchangeCards,player);
-				
+
 				System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
-				
+
 				for(Country c : player.getAssignedCountries())
 				{
 					System.out.println("######## Army Assignment after card exchange ###### ");
 					System.out.println("######## Country Name  ########## :"+c.getCountryName());
 					System.out.println("######## Country Armies #########   :"+c.getArmies());
-					
+
 				}
-				
-				
+
+
 				System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 				player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 			}
@@ -167,18 +167,18 @@ public class CardView implements Observer{
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-       Player player = (Player) arg0;
-       if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && player.getExchanged()) {
-       
-		System.out.println("**************In Card View*************** ");
-		List<Card> cardList = player.getCardList();
-		System.out.println("Cards after exchanging the cards");
+		Player player = (Player) arg0;
+		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null) && player.getExchanged()) {
 
-		for(Card card : cardList) {
-			System.out.println(card.getName());
+			System.out.println("**************In Card View*************** ");
+			List<Card> cardList = player.getCardList();
+			System.out.println("Cards after exchanging the cards");
+
+			for(Card card : cardList) {
+				System.out.println(card.getName());
+			}
+
 		}
-
-	}
 
 	}
 

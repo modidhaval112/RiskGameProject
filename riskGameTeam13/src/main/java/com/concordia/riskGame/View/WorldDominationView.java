@@ -35,59 +35,60 @@ public class WorldDominationView implements Observer {
 		if("domination".equals(player.dominationPrint))
 		{
 			player.dominationPrint="";
-		System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");
-		List<Player> playerList=MapContents.getInstance().getPlayerList();
-		DecimalFormat df = new DecimalFormat("#.##");
+			System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");
+			List<Player> playerList=MapContents.getInstance().getPlayerList();
+			DecimalFormat df = new DecimalFormat("#.##");
 
-		for (int i = 0; i < playerList.size(); i++) {
-			HashMap<Continent, List<Country>> continentCountries=MapContents.getInstance().getContinentAndItsCountries();
-			int continentsOccupied=0;
-			List <String> continentsOcuupied= new ArrayList();
-			for (Entry<Continent, List<Country>> entry : continentCountries.entrySet()) 
-			{
-				List<Country> countries=entry.getValue();
-				boolean isCountryCaptured=true;
-				for(int j=0; j<countries.size();j++)
+			for (int i = 0; i < playerList.size(); i++) {
+				HashMap<Continent, List<Country>> continentCountries=MapContents.getInstance().getContinentAndItsCountries();
+				int continentsOccupied=0;
+				List <String> continentsOcuupied= new ArrayList();
+				for (Entry<Continent, List<Country>> entry : continentCountries.entrySet()) 
 				{
-					List <String> m = new ArrayList<>();
-					for (int k=0; k<playerList.get(i).getAssignedCountries().size();k++)
+					List<Country> countries=entry.getValue();
+					boolean isCountryCaptured=true;
+					for(int j=0; j<countries.size();j++)
 					{
-						m.add(playerList.get(i).getAssignedCountries().get(k).getCountryName().toString());
+						List <String> m = new ArrayList<>();
+						for (int k=0; k<playerList.get(i).getAssignedCountries().size();k++)
+						{
+							m.add(playerList.get(i).getAssignedCountries().get(k).getCountryName().toString());
+						}
+
+						if(m.contains(countries.get(j).getCountryName()) & isCountryCaptured)
+
+						{
+							isCountryCaptured=true;
+						}
+						else {
+							isCountryCaptured=false;
+
+						}
+
 					}
 
-					if(m.contains(countries.get(j).getCountryName()) & isCountryCaptured)
-
+					if(isCountryCaptured)
 					{
-						isCountryCaptured=true;
+						continentsOccupied=continentsOccupied+1;
+						continentsOcuupied.add(entry.getKey().getContinentName().toString());
 					}
-					else {
-						isCountryCaptured=false;
-
-					}
+					
 
 				}
+				String percentage = df.format(((playerList.get(i).getAssignedCountries().size())*100)/noOfCountries);
+				List<Country> countryList= playerList.get(i).getAssignedCountries();
+				int countryArmies=0;
+				for (Country country : countryList) {
+					countryArmies=countryArmies+country.getArmies();
 
-				if(isCountryCaptured)
-				{
-					continentsOccupied=continentsOccupied+1;
-					continentsOcuupied.add(entry.getKey().getContinentName().toString());
 				}
+				System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+", Countries occupied by the Player are:  "+continentsOccupied + " Occupied Countinents are: " +StringUtils.join(continentsOcuupied, ','));
+
 
 			}
-			String percentage = df.format(((playerList.get(i).getAssignedCountries().size())*100)/noOfCountries);
-			List<Country> countryList= playerList.get(i).getAssignedCountries();
-			int countryArmies=0;
-			for (Country country : countryList) {
-				countryArmies=countryArmies+country.getArmies();
-
-			}
-			System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+", Countries occupied by the Player are:  "+continentsOccupied + " Occupied Countinents are: " +StringUtils.join(continentsOcuupied, ','));
 
 
+			System.out.println("################################################################################################################################"+System.lineSeparator());
 		}
-
-		
-		System.out.println("################################################################################################################################"+System.lineSeparator());
-	}
 	}
 }
