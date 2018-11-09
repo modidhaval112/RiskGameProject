@@ -75,22 +75,33 @@ public class MapValidator {
 	public Map<String, Integer> checkConnectedContinentGraph(Map<Continent, List<Country>> mapContinent,
 			Map<String, Integer> visitedMap) {
 
-		visitedMap.put(mapContinent.keySet().iterator().next().getContinentName(), 1);
+		//visitedMap.put(mapContinent.keySet().iterator().next().getContinentName(), 1);
 		for(Entry<Continent, List<Country>> continent : mapContinent.entrySet()) {
 			System.out.println("Continent name  : " + continent.getKey().getContinentName());
+			List<Country> visitedCountries = new ArrayList<>();
 			for(Country country : continent.getValue()) {
 				System.out.println("Country name  : " + country.getCountryName());
+				int count = 0;
 				for(Country neighbour : country.getNeighbouringCountries()) {
 					Player player = new Player();
 					Country n = player.getSourceCountryFromString(neighbour.getCountryName());
-					if(!visitedMap.containsKey(n.getBelongsToContinent()) && !(n.getBelongsToContinent().equals(country.getBelongsToContinent()))) {
+					if(!visitedMap.containsKey(n.getBelongsToContinent()) && (n.getBelongsToContinent().equals(country.getBelongsToContinent())) && !(visitedCountries.contains(n))) {
 						visitedMap.put(n.getBelongsToContinent(), 1);
+						visitedCountries.add(n);
+					}
+					else if(visitedMap.containsKey(n.getBelongsToContinent()) && (n.getBelongsToContinent().equals(country.getBelongsToContinent())) && !(visitedCountries.contains(n))) {
+						visitedMap.put(n.getBelongsToContinent(), visitedMap.get(n.getBelongsToContinent())+1);
+						visitedCountries.add(n);
 					}
 				}
 
 			}
 		}
+		System.out.println("***********************************************************");
 
+		for(Entry<String, Integer> a  : visitedMap.entrySet() ) {
+			System.out.println(a.getKey() +" : "+ a.getValue());
+		}
 		return visitedMap;
 	}
 
@@ -178,7 +189,7 @@ public class MapValidator {
 		MapParseProcessor mapParseProcessor = new MapParseProcessor();
 		MapContents mapContents = null;
 		BufferedReader bufferReaderForFile = null;
-
+		Map<String, Integer> visitedMapForContinent = new HashMap<>();
 		try {
 			bufferReaderForFile = new BufferedReader(new FileReader(file));
 			mapContents = mapParseProcessor.readMapElements(bufferReaderForFile);
@@ -202,6 +213,8 @@ public class MapValidator {
 				}
 			}
 
+			
+			visitedMapForContinent=checkConnectedContinentGraph(MapContents.getInstance().getContinentAndItsCountries(),visitedMapForContinent);
 
 			if (mapValidator.checkMapLabel(mapContents)) {
 				validMapFlag = true;
