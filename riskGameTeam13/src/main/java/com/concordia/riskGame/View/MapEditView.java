@@ -563,7 +563,7 @@ public class MapEditView extends java.awt.Frame {
 					if(flag.equals("T"))
 					{
 						List<String > countryNeighbours=countryAndNeighborsMap.get(countriesJList.getSelectedValue().toLowerCase());
-						if(countryNeighbours.contains(AddText.getText().toString().toLowerCase()))
+						if(countryNeighbours != null && countryNeighbours.contains(AddText.getText().toString().toLowerCase()))
 						{
 							setLog("Adjacent Country already exist");
 						}
