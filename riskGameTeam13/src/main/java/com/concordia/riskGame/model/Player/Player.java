@@ -556,6 +556,7 @@ public class Player extends Observable implements Serializable {
 				}	
 			catch (Exception e) {
 				System.out.println("Exception Message " + e.getMessage());
+				e.printStackTrace();
 				forfeitPhase(playerObject);
 			}
 		} else {
@@ -742,36 +743,59 @@ public class Player extends Observable implements Serializable {
 	 *         player.
 	 */
 	public List<Country> printNeighbouringCountryList(String countryName, Player player) {
-		List<Country> countryNeighbourList = new ArrayList();
+		List<Country> countryNeighbourList = new ArrayList<Country>();
 
-		List<Country> playerCountryList = new ArrayList();
+		List<Country> playerCountryList = new ArrayList<Country>();
 
-		List<Country> commonCountryList = new ArrayList();
+		List<Country> commonCountryList = new ArrayList<Country>();
 
 		playerCountryList = player.getAssignedCountries();
 
-		for (Country countryInstance : player.getAssignedCountries()) {
+	/*	for (Country countryInstance : player.getAssignedCountries()) {
 			if (countryInstance.getCountryName().equalsIgnoreCase(countryName)) {
 				countryNeighbourList = countryInstance.getNeighbouringCountries();
 			}
 
+		}*/
+		
+		Country country = getSourceCountryFromString(countryName);
+		for(Country neighbour : country.getNeighbouringCountries()) {
+			Country n = getSourceCountryFromString(neighbour.getCountryName());
+			
+			for(Country nei : n.getNeighbouringCountries()) {
+				Country np = getSourceCountryFromString(nei.getCountryName());
+				if(!countryNeighbourList.contains(np) && np.getBelongsToPlayer().getName().equals(player.getName()) && !(np.getCountryName().equals(countryName))) {
+					countryNeighbourList.add(nei);
+				}
+			}
+			/*if(!countryNeighbourList.isEmpty())
+			countryNeighbourList.removeAll(n.getNeighbouringCountries());
+			countryNeighbourList.addAll( n.getNeighbouringCountries());*/
 		}
 
 		for (Country countryObj : playerCountryList) {
 			for (Country countryj : countryNeighbourList) {
-				if (countryj.getCountryName().equalsIgnoreCase(countryObj.getCountryName())) {
+				if (countryj.getCountryName().equalsIgnoreCase(countryObj.getCountryName()) && !commonCountryList.contains(countryj)) {
+					
 					commonCountryList.add(countryj);
 				}
 			}
 		}
 
-		/*System.out.println("####### Printing the neighbour countries owned by the player #########");*/
+		System.out.println("####### Printing the neighbour countries owned by the player #########");
 
-		//System.out.println("####### The size of common country list is ######## " + commonCountryList.size());
+		System.out.println("#######***** The size of common country list is******* ######## " + commonCountryList.size());
 		for (Country countryObj : commonCountryList) {
+			System.out.println(countryObj.getCountryName());
 		}
 
 		return commonCountryList;
+	/*
+		Country country = getSourceCountryFromString(countryName);
+		List<Country> playerCountryList = player.getAssignedCountries();
+		for(Country playerContry : playerCountryList) {
+			
+		}*/
 	}
 
 	/**

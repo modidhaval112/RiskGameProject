@@ -192,4 +192,14 @@ public class Country {
 		this.belongsToPlayer = belongsToPlayer;
 	}
 	
+	
+	 @Override
+	    public boolean equals(Object anObject) {
+	        if (!(anObject instanceof Country)) {
+	            return false;
+	        }
+	        Country otherCountry = (Country)anObject;
+	        return otherCountry.getCountryName().equals(getCountryName());
+	    }
+	
 }
