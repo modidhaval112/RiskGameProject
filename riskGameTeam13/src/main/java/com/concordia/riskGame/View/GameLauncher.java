@@ -33,6 +33,8 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private JButton startGameButton;
 	private JButton createMapButton;
 	private JButton editMapButton;
+	private JButton tournamentButton;
+	private JButton loadGameButton;
 	private JButton exitButton;
 	private JLabel titleLabel;
 	private PlayerCount playerCount;
@@ -59,13 +61,13 @@ public class GameLauncher extends JFrame implements ActionListener {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gameFrame = new JFrame("Concordia Conquest");
 		gameFrame.setVisible(true);
-		try {
+		/*try {
 			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
 			gameFrame.setContentPane(label);
 		} catch (IOException e) {
 			System.out.println("Error Message : " + e.getMessage());
-		}
-		gameFrame.setSize(500, 500);
+		}*/
+		gameFrame.setSize(500, 700);
 		gameFrame.setLocation(500,200);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -91,26 +93,39 @@ public class GameLauncher extends JFrame implements ActionListener {
 		exitButton = new JButton("Exit");
 		exitButton.setForeground(new Color(102, 0, 0));
 		exitButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+		
+		tournamentButton = new JButton("Torunament Mode");
+		loadGameButton = new JButton("Load Game");
 
 		titleLabel.setForeground(Color.black);
 		titleLabel.setFont(new Font("Sans Serif", Font.PLAIN, 14));
 
-		startGameButton.setBounds(200, 90, 100, 30);
+		startGameButton.setBounds(200, 90, 140, 30);
 		startGameButton.addActionListener(this);
 
-		createMapButton.setBounds(200, 190, 100, 30);
+		createMapButton.setBounds(200, 190, 140, 30);
 		createMapButton.addActionListener(this);
 
-		editMapButton.setBounds(200, 290, 100, 30);
+		editMapButton.setBounds(200, 290, 140, 30);
 		editMapButton.addActionListener(this);
 
-		exitButton.setBounds(200, 390, 100, 30);
+		tournamentButton.setBounds(200, 390, 140, 30);
+		tournamentButton.addActionListener(this);
+		
+		loadGameButton.setBounds(200, 490, 140, 30);
+		loadGameButton.addActionListener(this);
+		
+		exitButton.setBounds(200, 590, 140, 30);
 		exitButton.addActionListener(this);
+		
+		
 
 		gameFrame.getContentPane().add(titleLabel);
 		gameFrame.getContentPane().add(startGameButton);
 		gameFrame.getContentPane().add(createMapButton);
 		gameFrame.getContentPane().add(editMapButton);
+		gameFrame.getContentPane().add(tournamentButton);
+		gameFrame.getContentPane().add(loadGameButton);
 		gameFrame.getContentPane().add(exitButton);
 		gameFrame.getContentPane().add(gamePanel);
 
@@ -151,7 +166,18 @@ public class GameLauncher extends JFrame implements ActionListener {
 			editObject= new MapEditView();
 			editObject.EditMapFileChoose();
 
-		} else if (event.getSource() == exitButton) {
+		} 
+		else if (event.getSource() == tournamentButton) {
+			System.out.println("#### tournamentButton  is clicked ####");
+		
+		}
+		
+		else if (event.getSource() == loadGameButton) {
+			System.out.println("#### loadGameButton  is clicked ####");
+		
+
+		}
+		else if (event.getSource() == exitButton) {
 			System.exit(0);
 
 		}
