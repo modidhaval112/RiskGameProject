@@ -25,7 +25,7 @@ import com.concordia.riskGame.model.dice.Dice;
  *
  * @author Darwin Anirudh G and sande
  */
-public class Player extends Observable implements Serializable {
+public class Player extends Observable implements Serializable,PlayerStrategy {
 
 	public static String reinforcePhase = "Reinforcement Phase";
 	public static String attackPhase = "Attack Phase";
@@ -853,7 +853,6 @@ public class Player extends Observable implements Serializable {
 		setCurrentPhase(Player.attackPhase);
 		player.setCurrentPhase(Player.attackPhase);
 		setDomination();
-
 		setPhase("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
 		pObject = player;
@@ -1257,21 +1256,16 @@ public class Player extends Observable implements Serializable {
 	 * @return Instance of the player is returned to the next phase
 	 */
 	public Player reinforcePhase(Player player) {
-
 		try {
 			setDomination();
-
 			setCurrentPhase(Player.reinforcePhase);
 			player.setCurrentPhase(Player.reinforcePhase);
 			Scanner scanner;
 			scanner = new Scanner(System.in);
 			int armiesToBeGiven = 0;
 			gamePlayerList = new ArrayList<Player>();
-			System.out.println(
-					"																													");
 			setPhase("\n######## " + player.getName() + "  reinforcement phase begins ########");
 			assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
-
 			List<Continent> currcontControlList = new ArrayList();
 			int armiesContControl = 0;
 			currcontControlList = contienentControlList(player);
@@ -1283,53 +1277,35 @@ public class Player extends Observable implements Serializable {
 					armiesContControl = armiesContControl + cont.getContinentControlValue();
 				}
 			}
-
 			System.out.println("#### The armies to be assigned from control value of continent is ###### : "+armiesContControl);
-
 			assignedArmies = assignedArmies + armiesContControl;
-
-
 			CardView cardView= new CardView();
 			armiesToBeGiven=cardView.exchangeCards(player);
 			assignedArmies += armiesToBeGiven;
 			setCardList(new ArrayList<>());
 			setExchanged(false);
-			System.out.println(
-					"																													");
 			setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 			player.setTotalArmies(assignedArmies);
 			int counter = player.getTotalArmies();
 			int armiesCounter;
-
-
 			while (counter > 0) {
 				printCountriesOwnedByPlayer(player);
-				System.out.println(
-						"																													");
-
 				setPhase("#### The number of armies to be reinforced are  #### :" + counter);
-				setPhase(
-						"##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
+				setPhase("##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
 				nameArmiesSpilt = scanner.nextLine().split(",");
 				countryName = nameArmiesSpilt[0];
 				armiesCount = nameArmiesSpilt[1];
-
 				if (!isNumeric(armiesCount)) {
 					armiesCount = reEnterArmyCountry();
 				}
-
 				if (!isValidSourceCountry(countryName, player)) {
 					countryName = reEnterCountry(player);
 				}
 
-
-				System.out.println(
-						"																													");
 				setPhase("##### The selected country name is  ####     : " + countryName);
 				setPhase("##### The army count  name is          ####     : " + armiesCount);
 				armiesCounter = Integer.parseInt(armiesCount);
 				int armyCount = 0;
-
 				if (armiesCounter <= counter) {
 					for (Country country : player.getAssignedCountries()) {
 						if (countryName.equalsIgnoreCase(country.getCountryName())) {
@@ -1347,18 +1323,13 @@ public class Player extends Observable implements Serializable {
 							"##### The entered army count is greater than the remaining armies. Please enter a value below the ramining armies ######");
 					setPhase("##### The reamining armies are ##### :" + counter);
 				}
-
 			}
-
 			setPhase("######### Player army count after reinforcment  ####### ");
 			setPhase("######## Player Name ########### : " + player.getName());
 			for (Country country : player.getAssignedCountries()) {
-
 				setPhase("					##### The Country Name  ####### : " + country.getCountryName());
 				setPhase("					##### The Army Count      ####### : " + country.getArmies());
-
 			}
-
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage()); 
 			reinforcePhase(player);
@@ -1366,7 +1337,6 @@ public class Player extends Observable implements Serializable {
 		setPhase("########" + player.getName() + "  reinforcement phase ended ########");
 		player.setCanAttack(true);
 		return player;
-
 	}
 
 	/**
@@ -1376,21 +1346,13 @@ public class Player extends Observable implements Serializable {
 	 * @return playerObject Player Object
 	 */
 	public Player exChangeCardTerritoryExist(List<Card> exchangeCards,Player player) {
-
-
 		Player playerObject = new Player();
 		playerObject = player;
-
 		List<Country> countryList = new ArrayList();
 		countryList = player.getAssignedCountries();
-
 		List<Country> updatedCountryList = new ArrayList();
-
 		List<Card> exchangeCardsLocal = new ArrayList();
-
-
 		System.out.println(" ###### Inside Exchange card Territory ####### ");
-
 		for(Country c : countryList)
 		{
 			for (Card card : exchangeCards)
@@ -1409,10 +1371,8 @@ public class Player extends Observable implements Serializable {
 			}
 			updatedCountryList.add(c);
 		}
-
 		playerObject.setAssignedCountries(updatedCountryList);
 		return playerObject;
-
 	}
 
 	/**
@@ -1422,18 +1382,15 @@ public class Player extends Observable implements Serializable {
 	 */
 	public List<Continent> contienentControlList(Player player)
 	{
-
 		System.out.println("####### calculateReinforcementArmiesContienentand ########");
 		MapContents contents = MapContents.getInstance();
 		HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
 		HashMap<String , Integer> continentAndControlValue = new  HashMap<>();
-
 		continentAndItsCountries= contents.getContinentAndItsCountries();
 		List<String> continentName = new ArrayList();
 		Map<Player,List<String>> playerContinentControl = new HashMap();
 		List<Continent> continentList = new ArrayList();
 		int armies = 0;
-
 		for (Map.Entry<Continent, List<Country>> entryKeyValue : continentAndItsCountries.entrySet())
 		{
 			String name = entryKeyValue.getKey().getContinentName();
@@ -1450,19 +1407,13 @@ public class Player extends Observable implements Serializable {
 				{
 					playerOwnedCountryCount = playerOwnedCountryCount + 1;
 				}
-
-
 			}
 			if(playerOwnedCountryCount == coutryContinentCount)
 			{
-
 				continentList.add(entryKeyValue.getKey());
-
 			}		
 		}
-
 		System.out.println("####### List size before returning is ####### : "+continentList.size());
-
 		return continentList;
 	}
 
@@ -1525,10 +1476,8 @@ public class Player extends Observable implements Serializable {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("#### Please enter a valid integer for army reinforcment #####");
 		armycount = sc.nextLine();
-
 		if (!isNumeric(armycount))
 			armycount = reEnterArmyCountry();
-
 		return armycount;
 	}
 
@@ -1544,7 +1493,6 @@ public class Player extends Observable implements Serializable {
 		Scanner sc = new Scanner(System.in);
 		String countryName = null;
 		countryName = sc.nextLine();
-
 		if (!isValidSourceCountry(countryName, player)) {
 			countryName = reEnterCountry(player);
 		}
@@ -1562,14 +1510,12 @@ public class Player extends Observable implements Serializable {
 
 	public boolean isValidSourceCountry(String countryName, Player playerObject) {
 		boolean returnValue = false;
-
 		for (Country countryInstance : playerObject.getAssignedCountries()) {
 			if (countryInstance.getCountryName().equalsIgnoreCase(countryName)) {
 				returnValue = true;
 				break;
 			}
 		}
-
 		return returnValue;
 	}
 
@@ -1582,8 +1528,6 @@ public class Player extends Observable implements Serializable {
 	 * @throws Exception exception of method
 	 */
 	public void exchangeCards(int cardTypes, String cardAppearingMoreThanThrice, Player player, List<Integer> cardNumbers) throws Exception {
-
-
 		if(cardTypes==3 || (cardAppearingMoreThanThrice!=null && !cardAppearingMoreThanThrice.isEmpty())){
 			Card card1 = player.getCardList().get(cardNumbers.get(0)-1);
 			Card card2 = player.getCardList().get(cardNumbers.get(1)-1);
@@ -1594,7 +1538,6 @@ public class Player extends Observable implements Serializable {
 			boolean s=  player.getCardList().remove(card1);
 			player.getCardList().remove(card2);
 			player.getCardList().remove(card3);
-
 			deck.add(card1);
 			deck.add(card2);
 			deck.add(card3);
@@ -1603,13 +1546,10 @@ public class Player extends Observable implements Serializable {
 			setChanged();
 			notifyObservers(player);
 		}
-
 		else{
 			System.out.println("Exchange not possible as the numbers are wrong");
 			throw new Exception();
 		}
-
-
 	}
 
 	/**
@@ -1649,12 +1589,10 @@ public class Player extends Observable implements Serializable {
 	 */
 	public int calculateReiforcementArmies(int numberOfCountriesOwned) {
 		int armiesToAssign;
-
 		armiesToAssign = numberOfCountriesOwned / 3;
 		if (armiesToAssign < 3) {
 			armiesToAssign = 3;
 		}
-
 		return armiesToAssign;
 	}
 
@@ -1668,7 +1606,6 @@ public class Player extends Observable implements Serializable {
 		for (Country country : player.getAssignedCountries()) {
 			System.out.print(country.getCountryName() + " ,");
 		}
-
 	}
 
 	/**
