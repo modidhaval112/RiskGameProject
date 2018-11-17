@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
@@ -62,7 +64,7 @@ public class MapValidator {
 
 		return true;
 	}
-
+ 
 
 	/**
 	 * method to check if map is connected continent graph or not
@@ -72,7 +74,58 @@ public class MapValidator {
 	 *                   not visited
 	 * @return true if graph is connected, otherwise false
 	 */
-	public Map<String, Integer> checkConnectedContinentGraph(Map<Continent, List<Country>> mapContinent,
+	
+	public boolean checkConnectedCountryContinent(MapContents mapContents) {
+		
+		Map<Country, List<Country>> listTempCountry =  mapContents.getCountryAndNeighbors();
+		
+		for(Continent c : mapContents.getContinentAndItsCountries().keySet()) {
+			Set<String> setConnectedCountries = new HashSet<>();
+			//System.out.println("Continent : " + c.getContinentName());
+			int i = 0;
+			for(Country country : mapContents.getContinentAndItsCountries().get(c)) {
+				//System.out.println("*******************Country : " + country.getCountryName());
+				
+				for(Country nbCountry : country.getNeighbouringCountries()) {
+					for(Country tempCountry : listTempCountry.keySet()) {
+						if(nbCountry.getCountryName().equalsIgnoreCase(tempCountry.getCountryName())) {
+							if(country.getBelongsToContinent().equalsIgnoreCase(tempCountry.getBelongsToContinent())) {
+								//System.out.println("*******************Nb Country : " + tempCountry.getCountryName());
+								setConnectedCountries.add(tempCountry.getCountryName());
+								if(i==0) {
+									setConnectedCountries.add(country.getCountryName());
+									i = 1;
+								}
+								
+							}
+						}
+					}
+				}				
+			}
+			
+			System.out.println("-----------------------------------------------");
+			System.out.println("Continent : " + c.getContinentName());
+			for(String countryName : setConnectedCountries) {
+				System.out.println("Country Name : " + countryName);
+			}
+			System.out.println("-----------------------------------------------");
+			System.out.println("mapContents.getContinentAndItsCountries().get(c).size() : " + mapContents.getContinentAndItsCountries().get(c).size());
+			System.out.println("setConnectedCountries.size() : " + setConnectedCountries.size());
+			if(mapContents.getContinentAndItsCountries().get(c).size()!=setConnectedCountries.size()) {
+				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
+				return false;
+			}
+			else
+			{
+				System.out.println("Continent " + c.getContinentName() + " is Connected");
+			}
+			
+		}
+		
+		return true;
+	}
+	
+/*	public Map<String, Integer> checkConnectedContinentGraph(Map<Continent, List<Country>> mapContinent,
 			Map<String, Integer> visitedMap) {
 
 		//visitedMap.put(mapContinent.keySet().iterator().next().getContinentName(), 1);
@@ -103,7 +156,7 @@ public class MapValidator {
 			System.out.println(a.getKey() +" : "+ a.getValue());
 		}
 		return visitedMap;
-	}
+	}*/
 
 	/**
 	 * method to check if all continent have at least one country
@@ -214,7 +267,7 @@ public class MapValidator {
 			}
 
 			
-			visitedMapForContinent=checkConnectedContinentGraph(MapContents.getInstance().getContinentAndItsCountries(),visitedMapForContinent);
+			//visitedMapForContinent=checkConnectedContinentGraph(MapContents.getInstance().getContinentAndItsCountries(),visitedMapForContinent);
 
 			if (mapValidator.checkMapLabel(mapContents)) {
 				validMapFlag = true;
@@ -278,6 +331,15 @@ public class MapValidator {
 			} else {
 				validMapFlag = false;
 				statusMessage = "Map is invalid as it is not a connected graph";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+			
+			if (mapValidator.checkConnectedCountryContinent(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Continents are not connected";
 				System.out.println("Message : " + statusMessage);
 				return;
 			}
