@@ -15,8 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
-
-
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 /**
  * The functionality of the class is to present the viewer a menu to start the
@@ -61,14 +62,16 @@ public class GameLauncher extends JFrame implements ActionListener {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gameFrame = new JFrame("Concordia Conquest");
 		gameFrame.setVisible(true);
+
 		/*try {
 			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
 			gameFrame.setContentPane(label);
 		} catch (IOException e) {
 			System.out.println("Error Message : " + e.getMessage());
 		}*/
-		gameFrame.setSize(500, 700);
-		gameFrame.setLocation(500,200);
+
+		gameFrame.setSize(500, 500);
+		gameFrame.setLocation(500, 200);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		border = new TitledBorder("Concordia Conquest");
@@ -79,61 +82,64 @@ public class GameLauncher extends JFrame implements ActionListener {
 		gamePanel.setBorder(border);
 
 		titleLabel = new JLabel("Concordia Conquest");
-		startGameButton = new JButton("Start Game");
-		startGameButton.setFont(new Font("Georgia", Font.PLAIN, 10));
-		startGameButton.setBackground(UIManager.getColor("Button.highlight"));
-		startGameButton.setForeground(new Color(102, 0, 0));
-		createMapButton = new JButton("Create Map");
-		createMapButton.setForeground(new Color(102, 0, 0));
-		createMapButton.setFont(new Font("Georgia", Font.PLAIN, 10));
-		editMapButton = new JButton("Edit map");
-		editMapButton.setFont(new Font("Georgia", Font.PLAIN, 10));
-		editMapButton.setBackground(UIManager.getColor("Button.highlight"));
-		startGameButton.setForeground(new Color(102, 0, 0));
-		exitButton = new JButton("Exit");
-		exitButton.setForeground(new Color(102, 0, 0));
-		exitButton.setFont(new Font("Georgia", Font.PLAIN, 10));
-		
-		tournamentButton = new JButton("Torunament Mode");
-		loadGameButton = new JButton("Load Game");
 
 		titleLabel.setForeground(Color.black);
 		titleLabel.setFont(new Font("Sans Serif", Font.PLAIN, 14));
 
-		startGameButton.setBounds(200, 90, 140, 30);
-		startGameButton.addActionListener(this);
-
-		createMapButton.setBounds(200, 190, 140, 30);
-		createMapButton.addActionListener(this);
-
-		editMapButton.setBounds(200, 290, 140, 30);
-		editMapButton.addActionListener(this);
-
-		tournamentButton.setBounds(200, 390, 140, 30);
-		tournamentButton.addActionListener(this);
-		
-		loadGameButton.setBounds(200, 490, 140, 30);
-		loadGameButton.addActionListener(this);
-		
-		exitButton.setBounds(200, 590, 140, 30);
-		exitButton.addActionListener(this);
-		
-		
-
 		gameFrame.getContentPane().add(titleLabel);
-		gameFrame.getContentPane().add(startGameButton);
-		gameFrame.getContentPane().add(createMapButton);
-		gameFrame.getContentPane().add(editMapButton);
-		gameFrame.getContentPane().add(tournamentButton);
-		gameFrame.getContentPane().add(loadGameButton);
-		gameFrame.getContentPane().add(exitButton);
 		gameFrame.getContentPane().add(gamePanel);
+		gamePanel.setLayout(null);
+		startGameButton = new JButton("Start Game");
+		gamePanel.add(startGameButton);
+		startGameButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+		startGameButton.setBackground(UIManager.getColor("Button.highlight"));
+		startGameButton.setForeground(new Color(102, 0, 0));
+		startGameButton.setForeground(new Color(102, 0, 0));
 
+		startGameButton.setBounds(186, 102, 121, 21);
+		startGameButton.addActionListener(this);
+		createMapButton = new JButton("Create Map");
+		gamePanel.add(createMapButton);
+		createMapButton.setForeground(new Color(102, 0, 0));
+		createMapButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+
+		createMapButton.setBounds(186, 158, 121, 21);
+		createMapButton.addActionListener(this);
+		editMapButton = new JButton("Edit map");
+		gamePanel.add(editMapButton);
+		editMapButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+		editMapButton.setForeground(new Color(102, 0, 0));
+		editMapButton.setBackground(UIManager.getColor("Button.highlight"));
+
+		editMapButton.setBounds(186, 214, 121, 21);
+		editMapButton.addActionListener(this);
+		tournamentButton = new JButton("Tournament");
+		gamePanel.add(tournamentButton);
+		tournamentButton.setForeground(new Color(102, 0, 0));
+		tournamentButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+
+		tournamentButton.setBounds(186, 270, 121, 21);
+		tournamentButton.addActionListener(this);
+		loadGameButton = new JButton("Load Game");
+		gamePanel.add(loadGameButton);
+		loadGameButton.setForeground(new Color(102, 0, 0));
+		loadGameButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+
+		loadGameButton.setBounds(186, 326, 121, 21);
+		loadGameButton.addActionListener(this);
+		exitButton = new JButton("Exit");
+		gamePanel.add(exitButton);
+		exitButton.setForeground(new Color(102, 0, 0));
+		exitButton.setFont(new Font("Georgia", Font.PLAIN, 10));
+
+		exitButton.setBounds(186, 371, 121, 21);
+		exitButton.addActionListener(this);
 
 	}
 
 	/**
 	 * main method
+	 * 
 	 * @param args String array.
 	 */
 	public static void main(String[] args) {
@@ -142,7 +148,8 @@ public class GameLauncher extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * This method takes an event as an input and performs task depending on the event
+	 * This method takes an event as an input and performs task depending on the
+	 * event
 	 */
 	public void actionPerformed(ActionEvent event) {
 
@@ -159,25 +166,21 @@ public class GameLauncher extends JFrame implements ActionListener {
 			createMapFile = new CreateMapFile();
 			createMapFile.createMap();
 
-
 		} else if (event.getSource() == editMapButton) {
 			System.out.println("#### editMapMapButton  is clicked ####");
 			gameFrame.setVisible(false);
-			editObject= new MapEditView();
+			editObject = new MapEditView();
 			editObject.EditMapFileChoose();
 
-		} 
-		else if (event.getSource() == tournamentButton) {
+		} else if (event.getSource() == tournamentButton) {
 			System.out.println("#### tournamentButton  is clicked ####");
-		
-		}
-		
-		else if (event.getSource() == loadGameButton) {
-			System.out.println("#### loadGameButton  is clicked ####");
-		
 
 		}
-		else if (event.getSource() == exitButton) {
+
+		else if (event.getSource() == loadGameButton) {
+			System.out.println("#### loadGameButton  is clicked ####");
+
+		} else if (event.getSource() == exitButton) {
 			System.exit(0);
 
 		}
