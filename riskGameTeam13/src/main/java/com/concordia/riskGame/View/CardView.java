@@ -197,5 +197,78 @@ public class CardView implements Observer{
 		}
 
 	}
+	
+	
+	public int exchangeCardsForComputerPlayers(Player player) throws Exception {
+		int armiesToBeGiven =0;
+		HashMap<String, Integer> cardCount = new HashMap<>();
+		int cardTypes = 0;
+		player.setCardExchangeTypeCount(0);
+		player.setCardExchangeAppearingMoreThanThrice("");
+		boolean cardExchangePossible = false;
+		String cardAppearingMoreThanThrice = null;
+		List<Card> exchangeSameCards = new ArrayList<>();
+		List<Card> exchangeDifferentCards = new ArrayList<>();
+		List<Card> exchangeCards = new ArrayList<>();
+		System.out.println("The cards with this player are :");
+		for (Card card : player.getCardList()) {
+			if (!cardCount.containsKey(card.getType())) {
+				cardCount.put(card.getType(), 1);
+				cardTypes++;
+				exchangeDifferentCards.add(card);
+			} else {
+				int c = cardCount.get(card.getType());
+				c++;
+				cardCount.put(card.getType(), c);
+			}
+			System.out.println(card.getType() + ", "+card.getCountry().getCountryName());
+		}
+		if (cardTypes == 3) {
+			cardExchangePossible = true;
+		}
+		for (Entry<String, Integer> cardVal : cardCount.entrySet()) {
+			if (cardVal.getValue() >= 3) {
+				cardExchangePossible = true;
+				cardAppearingMoreThanThrice = cardVal.getKey();
+			}
+		}
+		if(cardExchangePossible && cardTypes<3 && cardAppearingMoreThanThrice !=null) {
+			for(Card card : player.getCardList()) {
+				if(card.getType().equals(cardAppearingMoreThanThrice) && exchangeSameCards.size()<3) {
+					exchangeSameCards.add(card);
+				}
+			}
+		}
+		if (player.getCardList().size() < 3) {
+			System.out.println();
+			System.out.println("Not enough cards to exchange ,continuing with the reinforcement phase");
+		} else if (cardExchangePossible) {
+			if((exchangeDifferentCards.size()==3 || exchangeSameCards.size()==3)) {
+				player.exchangeCardsForComputerPlayer(exchangeDifferentCards,exchangeSameCards,player);
+				player.setExchanged(false);
+				int count = MapContents.getInstance().getCardExchangeCount();
+				armiesToBeGiven = (count + 1) * 5;
+
+				MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount()+1);
+				exchangeCards = exchangeDifferentCards.size()==3 ? exchangeDifferentCards : exchangeSameCards;
+				player = player.exChangeCardTerritoryExist(exchangeCards,player);
+
+				System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+
+				for(Country c : player.getAssignedCountries())
+				{
+					System.out.println("######## Army Assignment after card exchange ###### ");
+					System.out.println("######## Country Name  ########## :"+c.getCountryName());
+					System.out.println("######## Country Armies #########   :"+c.getArmies());
+
+				}
+
+
+				System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
+			}
+		}
+		return armiesToBeGiven;
+		
+	}
 
 }
