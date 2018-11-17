@@ -3,10 +3,13 @@ package com.concordia.riskGame.View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -15,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.concordia.riskGame.model.Map.MapParseProcessor;
@@ -28,12 +32,13 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  * @author Dheeraj As - Team 13
  *
  */
-public class PlayerCount extends JFrame implements ActionListener {
+public class PlayerCount extends JFrame  {
 	
 	private String[] playerCounterArray = {"3","4","5","6"};
 	
 	private int noOfPlayers;
 	private JFrame countFrame;
+	private JPanel   panel = new JPanel();
 	private JLabel countLabel;
 	private JLabel selectMapLabel;
 	private JComboBox playerCountCombo;
@@ -44,6 +49,26 @@ public class PlayerCount extends JFrame implements ActionListener {
 	private String filePath = null;
 	private int number = 1;
 	private MapParseProcessor mapParseObject;
+	private JLabel player1 = new JLabel();
+	private JLabel player2 = new JLabel();
+	private JLabel player3 = new JLabel();
+	private JLabel player4 = new JLabel();
+	private JLabel player5 = new JLabel();
+	private JLabel player6 = new JLabel();
+    private String playersTypes[]={"Aggressive", "Benevolent", "Random", "Cheater", "Human"};   
+
+
+    private JComboBox cbPlayer1 ; 
+    private JComboBox cbPlayer2 ; 
+    private JComboBox cbPlayer3 ; 
+    private JComboBox cbPlayer4 ; 
+    private JComboBox cbPlayer5 ; 
+    private JComboBox cbPlayer6 ; 
+    private String playercount ;
+
+
+
+
 
 	/**
 	 * This constructor calls the Count method
@@ -61,20 +86,181 @@ public class PlayerCount extends JFrame implements ActionListener {
 	 * players from a configuration file.
 	 */
 	public void Count() {
-		JFrame.setDefaultLookAndFeelDecorated(true);
+		//JFrame.setDefaultLookAndFeelDecorated(true);
 
 		countFrame = new JFrame("Concordia Conquest");
 		countFrame.setVisible(true);
 		
+		countFrame.setTitle("Choose Player");
+		countFrame.setVisible(true);
+		countFrame.setLocationRelativeTo(null);
+		countFrame.setSize(400,400);
+		countFrame.setSize(300,300);
+		panel.setBackground(Color.cyan);
+		GridBagLayout layout = new GridBagLayout();
+		panel.setLayout(layout);        
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		countLabel = new JLabel("Select the number of players");
+		playerCountCombo = new JComboBox(playerCounterArray);
+		okayButton = new JButton("OK");
+
+
+
+		player1.setText("Player1");
+		player1.setVisible(true);
+		
+		player2.setText("Player2");
+		player2.setVisible(true);
+		
+		player3.setText("Player3");
+		player3.setVisible(true);
+		
+		player4.setText("Player4");
+		player4.setVisible(true);
+		
+		player5.setText("Player5");
+		player5.setVisible(true);
+		
+		player6.setText("Player6");
+		player6.setVisible(true);
+		
+		cbPlayer1=new JComboBox(playersTypes); 
+		cbPlayer1.setBounds(50, 50,90,20);    
+		
+		cbPlayer2=new JComboBox(playersTypes); 
+		cbPlayer2.setBounds(50, 50,90,20);
+		
+		cbPlayer3=new JComboBox(playersTypes); 
+		cbPlayer3.setBounds(50, 50,90,20);
+		
+		cbPlayer4=new JComboBox(playersTypes); 
+		cbPlayer4.setBounds(50, 50,90,20);
+		
+		cbPlayer5=new JComboBox(playersTypes); 
+		cbPlayer5.setBounds(50, 50,90,20);
+		
+		cbPlayer6=new JComboBox(playersTypes); 
+		cbPlayer6.setBounds(50, 50,90,20);
+
+		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		panel.add(countLabel,gbc);
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		panel.add(playerCountCombo,gbc);
+		
+		
+		
+	
+		
+		countFrame.add(panel);
+		
+		playerCountCombo.addActionListener(new ActionListener() {
+
+	        public void actionPerformed(final ActionEvent e) {
+	             playercount = (String) playerCountCombo.getSelectedItem();
+
+	        	
+	        	if(playercount.equals("3") || playercount.equals("4") || playercount.equals("5") || playercount.equals("6")  )
+	        	{
+	        		
+	        		gbc.gridx = 0;
+		    		gbc.gridy = 4;
+		    		panel.add(player1,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 4;
+		    		panel.add(cbPlayer1,gbc);
+		    		
+		    		gbc.gridx = 0;
+		    		gbc.gridy = 6;
+		    		panel.add(player2,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 6;
+		    		panel.add(cbPlayer2,gbc);
+	        		
+		    		
+		    		gbc.gridx = 0;
+		    		gbc.gridy = 8;
+		    		panel.add(player3,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 8;
+		    		panel.add(cbPlayer3,gbc);
+	        		
+		    		panel.remove(cbPlayer4);
+		    		panel.remove(player4);
+		    		panel.remove(cbPlayer5);
+		    		panel.remove(player5);
+		    		panel.remove(cbPlayer6);
+		    		panel.remove(player6);
+
+
+	        		
+	        	}
+	        	
+	        	if( playercount.equals("4") || playercount.equals("5") || playercount.equals("6")  )
+	        	{
+	        		gbc.gridx = 0;
+		    		gbc.gridy = 10;
+		    		panel.add(player4,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 10;
+		    		panel.add(cbPlayer4,gbc);
+		    		panel.remove(cbPlayer5);
+		    		panel.remove(player5);
+
+		    		panel.remove(cbPlayer6);
+		    		panel.remove(player6);
+
+		    		
+	        		
+	        	}
+	        	
+	        	if( playercount.equals("5") || playercount.equals("6")  )
+	        	{
+	        		gbc.gridx = 0;
+		    		gbc.gridy = 12;
+		    		panel.add(player5,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 12;
+		    		panel.add(cbPlayer5,gbc);
+		    		panel.remove(cbPlayer6);
+		    		panel.remove(player6);
+
+	        		
+	        	}
+	        	
+	        	if(playercount.equals("6")  )
+	        	{
+	        		gbc.gridx = 0;
+		    		gbc.gridy = 14;
+		    		panel.add(player6,gbc);
+		    		gbc.gridx = 2;
+		    		gbc.gridy = 14;
+		    		panel.add(cbPlayer6,gbc);
+	        		
+	        	}
+	        	gbc.gridx = 3;
+	    		gbc.gridy = 16;
+	    		panel.add(okayButton,gbc);
+           
+	        	
+	        	countFrame.validate();
+	        	countFrame.repaint();
+	        	countFrame.repaint();
+	        }
+	    });
 		// set Background Image
-		try {
-			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
+		/*try {
+			//JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
 			countFrame.setContentPane(label);
 		} catch (IOException e) {
 			System.out.println("Error Message : " + e.getMessage());
 		}
 
-		
+		/*
 
 		countFrame.getContentPane().setLayout(null);
 
@@ -104,19 +290,56 @@ public class PlayerCount extends JFrame implements ActionListener {
 		selectMapLabel = new JLabel("select map file to start the game");
 
 		countFrame.setSize(500, 500);
-		countFrame.setLocation(500, 200);
+		countFrame.setLocation(500, 200); */
 
-	}
+	
 
 	/**
 	 * This function implements actions when okay button is clicked and presents
 	 * user the option to select the map file
 	 * @param event User Event
 	 */
+	
+	okayButton.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent event) {
 		try {
 			if (event.getSource() == okayButton) {
+				
+				HashMap<String,String> playerType = new HashMap<>(); 
+				if(playercount.equals("3") || playercount.equals("4") || playercount.equals("5") || playercount.equals("6")  )
+	        	{
+					playerType.put("Player1",(String) cbPlayer1.getSelectedItem());
+					playerType.put("Player2",(String) cbPlayer2.getSelectedItem());
+					playerType.put("Player3",(String) cbPlayer3.getSelectedItem());
 
+	        	}
+				
+				if( playercount.equals("4") || playercount.equals("5") || playercount.equals("6")  )
+	        	{
+					playerType.put("Player4",(String) cbPlayer4.getSelectedItem());
+
+	        	}
+				
+				if( playercount.equals("5") || playercount.equals("6")  )
+	        	{
+					playerType.put("Player5",(String) cbPlayer5.getSelectedItem());
+
+	        	}
+				
+				if( playercount.equals("6") || playercount.equals("6")  )
+	        	{
+					playerType.put("Player6",(String) cbPlayer6.getSelectedItem());
+
+	        	}
+				
+				for (String name: playerType.keySet()){
+
+		            String key =name.toString();
+		            String value = playerType.get(name).toString();  
+		            System.out.println(key + " " + value);  
+
+
+		} 
 				System.out.println("#### Okay Button is Clicked ####");
 				filenameFilter = new FileNameExtensionFilter(" .map", "map", "map");
 				countFrame.setVisible(false);
@@ -135,7 +358,7 @@ public class PlayerCount extends JFrame implements ActionListener {
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
 					mapParseObject = new MapParseProcessor();
-					mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),playerCountCombo.getSelectedItem().toString());
+					mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),playerCountCombo.getSelectedItem().toString(),playerType);
 
 				}
 
@@ -146,9 +369,10 @@ public class PlayerCount extends JFrame implements ActionListener {
 		}
 
 	}
-
 	
-
+	});
+	}
+	
 	/**
 	 * This method get the filePath
 	 * @return filePath

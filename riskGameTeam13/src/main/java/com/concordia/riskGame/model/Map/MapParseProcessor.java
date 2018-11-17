@@ -70,7 +70,7 @@ public class MapParseProcessor {
 	 * @return the mapContent Object with map details enriched
 	 */
 
-	public MapContents mapParser(String filePath, String numberOfPlayer) {
+	public MapContents mapParser(String filePath, String numberOfPlayer,HashMap<String,String> playerType) {
 		try {
 
 			fileObject = new File(filePath);
