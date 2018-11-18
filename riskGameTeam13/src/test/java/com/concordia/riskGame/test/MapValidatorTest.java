@@ -17,6 +17,7 @@ import com.concordia.riskGame.util.MapValidator;
 public class MapValidatorTest {
 	
 	File fileValid;
+	File fileInvalidDisconnectedContinent;
 	File fileInvalidDisconnected;
 	File fileInvalidZeroContinent;
 	File fileInvalidZeroCountry;
@@ -34,6 +35,7 @@ public class MapValidatorTest {
 	@Before
 	public void setUp() throws Exception {
 		fileValid= new File("src/main/resources/Africa.map");
+		fileInvalidDisconnectedContinent= new File("src/main/resources/Invalid_Not_Connected_Continent_Graph.map");
 		fileInvalidDisconnected= new File("src/main/resources/Invalid_Not_Connected_Graph.map");
 		fileInvalidZeroContinent= new File("src/main/resources/Invalid_Zero_Continent.map");	
 		fileInvalidZeroCountry= new File("src/main/resources/Invalid_Zero_Country.map");
@@ -59,6 +61,19 @@ public class MapValidatorTest {
 		 validFlag=mapValidatorObject.getValidMapFlag();
 		 
 		 assertTrue(validFlag);
+	}
+	
+	/**
+	 * This method checks if a disconnected continent map is considered to be invalid
+	 * @throws InvalidMapFileException  Map is Invalid.
+	 */
+	@Test
+	public void testDisconnectedContinentMap() throws InvalidMapFileException {
+		
+		 mapValidatorObject.init(fileInvalidDisconnectedContinent);
+		 validFlag=mapValidatorObject.getValidMapFlag();
+		 
+		 assertFalse(validFlag);
 	}
 	
 	/**
