@@ -37,7 +37,7 @@ public class RandomAssignment {
 		int noOfCountries = countryList.size();
 		System.out.println("Players : " + noOfPlayers + " Countries : " + noOfCountries);
 		List<Player> playersList = new ArrayList<>();
-		for (int i = 0; i < noOfPlayers; i++) {
+		for (int i = 0; i < noOfPlayers-1; i++) {
 			Player playerObject = new Player("Player - " + (i + 1));
 			String type = playerType.get(PLAYER+(i+1));
 			switch (type) {
