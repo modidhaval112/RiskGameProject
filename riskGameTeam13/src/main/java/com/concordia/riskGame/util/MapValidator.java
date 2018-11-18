@@ -163,6 +163,90 @@ import com.concordia.riskGame.model.Player.Player;
  		
  		return visitedMap;
 	}
+	
+	public boolean checkConnectedCountryContinent(MapContents mapContents) {
+		
+		Map<Country, List<Country>> listTempCountry =  mapContents.getCountryAndNeighbors();
+		
+		for(Continent c : mapContents.getContinentAndItsCountries().keySet()) {
+			//Set<String> setConnectedCountries = new HashSet<>();
+			Map<Country, List<Country>> mapCountry = new HashMap<>();
+
+			System.out.println("Continent : " + c.getContinentName());
+			//int i = 0;
+			for(Country country : mapContents.getContinentAndItsCountries().get(c)) {
+				//System.out.println("*******************Country : " + country.getCountryName());
+				List<Country> listNbCountry = new ArrayList<>();				
+				for(Country nbCountry : country.getNeighbouringCountries()) {
+					for(Country tempCountry : listTempCountry.keySet()) {
+						if(nbCountry.getCountryName().equalsIgnoreCase(tempCountry.getCountryName())) {
+							if(country.getBelongsToContinent().equalsIgnoreCase(tempCountry.getBelongsToContinent())) {
+								//System.out.println("*******************Nb Country : " + tempCountry.getCountryName());
+								//setConnectedCountries.add(tempCountry.getCountryName());
+								listNbCountry.add(tempCountry);
+								/*if(i==0) {
+									setConnectedCountries.add(country.getCountryName());
+									i = 1;
+								}*/
+								
+							}
+						}
+					}
+				}
+				mapCountry.put(country, listNbCountry);
+			}
+			
+			for (Country country : mapCountry.keySet()) {
+				System.out.println("Country : " + country.getCountryName());
+				for(Country nbCountry : mapCountry.get(country)) {
+					System.out.println("NbCountry : " + nbCountry.getCountryName());
+				}
+			}
+			
+			Map<String, Integer> visitedMapForContinent = new HashMap<>();
+			for (int i = 0; i < mapCountry.keySet().size(); i++) {
+				if (visitedMapForContinent.size() != mapCountry.keySet().size()) {
+					Map<String, Integer> visitedMap = new HashMap<>();
+					visitedMapForContinent = checkConnectedGraph(mapCountry.keySet().iterator().next(), mapCountry, visitedMap);
+				} else {
+					break;
+				}
+			}
+			
+			//System.out.println("-----------------------------------------------");
+			//System.out.println("Continent : " + c.getContinentName());
+			/*for(String countryName : setConnectedCountries) {
+				System.out.println("Country Name : " + countryName);
+			}*/
+			//System.out.println("-----------------------------------------------");
+			//System.out.println("mapContents.getContinentAndItsCountries().get(c).size() : " + mapContents.getContinentAndItsCountries().get(c).size());
+			//System.out.println("setConnectedCountries.size() : " + setConnectedCountries.size());
+			/*if(mapContents.getContinentAndItsCountries().get(c).size()!=setConnectedCountries.size()) {
+				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
+				return false;
+			}
+			else
+			{
+				System.out.println("Continent " + c.getContinentName() + " is Connected");
+			}*/
+			
+			int connectedCountries = 0;
+			for (Map.Entry<String, Integer> entry : visitedMapForContinent.entrySet()) {
+				System.out.println("Country and value " + entry.getKey() + " " + entry.getValue());
+				if (entry.getValue() == 1) {
+					connectedCountries++;
+				}
+			}
+			
+			if (connectedCountries != mapCountry.keySet().size()) {
+				return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
  	/**
 	 * method to check all the output returned by above described method
 	 * 
@@ -246,6 +330,16 @@ import com.concordia.riskGame.model.Player.Player;
 				System.out.println("Message : " + statusMessage);
 				return;
 			}
+ 			
+ 			if (mapValidator.checkConnectedCountryContinent(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Continents are not connected";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+ 			
  			if (connectedCountries == mapContents.getCountryAndNeighbors().keySet().size()) {
 				validMapFlag = true;
 				statusMessage = "Map is valid";
