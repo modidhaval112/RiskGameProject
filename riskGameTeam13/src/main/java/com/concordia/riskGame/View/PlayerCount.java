@@ -33,7 +33,7 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  */
 public class PlayerCount extends JFrame {
 
-	private String[] playerCounterArray = { "3", "4", "5", "6" };
+	private String[] playerCounterArray = { "2","3", "4", "5", "6" };
 
 	private int noOfPlayers;
 	private JFrame countFrame;
@@ -150,6 +150,35 @@ public class PlayerCount extends JFrame {
 
 			public void actionPerformed(final ActionEvent e) {
 				playercount = (String) playerCountCombo.getSelectedItem();
+				
+				if (playercount.equals("2") ||playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
+						|| playercount.equals("6")) {
+
+					gbc.gridx = 0;
+					gbc.gridy = 4;
+					panel.add(player1, gbc);
+					gbc.gridx = 2;
+					gbc.gridy = 4;
+					panel.add(cbPlayer1, gbc);
+
+					gbc.gridx = 0;
+					gbc.gridy = 6;
+					panel.add(player2, gbc);
+					gbc.gridx = 2;
+					gbc.gridy = 6;
+					panel.add(cbPlayer2, gbc);
+
+					
+					panel.remove(cbPlayer3);
+					panel.remove(player3);
+					panel.remove(cbPlayer4);
+					panel.remove(player4);
+					panel.remove(cbPlayer5);
+					panel.remove(player5);
+					panel.remove(cbPlayer6);
+					panel.remove(player6);
+
+				}
 
 				if (playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
 						|| playercount.equals("6")) {
@@ -282,6 +311,13 @@ public class PlayerCount extends JFrame {
 								|| playercount.equals("6")) {
 							playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
 							playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
+							/*playerType.put("Player3", (String) cbPlayer3.getSelectedItem());*/
+
+						}
+						if (playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
+								|| playercount.equals("6")) {
+							/*playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
+							playerType.put("Player2", (String) cbPlayer2.getSelectedItem());*/
 							playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
 
 						}

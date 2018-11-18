@@ -92,7 +92,7 @@ public class MapParseProcessor {
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapContentObject.setCountryList(countryList);
 			RandomAssignment randonAssignment = new RandomAssignment();
-			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList);
+			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList,playerType);
 			initialArmies = initialArmyAssignment(numberOfPlayers);
 			playerList = new ArrayList();
 
