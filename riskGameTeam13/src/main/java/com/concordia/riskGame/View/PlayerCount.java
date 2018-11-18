@@ -133,6 +133,7 @@ public class PlayerCount extends JFrame {
 					gbc.gridx = 2;
 					gbc.gridy = 4;
 					panel.add(cbPlayer1, gbc);
+					
  					gbc.gridx = 0;
 					gbc.gridy = 6;
 					panel.add(player2, gbc);
