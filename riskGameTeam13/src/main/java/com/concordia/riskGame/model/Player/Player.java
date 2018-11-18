@@ -21,6 +21,9 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
 
+
+
+
 /**
  * This is entity class to set and get properties of player.
  *
@@ -50,7 +53,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	private String[] nameArmiesSpilt;
 	private String countryName;
 	private String armiesCount;
-
+	public PlayerStrategy strategy;
 	private boolean hasWon;
 	private boolean canContinue;
 	private boolean hasLost;
@@ -1836,6 +1839,49 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		this.isComputerPlayer = isComputerPlayer;
 	}
 
+	 /**
+     * Getter method for strategy used by the player
+     * @return type of strategy
+     */
+    public PlayerStrategy getStrategy() {
+        return strategy;
+    }
+
+    /**
+     * Setter method for setting the strategy of the player
+     * @param strategy type for player
+     */
+    public void setStrategy(PlayerStrategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    /**
+     * This method will execute the attack method from the PlayerStrategy interface
+     * @param country1 name of the attacker's country
+     * @param country2 name of the defender's country
+     * @param gameView object of GameView class
+     * @param model object of Player class
+     */
+    public void executeAttack(Player player) {
+        this.strategy.attackPhase(player);
+    }
+
+    /**
+     * This method will execute the reinforce method from the PlayerStrategy interface
+     * @param player object of Player class
+     * @throws Exception 
+     */
+    public void executeReinforce(Player player) throws Exception {
+        this.strategy.reinforcePhase(player);
+    }
+
+    /**
+     * This method will execute the fortification method from the PlayerStrategy interface
+     * @param player object of Player class
+     */
+    public void executeFortification( Player player) {
+        this.strategy.forfeitPhase(player);
+    }
 	
 	
 }
