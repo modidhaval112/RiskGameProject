@@ -23,6 +23,7 @@ public class AggresivePlayer implements PlayerStrategy{
 		int assignedArmies = 0;
 		int armiesToBeGiven = 0;
 		player.setPhase("#### Aggressive Player Reinforcement Phase");
+		assignedArmies = player.calculateReiforcementArmies(player.getAssignedCountries().size());
 		List<Continent> currcontControlList = new ArrayList();
 		 currcontControlList = player.contienentControlList(player);
 		if(currcontControlList!=null)
