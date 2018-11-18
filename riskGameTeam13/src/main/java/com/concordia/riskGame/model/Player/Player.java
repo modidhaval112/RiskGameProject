@@ -1115,6 +1115,9 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				setCanFortify(true);
 				break;
 			}
+			if(player.getAssignedCountries().size() == 1) {
+				player.setCanFortify(false);
+			}
 		}
 	}
 

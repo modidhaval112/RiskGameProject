@@ -89,12 +89,12 @@ public class BenevolentPlayer implements PlayerStrategy {
 			countriesSize--;
 		}
 		player.setPhase("					###########    Source country      	     ###############       : "
-				+ sourceCountry);
+				+ sourceCountry.getCountryName());
 		player.setPhase(
-				"					###########  Destination Country   	 ###############       : " + destinationCountry);
+				"					###########  Destination Country   	 ###############       : " + destinationCountry.getCountryName());
 		player.setPhase("					############   Armies to be moved    ###############      : "
-				+ (sourceCountry.getArmies()-2));
-		destinationCountry.setArmies(destinationCountry.getArmies() + sourceCountry.getArmies()-2);
+				+ (2));
+		destinationCountry.setArmies(destinationCountry.getArmies() + 2);
 		sourceCountry.setArmies(sourceCountry.getArmies()-2);
 		player.setPhase("#### After Fortification ####");
 		player.printAllCountriesOfaPlayer(player);
@@ -141,5 +141,8 @@ public class BenevolentPlayer implements PlayerStrategy {
 				break;
 			}
 		}
-	}
+		if(player.getAssignedCountries().size() == 1) {
+			player.setCanFortify(false);
+		}
+		}
 }

@@ -285,6 +285,9 @@ public class AggresivePlayer implements PlayerStrategy{
 				player.setCanFortify(true);
 				break;
 			}
+			if(player.getAssignedCountries().size() == 1) {
+				player.setCanFortify(false);
+			}
 		}
 	}
 	
