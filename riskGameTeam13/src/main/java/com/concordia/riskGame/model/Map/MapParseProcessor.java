@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 import com.concordia.riskGame.View.GameLauncher;
@@ -95,8 +97,12 @@ public class MapParseProcessor {
 			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList,playerType);
 			initialArmies = initialArmyAssignment(numberOfPlayers);
 			playerList = new ArrayList();
+			
+			Set<Player> setplayer = playerObject.getPlayerAssign().keySet();
+			List<Player> sortedPlayerList = new ArrayList(setplayer);
+			sortedPlayerList.sort(Comparator.comparing(Player::getName));
 
-			for (Player key : playerObject.getPlayerAssign().keySet()) {
+			for (Player key : sortedPlayerList) {
 				System.out.println("Player Name : " + key.getName());
 				System.out.println("     Assigned no Of Countries  :" + key.getAssignedCountries().size());
 				key.setTotalArmies(initialArmies);
