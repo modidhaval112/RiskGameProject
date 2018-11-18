@@ -29,7 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  */
 public class PlayerCount extends JFrame {
- 	private String[] playerCounterArray = { "3", "4", "5", "6" };
+ 	private String[] playerCounterArray = {"2", "3", "4", "5", "6" };
  	private int noOfPlayers;
 	private JFrame countFrame;
 	private JPanel panel = new JPanel();
@@ -123,9 +123,11 @@ public class PlayerCount extends JFrame {
  		playerCountCombo.addActionListener(new ActionListener() {
  			public void actionPerformed(final ActionEvent e) {
 				playercount = (String) playerCountCombo.getSelectedItem();
- 				if (playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
+				
+				if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
 						|| playercount.equals("6")) {
- 					gbc.gridx = 0;
+					
+					gbc.gridx = 0;
 					gbc.gridy = 4;
 					panel.add(player1, gbc);
 					gbc.gridx = 2;
@@ -137,12 +139,25 @@ public class PlayerCount extends JFrame {
 					gbc.gridx = 2;
 					gbc.gridy = 6;
 					panel.add(cbPlayer2, gbc);
- 					/*gbc.gridx = 0;
+					panel.remove(cbPlayer3);
+					panel.remove(player3);
+					panel.remove(cbPlayer4);
+					panel.remove(player4);
+					panel.remove(cbPlayer5);
+					panel.remove(player5);
+					panel.remove(cbPlayer6);
+					panel.remove(player6);
+					
+				}
+ 				if (playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
+						|| playercount.equals("6")) {
+ 					
+ 					gbc.gridx = 0;
 					gbc.gridy = 8;
 					panel.add(player3, gbc);
 					gbc.gridx = 2;
 					gbc.gridy = 8;
-					panel.add(cbPlayer3, gbc);*/
+					panel.add(cbPlayer3, gbc);
  					panel.remove(cbPlayer4);
 					panel.remove(player4);
 					panel.remove(cbPlayer5);
@@ -234,11 +249,18 @@ public class PlayerCount extends JFrame {
 				try {
 					if (event.getSource() == okayButton) {
  						HashMap<String, String> playerType = new HashMap<>();
+ 						
+ 						if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
+								|| playercount.equals("6"))
+ 						{
+ 							playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
+							playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
+ 							
+ 						}
 						if (playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
 								|| playercount.equals("6")) {
-							playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
-							playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
-							//playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
+						
+							playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
  						}
  						if (playercount.equals("4") || playercount.equals("5") || playercount.equals("6")) {
 							playerType.put("Player4", (String) cbPlayer4.getSelectedItem());
