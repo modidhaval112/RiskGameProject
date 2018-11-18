@@ -234,9 +234,9 @@ public class AggresivePlayer implements PlayerStrategy{
 			countriesSize--;
 		}
 		player.setPhase("					###########    Source country      	     ###############       : "
-				+ sourceCountry);
+				+ sourceCountry.getCountryName());
 		player.setPhase(
-				"					###########  Destination Country   	 ###############       : " + destinationCountry);
+				"					###########  Destination Country   	 ###############       : " + destinationCountry.getCountryName());
 		player.setPhase("					############   Armies to be moved    ###############      : "
 				+ (sourceCountry.getArmies()-1));
 		destinationCountry.setArmies(destinationCountry.getArmies() + sourceCountry.getArmies()-1);
