@@ -99,7 +99,7 @@ public class MapParseProcessor {
 			playerList = new ArrayList();
 			
 			Set<Player> setplayer = playerObject.getPlayerAssign().keySet();
-			List<Player> sortedPlayerList = new ArrayList(setplayer);
+			List<Player> sortedPlayerList = new ArrayList<Player>(setplayer);
 			sortedPlayerList.sort(Comparator.comparing(Player::getName));
 
 			for (Player key : sortedPlayerList) {
