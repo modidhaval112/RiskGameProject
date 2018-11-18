@@ -96,6 +96,7 @@ public class RandomAssignment {
 			playerAssign.put(playersList.get(i), countryList1);
 		}
 		player.setPlayerAssign(playerAssign);
+						
 		return player;
 	}
 
