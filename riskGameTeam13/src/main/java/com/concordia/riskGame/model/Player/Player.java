@@ -1108,16 +1108,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
 		for (Country c : player.getAssignedCountries()) {
-			setCanAttack(false);
-			setCanFortify(false);
-			if (c.getArmies() > 1 && checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
-				setCanAttack(true);
-				setCanFortify(true);
+			player.setCanAttack(false);
+			player.setCanFortify(false);
+			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+				player.setCanAttack(true);
+			}
+			
+			if (c.getArmies() > 1 && player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player)!=null && !player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player).isEmpty()) {
+				player.setCanFortify(true);
 				break;
 			}
-			if(player.getAssignedCountries().size() == 1) {
-				player.setCanFortify(false);
-			}
+		}
+		if(player.getAssignedCountries().size() == 1) {
+			player.setCanFortify(false);
 		}
 	}
 
@@ -1730,6 +1733,22 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		return neighbouringAttackableCountries;
 	}
 
+	/**
+	 * This method returns all the attackable neighbor countries
+	 * @param country country object
+	 * @param player player object
+	 * @return neighbouringAttackableCountries list of countries
+	 */
+	public List<Country> checkNeighboringPlayerOwnedCountriesAndArmies(Country country, Player player) {
+		List<Country> neighbouringPlayerOwnedCountries = new ArrayList<>();
+		for (Country countryObject : country.getNeighbouringCountries()) {
+			Country neighboringCountry = getSourceCountryFromString(countryObject.getCountryName());
+			if (neighboringCountry.getBelongsToPlayer().equals(player)) {
+				neighbouringPlayerOwnedCountries.add(neighboringCountry);
+			}
+		}
+		return neighbouringPlayerOwnedCountries;
+	}
 	/**
 	 * @return the canAttack
 	 */

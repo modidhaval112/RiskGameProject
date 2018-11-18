@@ -282,12 +282,15 @@ public class AggresivePlayer implements PlayerStrategy{
 			player.setCanFortify(false);
 			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
+			}
+			
+			if (c.getArmies() > 1 && player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player)!=null && !player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanFortify(true);
 				break;
 			}
-			if(player.getAssignedCountries().size() == 1) {
-				player.setCanFortify(false);
-			}
+		}
+		if(player.getAssignedCountries().size() == 1) {
+			player.setCanFortify(false);
 		}
 	}
 	
