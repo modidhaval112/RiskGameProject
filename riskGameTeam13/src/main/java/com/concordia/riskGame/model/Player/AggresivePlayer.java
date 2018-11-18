@@ -52,6 +52,7 @@ public class AggresivePlayer implements PlayerStrategy{
 			System.out.println("Exception Message : " + e.getMessage()); 
 			reinforcePhase(player);
 		}
+		player.setCanAttack(true);
 		return player;
 	}
 	
@@ -93,7 +94,7 @@ public class AggresivePlayer implements PlayerStrategy{
 		sourceCountryObject = getStrongestCountry(player);
 		int numberOfNeighbours = sourceCountryObject.getNeighbouringCountries().size();
 		while(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0) {
-			destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours).getCountryName());
+			destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours-1).getCountryName());
 			if(destinationCountryObject.getBelongsToPlayer().equals(player)) {
 				numberOfNeighbours--;
 				continue;
@@ -163,6 +164,8 @@ public class AggresivePlayer implements PlayerStrategy{
 			}
 		attackableCount--;
 		}
+		checkPlayerTurnCanContinue(player);
+		player.setCardGiven(false);
 		return player;
 		}
 		
@@ -219,7 +222,7 @@ public class AggresivePlayer implements PlayerStrategy{
 		Country destinationCountry = null;
 		int countriesSize = sortedCountryList.size();
 		while(!fortificationDone && countriesSize>0 ) {
-			destinationCountry = sortedCountryList.get(countriesSize);
+			destinationCountry = sortedCountryList.get(countriesSize-1);
 			for(Country country2 : destinationCountry.getNeighbouringCountries()) {
 				sourceCountry = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
 				if(sourceCountry!=null && sourceCountry.getArmies()>1) {
@@ -265,6 +268,23 @@ public class AggresivePlayer implements PlayerStrategy{
 			}
 		}
 		return sortedCountryList;
+	}
+	
+	
+	/**
+	 * This method checks if player's turn can continue or not
+	 * @param player player object
+	 */
+	void checkPlayerTurnCanContinue(Player player) {
+		for (Country c : player.getAssignedCountries()) {
+			player.setCanAttack(false);
+			player.setCanFortify(false);
+			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+				player.setCanAttack(true);
+				player.setCanFortify(true);
+				break;
+			}
+		}
 	}
 	
 }

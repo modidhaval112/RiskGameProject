@@ -43,20 +43,24 @@ public class RandomAssignment {
 			switch (type) {
             case "Aggressive":
             	playerObject.setStrategy(new AggresivePlayer());
+            	playerObject.setComputerPlayer(true);
                 break;
             case "Benevolent":
             	playerObject.setStrategy(new BenevolentPlayer());
+            	playerObject.setComputerPlayer(true);
                 break;
             case "Random":
             	playerObject.setStrategy(new RandomPlayer());
+            	playerObject.setComputerPlayer(true);
                 break;
             case "Cheater":
             	playerObject.setStrategy(new CheaterPlayer());
+            	playerObject.setComputerPlayer(true);
                 break;
             default:
             	playerObject.setStrategy(new Player());
-			playersList.add(playerObject);
 			}
+			playersList.add(playerObject);
 		}
 		RandomAssignment inputObject = new RandomAssignment();
 		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);

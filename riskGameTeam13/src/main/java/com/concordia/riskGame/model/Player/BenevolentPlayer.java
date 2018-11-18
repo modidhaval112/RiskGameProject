@@ -35,6 +35,7 @@ public class BenevolentPlayer implements PlayerStrategy {
 		player.setPhase("######### Player army count after reinforcment  ####### ");
 		player.setPhase("######## Player Name ########### : " + player.getName());
 		player.printAllCountriesOfaPlayer(player);
+		player.setCanAttack(true);
 		return player;
 	}
 
@@ -57,8 +58,10 @@ public class BenevolentPlayer implements PlayerStrategy {
 	}
 	@Override
 	public Player attackPhase(Player player) {
-		// TODO Auto-generated method stub
-		return null;
+		player.setPhase("#### BENEVOLENT PLAYER ATTACK PHASE BEGINS####");
+		player.setPhase("#### BENEVOLENT PLAYER DOESNT ATTACK####");
+		checkPlayerTurnCanContinue(player);
+		return player;
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class BenevolentPlayer implements PlayerStrategy {
 		Country destinationCountry = null;
 		int countriesSize = sortedCountryList.size();
 		while(!fortificationDone && countriesSize>0 ) {
-			destinationCountry = sortedCountryList.get(countriesSize);
+			destinationCountry = sortedCountryList.get(countriesSize-1);
 			for(Country country2 : destinationCountry.getNeighbouringCountries()) {
 				sourceCountry = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
 				if(sourceCountry!=null && sourceCountry.getArmies()>3) {
@@ -121,5 +124,21 @@ public class BenevolentPlayer implements PlayerStrategy {
 			}
 		}
 		return sortedCountryList;
+	}
+	
+	/**
+	 * This method checks if player's turn can continue or not
+	 * @param player player object
+	 */
+	void checkPlayerTurnCanContinue(Player player) {
+		for (Country c : player.getAssignedCountries()) {
+			player.setCanAttack(false);
+			player.setCanFortify(false);
+			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+				player.setCanAttack(true);
+				player.setCanFortify(true);
+				break;
+			}
+		}
 	}
 }

@@ -20,6 +20,7 @@ public class CheaterPlayer implements PlayerStrategy {
 			playerCountry.setArmies(playerCountry.getArmies()*2);
 		}
 		player.setPhase("#### After Reinforcement Phase");
+		player.setCanAttack(true);
 		return player;
 	}
 
@@ -29,7 +30,7 @@ public class CheaterPlayer implements PlayerStrategy {
 		player.setCurrentPhase(Player.reinforcePhase);
 		player.setPhase("#### Cheater Player Attack Phase");
 		player.printAllCountriesOfaPlayer(player);
-		Iterator<Country> iterator = player.getAssignedCountries().iterator();
+		Iterator<Country> iterator =  new ArrayList<>(player.getAssignedCountries()).iterator();
 		while(iterator.hasNext()) {
 			Country playerCountry = player.getSourceCountryFromString(iterator.next().getCountryName());
 			for(Country country2 : playerCountry.getNeighbouringCountries()) {
@@ -37,11 +38,18 @@ public class CheaterPlayer implements PlayerStrategy {
 				if(belongsToPlayer == null) {
 					Country destinationCountry = player.getSourceCountryFromString(country2.getCountryName());
 					playerLosesTheCountry(playerCountry,destinationCountry);
+					
 				}
 			}
 		}
 		player.setPhase("#### After Cheater Player Attack Phase");
 		player.printAllCountriesOfaPlayer(player);
+		boolean result = player.hasPlayerWon(player);
+		if(result) {
+			player.setPhase("####**** PLAYER HAS WON ****####");
+			System.exit(0);
+		}
+		checkPlayerTurnCanContinue(player);
 		return player;
 	}
 	
@@ -99,6 +107,22 @@ public class CheaterPlayer implements PlayerStrategy {
 		player.setPhase("#### After Fortification Phase");
 		player.printAllCountriesOfaPlayer(player);
 		return player;
+	}
+	
+	/**
+	 * This method checks if player's turn can continue or not
+	 * @param player player object
+	 */
+	void checkPlayerTurnCanContinue(Player player) {
+		for (Country c : player.getAssignedCountries()) {
+			player.setCanAttack(false);
+			player.setCanFortify(false);
+			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+				player.setCanAttack(true);
+				player.setCanFortify(true);
+				break;
+			}
+		}
 	}
 
 }
