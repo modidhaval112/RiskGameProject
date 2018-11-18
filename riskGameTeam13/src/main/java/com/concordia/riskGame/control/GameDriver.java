@@ -58,12 +58,12 @@ public class GameDriver {
 			Player playerInstance = new Player();
 			Player p = iterator.next();
 			if(!p.isHasLost()) {
-			playerInstance = playerInstance.reinforcePhase(p);
+			playerInstance = p.strategy.reinforcePhase(p);
 			if(playerInstance.getCanAttack()) {
-			playerInstance = playerInstance.attackPhase(playerInstance);
+			playerInstance = playerInstance.strategy.attackPhase(playerInstance);
 			}
 			if(playerInstance.getCanFortify()) {
-			playerInstance = playerInstance.forfeitPhase(playerInstance);
+			playerInstance = playerInstance.strategy.forfeitPhase(playerInstance);
 			}
 			}
 		}
