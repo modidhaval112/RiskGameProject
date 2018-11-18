@@ -2,6 +2,7 @@ package com.concordia.riskGame.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,9 @@ public class RandomAssignment {
 			}
 			playersList.add(playerObject);
 		}
+		
+		playersList.sort(Comparator.comparing(Player::getName));
+		
 		RandomAssignment inputObject = new RandomAssignment();
 		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		Map<Continent, List<Country>> continentAssign = new HashMap<>();
