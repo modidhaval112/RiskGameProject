@@ -1,0 +1,16 @@
+[Map]
+author=Mahks
+image=Invalid_Not_Connected_Continent_Graph.bmp
+wrap=no
+scroll=none
+warn=yes
+
+[Continents]
+c1=1
+c2=1
+
+[Territories]
+n1,59,79,c1,n2,n4
+n2,139,79,c1,n3
+n3,219,79,c2,n1
+n4,59,160,c2,n2
