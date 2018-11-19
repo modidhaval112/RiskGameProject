@@ -130,7 +130,7 @@ import com.concordia.riskGame.model.Player.Player;
 		List<Country> nbCountries = new ArrayList<>();
 		visitedMap.put(parent.getCountryName().trim(), 1);
 		
-		System.out.println("parent.getCountryName() : " + parent.getCountryName());
+		//System.out.println("parent.getCountryName() : " + parent.getCountryName());
 		
  		for (Map.Entry<Country, List<Country>> entry : mapCountry.entrySet()) {
 			if (parent.getCountryName().equalsIgnoreCase(entry.getKey().getCountryName())) {
@@ -140,28 +140,13 @@ import com.concordia.riskGame.model.Player.Player;
  		if (nbCountries != null && !nbCountries.isEmpty()) {
 			for (int i = 0; i < nbCountries.size(); i++) {
 				if (!visitedMap.containsKey(nbCountries.get(i).getCountryName().trim())) {
+					//System.out.println("Has Nb Country");
 					checkConnectedGraphForContinent(nbCountries.get(i), mapCountry, visitedMap);
 
 				}
 			}
 		}
-		else {
-			Iterator<Country> it = mapCountry.keySet().iterator();
-			Country next;
-			while (it.hasNext()) {
-				next = it.next();
-				//System.out.println("mapCountry.keySet().iterator().next().getCountryName() : " + next.getCountryName());
-				if (!visitedMap.containsKey(next.getCountryName().trim()) && mapCountry.get(next) != null && !mapCountry.get(next).isEmpty()) {
-					checkConnectedGraphForContinent(next, mapCountry, visitedMap);
-				}
-			}
-		}
- 		
-/* 		for (Entry<String, Integer> entry : visitedMap.entrySet()) {
-			System.out.println("Country **** " + entry.getKey());
-			System.out.println("Value **** " + entry.getValue());
-		}*/
- 		
+
  		return visitedMap;
 	}
 	
@@ -170,26 +155,20 @@ import com.concordia.riskGame.model.Player.Player;
 		Map<Country, List<Country>> listTempCountry =  mapContents.getCountryAndNeighbors();
 		
 		for(Continent c : mapContents.getContinentAndItsCountries().keySet()) {
-			//Set<String> setConnectedCountries = new HashSet<>();
+
 			Map<Country, List<Country>> mapCountry = new HashMap<>();
 
 			//System.out.println("Continent : " + c.getContinentName());
-			//int i = 0;
+
 			for(Country country : mapContents.getContinentAndItsCountries().get(c)) {
-				//System.out.println("*******************Country : " + country.getCountryName());
+				System.out.println("Country : " + country.getCountryName());
 				List<Country> listNbCountry = new ArrayList<>();				
 				for(Country nbCountry : country.getNeighbouringCountries()) {
 					for(Country tempCountry : listTempCountry.keySet()) {
 						if(nbCountry.getCountryName().equalsIgnoreCase(tempCountry.getCountryName())) {
 							if(country.getBelongsToContinent().equalsIgnoreCase(tempCountry.getBelongsToContinent())) {
 								//System.out.println("*******************Nb Country : " + tempCountry.getCountryName());
-								//setConnectedCountries.add(tempCountry.getCountryName());
 								listNbCountry.add(tempCountry);
-								/*if(i==0) {
-									setConnectedCountries.add(country.getCountryName());
-									i = 1;
-								}*/
-								
 							}
 						}
 					}
@@ -207,32 +186,18 @@ import com.concordia.riskGame.model.Player.Player;
 				}
 			}
 			
+ 			Iterator<Country> it = mapCountry.keySet().iterator();
+ 			Country next;
 			Map<String, Integer> visitedMapForContinent = new HashMap<>();
-			for (int i = 0; i < mapCountry.keySet().size(); i++) {
+			while(it.hasNext()) {
+				next = it.next();
 				if (visitedMapForContinent.size() != mapCountry.keySet().size()) {
 					Map<String, Integer> visitedMap = new HashMap<>();
-					visitedMapForContinent = checkConnectedGraphForContinent(mapCountry.keySet().iterator().next(), mapCountry, visitedMap);
+					visitedMapForContinent = checkConnectedGraphForContinent(next, mapCountry, visitedMap);
 				} else {
 					break;
 				}
 			}
-			
-			//System.out.println("-----------------------------------------------");
-			//System.out.println("Continent : " + c.getContinentName());
-			/*for(String countryName : setConnectedCountries) {
-				System.out.println("Country Name : " + countryName);
-			}*/
-			//System.out.println("-----------------------------------------------");
-			//System.out.println("mapContents.getContinentAndItsCountries().get(c).size() : " + mapContents.getContinentAndItsCountries().get(c).size());
-			//System.out.println("setConnectedCountries.size() : " + setConnectedCountries.size());
-			/*if(mapContents.getContinentAndItsCountries().get(c).size()!=setConnectedCountries.size()) {
-				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
-				return false;
-			}
-			else
-			{
-				System.out.println("Continent " + c.getContinentName() + " is Connected");
-			}*/
 			
 			int connectedCountries = 0;
 			for (Map.Entry<String, Integer> entry : visitedMapForContinent.entrySet()) {
