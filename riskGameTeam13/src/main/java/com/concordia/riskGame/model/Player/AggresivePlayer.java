@@ -91,8 +91,9 @@ public class AggresivePlayer implements PlayerStrategy{
 		Country destinationCountryObject;
 		player.setPhase("#### Aggressive Player Attack Phase");
 		int attackableCount = player.getAssignedCountries().size();
+		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
 		while(attackableCount!=0) {
-		sourceCountryObject = getStrongestCountry(player);
+		sourceCountryObject = sortedListBasedOnArmies.get(attackableCount-1);
 		int numberOfNeighbours = sourceCountryObject.getNeighbouringCountries().size();
 		while(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0) {
 			destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours-1).getCountryName());
@@ -182,7 +183,7 @@ public class AggresivePlayer implements PlayerStrategy{
 			playerHasLost(sourceCountryObject, destinationCountryObject);
 		}
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
-		int movableArmies = 1;
+		int movableArmies = sourceCountryObject.getArmies()-1;
 		/*while (movableArmies <= 0 || movableArmies >= sourceCountryObject.getArmies()) {
 			System.out.println(
 					"Enter the armies to be left behind (Has to be at least 1 and cannot be equal or gretaer than the armies of attacking country)");
@@ -190,7 +191,7 @@ public class AggresivePlayer implements PlayerStrategy{
 			movableArmies = scanner.nextInt();
 		}*/
 		if (movableArmies > 0) {
-			sourceCountryObject.setArmies(sourceCountryObject.getArmies() - movableArmies);
+			sourceCountryObject.setArmies(1);
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies() + movableArmies);
 		}
 	}
@@ -224,11 +225,14 @@ public class AggresivePlayer implements PlayerStrategy{
 		int countriesSize = sortedCountryList.size();
 		while(!fortificationDone && countriesSize>0 ) {
 			destinationCountry = sortedCountryList.get(countriesSize-1);
-			for(Country country2 : destinationCountry.getNeighbouringCountries()) {
+			if(player.checkNeighboringAttackableCountriesAndArmies(destinationCountry, player)!=null &&
+					player.checkNeighboringAttackableCountriesAndArmies(destinationCountry, player).size()>0 ) {
+				for(Country country2 : destinationCountry.getNeighbouringCountries()) {
 				sourceCountry = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
-				if(sourceCountry!=null && sourceCountry.getArmies()>1) {
-					fortificationDone = true;
-					break;
+					if(sourceCountry!=null && sourceCountry.getArmies()>1 ) {
+						fortificationDone = true;
+						break;
+					}
 				}
 			}
 			countriesSize--;
