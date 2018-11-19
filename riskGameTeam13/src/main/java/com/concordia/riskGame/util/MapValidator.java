@@ -125,12 +125,12 @@ import com.concordia.riskGame.model.Player.Player;
 	 *                   not visited
 	 * @return true if graph is connected, otherwise false
 	 */
-	public Map<String, Integer> checkConnectedGraph(Country parent, Map<Country, List<Country>> mapCountry,
+	public Map<String, Integer> checkConnectedGraphForContinent(Country parent, Map<Country, List<Country>> mapCountry,
 			Map<String, Integer> visitedMap) {
 		List<Country> nbCountries = new ArrayList<>();
 		visitedMap.put(parent.getCountryName().trim(), 1);
 		
-		//System.out.println("parent.getCountryName() : " + parent.getCountryName());
+		System.out.println("parent.getCountryName() : " + parent.getCountryName());
 		
  		for (Map.Entry<Country, List<Country>> entry : mapCountry.entrySet()) {
 			if (parent.getCountryName().equalsIgnoreCase(entry.getKey().getCountryName())) {
@@ -140,7 +140,8 @@ import com.concordia.riskGame.model.Player.Player;
  		if (nbCountries != null && !nbCountries.isEmpty()) {
 			for (int i = 0; i < nbCountries.size(); i++) {
 				if (!visitedMap.containsKey(nbCountries.get(i).getCountryName().trim())) {
-					checkConnectedGraph(nbCountries.get(i), mapCountry, visitedMap);
+					checkConnectedGraphForContinent(nbCountries.get(i), mapCountry, visitedMap);
+
 				}
 			}
 		}
@@ -150,13 +151,13 @@ import com.concordia.riskGame.model.Player.Player;
 			while (it.hasNext()) {
 				next = it.next();
 				//System.out.println("mapCountry.keySet().iterator().next().getCountryName() : " + next.getCountryName());
-				if (!visitedMap.containsKey(next.getCountryName().trim())) {
-					checkConnectedGraph(next, mapCountry, visitedMap);
+				if (!visitedMap.containsKey(next.getCountryName().trim()) && mapCountry.get(next) != null && !mapCountry.get(next).isEmpty()) {
+					checkConnectedGraphForContinent(next, mapCountry, visitedMap);
 				}
 			}
 		}
  		
- 		/*for (Entry<String, Integer> entry : visitedMap.entrySet()) {
+/* 		for (Entry<String, Integer> entry : visitedMap.entrySet()) {
 			System.out.println("Country **** " + entry.getKey());
 			System.out.println("Value **** " + entry.getValue());
 		}*/
@@ -172,7 +173,7 @@ import com.concordia.riskGame.model.Player.Player;
 			//Set<String> setConnectedCountries = new HashSet<>();
 			Map<Country, List<Country>> mapCountry = new HashMap<>();
 
-		//	System.out.println("Continent : " + c.getContinentName());
+			//System.out.println("Continent : " + c.getContinentName());
 			//int i = 0;
 			for(Country country : mapContents.getContinentAndItsCountries().get(c)) {
 				//System.out.println("*******************Country : " + country.getCountryName());
@@ -195,11 +196,14 @@ import com.concordia.riskGame.model.Player.Player;
 				}
 				mapCountry.put(country, listNbCountry);
 			}
-			
+			int countireswithNoNbCounty = 0;
 			for (Country country : mapCountry.keySet()) {
-				//System.out.println("Country : " + country.getCountryName());
+				//System.out.println("***Country : " + country.getCountryName());
 				for(Country nbCountry : mapCountry.get(country)) {
-				//	System.out.println("NbCountry : " + nbCountry.getCountryName());
+					//System.out.println("******NbCountry : " + nbCountry.getCountryName());
+				}
+				if(mapCountry.get(country) == null || mapCountry.get(country).isEmpty()) {
+					countireswithNoNbCounty++;
 				}
 			}
 			
@@ -207,7 +211,7 @@ import com.concordia.riskGame.model.Player.Player;
 			for (int i = 0; i < mapCountry.keySet().size(); i++) {
 				if (visitedMapForContinent.size() != mapCountry.keySet().size()) {
 					Map<String, Integer> visitedMap = new HashMap<>();
-					visitedMapForContinent = checkConnectedGraph(mapCountry.keySet().iterator().next(), mapCountry, visitedMap);
+					visitedMapForContinent = checkConnectedGraphForContinent(mapCountry.keySet().iterator().next(), mapCountry, visitedMap);
 				} else {
 					break;
 				}
@@ -237,14 +241,49 @@ import com.concordia.riskGame.model.Player.Player;
 					connectedCountries++;
 				}
 			}
-			
-			if (connectedCountries != mapCountry.keySet().size()) {
+			//System.out.println("Continent : " + c.getContinentName());
+			//System.out.println(" c.getNumberOfCountries() " + mapContents.getContinentAndItsCountries().get(c).size());
+			//System.out.println("countireswithNoNbCounty : " + countireswithNoNbCounty);
+			if(mapContents.getContinentAndItsCountries().get(c).size() == countireswithNoNbCounty) {
 				return false;
 			}
 			
+			if (connectedCountries != mapCountry.keySet().size()) {
+				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
+				return false;
+			}
+			System.out.println("Continent " + c.getContinentName() + " is Connected");
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * method to check if map is connected graph or not
+	 * 
+	 * @param parent     starting node of the graph
+	 * @param mapCountry map of Country and neighboring Countries
+	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
+	 *                   not visited
+	 * @return true if graph is connected, otherwise false
+	 */
+	public Map<String, Integer> checkConnectedGraph(Country parent, Map<Country, List<Country>> mapCountry,
+			Map<String, Integer> visitedMap) {
+		List<Country> nbCountries = new ArrayList<>();
+		visitedMap.put(parent.getCountryName().trim(), 1);
+ 		for (Map.Entry<Country, List<Country>> entry : mapCountry.entrySet()) {
+			if (parent.getCountryName().equalsIgnoreCase(entry.getKey().getCountryName())) {
+				nbCountries = entry.getValue();
+			}
+		}
+ 		if (nbCountries != null) {
+			for (int i = 0; i < nbCountries.size(); i++) {
+				if (!visitedMap.containsKey(nbCountries.get(i).getCountryName().trim())) {
+					checkConnectedGraph(nbCountries.get(i), mapCountry, visitedMap);
+				}
+			}
+		}
+ 		return visitedMap;
 	}
 	
  	/**
@@ -345,7 +384,7 @@ import com.concordia.riskGame.model.Player.Player;
 				statusMessage = "Map is valid";
 			} else {
 				validMapFlag = false;
-				statusMessage = "Map is invalid as it is not a connected graph";
+				statusMessage = "Map is invalid as countries are not connected";
 				System.out.println("Message : " + statusMessage);
 				return;
 			}

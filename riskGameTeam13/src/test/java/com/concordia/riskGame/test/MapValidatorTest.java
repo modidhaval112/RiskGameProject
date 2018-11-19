@@ -24,7 +24,6 @@ public class MapValidatorTest {
 	File fileInvalidUnassignedCountry;
 	File fileInvalidAssignedToTwoCountries;
 	File fileInvalidContinentNotInList;
-	File fileUniDirectional;
 	MapValidator mapValidatorObject;
 	Boolean validFlag;
 	
@@ -42,7 +41,6 @@ public class MapValidatorTest {
 		fileInvalidUnassignedCountry= new File("src/main/resources/Invalid_Country_Not_Assigned_To_Continent.map");
 		fileInvalidAssignedToTwoCountries= new File("src/main/resources/Invalid_Country_Assigned_To_Two_Continent.map");
 		fileInvalidContinentNotInList= new File("src/main/resources/Invalid_Country_Continent_Not_From_Continent_List.map");
-		fileUniDirectional= new File("src/main/resources/99 Mens Morris.map");
 		
 		mapValidatorObject = new MapValidator(); 
 		
@@ -152,19 +150,6 @@ public class MapValidatorTest {
 		 assertFalse(validFlag);
 		
 	}
-	
-	/**
-	 * This method checks if a Unidirectional map is considered as valid or not
-	 */
-	@Test
-	public void testUniDirectionalMap() {
-		
-		mapValidatorObject.init(fileUniDirectional);
-		validFlag=mapValidatorObject.getValidMapFlag();
-		 
-		 assertTrue(validFlag);
-		
-	}
-	
+
 
 }
