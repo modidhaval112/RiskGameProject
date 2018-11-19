@@ -237,6 +237,13 @@ public class AggresivePlayer implements PlayerStrategy{
 			}
 			countriesSize--;
 		}
+		
+		if(sourceCountry==null || destinationCountry==null || !fortificationDone) {
+			player.setPhase("#### Fortification not possible####");
+			player.setPhase("#### After Fortification ####");
+			player.printAllCountriesOfaPlayer(player);
+			return player;
+		}
 		player.setPhase("					###########    Source country      	     ###############       : "
 				+ sourceCountry.getCountryName());
 		player.setPhase(
