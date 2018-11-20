@@ -906,14 +906,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 								setPhase("Attacker Dice value " + attackerDiceResults.get(i));
 								setPhase("Defender Dice value " + defenderDiceResults.get(i));
 								if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
-									if (!player.isCardGiven()) {
-										if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
-
-											Card card = deck.draw();
-											player.getCardList().add(card);
-											player.setCardGiven(true);
-										}
-									}
+									
 									setPhase("Attacker wins this battle");
 									destinationCountryObject.setArmies(destinationCountryObject.getArmies() - 1);
 								} else {
@@ -985,13 +978,6 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 							setPhase("Attacker Dice value " + attackerDiceResults.get(i));
 							setPhase("Defender Dice value " + defenderDiceResults.get(i));
 							if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
-								if (!player.isCardGiven()) {
-									if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
-										Card card = deck.draw();
-										player.getCardList().add(card);
-										player.setCardGiven(true);
-									}
-								}
 								setPhase("Attacker wins this battle");
 								destinationCountryObject.setArmies(destinationCountryObject.getArmies() - 1);
 							} else {
@@ -1010,7 +996,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				}
 				if (destinationCountryObject.getArmies() < 1) {
 					this.movableArmies = 0;
-					playerLosesTheCountry(sourceCountryObject, destinationCountryObject);
+					playerLosesTheCountry(sourceCountryObject, destinationCountryObject,player);
 					printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
 				if (hasPlayerWon(player)) {
@@ -1128,10 +1114,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	 * This method transfer country from one player to another player when player losses the country 
 	 * @param sourceCountryObject Source Country Object
 	 * @param destinationCountryObject destination country object
+	 * @param player 
 	 */
-	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
+	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject, Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
 		sourceCountryObject.getBelongsToPlayer().getAssignedCountries().add(destinationCountryObject);
+		if (!player.isCardGiven()) {
+			if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
+
+				Card card = deck.draw();
+				player.getCardList().add(card);
+				player.setCardGiven(true);
+			}
+		}
 		if (destinationCountryObject.getBelongsToPlayer().getAssignedCountries().size() == 0) {
 			playerHasLost(sourceCountryObject, destinationCountryObject);
 		}

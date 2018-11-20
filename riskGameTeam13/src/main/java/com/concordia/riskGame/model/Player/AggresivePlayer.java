@@ -84,7 +84,7 @@ public class AggresivePlayer implements PlayerStrategy{
 		int maximumDefenderDice = 0;
 		int defenderDice = 0;
 		Dice dice = new Dice();
-		Deck deck = Deck.getInstance();
+		
 		List<Integer> attackerDiceResults;
 		List<Integer> defenderDiceResults;
 		Country sourceCountryObject;
@@ -130,13 +130,6 @@ public class AggresivePlayer implements PlayerStrategy{
 							player.setPhase("Attacker Dice value " + attackerDiceResults.get(i));
 							player.setPhase("Defender Dice value " + defenderDiceResults.get(i));
 							if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
-								if (!player.isCardGiven()) {
-									if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
-										Card card = deck.draw();
-										player.getCardList().add(card);
-										player.setCardGiven(true);
-									}
-								}
 								player.setPhase("Attacker wins this battle");
 								destinationCountryObject.setArmies(destinationCountryObject.getArmies() - 1);
 							} else {
@@ -154,7 +147,7 @@ public class AggresivePlayer implements PlayerStrategy{
 				}
 				if (destinationCountryObject.getArmies() < 1) {
 					//this.movableArmies = 1;
-					playerLosesTheCountry(sourceCountryObject, destinationCountryObject);
+					playerLosesTheCountry(sourceCountryObject, destinationCountryObject,player);
 					player.printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
 				if (player.hasPlayerWon(player)) {
@@ -176,9 +169,18 @@ public class AggresivePlayer implements PlayerStrategy{
 	 * @param sourceCountryObject Source Country Object
 	 * @param destinationCountryObject destination country object
 	 */
-	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
+	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject,Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
 		sourceCountryObject.getBelongsToPlayer().getAssignedCountries().add(destinationCountryObject);
+		Deck deck = Deck.getInstance();
+		if (!player.isCardGiven()) {
+			if (player.getCardList() != null && !deck.deckOfCards.isEmpty()) {
+
+				Card card = deck.draw();
+				player.getCardList().add(card);
+				player.setCardGiven(true);
+			}
+		}
 		if (destinationCountryObject.getBelongsToPlayer().getAssignedCountries().size() == 0) {
 			playerHasLost(sourceCountryObject, destinationCountryObject);
 		}
