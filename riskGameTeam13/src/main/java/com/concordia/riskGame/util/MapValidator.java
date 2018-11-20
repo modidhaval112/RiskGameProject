@@ -123,7 +123,7 @@ import com.concordia.riskGame.model.Player.Player;
 	 * @param mapCountry map of Country and neighboring Countries
 	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
 	 *                   not visited
-	 * @return true if graph is connected, otherwise false
+	 * @return visitedMap key is continent name and value shows if continent is connected or not
 	 */
 	public Map<String, Integer> checkConnectedGraphForContinent(Country parent, Map<Country, List<Country>> mapCountry,
 			Map<String, Integer> visitedMap) {
@@ -150,6 +150,11 @@ import com.concordia.riskGame.model.Player.Player;
  		return visitedMap;
 	}
 	
+	/**
+	 * method to check if all the countries in the continents are connected or not
+	 * @param mapContents GameMap object
+	 * @return true if all continents are connected otherwise false
+	 */
 	public boolean checkConnectedCountryContinent(MapContents mapContents) {
 		
 		Map<Country, List<Country>> listTempCountry =  mapContents.getCountryAndNeighbors();
@@ -210,14 +215,21 @@ import com.concordia.riskGame.model.Player.Player;
 			//System.out.println(" c.getNumberOfCountries() " + mapContents.getContinentAndItsCountries().get(c).size());
 			//System.out.println("countireswithNoNbCounty : " + countireswithNoNbCounty);
 			if(mapContents.getContinentAndItsCountries().get(c).size() == countireswithNoNbCounty) {
+				System.out.println("****************************************************");
+				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
+				System.out.println("****************************************************");
 				return false;
 			}
 			
 			if (connectedCountries != mapCountry.keySet().size()) {
+				System.out.println("****************************************************");
 				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
+				System.out.println("****************************************************");
 				return false;
 			}
+			System.out.println("---------------------------------------------------");
 			System.out.println("Continent " + c.getContinentName() + " is Connected");
+			System.out.println("---------------------------------------------------");
 		}
 		
 		return true;
@@ -230,7 +242,7 @@ import com.concordia.riskGame.model.Player.Player;
 	 * @param mapCountry map of Country and neighboring Countries
 	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
 	 *                   not visited
-	 * @return true if graph is connected, otherwise false
+	 * @return visitedMap if graph is connected, otherwise false
 	 */
 	public Map<String, Integer> checkConnectedGraph(Country parent, Map<Country, List<Country>> mapCountry,
 			Map<String, Integer> visitedMap) {
