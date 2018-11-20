@@ -43,7 +43,7 @@ public class RandomPlayer implements PlayerStrategy {
 		player.setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 		int countriesSize = player.getAssignedCountries().size();
 		Random random = new Random();
-		int rand = random.nextInt(countriesSize-1);
+		int rand = random.nextInt(countriesSize);
 		Country randomCountry = player.getSourceCountryFromPlayerUsingString(player.getAssignedCountries().get(rand).getCountryName(),player);
 		randomCountry.setArmies(randomCountry.getArmies()+assignedArmies);
 		player.setPhase("######### Player army count after reinforcment  ####### ");
@@ -79,13 +79,13 @@ public class RandomPlayer implements PlayerStrategy {
 		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
 		List<Integer> randomNumbersList = new ArrayList<>();
 		Random random = new Random();
-		int rand = random.nextInt(attackableCount-1);
+		int rand = random.nextInt(attackableCount);
 		while(rand!=0) {
 			player.setPhase("#### Random player will attack "+rand+" times");
 			int j=0;
-			int randn = random.nextInt(attackableCount-1);
+			int randn = random.nextInt(attackableCount);
 			while(randomNumbersList.contains(randn)) {
-				randn = random.nextInt(attackableCount-1);
+				randn = random.nextInt(attackableCount);
 			}
 			randomNumbersList.add(randn);
 			sourceCountryObject = sortedListBasedOnArmies.get(randn);
@@ -182,9 +182,9 @@ public class RandomPlayer implements PlayerStrategy {
 		List<Integer> randomNumbersList = new ArrayList<>();
 		while(!fortificationDone && countriesSize>0 ) {
 			Random random = new Random();
-			int rand = random.nextInt(countriesSize-1);
+			int rand = random.nextInt(countriesSize);
 			while(randomNumbersList.contains(rand)) {
-				rand = random.nextInt(countriesSize-1);
+				rand = random.nextInt(countriesSize);
 			}
 			randomNumbersList.add(rand);
 			destinationCountry = sortedCountryList.get(rand);
