@@ -1,5 +1,6 @@
 package com.concordia.riskGame.model.Card;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
@@ -11,7 +12,9 @@ import com.concordia.riskGame.model.Country.Country;
  * @author sande
  *
  */
-public class Card {
+public class Card implements Serializable {
+	
+	private static final long serialversionUID = 1L;
 
     private final String type;
     private final Country country;

@@ -11,6 +11,9 @@ import com.concordia.riskGame.model.Country.Country;
  *
  */
 public class Continent {
+	
+	private static final long serialversionUID = 1L;
+	
 	private String continentName;
 	private List<Country> countries;
 	private int numberOfCountries;

@@ -10,6 +10,9 @@ import java.util.Random;
  *
  */
 public class Dice {
+	
+	private static final long serialversionUID = 1L;
+	
 	int numberOfDice;
 	List<Integer> results = new ArrayList<>();
 	public static final int max = 6;

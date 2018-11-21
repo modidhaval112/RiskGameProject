@@ -1,5 +1,6 @@
 package com.concordia.riskGame.model.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,9 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.dice.Dice;
 
-public class RandomPlayer implements PlayerStrategy {
+public class RandomPlayer implements PlayerStrategy,Serializable {
+	
+	private static final long serialversionUID = 1L;
 
 	@Override
 	public Player reinforcePhase(Player player) {

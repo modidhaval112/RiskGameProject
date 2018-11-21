@@ -14,6 +14,8 @@ import com.concordia.riskGame.model.Player.Player;
  */
 
 public class Country {
+	
+	private static final long serialversionUID = 1L;
 
 	private String countryName;
 	private List<Country> neighbouringCountries;

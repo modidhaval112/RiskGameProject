@@ -1,5 +1,6 @@
 package com.concordia.riskGame.model.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.List;
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
 
-public class CheaterPlayer implements PlayerStrategy {
+public class CheaterPlayer implements PlayerStrategy,Serializable {
+	
+	private static final long serialversionUID = 1L;
 
 	@Override
 	public Player reinforcePhase(Player player) {

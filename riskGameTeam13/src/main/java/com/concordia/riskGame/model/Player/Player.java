@@ -30,6 +30,8 @@ import com.concordia.riskGame.model.dice.Dice;
  * @author Darwin Anirudh G and sande
  */
 public class Player extends Observable implements Serializable,PlayerStrategy {
+	
+	private static final long serialversionUID = 1L;
 
 	public static String reinforcePhase = "Reinforcement Phase";
 	public static String attackPhase = "Attack Phase";

@@ -1,5 +1,6 @@
 package com.concordia.riskGame.model.Map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,10 @@ import com.concordia.riskGame.model.Player.Player;
  * 
  * @author Dheeraj As
  */
-public class MapContents {
+public class MapContents implements Serializable {
 
+	private static final long serialversionUID = 1L;
+	
 	private static MapContents mapContents;
 
 

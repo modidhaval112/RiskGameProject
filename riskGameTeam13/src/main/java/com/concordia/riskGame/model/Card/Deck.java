@@ -16,6 +16,8 @@ import com.concordia.riskGame.model.Country.Country;
  */
 public class Deck implements Serializable{
 
+	private static final long serialversionUID = 1L;
+	
 	private int i;
 	private static Deck deck;
 
