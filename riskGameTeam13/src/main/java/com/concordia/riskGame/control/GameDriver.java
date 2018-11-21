@@ -68,6 +68,9 @@ public class GameDriver {
 			if(playerInstance.getCanAttack()) {
 			playerInstance = playerInstance.strategy.attackPhase(playerInstance);
 			}
+			if(playerInstance.getHasWon()) {
+				System.exit(0);
+			}
 			if(playerInstance.getCanFortify()) {
 			playerInstance = playerInstance.strategy.forfeitPhase(playerInstance);
 			}

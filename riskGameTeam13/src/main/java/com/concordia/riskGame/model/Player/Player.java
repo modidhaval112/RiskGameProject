@@ -1172,7 +1172,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				}
 				if (hasPlayerWon(player)) {
 					setPhase("Player " + player.getName() + "has won the game");
-					System.exit(0);
+					return pObject;
 				}
 				checkPlayerTurnCanContinue(player);
 

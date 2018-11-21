@@ -155,7 +155,7 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 				}
 				if (player.hasPlayerWon(player)) {
 					player.setPhase("Player " + player.getName() + "has won the game");
-					System.exit(0);
+					return player;
 				}
 				player.checkPlayerTurnCanContinue(player);
 				numberOfNeighbours--;
