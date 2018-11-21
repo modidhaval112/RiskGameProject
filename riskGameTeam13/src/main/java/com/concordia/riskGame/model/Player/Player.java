@@ -1171,6 +1171,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
 				if (hasPlayerWon(player)) {
+					player.setHasWon(true);
 					setPhase("Player " + player.getName() + "has won the game");
 					return pObject;
 				}

@@ -154,6 +154,7 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 					player.printAllCountriesOfaPlayer(sourceCountryObject.getBelongsToPlayer());
 				}
 				if (player.hasPlayerWon(player)) {
+					player.setHasWon(true);
 					player.setPhase("Player " + player.getName() + "has won the game");
 					return player;
 				}

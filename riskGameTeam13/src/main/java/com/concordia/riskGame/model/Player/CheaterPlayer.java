@@ -49,6 +49,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.printAllCountriesOfaPlayer(player);
 		boolean result = player.hasPlayerWon(player);
 		if(result) {
+			player.setHasWon(true);
 			player.setPhase("####**** CHEATER PLAYER HAS WON ****####");
 			return player;
 		}
