@@ -32,8 +32,8 @@ public class MapContents implements Serializable {
 	public List<Player> playerList = new ArrayList<>();
 	private List<Country> countryList = new ArrayList<>();
 	private int cardExchangeCount = 0;
-
-
+	public int rotateCount;
+	
 
 	/**
 	 * Default Constructor
@@ -172,5 +172,24 @@ public class MapContents implements Serializable {
 	public void setCardExchangeCount(int armyExchangeCount) {
 		this.cardExchangeCount = armyExchangeCount;
 	}
+
+	/**
+	 * The following method returns the rotate count.
+	 * @return It returns the value of rotato count.
+	 */
+	public int getRotateCount() {
+		return rotateCount;
+	}
+
+	/**
+	 * The following sets the value of rotate count.
+	 * @param rotateCount Number of times to rotate.
+	 */
+	public void setRotateCount(int rotateCount) {
+		this.rotateCount = rotateCount;
+	}
+	
+	
+	
 
 }
