@@ -407,4 +407,17 @@ public class MapParseProcessor {
 		return randomObject.nextInt(end - start) + start;
 	}
 
+	/**
+	 * Call the driver for the load game.
+	 * @param mpcontObject
+	 */
+	public void callGamePhase(MapContents mpcontObject)
+	{
+		try {
+			gameDriverObject.load(mpcontObject);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
 }

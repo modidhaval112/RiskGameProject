@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
+import com.concordia.riskGame.model.save.RiskSaveGame;
 
 /**
  * This class implements the Game phases in a round robin fashion
@@ -30,6 +32,10 @@ public class GameDriver {
 	private List<Player> updatedPlayerList;
 	private int assignedArmies;
 	private boolean endTheGame;
+	private MapContents mapContents;
+	private RiskSaveGame riskSaveGameObject;
+	
+	
 	/**
 	 * The following method calls each of the game phase for each player.
 	 * 
@@ -100,7 +106,7 @@ public class GameDriver {
 
 		try {
 		for (Country countryObj : player.getAssignedCountries()) {
-			Country country =player.getSourceCountryFromString(countryObj.getCountryName());
+			Country country = getSourceCountryFromString(countryObj.getCountryName());
 			System.out.println(country.getCountryName() + " : " + country.getArmies());
 		}
 		scanner = new Scanner(System.in);
@@ -225,5 +231,113 @@ public class GameDriver {
 		}
 
 	}
+	
+	
+public void load(MapContents mp) throws Exception {
+		
+		System.out.println("##########  load is Called #######");
+		MapContents.setMapContents(mp);
+		mapContents = MapContents.getInstance();
+	
+		
+		
+		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
+		gmcountryAndNeighbours = mapContents.getCountryAndNeighbors();
+		scanner = new Scanner(System.in);
+		updatedPlayerList = new ArrayList<Player>();
+		endTheGame=false;
+		try
+		{
+		Deck deck = Deck.getInstance();
+		deck.setDeckOfCards(mapContents.getCountryList());
+		while(!endTheGame) {
+			List<Player> removablePlayers = new ArrayList<>();
+			for(Player player : mapContents.getPlayerList()) {
+				if(player.isHasLost()) {
+					removablePlayers.add(player);
+				}
+			}
+			mapContents.getPlayerList().removeAll(removablePlayers);
+		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
+	
+		ListIterator<Player> iter = mapContents.getPlayerList().listIterator();
+
+		
+		while (iter.hasNext()) {
+			Player playerInstance = new Player();
+			
+			Player p = iter.next();
+			
+			if(!p.isHasLost()) {
+		
+			playerInstance = playerInstance.reinforcePhase(p);
+			
+			if(playerInstance.getCanAttack()) {
+			playerInstance = playerInstance.attackPhase(playerInstance);
+			}
+			if(playerInstance.getCanFortify()) {
+			playerInstance = playerInstance.forfeitPhase(playerInstance);
+			}
+			}
+			
+			System.out.println("###### Do you want to save the game : yes / no ########");
+			String saveGame = scanner.nextLine();
+			
+			if(saveGame.equalsIgnoreCase("yes"))
+			{
+				System.out.println("##### Saving the Game . . . . .  #######");
+				int rotateCount;
+				rotateCount = iter.nextIndex();
+				MapContents mapContentObject = MapContents.getInstance();
+				System.out.println("######### The rotate value is ###### : "+rotateCount);
+				mapContentObject.setRotateCount(rotateCount);
+				
+				riskSaveGameObject = new RiskSaveGame();
+				riskSaveGameObject.saveGame(mapContentObject);
+				mapContentObject.setRotateCount(0);
+			}
+			
+			
+		}
+		
+		}
+		if(endTheGame) {
+			System.exit(0);
+		}
+		
+		System.out.println("######## Do you want to exit : yes  #########");
+		String choice = scanner.nextLine();
+
+		if (choice.equalsIgnoreCase("yes")) {
+			System.exit(0);
+		}
+		MapContents mapContentObject = MapContents.getInstance();
+		load(mapContentObject );
+		}		catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+	}
+
+
+
+
+public Country getSourceCountryFromString(String sourceCountry) {
+	MapContents contents = MapContents.getInstance();
+	
+	System.out.println("##########     getSourceCountryFromString   ####### : ");
+	System.out.println("##########  Map Content Number of Player       ####### : "+contents.getPlayerList().size());
+	System.out.println("##########  Map Content Number of Countries  ####### : "+contents.getCountryList().size());
+
+	
+	HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
+	for (Country country : countriesAndItsNeighbours.keySet()) {
+		if (sourceCountry != null && !sourceCountry.isEmpty() && sourceCountry.equals(country.getCountryName())) {
+			return country;
+		}
+	}
+	return null;
+}
 
 }
