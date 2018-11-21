@@ -375,6 +375,175 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		playerObject.setCurrentPhase(Player.fortificationPhase);
 		setDomination();
 		Scanner scanner;
+		System.out.println("###### Do you wish to enter the fortification phase: yes/no #######");
+		String choice = null;
+		Scanner sc = new Scanner(System.in);
+		choice = sc.nextLine();
+
+		if (choice.equalsIgnoreCase("yes")) {
+			try {
+				Player player = new Player();
+				player = playerObject;
+				System.out.println(player.getName() + " is in fortification phase ");
+				System.out.println("##### Fortification Phase begins ######");
+				String[] utilString;
+				
+				
+				System.out.println("#### List of fortifiable countries owned by the player #####");
+				List<Country> fortifiableDestinationCountriesList = new ArrayList<Country>();
+
+				for (Country countryObj : player.getAssignedCountries()) {
+						System.out.println(countryObj.getCountryName() + ": " + countryObj.getArmies());
+					}
+					
+					System.out.println("##### Please enter the source country to move armies from ####### ");
+					String srcCountry = sc.nextLine();
+					srcCountry  = srcCountry.trim();
+					
+					if (!checkValidSourceCountry(srcCountry, player) && !srcCountry.equalsIgnoreCase("quit")) {
+						srcCountry = reEnterSourceCountry(player);
+						srcCountry = srcCountry.trim();
+					}
+					
+					List<Country> destNeighborCountryList = new ArrayList();
+					destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
+
+					
+
+					if(destNeighborCountryList.size() == 0)
+					{
+						System.out.println("##### The source country has zero neighboring countries ######");
+						srcCountry = reEnterSourceCountryforListCheck(player);
+						srcCountry = srcCountry.trim();
+
+					}
+
+					
+					if(!srcCountry.equalsIgnoreCase("quit"))
+					{
+						
+					System.out.println(" ###### Printing the destination fortifiable countries for the source country ###### ");
+					destNeighborCountryList=printNeighbouringCountryList(srcCountry,player);
+					System.out.println(" ###### Please enter destination country to move armies  ###### ");
+					String destinationCountry = sc.nextLine();
+					destinationCountry = destinationCountry.trim();
+					
+					if (!checkValidDestinationCountry(destNeighborCountryList, destinationCountry)) {
+						destinationCountry = reEnterDestinationCountry(destNeighborCountryList);
+						destinationCountry = destinationCountry.trim();
+					}
+					System.out.println("###### Please enter armies to moved from source country to destination country #####");
+					int movingArmies = sc.nextInt();
+					if(!checkValidArmyFortification(movingArmies))
+					{
+						movingArmies = reEnterArmies();
+					}
+					String fromCountry = srcCountry;
+					String toCountry = destinationCountry;
+					System.out.println("					###########  Source country      	        ###############      : "
+							+ fromCountry);
+					System.out.println(
+							"					       ###########   Destination Country   	    ###############      : " + toCountry);
+					System.out.println("				   ###########   Armies to be moved        ###############      : "
+							+ movingArmies);
+					int destArmies = 0;
+					int sourcesArmies = 0;
+					/*if (!isNeighbour(fromCountry, toCountry)) {
+						System.out.println("##### The Countries are not neighbours ######");
+						setErrorMesage("The Countries are not neighbours");
+						throw new Exception();
+					}*/
+					List<Country> assignedCountriesClone = new ArrayList<Country>();
+					List<Country> assignedCountriesClone2 = new ArrayList<Country>();
+					for (Country countryInstance : player.getAssignedCountries()) {
+						if (countryInstance.getCountryName().equalsIgnoreCase(fromCountry)) {
+							Country sourceCountry = new Country();
+							sourceCountry = countryInstance;
+							sourcesArmies = sourceCountry.getArmies();
+							if (sourcesArmies == 1) {
+								System.out.println("You cannot move the only army from this Country");
+								setErrorMesage("You cannot move the only army from this Country");
+								throw new Exception();
+							}
+							if (sourcesArmies < movingArmies) {
+								System.out.println(
+										"The country doesnt have the mentioned number of armies, please enter a lesser number");
+								setErrorMesage("The country doesnt have the mentioned number of armies, please enter a lesser number");
+								throw new Exception();
+							}
+							if (sourcesArmies == movingArmies) {
+								System.out.println(
+										"You cannot move all the armies from this Country, please enter a lesser number");
+								setErrorMesage("You cannot move all the armies from this Country, please enter a lesser number");
+								throw new Exception();
+							}
+							sourcesArmies = sourcesArmies - movingArmies;
+							sourceCountry.setArmies(sourcesArmies);
+						}
+						assignedCountriesClone.add(countryInstance);
+					}
+
+					for (Country countryInstance : player.getAssignedCountries()) {
+						if (countryInstance.getCountryName().equalsIgnoreCase(toCountry)) {
+							Country destCountry = new Country();
+							destCountry = countryInstance;
+							destArmies = destCountry.getArmies();
+							destArmies = destArmies + movingArmies;
+							destCountry.setArmies(destArmies);
+						}
+						assignedCountriesClone2.add(countryInstance);
+					}
+
+					for (Country x : assignedCountriesClone2) {
+						if (!assignedCountriesClone.contains(x))
+							assignedCountriesClone.add(x);
+					}
+					System.out.println("############### Displaying player armies count after fortify ###########");
+					for (Country country : assignedCountriesClone) {
+						System.out.println("######## The country name is     #######      : " + country.getCountryName());
+						System.out.println("######## The country armies is   #######      : " + country.getArmies());
+					}
+					player.setAssignedCountries(assignedCountriesClone);
+					System.out.println("##### Armies have been moved between countries ######");
+					setErrorMesage("Armies have been moved between countries");
+					return player;
+					}
+					else
+					{
+						System.out.println("####### Player Quits Fortification Phase #########");
+						return player;
+					}
+					
+					
+					
+				}
+			
+
+			
+		catch (Exception e) {
+	
+				System.out.println("Exception Message " + e.getMessage());
+				e.printStackTrace();
+				/*forfeitPhase(playerObject);*/
+			}
+		}
+		else
+		{
+			System.out.println(" ######### Moving onto Next Phase ########## : ");
+			return playerObject;
+		}
+		return playerObject;
+	}
+	
+	
+	
+	
+	
+	/*public Player forfeitPhase(Player playerObject) {
+		setCurrentPhase(Player.fortificationPhase);
+		playerObject.setCurrentPhase(Player.fortificationPhase);
+		setDomination();
+		Scanner scanner;
 		setPhase("###### Do you wish to enter the fortification phase: yes/no #######");
 		String choice = null;
 		Scanner sc = new Scanner(System.in);
@@ -543,7 +712,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 			return playerObject;
 		}
 		return playerObject;
-	}
+	}*/
 
 
 	/**
