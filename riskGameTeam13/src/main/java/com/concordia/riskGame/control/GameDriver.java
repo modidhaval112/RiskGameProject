@@ -34,7 +34,8 @@ public class GameDriver {
 	private boolean endTheGame;
 	private MapContents mapContents;
 	private RiskSaveGame riskSaveGameObject;
-	
+	private int roundCounter = 0;
+	private int roundCounterLoad = 0;
 	
 	/**
 	 * The following method calls each of the game phase for each player.
@@ -49,6 +50,7 @@ public class GameDriver {
 		updatedPlayerList = new ArrayList<Player>();
 		endTheGame=false;
 		
+		
 		Deck deck = Deck.getInstance();
 		deck.setDeckOfCards(mapContents.getCountryList());
 		while(!endTheGame) {
@@ -59,10 +61,12 @@ public class GameDriver {
 				}
 			}
 			mapContents.getPlayerList().removeAll(removablePlayers);
-		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
-		while(iterator.hasNext()) {
+			
+		/*Iterator<Player> iterator = mapContents.getPlayerList().iterator();*/
+		ListIterator<Player> iter = mapContents.getPlayerList().listIterator();
+		while(iter.hasNext()) {
 			Player playerInstance = new Player();
-			Player p = iterator.next();
+			Player p = iter.next();
 			if(!p.isHasLost()) {
 			playerInstance = p.strategy.reinforcePhase(p);
 			if(playerInstance.getCanAttack()) {
@@ -74,6 +78,22 @@ public class GameDriver {
 			if(playerInstance.getCanFortify()) {
 			playerInstance = playerInstance.strategy.forfeitPhase(playerInstance);
 			}
+			}
+			
+			roundCounter = roundCounter + 1;
+			if(roundCounter % 2 == 0)
+			{
+				System.out.println("##### Saving the Game . . . . .  #######");
+				int rotateCount;
+				rotateCount = iter.nextIndex();
+				MapContents mapContentObject = MapContents.getInstance();
+				mapContentObject.setRotateCount(rotateCount);
+				System.out.println("######### The rotate value is ###### : "+rotateCount);
+				
+				
+				riskSaveGameObject = new RiskSaveGame();
+				riskSaveGameObject.saveGame(mapContentObject);
+				
 			}
 		}
 		}
@@ -241,7 +261,7 @@ public void load(MapContents mp) throws Exception {
 		System.out.println("##########  load is Called #######");
 		MapContents.setMapContents(mp);
 		mapContents = MapContents.getInstance();
-	
+		
 		
 		
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
@@ -261,7 +281,8 @@ public void load(MapContents mp) throws Exception {
 				}
 			}
 			mapContents.getPlayerList().removeAll(removablePlayers);
-		Iterator<Player> iterator = mapContents.getPlayerList().iterator();
+			
+		/*Iterator<Player> iterator = mapContents.getPlayerList().iterator();*/
 	
 		ListIterator<Player> iter = mapContents.getPlayerList().listIterator();
 
@@ -283,25 +304,23 @@ public void load(MapContents mp) throws Exception {
 			}
 			}
 			
-			System.out.println("###### Do you want to save the game : yes / no ########");
-			String saveGame = scanner.nextLine();
-			
-			if(saveGame.equalsIgnoreCase("yes"))
-			{
-				System.out.println("##### Saving the Game . . . . .  #######");
-				int rotateCount;
-				rotateCount = iter.nextIndex();
-				MapContents mapContentObject = MapContents.getInstance();
-				System.out.println("######### The rotate value is ###### : "+rotateCount);
-				mapContentObject.setRotateCount(rotateCount);
-				
-				riskSaveGameObject = new RiskSaveGame();
-				riskSaveGameObject.saveGame(mapContentObject);
-				mapContentObject.setRotateCount(0);
-			}
-			
-			
 		}
+		
+		roundCounterLoad = roundCounterLoad + 1;	
+		if(roundCounterLoad % 2 == 0)
+		{
+			System.out.println("##### Saving the Game . . . . .  #######");
+			int rotateCount;
+			rotateCount = iter.nextIndex();
+			MapContents mapContentObject = MapContents.getInstance();
+			System.out.println("######### The rotate value is ###### : "+rotateCount);
+			mapContentObject.setRotateCount(rotateCount);
+			
+			riskSaveGameObject = new RiskSaveGame();
+			riskSaveGameObject.saveGame(mapContentObject);
+			mapContentObject.setRotateCount(0);
+		}
+
 		
 		}
 		if(endTheGame) {
