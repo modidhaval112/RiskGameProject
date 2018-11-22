@@ -162,8 +162,18 @@ import com.concordia.riskGame.model.Player.Player;
 		for(Continent c : mapContents.getContinentAndItsCountries().keySet()) {
 
 			Map<Country, List<Country>> mapCountry = new HashMap<>();
+			Map<String, Integer> visitedMapForContinent = new HashMap<>();
 
 			//System.out.println("Continent : " + c.getContinentName());
+			
+			if(mapContents.getContinentAndItsCountries().get(c).size() == 1) {
+				System.out.println("Country : " + mapContents.getContinentAndItsCountries().get(c).get(0).getCountryName());
+				System.out.println("---------------------------------------------------");
+				System.out.println("Continent " + c.getContinentName() + " is Connected");
+				System.out.println("---------------------------------------------------");
+				visitedMapForContinent.put(c.getContinentName(), 1);
+				continue;
+			}
 
 			for(Country country : mapContents.getContinentAndItsCountries().get(c)) {
 				System.out.println("Country : " + country.getCountryName());
@@ -193,7 +203,7 @@ import com.concordia.riskGame.model.Player.Player;
 			
  			Iterator<Country> it = mapCountry.keySet().iterator();
  			Country next;
-			Map<String, Integer> visitedMapForContinent = new HashMap<>();
+			
 			while(it.hasNext()) {
 				next = it.next();
 				if (visitedMapForContinent.size() != mapCountry.keySet().size()) {
