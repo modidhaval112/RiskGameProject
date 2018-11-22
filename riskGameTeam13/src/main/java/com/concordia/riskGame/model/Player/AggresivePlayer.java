@@ -96,15 +96,19 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 		int attackableCount = player.getAssignedCountries().size();
 		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
 		while(attackableCount!=0) {
-		sourceCountryObject = sortedListBasedOnArmies.get(attackableCount-1);
-		int numberOfNeighbours = sourceCountryObject.getNeighbouringCountries().size();
-		while(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0) {
-			destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours-1).getCountryName());
-			if(destinationCountryObject.getBelongsToPlayer().equals(player)) {
+		//sourceCountryObject = sortedListBasedOnArmies.get(attackableCount-1);
+			sourceCountryObject = getStrongestAttackableCountry(player);
+			if(sourceCountryObject.getArmies()==1) {
+				break;
+			}
+		int numberOfNeighbours = player.checkNeighboringAttackableCountriesAndArmies(sourceCountryObject, player).size();
+		if(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0) {
+			destinationCountryObject = player.checkNeighboringAttackableCountriesAndArmies(sourceCountryObject, player).get(0);
+			/*if(destinationCountryObject.getBelongsToPlayer().equals(player)) {
 				numberOfNeighbours--;
 				continue;
-			}
-				while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0) {
+			}*/
+				//while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0) {
 					maximumAttackerDice = player.getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 					maximumDefenderDice = player.getMaxDefenderDiceCount(destinationCountryObject.getArmies());
 					System.out.println();
@@ -142,7 +146,7 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 						} else {
 							break;
 						}
-					}
+			//		}
 					player.setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
 							+ sourceCountryObject.getArmies());
 					player.setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
@@ -159,15 +163,32 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 					return player;
 				}
 				player.checkPlayerTurnCanContinue(player);
-				numberOfNeighbours--;
+				//numberOfNeighbours--;
 			}
-		attackableCount--;
+		//attackableCount--;
 		}
+		
+		player.printAllCountriesOfaPlayer(player);
 		checkPlayerTurnCanContinue(player);
 		player.setCardGiven(false);
 		return player;
 		}
 		
+	private Country getStrongestAttackableCountry(Player player) {
+
+		List<Country> playerOwnedCountries = player.getAssignedCountries();
+		Country strongestCountry = null;
+		int armyCount = 0;
+		for(Country country : playerOwnedCountries) {
+			if(country.getArmies()>armyCount && player.checkNeighboringAttackableCountriesAndArmies(country, player).size()>0) {
+				armyCount = country.getArmies();
+				strongestCountry = country;
+			}
+		}
+		return strongestCountry;
+	
+	}
+
 	/**
 	 * This method transfer country from one player to another player when player losses the country 
 	 * @param sourceCountryObject Source Country Object

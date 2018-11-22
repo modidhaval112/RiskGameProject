@@ -1901,7 +1901,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	}
 
 	/**
-	 * This method returns all the attackable neighbor countries
+	 * This method returns all the player owned neighbor countries
 	 * @param country country object
 	 * @param player player object
 	 * @return neighbouringAttackableCountries list of countries
