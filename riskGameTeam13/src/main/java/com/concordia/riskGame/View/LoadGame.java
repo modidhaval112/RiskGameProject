@@ -73,9 +73,8 @@ public class LoadGame {
 			playerListLoadGame = mapContentObject.getPlayerList();
 			Collections.rotate(playerListLoadGame, playerListLoadGame.size() - rotateValue);
 			mapContentObject.setPlayerList(playerListLoadGame);
-			MapParseProcessor mp = new MapParseProcessor();
-			mp.callGamePhase(mapContentObject);
-		
+			GameDriver gameDriverObject = new GameDriver();
+			gameDriverObject.load(mapContentObject);
 			
 		}catch(Exception e)
 		{
