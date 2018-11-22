@@ -27,7 +27,7 @@ public class RiskSaveGame {
 		
 		dateString = dateString.replaceAll(":", "");
 		System.out.println("########## Date String is  ########## : "+dateString );
-		String filePath =  "C://SaveGame/"+dateString;
+		String filePath =  "C:\\SaveGame\\"+dateString;
 		File file = new File(filePath);
 		
 		file.setReadable(true);
