@@ -2,10 +2,8 @@ package com.concordia.riskGame.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.DateFormat;
@@ -19,10 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
-import com.concordia.riskGame.model.Map.MapParseProcessor;
 import com.concordia.riskGame.model.Player.CheaterPlayer;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.save.RiskSaveGame;
@@ -46,18 +42,6 @@ public class RiskSaveGameTest {
 	 */
 	@Before
 	public void before () {
-
-/*		
-		File file = new File("src/main/resources/test.map");
-		MapParseProcessor mapParseProcessor = new MapParseProcessor();
-		BufferedReader bufferReaderForFile = null;
- 		try {
-			bufferReaderForFile = new BufferedReader(new FileReader(file));
-			mapContents = mapParseProcessor.readMapElements(bufferReaderForFile);
- 		}
- 		catch(Exception e) {
- 			
- 		}*/
 		
 		p1 = new Player("p1");
 		p2 = new Player("p2");
