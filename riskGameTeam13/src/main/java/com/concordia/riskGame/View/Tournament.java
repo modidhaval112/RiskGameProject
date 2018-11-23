@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.concordia.riskGame.View;
 
 import java.awt.Color;
@@ -9,11 +6,15 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author saich
  *
  */
-public class Tournament {
+public class Tournament extends JFrame implements ActionListener {
 	private HashMap<String, String> playerType = new HashMap<>();
 	private int noOfTurns;
 	private int noOfGames;
@@ -61,12 +62,16 @@ public class Tournament {
 	private String playersTypes[] = { "Aggressive", "Benevolent", "Random", "Cheater" };
 	private JComboBox playerCountCombo;
 	private JComboBox mapCountCombo;
-	private JComboBox gamesCount;
-	private JComboBox turns;
+	private JComboBox gamesCountCombo;
+	private JComboBox turnsCombo;
 
-	private String[] playerCounterArray = {"2", "3", "4", "5", "6" };
+	private String[] playerCounterArray = {"2", "3", "4" };
 	private String[] mapArray = {"1","2","3", "4", "5"};
+	private int[] turnsArray = IntStream.rangeClosed(10, 50).toArray();
+	private String strArray[] = Arrays.stream(turnsArray).mapToObj(String::valueOf).toArray(String[]::new);
 
+
+    private  JDialog dialogBox;  
 
 	private JLabel countLabel;
 	private JLabel mapLabel;
@@ -74,8 +79,8 @@ public class Tournament {
 	private JLabel turnsLabel;
 
 	private JButton okayButton;
-	
-	private List<String> filesSelected;
+
+	private List<String> filesSelected = new ArrayList<>();
 
 
 	Tournament()
@@ -91,9 +96,9 @@ public class Tournament {
 		frame.setTitle("Touranment Mode");
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
-		frame.setSize(800,800);
+		frame.setSize(550,250);
 		panel.setSize(700,700);
-		panel.setBackground(Color.cyan);
+		//panel.setBackground(Color.cyan);
 		GridBagLayout layout = new GridBagLayout();
 		panel.setLayout(layout);        
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -113,9 +118,13 @@ public class Tournament {
 
 		countLabel = new JLabel("Select the number of Players");
 		mapLabel=  new JLabel("Select the number of Maps");
-		gamesLabel= new JLabel("No of Games");
+		gamesLabel= new JLabel("Select number of Games");
+		turnsLabel=new JLabel("Select number of turns");
 		playerCountCombo = new JComboBox(playerCounterArray);
 		mapCountCombo= new JComboBox(mapArray);
+		gamesCountCombo=new JComboBox(mapArray);
+		turnsCombo =new JComboBox(strArray);
+
 		okayButton = new JButton("OK");
 
 		player1.setText("Player1");
@@ -150,6 +159,13 @@ public class Tournament {
 		fileButton4 =new JButton("Map4");
 		fileButton5 =new JButton("Map5");
 
+		fileButton1.addActionListener(this);
+		fileButton2.addActionListener(this);
+		fileButton3.addActionListener(this);
+		fileButton4.addActionListener(this);
+		fileButton5.addActionListener(this);
+
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 
@@ -166,6 +182,21 @@ public class Tournament {
 		gbc.gridy = 0;
 
 		panel.add(mapCountCombo, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 15;
+		panel.add(turnsLabel, gbc);
+		gbc.gridx = 4;
+		gbc.gridy = 15;
+		panel.add(turnsCombo, gbc);
+
+		gbc.gridx = 8;
+		gbc.gridy = 15;
+		panel.add(gamesLabel, gbc);
+		gbc.gridx = 12;
+		gbc.gridy = 15;
+		panel.add(gamesCountCombo, gbc);
+
 		frame.add(panel);
 
 		playerCountCombo.addActionListener(new ActionListener() {
@@ -176,11 +207,9 @@ public class Tournament {
 
 					gbc.gridx = 0;
 					gbc.gridy = 4;
-
 					panel.add(player1, gbc);
 					gbc.gridx = 4;
 					gbc.gridy = 4;
-
 					panel.add(cbPlayer1, gbc);
 
 					gbc.gridx = 0;
@@ -219,6 +248,9 @@ public class Tournament {
 
 				}
 
+				frame.validate();
+				frame.repaint();
+				frame.repaint();
 
 			}
 		});
@@ -228,7 +260,7 @@ public class Tournament {
 			public void actionPerformed(final ActionEvent e) {
 				mapCount = (String) mapCountCombo.getSelectedItem();
 
-				if (mapCount.equals("2")||mapCount.equals("3") || mapCount.equals("4") ||mapCount.equals("5") ) {
+				if (mapCount.equals("1")||mapCount.equals("2")||mapCount.equals("3") || mapCount.equals("4") ||mapCount.equals("5") ) {
 
 					gbc.gridx = 8;
 					gbc.gridy = 4;
@@ -236,6 +268,22 @@ public class Tournament {
 					gbc.gridx = 12;
 					gbc.gridy = 4;
 					panel.add(fileButton1, gbc);
+
+					panel.remove(fileButton2);
+					panel.remove(map2);
+					panel.remove(fileButton3);
+					panel.remove(map3);
+					panel.remove(fileButton4);
+					panel.remove(map4);
+					panel.remove(fileButton5);
+					panel.remove(map5);
+
+
+				}
+
+				if (mapCount.equals("2")||mapCount.equals("3") || mapCount.equals("4") ||mapCount.equals("5") ) {
+
+
 
 					gbc.gridx = 8;
 					gbc.gridy = 6;
@@ -288,8 +336,8 @@ public class Tournament {
 					panel.add(fileButton5, gbc);
 
 				}
-				gbc.gridx = 3;
-				gbc.gridy = 16;
+				gbc.gridx = 6;
+				gbc.gridy = 18;
 				panel.add(okayButton, gbc);
 				frame.validate();
 				frame.repaint();
@@ -298,21 +346,51 @@ public class Tournament {
 			}
 		});
 
+		okayButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				
+				if(mapCountCombo.getSelectedItem().toString().equals(filesSelected.size()))
+				{
+					System.out.println("All are same");
+				}
+				else
+				{
+			        dialogBox = new JDialog(frame , "Map file Error", true); 
+			        dialogBox.add( new JLabel ("Choose all the Map files."));  
+
+			        JButton button = new JButton ("OK");  
+			        dialogBox.add(button);
+			        dialogBox.setSize(300,300);    
+			        
+
+			        dialogBox.setVisible(true);  
 
 
+				}
+
+			}
+		});
 	}
+
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == fileButton1|| e.getSource() == fileButton2||e.getSource() == fileButton3||e.getSource() == fileButton4||e.getSource() == fileButton5)
 		{
 			fileChooser = new JFileChooser();
-			fileChooser.setDialogTitle("Map1");
+			fileChooser.setDialogTitle("Select the map");
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 			filenameFilter = new FileNameExtensionFilter(".map Files", "map", "map");
 			fileChooser.setFileFilter(filenameFilter);
-			File file = fileChooser.getSelectedFile();
-			String fileName = file.getName();
-			filesSelected.add(file.getAbsolutePath());
+			int result = fileChooser.showOpenDialog(fileChooser);
+			fileChooser.setLocation(500, 200);
+			fileChooser.setSize(500, 500);
+			fileChooser.setVisible(true);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				String fileName = file.getName();
+				filesSelected.add(file.getAbsolutePath());
+
+			}
 		}
 	}  
 }
