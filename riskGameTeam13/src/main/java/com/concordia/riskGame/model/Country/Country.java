@@ -1,5 +1,6 @@
 package com.concordia.riskGame.model.Country;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.concordia.riskGame.model.Player.Player;
@@ -13,7 +14,7 @@ import com.concordia.riskGame.model.Player.Player;
  *
  */
 
-public class Country {
+public class Country implements Serializable {
 	
 	private static final long serialversionUID = 1L;
 

@@ -184,6 +184,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		else if (event.getSource() == loadGameButton) {
 			System.out.println("#### loadGameButton  is clicked ####");
+			gameFrame.dispose();
 			LoadGame loadgame = new LoadGame();
 			
 		} else if (event.getSource() == exitButton) {

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,7 +33,9 @@ import com.concordia.riskGame.util.RandomAssignment;
  * @author Dheeraj As - Team 13
  * @author Darwin Anirudh G - Team 13
  */
-public class MapParseProcessor {
+public class MapParseProcessor  implements Serializable {
+	
+	private static final long serialversionUID = 1L;
 
 	private File file;
 	private String currentLine;
