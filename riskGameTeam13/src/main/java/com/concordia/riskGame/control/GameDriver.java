@@ -348,11 +348,6 @@ public void load(MapContents mp) throws Exception {
 public Country getSourceCountryFromString(String sourceCountry) {
 	MapContents contents = MapContents.getInstance();
 	
-	System.out.println("##########     getSourceCountryFromString   ####### : ");
-	System.out.println("##########  Map Content Number of Player       ####### : "+contents.getPlayerList().size());
-	System.out.println("##########  Map Content Number of Countries  ####### : "+contents.getCountryList().size());
-
-	
 	HashMap<Country, List<Country>> countriesAndItsNeighbours = contents.getCountryAndNeighbors();
 	for (Country country : countriesAndItsNeighbours.keySet()) {
 		if (sourceCountry != null && !sourceCountry.isEmpty() && sourceCountry.equals(country.getCountryName())) {
