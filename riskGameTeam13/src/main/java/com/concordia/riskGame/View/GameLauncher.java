@@ -41,6 +41,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 	private PlayerCount playerCount;
 	private CreateMapFile createMapFile;
 	private MapEditView editObject;
+	private Tournament tournament;
 
 	/**
 	 * This method launches the game and displays the start menu
@@ -174,6 +175,10 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		} else if (event.getSource() == tournamentButton) {
 			System.out.println("#### tournamentButton  is clicked ####");
+			gameFrame.setVisible(false);
+			tournament= new Tournament();
+			
+
 
 		}
 
