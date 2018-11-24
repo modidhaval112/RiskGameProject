@@ -6,25 +6,27 @@ import java.util.List;
 
 public class Tournament {
 	
-	public int numberOfTurns;
-	public int numberOfGames;
-	public List<String> gameMapFiles = new ArrayList<>();
-	HashMap<String, String> playerNameAndTypes = new HashMap<>();
+	public int noOfTurns;
+	public int noOfGames;
+	public List<String> mapFiles = new ArrayList<>();
+	HashMap<String, String> playerNamesAndTypes = new HashMap<>();
 	
 	
 	/**
 	 * This method assigning the map files,count of games and turns
 	 * @param playerNameAndTypes MAp of the player and the types of players
-	 * @param gameMapFiles list of game map file names
+	 * @param mapFiles list of game map file names
 	 * @param numberOfGames count of the games played
 	 * @param numberOfTurns count of the turns
 	 */
-	public Tournament(HashMap<String, String> playerNameAndTypes ,List<String> gameMapFiles, int numberOfGames, int numberOfTurns) {
+	public Tournament(HashMap<String, String> playerNamesAndTypes ,List<String> mapFiles, int noOfGames, int noOfTurns) {
 		super();
-		this.playerNameAndTypes = playerNameAndTypes;
-		this.gameMapFiles = gameMapFiles;
-		this.numberOfGames = numberOfGames;
-		this.numberOfTurns = numberOfTurns;
+		this.playerNamesAndTypes = playerNamesAndTypes;
+		this.mapFiles = mapFiles;
+		this.noOfGames = noOfGames;
+		this.noOfTurns = noOfTurns;
 	}
-	
+
+
+
 }

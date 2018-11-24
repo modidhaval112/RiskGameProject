@@ -75,7 +75,7 @@ public class MapParseProcessor  implements Serializable {
 	 * @return the mapContent Object with map details enriched
 	 */
 
-	public MapContents mapParser(String filePath, String numberOfPlayer,HashMap<String,String> playerType) {
+	public MapContents mapParser(String filePath, String numberOfPlayer,HashMap<String,String> playerType,String gameType) {
 		try {
 
 			fileObject = new File(filePath);
@@ -120,8 +120,11 @@ public class MapParseProcessor  implements Serializable {
 
 			armyAssignment(playerList);
 			mapContentObject.setPlayerList(playerList);
+			if(!gameType.equals("tournament"))
+			{
 			gameDriverObject = new GameDriver();
 			gameDriverObject.gamePhase();
+			}
 		} catch (InvalidMapFileException e) {
 			System.out.println("Please select a valid map");
 			GameLauncher gameLauncherObject = new GameLauncher();

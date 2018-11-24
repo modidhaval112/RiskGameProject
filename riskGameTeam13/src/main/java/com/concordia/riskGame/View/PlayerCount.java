@@ -294,7 +294,7 @@ public class PlayerCount extends JFrame {
 							filePath = selectedFile.getAbsolutePath().toString();
 							mapParseObject = new MapParseProcessor();
 							mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),
-							playerCountCombo.getSelectedItem().toString(), playerType);
+							playerCountCombo.getSelectedItem().toString(), playerType,"single");
  						}
  					}
  				} catch (Exception e) {

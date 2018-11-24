@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.concordia.riskGame.control.TournamentGameDriver;
+
 /**
  * @author saich
  *
@@ -71,7 +73,7 @@ public class Tournament extends JFrame implements ActionListener {
 	private String strArray[] = Arrays.stream(turnsArray).mapToObj(String::valueOf).toArray(String[]::new);
 
 
-    private  JDialog dialogBox;  
+	private  JDialog dialogBox;  
 
 	private JLabel countLabel;
 	private JLabel mapLabel;
@@ -81,6 +83,7 @@ public class Tournament extends JFrame implements ActionListener {
 	private JButton okayButton;
 
 	private List<String> filesSelected = new ArrayList<>();
+	TournamentGameDriver tgm;
 
 
 	Tournament()
@@ -348,8 +351,34 @@ public class Tournament extends JFrame implements ActionListener {
 
 		okayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
+
+				if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4"))
+				{
+					playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
+					playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
+
+				}
+				if (playercount.equals("3") || playercount.equals("4")) {
+
+					playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
+				}
+				if (playercount.equals("4")) {
+					playerType.put("Player4", (String) cbPlayer4.getSelectedItem());
+				}
 				
-				if(mapCountCombo.getSelectedItem().toString().equals(filesSelected.size()))
+				tgm= new TournamentGameDriver();
+				
+				try {
+					tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				/*if(mapCountCombo.getSelectedItem().toString().equals(filesSelected.size()))
 				{
 					System.out.println("All are same");
 				}
@@ -361,12 +390,12 @@ public class Tournament extends JFrame implements ActionListener {
 			        JButton button = new JButton ("OK");  
 			        dialogBox.add(button);
 			        dialogBox.setSize(300,300);    
-			        
+
 
 			        dialogBox.setVisible(true);  
 
 
-				}
+				}*/
 
 			}
 		});
@@ -388,9 +417,9 @@ public class Tournament extends JFrame implements ActionListener {
 			if (result == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				String fileName = file.getName();
-				filesSelected.add(file.getAbsolutePath());
-
+				filesSelected.add(file.getAbsolutePath().toString());
 			}
+
 		}
 	}  
 }
