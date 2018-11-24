@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import com.concordia.riskGame.model.Tournament.Tournament;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -176,7 +179,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		} else if (event.getSource() == tournamentButton) {
 			System.out.println("#### tournamentButton  is clicked ####");
 			gameFrame.setVisible(false);
-			tournament= new Tournament();
+			//tournament= new Tournament();
 			
 
 
