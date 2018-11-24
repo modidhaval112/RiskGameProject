@@ -23,6 +23,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 			playerCountry.setArmies(playerCountry.getArmies()*2);
 		}
 		player.setPhase("#### After Reinforcement Phase");
+		player.printAllCountriesOfaPlayer(player);
 		player.setCanAttack(true);
 		return player;
 	}
@@ -106,7 +107,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 					break;
 				}
 			}
-			playerCountry.setArmies(playerCountry.getArmies()*2);
+			//playerCountry.setArmies(playerCountry.getArmies()*2);
 		}
 		player.setPhase("#### After Fortification Phase");
 		player.printAllCountriesOfaPlayer(player);
