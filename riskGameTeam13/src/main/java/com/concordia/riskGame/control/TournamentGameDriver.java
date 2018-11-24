@@ -15,6 +15,10 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.Tournament.Tournament;
 
+/**
+ * @author saich
+ *
+ */
 public class TournamentGameDriver {
 
 
@@ -35,8 +39,7 @@ public class TournamentGameDriver {
 		Tournament tournament = new Tournament(playerNamesAndTypes, gameMapFiles, noOfGames, noOfTurns);
 		for(String fileName : gameMapFiles)
 		{
-
-			
+			System.out.println("Current Map is" +gameMapFiles.indexOf(fileName));
 			for(int j=0; j<noOfGames;j++)
 			{
 				mapParseObject = new MapParseProcessor();
@@ -49,7 +52,7 @@ public class TournamentGameDriver {
 				turns=0;
 				Deck deck = Deck.getInstance();
 				deck.setDeckOfCards(mapContents.getCountryList());
-				System.out.println("In game "+j);
+				System.out.println("Map "+gameMapFiles.indexOf(fileName)+"In game "+j);
 
 				while(!endTheGame && turns < noOfTurns) {
 					List<Player> removablePlayers = new ArrayList<>();
