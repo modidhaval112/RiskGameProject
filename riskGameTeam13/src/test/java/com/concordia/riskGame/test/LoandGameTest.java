@@ -11,22 +11,25 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
+import com.concordia.riskGame.View.LoadGame;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.CheaterPlayer;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.save.RiskSaveGame;
 
-public class RiskSaveGameTest {
+public class LoandGameTest {
 	
 	private MapContents mapContents;
 	private RiskSaveGame riskSaveGame;
 	private String expectedFileName;
+	private String expectedFilePath;
 	private Player p1, p2;
 	private Country c1,c2,c3,c4;
 	private List<Country> listCountry, listCountry1;
@@ -100,46 +103,11 @@ public class RiskSaveGameTest {
 	
 	/**
 	 * Test method to check if saved game file has been created or not 
-	 */
-	@Test
-	public void testFileCreation() {
-		try {
-		boolean flag = false;
-		DateFormat sdf = new SimpleDateFormat("yyyyMMddHH:mm:ss");
-		Date date = new Date();
-		expectedFileName = sdf.format(date);
-		expectedFileName = expectedFileName.replaceAll(":", "");
-		
-		riskSaveGame = new RiskSaveGame();
-
-			riskSaveGame.saveGame(mapContents);
-		
-		File folder = new File("C:\\SaveGame\\");
-		File[] listOfFiles = folder.listFiles();
-		
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-			    System.out.println("File " + listOfFiles[i].getName());
-			}
-			if(listOfFiles[i].getName().equalsIgnoreCase(expectedFileName)) {
-				flag = true;
-				break;
-			}
-		}
-	    assertTrue(flag);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Test method to check if saved game file has been created or not 
 	 * @throws IOException 
 	 */
 	@Test
-	public void testCheckFileData() throws IOException {
+	public void testreadSavedMapContent() throws IOException {
 		boolean flag = false;
-		ObjectInputStream restore = null;
 		try {
 			
 			CheaterPlayer cp = new CheaterPlayer();
@@ -155,14 +123,12 @@ public class RiskSaveGameTest {
 			Date date = new Date();
 			expectedFileName = sdf.format(date);
 			expectedFileName = expectedFileName.replaceAll(":", "");
+			expectedFilePath = "C:\\SaveGame\\"+expectedFileName;
 			
-			FileInputStream savedFile = new FileInputStream("C:\\SaveGame\\" + expectedFileName);
-			restore = new ObjectInputStream(savedFile);
-			Object obj = restore.readObject();
-			System.out.println("####### Saved file object is ####### : " + obj.toString());
-
-			MapContents mapContentObject = (MapContents) obj;
-			List<Player> listPlayer1 = mapContentObject.getPlayerList();
+			LoadGameMock lgm = new LoadGameMock();
+			MapContents mapContents = lgm.readSavedMapContent(expectedFilePath);
+			
+			List<Player> listPlayer1 = mapContents.getPlayerList();
 			
 			if(listPlayer1.get(0).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(0).getAssignedCountries().get(1).getArmies() == 20
 					&& listPlayer1.get(1).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(1).getAssignedCountries().get(1).getArmies() == 20) {
@@ -170,15 +136,11 @@ public class RiskSaveGameTest {
 			}
 			
 			assertTrue(flag);
-			restore.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-		} finally {
-			restore.close();
 		}
-
 	}
 
 }
