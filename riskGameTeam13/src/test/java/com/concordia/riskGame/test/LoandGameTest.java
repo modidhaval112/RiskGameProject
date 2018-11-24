@@ -125,8 +125,8 @@ public class LoandGameTest {
 			expectedFileName = expectedFileName.replaceAll(":", "");
 			expectedFilePath = "C:\\SaveGame\\"+expectedFileName;
 			
-			LoadGameMock lgm = new LoadGameMock();
-			MapContents mapContents = lgm.readSavedMapContent(expectedFilePath);
+			LoadGame lg = new LoadGame();
+			MapContents mapContents = lg.readSavedMapContent(expectedFilePath);
 			
 			List<Player> listPlayer1 = mapContents.getPlayerList();
 			
