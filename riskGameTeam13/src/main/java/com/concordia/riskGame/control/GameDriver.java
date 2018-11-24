@@ -9,6 +9,9 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.concordia.riskGame.View.CardView;
+import com.concordia.riskGame.View.PhaseView;
+import com.concordia.riskGame.View.WorldDominationView;
 import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -65,18 +68,18 @@ public class GameDriver {
 		/*Iterator<Player> iterator = mapContents.getPlayerList().iterator();*/
 		ListIterator<Player> iter = mapContents.getPlayerList().listIterator();
 		while(iter.hasNext()) {
-			Player playerInstance = new Player();
+		//	Player playerInstance = new Player();
 			Player p = iter.next();
 			if(!p.isHasLost()) {
-			playerInstance = p.strategy.reinforcePhase(p);
-			if(playerInstance.getCanAttack()) {
-			playerInstance = playerInstance.strategy.attackPhase(playerInstance);
+			p = p.strategy.reinforcePhase(p);
+			if(p.getCanAttack()) {
+			p = p.strategy.attackPhase(p);
 			}
-			if(playerInstance.getHasWon()) {
+			if(p.getHasWon()) {
 				System.exit(0);
 			}
-			if(playerInstance.getCanFortify()) {
-			playerInstance = playerInstance.strategy.forfeitPhase(playerInstance);
+			if(p.getCanFortify()) {
+			p = p.strategy.forfeitPhase(p);
 			}
 			}
 			
@@ -276,6 +279,15 @@ public void load(MapContents mp) throws Exception {
 		while(!endTheGame) {
 			List<Player> removablePlayers = new ArrayList<>();
 			for(Player player : mapContents.getPlayerList()) {
+				
+			}
+			for(Player player : mapContents.getPlayerList()) {
+				PhaseView phaseView = new PhaseView();
+				player.addObserver(phaseView);
+				WorldDominationView dominationView = new WorldDominationView();
+				player.addObserver(dominationView);
+				CardView cardView = new CardView();
+				player.addObserver(cardView);
 				if(player.isHasLost()) {
 					removablePlayers.add(player);
 				}
@@ -291,10 +303,11 @@ public void load(MapContents mp) throws Exception {
 			Player playerInstance = new Player();
 			
 			Player p = iter.next();
+			playerInstance=p;
 			
-			if(!p.isHasLost()) {
+			if(!playerInstance.isHasLost()) {
 		
-			playerInstance = p.getStrategy().reinforcePhase(p);
+			playerInstance =playerInstance.getStrategy().reinforcePhase(playerInstance);
 			
 			if(playerInstance.getCanAttack()) {
 			playerInstance = playerInstance.getStrategy().attackPhase(playerInstance);
