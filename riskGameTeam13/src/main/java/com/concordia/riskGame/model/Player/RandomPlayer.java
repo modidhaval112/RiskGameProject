@@ -193,6 +193,12 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 		while(!fortificationDone && countriesSize>0 ) {
 			Random random = new Random();
 			int rand = random.nextInt(countriesSize);
+			if(randomNumbersList.size()==sortedCountryList.size()) {
+				player.setPhase("####Fortification Not Possible ####");
+				player.setPhase("#### After Fortification ####");
+				player.printAllCountriesOfaPlayer(player);
+				return player;
+			}
 			while(randomNumbersList.contains(rand)) {
 				rand = random.nextInt(countriesSize);
 			}
