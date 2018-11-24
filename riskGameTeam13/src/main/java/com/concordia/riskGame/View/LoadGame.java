@@ -28,9 +28,9 @@ public class LoadGame {
 	private int rotateValue;
 	
 	/**
-	 * Default constructor of load game.
+	 * method to choose file 
 	 */
-	public LoadGame()
+	public void chooseFileMethod()
 	{
 		System.out.println("##### Select a file to load the game #######");
 		System.out.println("#### Okay Button is Clicked ####");
@@ -62,8 +62,9 @@ public class LoadGame {
 	 * The following method read the saved map file from the specified location and instantiates the map content object.
 	 * @param filePath The path of the saved file. 
 	 */
-	public void readSavedMapContent(String filePath)
+	public MapContents readSavedMapContent(String filePath)
 	{
+		MapContents mapContentObject = null;
 		try {
 			System.out.println("##### Calling readSavedMapContent() #########");
 			System.out.println("##### file path is  ######### : "+ filePath );
@@ -72,7 +73,6 @@ public class LoadGame {
 			Object obj = restore.readObject();
 			System.out.println("####### Saved file object is ####### : "+obj.toString());
 			
-			MapContents mapContentObject;
 			mapContentObject = (MapContents)obj;
 			System.out.println("####### mapContentObject file object is ####### : "+mapContentObject.toString());
 			
@@ -94,6 +94,8 @@ public class LoadGame {
 		{
 			e.printStackTrace();
 		}
+		
+		return mapContentObject;
 	}
 	
 	
