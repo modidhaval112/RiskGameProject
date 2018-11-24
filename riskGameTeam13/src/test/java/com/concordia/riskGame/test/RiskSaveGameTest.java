@@ -104,7 +104,7 @@ public class RiskSaveGameTest {
 	 */
 	@Test
 	public void testFileCreation() {
-
+		try {
 		boolean flag = false;
 		DateFormat sdf = new SimpleDateFormat("yyyyMMddHH:mm:ss");
 		Date date = new Date();
@@ -112,7 +112,9 @@ public class RiskSaveGameTest {
 		expectedFileName = expectedFileName.replaceAll(":", "");
 		
 		riskSaveGame = new RiskSaveGame();
-		riskSaveGame.saveGame(mapContents);
+
+			riskSaveGame.saveGame(mapContents);
+		
 		File folder = new File("C:\\SaveGame\\");
 		File[] listOfFiles = folder.listFiles();
 		
@@ -126,6 +128,9 @@ public class RiskSaveGameTest {
 			}
 		}
 	    assertTrue(flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
