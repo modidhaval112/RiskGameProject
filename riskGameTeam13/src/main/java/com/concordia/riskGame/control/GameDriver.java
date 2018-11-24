@@ -281,6 +281,12 @@ public class GameDriver {
 			while(!endTheGame) {
 				List<Player> removablePlayers = new ArrayList<>();
 				for(Player player : mapContents.getPlayerList()) {
+					PhaseView phaseView = new PhaseView();
+					player.addObserver(phaseView);
+					WorldDominationView dominationView = new WorldDominationView();
+					player.addObserver(dominationView);
+					CardView cardView = new CardView();
+					player.addObserver(cardView);
 					if(player.isHasLost()) {
 						removablePlayers.add(player);
 					}
