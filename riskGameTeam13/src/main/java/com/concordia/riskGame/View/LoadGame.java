@@ -20,7 +20,7 @@ public class LoadGame {
 
 	private JFileChooser fileChooser;
 	private String filePath;
-
+	private int rotateValue;
 	public LoadGame()
 	{
 		System.out.println("##### Select a file to load the game #######");
@@ -43,13 +43,13 @@ public class LoadGame {
 			System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 			filePath = selectedFile.getAbsolutePath().toString();
 			System.out.println("###### The selected file path is ####### : "+filePath );
-			readSavedMapContent();
+			readSavedMapContent(filePath);
 		}
 
 		
 	}
 	
-	public void readSavedMapContent()
+	public void readSavedMapContent(String filePath)
 	{
 		try {
 			System.out.println("##### Calling readSavedMapContent() #########");
@@ -67,7 +67,7 @@ public class LoadGame {
 			System.out.println("##########  Map Content Number of Player       ####### : "+mapContentObject.getPlayerList().size());
 			System.out.println("##########  Map Content Number of Countries  ####### : "+mapContentObject.getCountryList().size());
 	
-			int rotateValue = mapContentObject.getRotateCount();
+			rotateValue = mapContentObject.getRotateCount();
 			System.out.println("######### The roate count value is ######## : "+rotateValue);
 			List<com.concordia.riskGame.model.Player.Player> playerListLoadGame = new ArrayList();
 			playerListLoadGame = mapContentObject.getPlayerList();
@@ -75,6 +75,7 @@ public class LoadGame {
 			mapContentObject.setPlayerList(playerListLoadGame);
 			GameDriver gameDriverObject = new GameDriver();
 			gameDriverObject.load(mapContentObject);
+			
 			
 		}catch(Exception e)
 		{
