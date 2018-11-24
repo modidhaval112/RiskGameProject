@@ -16,11 +16,20 @@ import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
 
+/**
+ * The load game class is used to load the saved file and continue the game where it was saved.
+ * @author Darwin Anirudh
+ *
+ */
 public class LoadGame {
 
 	private JFileChooser fileChooser;
 	private String filePath;
 	private int rotateValue;
+	
+	/**
+	 * Default constructor of load game.
+	 */
 	public LoadGame()
 	{
 		System.out.println("##### Select a file to load the game #######");
@@ -49,6 +58,10 @@ public class LoadGame {
 		
 	}
 	
+	/**
+	 * The following method read the saved map file from the specified location and instantiates the map content object.
+	 * @param filePath The path of the saved file. 
+	 */
 	public void readSavedMapContent(String filePath)
 	{
 		try {
