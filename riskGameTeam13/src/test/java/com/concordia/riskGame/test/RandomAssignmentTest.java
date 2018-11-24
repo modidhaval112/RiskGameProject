@@ -3,8 +3,11 @@ package com.concordia.riskGame.test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +54,11 @@ public class RandomAssignmentTest {
 	 */
 	@Test
 	public void testRandonAssignmentMethod() {
-		player = randomAssignment.randonAssignmentMethod(playerCount, listOfCountry);
+		HashMap<String, String> playerType = new HashMap<>();
+		playerType.put("Player1", "Cheater");
+		playerType.put("Player2", "Cheater");
+		playerType.put("Player3", "Cheater");
+		player = randomAssignment.randonAssignmentMethod(playerCount, listOfCountry, playerType);
 		Map<Player, List<Country>> playerAssign = player.getPlayerAssign();
 
 		for (Player player : playerAssign.keySet()) {
