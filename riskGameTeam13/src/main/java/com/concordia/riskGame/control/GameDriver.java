@@ -294,13 +294,13 @@ public void load(MapContents mp) throws Exception {
 			
 			if(!p.isHasLost()) {
 		
-			playerInstance = playerInstance.reinforcePhase(p);
+			playerInstance = p.getStrategy().reinforcePhase(p);
 			
 			if(playerInstance.getCanAttack()) {
-			playerInstance = playerInstance.attackPhase(playerInstance);
+			playerInstance = playerInstance.getStrategy().attackPhase(playerInstance);
 			}
 			if(playerInstance.getCanFortify()) {
-			playerInstance = playerInstance.forfeitPhase(playerInstance);
+			playerInstance = playerInstance.getStrategy().forfeitPhase(playerInstance);
 			}
 			}
 			
