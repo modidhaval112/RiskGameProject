@@ -377,7 +377,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		playerObject.setCurrentPhase(Player.fortificationPhase);
 		setDomination();
 		Scanner scanner;
-		System.out.println("###### Do you wish to enter the fortification phase: yes/no #######");
+		playerObject.setPhase("###### Do you wish to enter the fortification phase: yes/no #######");
 		String choice = null;
 		Scanner sc = new Scanner(System.in);
 		choice = sc.nextLine();
@@ -386,19 +386,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 			try {
 				Player player = new Player();
 				player = playerObject;
-				System.out.println(player.getName() + " is in fortification phase ");
-				System.out.println("##### Fortification Phase begins ######");
+				playerObject.setPhase(player.getName() + " is in fortification phase ");
+				playerObject.setPhase("##### Fortification Phase begins ######");
 				String[] utilString;
 				
 				
-				System.out.println("#### List of fortifiable countries owned by the player #####");
+				playerObject.setPhase("#### List of fortifiable countries owned by the player #####");
 				List<Country> fortifiableDestinationCountriesList = new ArrayList<Country>();
 
 				for (Country countryObj : player.getAssignedCountries()) {
-						System.out.println(countryObj.getCountryName() + ": " + countryObj.getArmies());
+					playerObject.setPhase(countryObj.getCountryName() + ": " + countryObj.getArmies());
 					}
 					
-					System.out.println("##### Please enter the source country to move armies from ####### ");
+				playerObject.setPhase("##### Please enter the source country to move armies from ####### ");
 					String srcCountry = sc.nextLine();
 					srcCountry  = srcCountry.trim();
 					
@@ -414,7 +414,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 
 					if(destNeighborCountryList.size() == 0)
 					{
-						System.out.println("##### The source country has zero neighboring countries ######");
+						playerObject.setPhase("##### The source country has zero neighboring countries ######");
 						srcCountry = reEnterSourceCountryforListCheck(player);
 						srcCountry = srcCountry.trim();
 
@@ -424,9 +424,9 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					if(!srcCountry.equalsIgnoreCase("quit"))
 					{
 						
-					System.out.println(" ###### Printing the destination fortifiable countries for the source country ###### ");
+						playerObject.setPhase(" ###### Printing the destination fortifiable countries for the source country ###### ");
 					destNeighborCountryList=printNeighbouringCountryList(srcCountry,player);
-					System.out.println(" ###### Please enter destination country to move armies  ###### ");
+					playerObject.setPhase(" ###### Please enter destination country to move armies  ###### ");
 					String destinationCountry = sc.nextLine();
 					destinationCountry = destinationCountry.trim();
 					
@@ -434,7 +434,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 						destinationCountry = reEnterDestinationCountry(destNeighborCountryList);
 						destinationCountry = destinationCountry.trim();
 					}
-					System.out.println("###### Please enter armies to moved from source country to destination country #####");
+					playerObject.setPhase("###### Please enter armies to moved from source country to destination country #####");
 					int movingArmies = sc.nextInt();
 					if(!checkValidArmyFortification(movingArmies))
 					{
@@ -442,11 +442,11 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					}
 					String fromCountry = srcCountry;
 					String toCountry = destinationCountry;
-					System.out.println("					###########  Source country      	        ###############      : "
+					playerObject.setPhase("					###########  Source country      	        ###############      : "
 							+ fromCountry);
-					System.out.println(
+					playerObject.setPhase(
 							"					       ###########   Destination Country   	    ###############      : " + toCountry);
-					System.out.println("				   ###########   Armies to be moved        ###############      : "
+					playerObject.setPhase("				   ###########   Armies to be moved        ###############      : "
 							+ movingArmies);
 					int destArmies = 0;
 					int sourcesArmies = 0;
@@ -463,18 +463,18 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 							sourceCountry = countryInstance;
 							sourcesArmies = sourceCountry.getArmies();
 							if (sourcesArmies == 1) {
-								System.out.println("You cannot move the only army from this Country");
+								playerObject.setPhase("You cannot move the only army from this Country");
 								setErrorMesage("You cannot move the only army from this Country");
 								throw new Exception();
 							}
 							if (sourcesArmies < movingArmies) {
-								System.out.println(
+								playerObject.setPhase(
 										"The country doesnt have the mentioned number of armies, please enter a lesser number");
 								setErrorMesage("The country doesnt have the mentioned number of armies, please enter a lesser number");
 								throw new Exception();
 							}
 							if (sourcesArmies == movingArmies) {
-								System.out.println(
+								playerObject.setPhase(
 										"You cannot move all the armies from this Country, please enter a lesser number");
 								setErrorMesage("You cannot move all the armies from this Country, please enter a lesser number");
 								throw new Exception();
@@ -500,19 +500,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 						if (!assignedCountriesClone.contains(x))
 							assignedCountriesClone.add(x);
 					}
-					System.out.println("############### Displaying player armies count after fortify ###########");
+					playerObject.setPhase("############### Displaying player armies count after fortify ###########");
 					for (Country country : assignedCountriesClone) {
-						System.out.println("######## The country name is     #######      : " + country.getCountryName());
-						System.out.println("######## The country armies is   #######      : " + country.getArmies());
+						playerObject.setPhase("######## The country name is     #######      : " + country.getCountryName());
+						playerObject.setPhase("######## The country armies is   #######      : " + country.getArmies());
 					}
 					player.setAssignedCountries(assignedCountriesClone);
-					System.out.println("##### Armies have been moved between countries ######");
+					playerObject.setPhase("##### Armies have been moved between countries ######");
 					setErrorMesage("Armies have been moved between countries");
 					return player;
 					}
 					else
 					{
-						System.out.println("####### Player Quits Fortification Phase #########");
+						playerObject.setPhase("####### Player Quits Fortification Phase #########");
 						return player;
 					}
 					
@@ -1003,7 +1003,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		setCurrentPhase(Player.attackPhase);
 		player.setCurrentPhase(Player.attackPhase);
 		setDomination();
-		setPhase("###### Do you wish to attack : yes/no #######");
+		player.setPhase("###### Do you wish to attack : yes/no #######");
 		Player pObject = new Player();
 		pObject = player;
 		String choice = null;
@@ -1028,7 +1028,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				GameDriver driver = new GameDriver();
 				List<Country> sourceAndDestinationCountry = driver.getSourceAndDestinationCountry(player); 
 				if(sourceAndDestinationCountry==null) {
-					setPhase("#### Moving to the next phase ####");
+					player.setPhase("#### Moving to the next phase ####");
 					player.setCanFortify(true);
 					player.setCardGiven(false);
 					return pObject;
@@ -1036,7 +1036,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				sourceCountryObject=sourceAndDestinationCountry.get(0);
 				destinationCountryObject=sourceAndDestinationCountry.get(1);
 				if (sourceCountryObject.getArmies() > 3) {
-					setPhase("Enter 1 if you want to go all out or enter 2 do a normal attack");
+					player.setPhase("Enter 1 if you want to go all out or enter 2 do a normal attack");
 					attackChoice = scanner.nextInt(); // input mismatch exception to be handled properly in future
 					if (attackChoice == 1) {
 						allOut = true;
@@ -1052,19 +1052,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 						maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 						maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
 						System.out.println();
-						setPhase("###### The maximum number of dice attacker can roll is  #### : "+maximumAttackerDice);
-						setPhase("###### The maximum number of dice defender can roll is  #### : "+maximumDefenderDice);
+						player.setPhase("###### The maximum number of dice attacker can roll is  #### : "+maximumAttackerDice);
+						player.setPhase("###### The maximum number of dice defender can roll is  #### : "+maximumDefenderDice);
 						attackerDiceResults = dice.rollDice(maximumAttackerDice);
 						defenderDiceResults = dice.rollDice(maximumDefenderDice);
-						setPhase(
+						player.setPhase(
 								"Attacker Dice Roll results : " + attackerDiceResults.size() + " dice has been rolled");
 						for (Integer result : attackerDiceResults) {
-							setPhase(result + " ");
+							player.setPhase(result + " ");
 						}
-						setPhase(
+						player.setPhase(
 								"Defender Dice Roll results" + defenderDiceResults.size() + " dice has been rolled");
 						for (Integer result : defenderDiceResults) {
-							setPhase(result + " ");
+							player.setPhase(result + " ");
 						}
 						Collections.sort(attackerDiceResults);
 						Collections.reverse(attackerDiceResults);
@@ -1073,39 +1073,39 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 						int minimumDiceValue = maximumAttackerDice < maximumDefenderDice ? maximumAttackerDice: maximumDefenderDice;
 						for (int i = 0; i < minimumDiceValue; i++) {
 							if (attackerDiceResults.get(i) != null && defenderDiceResults.get(i) != null) {
-								setPhase("Result number " + (i + 1));
-								setPhase("Attacker Dice value " + attackerDiceResults.get(i));
-								setPhase("Defender Dice value " + defenderDiceResults.get(i));
+								player.setPhase("Result number " + (i + 1));
+								player.setPhase("Attacker Dice value " + attackerDiceResults.get(i));
+								player.setPhase("Defender Dice value " + defenderDiceResults.get(i));
 								if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
 									
-									setPhase("Attacker wins this battle");
+									player.setPhase("Attacker wins this battle");
 									destinationCountryObject.setArmies(destinationCountryObject.getArmies() - 1);
 								} else {
-									setPhase("Defender wins this battle");
+									player.setPhase("Defender wins this battle");
 									sourceCountryObject.setArmies(sourceCountryObject.getArmies() - 1);
 								}
 							} else {
 								break;
 							}
 						}
-						setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
+						player.setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
 								+ sourceCountryObject.getArmies());
-						setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
+						player.setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
 								+ destinationCountryObject.getArmies());
 					}
 				} else {
 					maximumAttackerDice = getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 					maximumDefenderDice = getMaxDefenderDiceCount(destinationCountryObject.getArmies());
-					setPhase("###### The max attacker dice count is  #### : "+maximumAttackerDice);
-					setPhase("###### The max attacker dice count is  #### : "+maximumDefenderDice);
-					setPhase("Enter the number of dice to be roled. Maximum is " + maximumAttackerDice);
+					player.setPhase("###### The max attacker dice count is  #### : "+maximumAttackerDice);
+					player.setPhase("###### The max attacker dice count is  #### : "+maximumDefenderDice);
+					player.setPhase("Enter the number of dice to be roled. Maximum is " + maximumAttackerDice);
 					attackerDice = scanner.nextInt();
 					if (attackerDice > 3 && maximumAttackerDice == 3) {
 						attackerDice = 3;
 					} else if (attackerDice > maximumAttackerDice) {
 						attackerDice = maximumAttackerDice;
 					}
-					setPhase("Number of dice rolled by attacker : " + attackerDice);
+					player.setPhase("Number of dice rolled by attacker : " + attackerDice);
 					if(destinationCountryObject.getBelongsToPlayer().getisComputerPlayer()){
 		                   Random random = new Random();
 		                    if (destinationCountryObject.getArmies() <= 1) {
@@ -1115,7 +1115,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		                    }
 		            }
 					else {
-					setPhase("Enter the number of dice to be roled. Maximum is " + maximumDefenderDice);
+						player.setPhase("Enter the number of dice to be roled. Maximum is " + maximumDefenderDice);
 					defenderDice = scanner.nextInt();
 					if (defenderDice > 2 && maximumDefenderDice == 2) {
 						defenderDice = 2;
@@ -1123,18 +1123,18 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 						defenderDice = maximumDefenderDice;
 					}
 					}
-					setPhase("Number of dice rolled by defender : " + defenderDice);
+					player.setPhase("Number of dice rolled by defender : " + defenderDice);
 					attackerDiceResults = dice.rollDice(attackerDice);
 					defenderDiceResults = dice.rollDice(defenderDice);
 
-					setPhase("Attacker Dice Roll results");
+					player.setPhase("Attacker Dice Roll results");
 					for (Integer result : attackerDiceResults) {
-						setPhase(result + " ");
+						player.setPhase(result + " ");
 					}
 					System.out.println();
-					setPhase("Defender Dice Roll results");
+					player.setPhase("Defender Dice Roll results");
 					for (Integer result : defenderDiceResults) {
-						setPhase(result + " ");
+						player.setPhase(result + " ");
 					}
 					System.out.println();
 					Collections.sort(attackerDiceResults);
@@ -1145,23 +1145,23 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 
 					for (int i = 0; i < minimumDiceValue; i++) {
 						if (attackerDiceResults.get(i) != null && defenderDiceResults.get(i) != null) {
-							setPhase("Result number " + (i + 1));
-							setPhase("Attacker Dice value " + attackerDiceResults.get(i));
-							setPhase("Defender Dice value " + defenderDiceResults.get(i));
+							player.setPhase("Result number " + (i + 1));
+							player.setPhase("Attacker Dice value " + attackerDiceResults.get(i));
+							player.setPhase("Defender Dice value " + defenderDiceResults.get(i));
 							if (attackerDiceResults.get(i) > defenderDiceResults.get(i)) {
-								setPhase("Attacker wins this battle");
+								player.setPhase("Attacker wins this battle");
 								destinationCountryObject.setArmies(destinationCountryObject.getArmies() - 1);
 							} else {
-								setPhase("Defender wins this battle");
+								player.setPhase("Defender wins this battle");
 								sourceCountryObject.setArmies(sourceCountryObject.getArmies() - 1);
 							}
 						} else {
 							break;
 						}
 					}
-					setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
+					player.setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
 							+ sourceCountryObject.getArmies());
-					setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
+					player.setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
 							+ destinationCountryObject.getArmies());
 
 				}
@@ -1172,7 +1172,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 				}
 				if (hasPlayerWon(player)) {
 					player.setHasWon(true);
-					setPhase("Player " + player.getName() + "has won the game");
+					player.setPhase("Player " + player.getName() + "has won the game");
 					return pObject;
 				}
 				checkPlayerTurnCanContinue(player);
@@ -1181,14 +1181,14 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					attackPhase(player);
 				}
 				else {
-					setPhase("Exiting Attack as attack is not possible anymore");
+					player.setPhase("Exiting Attack as attack is not possible anymore");
 				}
 			} else if (choice.equalsIgnoreCase("no")) {
-				setPhase("Player enter into fortify phase");
+				player.setPhase("Player enter into fortify phase");
 				player.setCanFortify(true);
 			} else {
-				setPhase("Invalid Option");
-				setPhase("#### Moving to the next phase ####");
+				player.setPhase("Invalid Option");
+				player.setPhase("#### Moving to the next phase ####");
 				player.setCanFortify(true);
 			}
 		} catch (Exception e) {
@@ -1406,7 +1406,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 			scanner = new Scanner(System.in);
 			int armiesToBeGiven = 0;
 			gamePlayerList = new ArrayList<Player>();
-			setPhase("\n######## " + player.getName() + "  reinforcement phase begins ########");
+			player.setPhase("\n######## " + player.getName() + "  reinforcement phase begins ########");
 			assignedArmies = calculateReiforcementArmies(player.getAssignedCountries().size());
 			List<Continent> currcontControlList = new ArrayList();
 			int armiesContControl = 0;
@@ -1415,25 +1415,25 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 			{
 				for(Continent cont : currcontControlList)
 				{
-					setPhase(" ##### continent name is ###### "+cont.getContinentName()  +" and     control value is "+cont.getContinentControlValue() );
+					player.setPhase(" ##### continent name is ###### "+cont.getContinentName()  +" and     control value is "+cont.getContinentControlValue() );
 					armiesContControl = armiesContControl + cont.getContinentControlValue();
 				}
 			}
-			setPhase("#### The armies to be assigned from control value of continent is ###### : "+armiesContControl);
+			player.setPhase("#### The armies to be assigned from control value of continent is ###### : "+armiesContControl);
 			assignedArmies = assignedArmies + armiesContControl;
 			CardView cardView= new CardView();
 			armiesToBeGiven=cardView.exchangeCards(player);
 			assignedArmies += armiesToBeGiven;
 			setCardList(new ArrayList<>());
 			setExchanged(false);
-			setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
+			player.setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 			player.setTotalArmies(assignedArmies);
 			int counter = player.getTotalArmies();
 			int armiesCounter;
 			while (counter > 0) {
 				printCountriesOwnedByPlayer(player);
-				setPhase("#### The number of armies to be reinforced are  #### :" + counter);
-				setPhase("##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
+				player.setPhase("#### The number of armies to be reinforced are  #### :" + counter);
+				player.setPhase("##### Select the country name,armies (comma , seperated) in which you want to assign armies ######");
 				nameArmiesSpilt = scanner.nextLine().split(",");
 				countryName = nameArmiesSpilt[0];
 				armiesCount = nameArmiesSpilt[1];
@@ -1444,8 +1444,8 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					countryName = reEnterCountry(player);
 				}
 
-				setPhase("##### The selected country name is  ####     : " + countryName);
-				setPhase("##### The army count  name is          ####     : " + armiesCount);
+				player.setPhase("##### The selected country name is  ####     : " + countryName);
+				player.setPhase("##### The army count  name is          ####     : " + armiesCount);
 				armiesCounter = Integer.parseInt(armiesCount);
 				int armyCount = 0;
 				if (armiesCounter <= counter) {
@@ -1461,22 +1461,22 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 					}
 					counter = counter - armiesCounter;
 				} else {
-					setPhase(
+					player.setPhase(
 							"##### The entered army count is greater than the remaining armies. Please enter a value below the ramining armies ######");
-					setPhase("##### The reamining armies are ##### :" + counter);
+					player.setPhase("##### The reamining armies are ##### :" + counter);
 				}
 			}
-			setPhase("######### Player army count after reinforcment  ####### ");
-			setPhase("######## Player Name ########### : " + player.getName());
+			player.setPhase("######### Player army count after reinforcment  ####### ");
+			player.setPhase("######## Player Name ########### : " + player.getName());
 			for (Country country : player.getAssignedCountries()) {
-				setPhase("					##### The Country Name  ####### : " + country.getCountryName());
-				setPhase("					##### The Army Count      ####### : " + country.getArmies());
+				player.setPhase("					##### The Country Name  ####### : " + country.getCountryName());
+				player.setPhase("					##### The Army Count      ####### : " + country.getArmies());
 			}
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage()); 
 			reinforcePhase(player);
 		}
-		setPhase("########" + player.getName() + "  reinforcement phase ended ########");
+		player.setPhase("########" + player.getName() + "  reinforcement phase ended ########");
 		player.setCanAttack(true);
 		return player;
 	}
