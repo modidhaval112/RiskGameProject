@@ -255,15 +255,16 @@ public class GameDriver {
 
 	}
 	
-	
-public void load(MapContents mp) throws Exception {
+/**
+ * The method is driver method for the loaded game from file. 	
+ * @param mapContentOb The mapContent Object.
+ * @throws Exception
+ */
+public void load(MapContents mapContentOb) throws Exception {
 		
 		System.out.println("##########  load is Called #######");
-		MapContents.setMapContents(mp);
+		MapContents.setMapContents(mapContentOb);
 		mapContents = MapContents.getInstance();
-		
-		
-		
 		gmcountryAndNeighbours = new HashMap<Country, List<Country>>();
 		gmcountryAndNeighbours = mapContents.getCountryAndNeighbors();
 		scanner = new Scanner(System.in);
@@ -281,29 +282,22 @@ public void load(MapContents mp) throws Exception {
 				}
 			}
 			mapContents.getPlayerList().removeAll(removablePlayers);
-			
-		/*Iterator<Player> iterator = mapContents.getPlayerList().iterator();*/
-	
 		ListIterator<Player> iter = mapContents.getPlayerList().listIterator();
-
-		
 		while (iter.hasNext()) {
 			Player playerInstance = new Player();
-			
 			Player p = iter.next();
-			
 			if(!p.isHasLost()) {
-		
 			playerInstance = p.getStrategy().reinforcePhase(p);
-			
 			if(playerInstance.getCanAttack()) {
 			playerInstance = playerInstance.getStrategy().attackPhase(playerInstance);
+			}
+			if(playerInstance.getHasWon()) {
+				System.exit(0);
 			}
 			if(playerInstance.getCanFortify()) {
 			playerInstance = playerInstance.getStrategy().forfeitPhase(playerInstance);
 			}
 			}
-			
 		}
 		
 		roundCounterLoad = roundCounterLoad + 1;	
@@ -315,7 +309,6 @@ public void load(MapContents mp) throws Exception {
 			MapContents mapContentObject = MapContents.getInstance();
 			System.out.println("######### The rotate value is ###### : "+rotateCount);
 			mapContentObject.setRotateCount(rotateCount);
-			
 			riskSaveGameObject = new RiskSaveGame();
 			riskSaveGameObject.saveGame(mapContentObject);
 			mapContentObject.setRotateCount(0);
@@ -326,10 +319,8 @@ public void load(MapContents mp) throws Exception {
 		if(endTheGame) {
 			System.exit(0);
 		}
-		
 		System.out.println("######## Do you want to exit : yes  #########");
 		String choice = scanner.nextLine();
-
 		if (choice.equalsIgnoreCase("yes")) {
 			System.exit(0);
 		}
@@ -343,8 +334,11 @@ public void load(MapContents mp) throws Exception {
 	}
 
 
-
-
+/**
+ * To get the country object from the string value of the country
+ * @param sourceCountry Pass the source country
+ * @return the country object
+ */
 public Country getSourceCountryFromString(String sourceCountry) {
 	MapContents contents = MapContents.getInstance();
 	
