@@ -1,0 +1,78 @@
+[DEBUG] 2018-11-24 19:01:03.256 [AWT-EventQueue-0] TournamentGameDriver - No of Turns is 11
+[DEBUG] 2018-11-24 19:01:03.258 [AWT-EventQueue-0] TournamentGameDriver - Current Map is0Filename isC:\Users\saich\git\RiskGameProject\riskGameTeam13\AtlanticCity.map
+[DEBUG] 2018-11-24 19:01:03.285 [AWT-EventQueue-0] TournamentGameDriver - Map 0In game 0
+[DEBUG] 2018-11-24 19:01:03.285 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.285 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is2
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is3
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is4
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is5
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - 1
+[DEBUG] 2018-11-24 19:01:03.304 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.320 [AWT-EventQueue-0] TournamentGameDriver - Map 0In game 1
+[DEBUG] 2018-11-24 19:01:03.320 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.320 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is2
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is3
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is4
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is5
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - 2
+[DEBUG] 2018-11-24 19:01:03.336 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.351 [AWT-EventQueue-0] TournamentGameDriver - Map 0In game 2
+[DEBUG] 2018-11-24 19:01:03.351 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.351 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is2
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is3
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is4
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.360 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is5
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - 3
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - Current Map is1Filename isC:\Users\saich\git\RiskGameProject\riskGameTeam13\LostWorld.map
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - Map 1In game 0
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.376 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.392 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.392 [AWT-EventQueue-0] TournamentGameDriver - 4
+[DEBUG] 2018-11-24 19:01:03.392 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - Map 1In game 1
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is2
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is3
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is4
+[DEBUG] 2018-11-24 19:01:03.407 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is5
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - 5
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Map 1In game 2
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is1
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is2
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.423 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is3
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is4
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - After Iterator
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Turns Count is5
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Save the result and Exit the loop
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - 6
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - [Player - 1, Player - 1, Player - 1, Player - 1, Player - 1, Player - 1]
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - ========================================================
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 1 Game 1 result is Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 1 Game 2 result is Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 1 Game 3 result is Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 2 Game 1 result is Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 2 Game 2 result is Player - 1
+[DEBUG] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - Map 2 Game 3 result is Player - 1
+[INFO ] 2018-11-24 19:01:03.438 [AWT-EventQueue-0] TournamentGameDriver - ========================================================
