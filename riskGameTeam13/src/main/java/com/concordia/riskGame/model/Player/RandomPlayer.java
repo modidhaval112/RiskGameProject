@@ -214,7 +214,7 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 					}
 				}
 			}
-			countriesSize--;
+			//countriesSize--;
 		}
 		
 		if(sourceCountry==null || destinationCountry==null || !fortificationDone) {

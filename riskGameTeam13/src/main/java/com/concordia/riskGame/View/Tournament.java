@@ -370,6 +370,7 @@ public class Tournament extends JFrame implements ActionListener {
 				
 				try {
 					tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
+					frame.setVisible(false);
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
