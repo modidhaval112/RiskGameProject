@@ -19,7 +19,8 @@ import org.junit.runners.Suite.SuiteClasses;
 			   FortificationTest.class,
 			   CardsTest.class,
 			   DiceTest.class,
-			   LoadGameTest.class
+			   LoadGameTest.class,
+			   RiskSaveGameTest.class
 			   })
 
 public class TestSuiteAll {
