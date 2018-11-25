@@ -5,6 +5,10 @@ package com.concordia.riskGame.View;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.model.Player.*;
 
 
@@ -14,6 +18,8 @@ import com.concordia.riskGame.model.Player.*;
  *
  */
 public class PhaseView implements Observer{
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
@@ -25,7 +31,7 @@ public class PhaseView implements Observer{
 		if("phase".equals(player.phasePrint))
 		{
 			player.phasePrint="";
-			System.out.println("## Phase view ## ->  " + player.phaseMsg);
+			LOGGER.info("## Phase view ## ->  " + player.phaseMsg);
 
 
 
