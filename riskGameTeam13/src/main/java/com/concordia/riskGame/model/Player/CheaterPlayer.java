@@ -72,7 +72,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
 		int movableArmies = 1;
 		if (movableArmies > 0) {
-			sourceCountryObject.setArmies(sourceCountryObject.getArmies() - movableArmies);
+			//sourceCountryObject.setArmies(sourceCountryObject.getArmies() - movableArmies);
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies() + movableArmies);
 		}
 	}

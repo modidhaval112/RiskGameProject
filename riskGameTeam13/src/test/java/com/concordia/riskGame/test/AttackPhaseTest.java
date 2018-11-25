@@ -224,7 +224,7 @@ public class AttackPhaseTest {
 		countryTwo.setArmies(0);
 		playerOne.movableArmies = 1;
 		int armies = countryOne.getArmies();
-		playerOne.playerLosesTheCountry(countryOne, countryThree);
+		playerOne.playerLosesTheCountry(countryOne, countryThree, playerOne);
 		assertEquals(countryOne.getBelongsToPlayer().getName(), countryThree.getBelongsToPlayer().getName());
 		assertEquals(countryOne.getArmies(), armies - 1);
 		

@@ -83,22 +83,30 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 		List<Integer> randomNumbersList = new ArrayList<>();
 		Random random = new Random();
 		int rand = random.nextInt(attackableCount);
+		player.setPhase("#### Random player will attack "+rand+" times");
 		while(rand!=0) {
-			player.setPhase("#### Random player will attack "+rand+" times");
 			int j=0;
 			int randn = random.nextInt(attackableCount);
+			if(randomNumbersList.size()==sortedListBasedOnArmies.size()) {
+				player.setPhase("####Attack Not Possible anymore####");
+				checkPlayerTurnCanContinue(player);
+				player.setCardGiven(false);
+				return player;
+			}
 			while(randomNumbersList.contains(randn)) {
 				randn = random.nextInt(attackableCount);
 			}
 			randomNumbersList.add(randn);
 			sourceCountryObject = sortedListBasedOnArmies.get(randn);
 			int numberOfNeighbours = sourceCountryObject.getNeighbouringCountries().size();
+			player.setPhase("#### Source Country : "+sourceCountryObject.getCountryName()+" ####");
 			while(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0 && rand>0) {
 				destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours-1).getCountryName());
 				if(destinationCountryObject.getBelongsToPlayer().equals(player)) {
 					numberOfNeighbours--;
 					continue;
 				}
+				player.setPhase("#### Destination Country : "+destinationCountryObject.getCountryName()+" ####");
 				while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0 && rand>0) {
 					player.setPhase("#### Attack Number "+(++j)+" of Random Player");
 					maximumAttackerDice = player.getMaxAttackerDiceCount (sourceCountryObject.getArmies());
@@ -156,9 +164,13 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 					player.setPhase("Player " + player.getName() + "has won the game");
 					return player;
 				}
-				player.checkPlayerTurnCanContinue(player);
+				//player.checkPlayerTurnCanContinue(player);
 				numberOfNeighbours--;
 			}
+			if(sourceCountryObject.getArmies() == 1 || numberOfNeighbours<=0) {
+				
+			}
+			
 		}
 		checkPlayerTurnCanContinue(player);
 		player.setCardGiven(false);
@@ -181,6 +193,12 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 		while(!fortificationDone && countriesSize>0 ) {
 			Random random = new Random();
 			int rand = random.nextInt(countriesSize);
+			if(randomNumbersList.size()==sortedCountryList.size()) {
+				player.setPhase("####Fortification Not Possible ####");
+				player.setPhase("#### After Fortification ####");
+				player.printAllCountriesOfaPlayer(player);
+				return player;
+			}
 			while(randomNumbersList.contains(rand)) {
 				rand = random.nextInt(countriesSize);
 			}

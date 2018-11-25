@@ -16,12 +16,21 @@ import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
 
+/**
+ * The load game class is used to load the saved file and continue the game where it was saved.
+ * @author Darwin Anirudh
+ *
+ */
 public class LoadGame {
 
 	private JFileChooser fileChooser;
 	private String filePath;
-
-	public LoadGame()
+	private int rotateValue;
+	
+	/**
+	 * method to choose file 
+	 */
+	public void chooseFileMethod()
 	{
 		System.out.println("##### Select a file to load the game #######");
 		System.out.println("#### Okay Button is Clicked ####");
@@ -43,14 +52,19 @@ public class LoadGame {
 			System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 			filePath = selectedFile.getAbsolutePath().toString();
 			System.out.println("###### The selected file path is ####### : "+filePath );
-			readSavedMapContent();
+			readSavedMapContent(filePath);
 		}
 
 		
 	}
 	
-	public void readSavedMapContent()
+	/**
+	 * The following method read the saved map file from the specified location and instantiates the map content object.
+	 * @param filePath The path of the saved file. 
+	 */
+	public MapContents readSavedMapContent(String filePath)
 	{
+		MapContents mapContentObject = null;
 		try {
 			System.out.println("##### Calling readSavedMapContent() #########");
 			System.out.println("##### file path is  ######### : "+ filePath );
@@ -59,7 +73,6 @@ public class LoadGame {
 			Object obj = restore.readObject();
 			System.out.println("####### Saved file object is ####### : "+obj.toString());
 			
-			MapContents mapContentObject;
 			mapContentObject = (MapContents)obj;
 			System.out.println("####### mapContentObject file object is ####### : "+mapContentObject.toString());
 			
@@ -67,7 +80,7 @@ public class LoadGame {
 			System.out.println("##########  Map Content Number of Player       ####### : "+mapContentObject.getPlayerList().size());
 			System.out.println("##########  Map Content Number of Countries  ####### : "+mapContentObject.getCountryList().size());
 	
-			int rotateValue = mapContentObject.getRotateCount();
+			rotateValue = mapContentObject.getRotateCount();
 			System.out.println("######### The roate count value is ######## : "+rotateValue);
 			List<com.concordia.riskGame.model.Player.Player> playerListLoadGame = new ArrayList();
 			playerListLoadGame = mapContentObject.getPlayerList();
@@ -76,10 +89,13 @@ public class LoadGame {
 			GameDriver gameDriverObject = new GameDriver();
 			gameDriverObject.load(mapContentObject);
 			
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		return mapContentObject;
 	}
 	
 	
