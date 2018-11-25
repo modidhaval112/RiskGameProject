@@ -14,13 +14,15 @@ import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.Tournament.Tournament;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 /**
  * @author saich
  *
  */
 public class TournamentGameDriver {
 
+	private static Logger LOGGER = LogManager.getLogger();
 
 	private HashMap<Country, List<Country>> gmcountryAndNeighbours;
 	private boolean endTheGame = false;
@@ -37,9 +39,10 @@ public class TournamentGameDriver {
 
 
 		Tournament tournament = new Tournament(playerNamesAndTypes, gameMapFiles, noOfGames, noOfTurns);
+		LOGGER.debug("No of Turns is "+noOfTurns);
 		for(String fileName : gameMapFiles)
 		{
-			System.out.println("Current Map is" +gameMapFiles.indexOf(fileName));
+			LOGGER.debug("Current Map is" +gameMapFiles.indexOf(fileName) +"Filename is"+fileName);
 			for(int j=0; j<noOfGames;j++)
 			{
 				mapParseObject = new MapParseProcessor();
@@ -52,7 +55,7 @@ public class TournamentGameDriver {
 				turns=0;
 				Deck deck = Deck.getInstance();
 				deck.setDeckOfCards(mapContents.getCountryList());
-				System.out.println("Map "+gameMapFiles.indexOf(fileName)+"In game "+j);
+				LOGGER.debug("Map "+gameMapFiles.indexOf(fileName)+"In game "+j);
 
 				while(!endTheGame && turns < noOfTurns) {
 					List<Player> removablePlayers = new ArrayList<>();
@@ -63,8 +66,10 @@ public class TournamentGameDriver {
 					}
 					mapContents.getPlayerList().removeAll(removablePlayers);
 					Iterator<Player> iterator = mapContents.getPlayerList().iterator();
-					while(iterator.hasNext() &&!endTheGame) {
+					LOGGER.debug("After Iterator");		
+					while(iterator.hasNext() &&!endTheGame &&  turns < noOfTurns) {
 						turns++;
+						LOGGER.debug("Turns Count is"+turns);
 						Player playerInstance = new Player();
 						Player p = iterator.next();
 						if(!p.isHasLost()) {
@@ -73,9 +78,12 @@ public class TournamentGameDriver {
 								playerInstance = playerInstance.strategy.attackPhase(playerInstance);
 							}
 							if(playerInstance.getHasWon()) {
-								System.out.println("Save the result and Exit the loop");
+								LOGGER.debug("Save the result and Exit the loop");
 								endTheGame=true;
 								results.add(playerInstance.getName());
+								LOGGER.debug(results.size());
+								LOGGER.debug(playerInstance.getName());
+
 
 
 							}
@@ -83,18 +91,35 @@ public class TournamentGameDriver {
 								playerInstance = playerInstance.strategy.forfeitPhase(playerInstance);
 							}
 						}
+
+						if(turns == noOfTurns) {
+							LOGGER.debug("Game result is draw");
+
+							results.add("Draw");
+							LOGGER.debug(results.size());
+						}
 					}
-					if(turns == noOfTurns) {
-						System.out.println("Game result is draw");
-						results.add("Draw");
-					}
+
 				}
+
 
 			}
 
 		}
-		System.out.println(Arrays.toString(results.toArray()));
+		LOGGER.debug(Arrays.toString(results.toArray()));
+		LOGGER.debug("========================================================");
 
+		int listcount=0;
+		for(String fileName : gameMapFiles)
+		{
+			for(int j=0; j<noOfGames;j++)
+			{
+				LOGGER.debug( "Map "+( gameMapFiles.indexOf(fileName)+1) +" Game "+(j+1)+" result is " +results.get(listcount));
+				listcount++;
+			}
+
+		}
+		LOGGER.info("========================================================");
 
 		if(endTheGame) {
 			System.exit(0);
