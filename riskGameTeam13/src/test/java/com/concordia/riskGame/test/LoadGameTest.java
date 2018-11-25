@@ -2,25 +2,17 @@ package com.concordia.riskGame.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import com.concordia.riskGame.View.LoadGame;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
-import com.concordia.riskGame.model.Player.CheaterPlayer;
+import com.concordia.riskGame.model.Player.BenevolentPlayer;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.save.RiskSaveGame;
 
@@ -28,16 +20,11 @@ public class LoadGameTest {
 	
 	private MapContents mapContents;
 	private RiskSaveGame riskSaveGame;
-	private String expectedFileName;
 	private String expectedFilePath;
 	private Player p1, p2;
 	private Country c1,c2,c3,c4;
 	private List<Country> listCountry, listCountry1;
 	private List<Player> listPlayer;
-	
-    @Rule
-    public final TextFromStandardInputStream systemInMock
-      = TextFromStandardInputStream.emptyStandardInputStream();
 	
 	/**
 	 * before method for initializing objects
@@ -56,12 +43,16 @@ public class LoadGameTest {
 		mapContents = MapContents.getInstance();
 		listPlayer = new ArrayList<>();
 		
-		p1.setTotalArmies(40);
-		p2.setTotalArmies(40);
-		c1.setArmies(10);
+		p1.setTotalArmies(30);
+		p2.setTotalArmies(30);
+		c1.setArmies(20);
 		c2.setArmies(10);
-		c3.setArmies(10);
+		c3.setArmies(20);
 		c4.setArmies(10);
+		c1.setBelongsToPlayer(p1);
+		c2.setBelongsToPlayer(p1);
+		c3.setBelongsToPlayer(p2);
+		c4.setBelongsToPlayer(p2);
 		
 		listCountry.add(c2);
 		listCountry.add(c3);
@@ -106,32 +97,38 @@ public class LoadGameTest {
 	 * @throws IOException 
 	 */
 	@Test
-	public void testreadSavedMapContent() throws IOException {
+	public void testReadSavedMapContent() throws IOException {
 		boolean flag = false;
 		try {
 			
-			CheaterPlayer cp = new CheaterPlayer();
-			Player p11 = cp.reinforcePhase(p1);
-			Player p22 = cp.reinforcePhase(p2);
+			BenevolentPlayer bp = new BenevolentPlayer();
+			
+			p1.setStrategy(new BenevolentPlayer());
+			p2.setStrategy(new BenevolentPlayer());
+			Player p11 = bp.reinforcePhase(p1);
+			Player p22 = bp.reinforcePhase(p2);
+			System.out.println("1 : " + p11.getAssignedCountries().get(0).getArmies());
+			System.out.println("1 : " + p11.getAssignedCountries().get(1).getArmies());
+			System.out.println("1 : " + p22.getAssignedCountries().get(0).getArmies());
+			System.out.println("1 : " + p22.getAssignedCountries().get(1).getArmies());
 			listPlayer.add(p11);
 			listPlayer.add(p22);
 			mapContents.setPlayerList(listPlayer);
 			
 			riskSaveGame = new RiskSaveGame();
-			riskSaveGame.saveGame(mapContents);
-			DateFormat sdf = new SimpleDateFormat("yyyyMMddHH:mm:ss");
-			Date date = new Date();
-			expectedFileName = sdf.format(date);
-			expectedFileName = expectedFileName.replaceAll(":", "");
-			expectedFilePath = "C:\\SaveGame\\"+expectedFileName;
+			expectedFilePath = riskSaveGame.saveGame(mapContents);
 			
 			LoadGame lg = new LoadGame();
-			MapContents mapContents = lg.readSavedMapContent(expectedFilePath);
-			
+			mapContents = lg.readSavedMapContent(expectedFilePath);
 			List<Player> listPlayer1 = mapContents.getPlayerList();
 			
-			if(listPlayer1.get(0).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(0).getAssignedCountries().get(1).getArmies() == 20
-					&& listPlayer1.get(1).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(1).getAssignedCountries().get(1).getArmies() == 20) {
+			System.out.println("1 : " + listPlayer1.get(0).getAssignedCountries().get(0).getArmies());
+			System.out.println("2 : " + listPlayer1.get(0).getAssignedCountries().get(1).getArmies());
+			System.out.println("3 : " + listPlayer1.get(1).getAssignedCountries().get(0).getArmies());
+			System.out.println("4 : " + listPlayer1.get(1).getAssignedCountries().get(1).getArmies());
+			
+			if(listPlayer1.get(0).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(0).getAssignedCountries().get(1).getArmies() == 13
+					&& listPlayer1.get(1).getAssignedCountries().get(0).getArmies() == 20 && listPlayer1.get(1).getAssignedCountries().get(1).getArmies() == 13) {
 				flag = true;
 			}
 			
