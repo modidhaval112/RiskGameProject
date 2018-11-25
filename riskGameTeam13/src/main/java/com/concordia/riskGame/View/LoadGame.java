@@ -32,6 +32,8 @@ public class LoadGame {
 	 */
 	public void chooseFileMethod()
 	{
+		
+		try {
 		System.out.println("##### Select a file to load the game #######");
 		System.out.println("#### Okay Button is Clicked ####");
 		
@@ -52,7 +54,13 @@ public class LoadGame {
 			System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
 			filePath = selectedFile.getAbsolutePath().toString();
 			System.out.println("###### The selected file path is ####### : "+filePath );
-			readSavedMapContent(filePath);
+			MapContents mapContentObject = readSavedMapContent(filePath);
+			GameDriver gameDriverObject = new GameDriver();
+			gameDriverObject.load(mapContentObject);
+		}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 
 		
@@ -86,8 +94,7 @@ public class LoadGame {
 			playerListLoadGame = mapContentObject.getPlayerList();
 			Collections.rotate(playerListLoadGame, playerListLoadGame.size() - rotateValue);
 			mapContentObject.setPlayerList(playerListLoadGame);
-			GameDriver gameDriverObject = new GameDriver();
-			gameDriverObject.load(mapContentObject);
+
 			
 			
 		}catch(Exception e)
