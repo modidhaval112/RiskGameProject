@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -33,6 +34,7 @@ public class RiskSaveGameTest {
 	private Country c1,c2,c3,c4;
 	private List<Country> listCountry, listCountry1;
 	private List<Player> listPlayer;
+	private HashMap<Country, List<Country>> countryAndNBCountry;
 	
     @Rule
     public final TextFromStandardInputStream systemInMock
@@ -53,6 +55,7 @@ public class RiskSaveGameTest {
 		listCountry = new ArrayList<>();
 		listCountry1 = new ArrayList<>();
 		mapContents = MapContents.getInstance();
+		countryAndNBCountry = new HashMap<>();
 		listPlayer = new ArrayList<>();
 		
 		p1.setTotalArmies(40);
@@ -69,21 +72,30 @@ public class RiskSaveGameTest {
 		listCountry.add(c2);
 		listCountry.add(c3);
 		c1.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c1, listCountry);
+		countryAndNBCountry.put(c1, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c3);
 		listCountry.add(c4);
 		c2.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c2, listCountry);
+		countryAndNBCountry.put(c2, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c4);
 		listCountry.add(c1);
 		c3.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c3, listCountry);
+		countryAndNBCountry.put(c3, listCountry);
+		
+		listCountry = new ArrayList<>();
+		
+		listCountry.add(c1);
+		listCountry.add(c2);
+		listCountry.add(c3);
+		c4.setNeighbouringCountries(listCountry);
+		countryAndNBCountry.put(c4, listCountry);
+		mapContents.setCountryAndNeighbors(countryAndNBCountry);
 		
 		listCountry = new ArrayList<>();
 		
