@@ -25,9 +25,9 @@ public class TournamentGameDriver {
 	private static Logger LOGGER = LogManager.getLogger();
 
 	private HashMap<Country, List<Country>> gmcountryAndNeighbours;
-	private boolean endTheGame = false;
-	public int turns=0;
-	private List<String> results = new ArrayList<>();
+	private boolean endTheGame;
+	public int turns;
+	private List<String> results;
 	MapParseProcessor mapParseObject;
 	/**
 	 * The following method calls each of the game phase for each player.
@@ -36,7 +36,9 @@ public class TournamentGameDriver {
 	 */
 	public void gamePhase(HashMap<String, String> playerNamesAndTypes,List<String> gameMapFiles,int noOfGames,int noOfTurns) throws Exception {
 
-
+		turns=0;
+		endTheGame = false;
+		results = new ArrayList<>();
 
 		Tournament tournament = new Tournament(playerNamesAndTypes, gameMapFiles, noOfGames, noOfTurns);
 		LOGGER.debug("No of Turns is "+noOfTurns);
@@ -61,11 +63,14 @@ public class TournamentGameDriver {
 					List<Player> removablePlayers = new ArrayList<>();
 					for(Player player : mapContents.getPlayerList()) {
 						if(player.isHasLost()) {
+							System.out.println("Lost Player : " + player.getName());
+							System.out.println("Removing Player : " );
 							removablePlayers.add(player);
 						}
 					}
 					mapContents.getPlayerList().removeAll(removablePlayers);
 					Iterator<Player> iterator = mapContents.getPlayerList().iterator();
+					System.out.println("mapContents.getPlayerList() : " + mapContents.getPlayerList().size());
 					LOGGER.debug("After Iterator");		
 					while(iterator.hasNext() &&!endTheGame &&  turns < noOfTurns) {
 						turns++;
@@ -92,9 +97,9 @@ public class TournamentGameDriver {
 							}
 						}
 
-						if(turns == noOfTurns) {
+						if(turns == noOfTurns && !playerInstance.getHasWon()) {
 							LOGGER.debug("Game result is draw");
-
+							endTheGame=true;
 							results.add("Draw");
 							LOGGER.debug(results.size());
 						}
@@ -122,6 +127,8 @@ public class TournamentGameDriver {
 		LOGGER.info("========================================================");
 
 		if(endTheGame) {
+			MapContents mapContents = MapContents.getInstance();
+			mapContents.setTournamentResults(results);
 			System.exit(0);
 		}
 
