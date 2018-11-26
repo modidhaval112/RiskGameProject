@@ -33,6 +33,7 @@ public class MapContents implements Serializable {
 	private List<Country> countryList = new ArrayList<>();
 	private int cardExchangeCount = 0;
 	public int rotateCount;
+	private List<String> tournamentResults;
 	
 
 	/**
@@ -187,6 +188,22 @@ public class MapContents implements Serializable {
 	 */
 	public void setRotateCount(int rotateCount) {
 		this.rotateCount = rotateCount;
+	}
+
+	/**
+	 * This method returns the result of the tournament
+	 * @return tournamentResults result of the tournament
+	 */
+	public List<String> getTournamentResults() {
+		return tournamentResults;
+	}
+
+	/**
+	 * This method sets the result of the tournament
+	 * @param tournamentResults result of the tournament
+	 */
+	public void setTournamentResults(List<String> tournamentResults) {
+		this.tournamentResults = tournamentResults;
 	}
 	
 	
