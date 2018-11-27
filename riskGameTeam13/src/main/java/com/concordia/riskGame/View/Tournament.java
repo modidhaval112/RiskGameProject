@@ -27,7 +27,7 @@ import org.junit.contrib.java.lang.system.SystemOutRule;
 import com.concordia.riskGame.control.TournamentGameDriver;
 
 /**
- * 
+ * This class has the implementation of tournament view consisting of all the tournament, player, games and turns.
  * @author saich
  *
  */
@@ -90,11 +90,17 @@ public class Tournament extends JFrame implements ActionListener {
 	TournamentGameDriver tgm;
 
 
+	/**
+	 * Default constructor
+	 */
 	Tournament()
 	{
 		tournamentView();
 	}
 
+	/**
+	 * Tournament view method consists of the tournament view which accepts players, maps, turns and games.
+	 */
 	public void tournamentView()
 	{
 		frame = new JFrame();
@@ -105,7 +111,6 @@ public class Tournament extends JFrame implements ActionListener {
 		frame.setLocationRelativeTo(null);
 		frame.setSize(550,250);
 		panel.setSize(700,700);
-		//panel.setBackground(Color.cyan);
 		GridBagLayout layout = new GridBagLayout();
 		panel.setLayout(layout);        
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -394,10 +399,8 @@ public class Tournament extends JFrame implements ActionListener {
 						tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
 						frame.setVisible(false);
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
