@@ -36,7 +36,7 @@ import com.concordia.riskGame.model.Player.Player;
  	/**
 	 * method to check if Country Continent if from Continent list only
 	 * 
-	 * @param mapContents : GameMap object
+	 * @param mapContents : MapContents object
 	 * @return true if Country Continent is from Continent List, otherwise false
 	 */
 	public boolean checkContinent(MapContents mapContents) {
@@ -82,7 +82,7 @@ import com.concordia.riskGame.model.Player.Player;
  	/**
 	 * method to check if all continent have at least one country
 	 * 
-	 * @param mapContents : GameMap object
+	 * @param mapContents : MapContents object
 	 * @return true if all continent has at least one country, otherwise false
 	 */
 	public boolean checkContinentCountry(MapContents mapContents) {
@@ -93,10 +93,26 @@ import com.concordia.riskGame.model.Player.Player;
 		}
 		return true;
 	}
+	
+	/**
+	 * method to check if all continent control value
+	 * 
+	 * @param mapContents : MapContents object
+	 * @return true if all continent has at least one country, otherwise false
+	 */
+	public boolean checkContinentControlValue(MapContents mapContents) {
+ 		for (Continent continent : mapContents.getContinentAndItsCountries().keySet()) {
+			if (continent.getContinentControlValue()<0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
  	/**
 	 * method to check if country is assigned to only one country
 	 * 
-	 * @param mapContents : GameMap object
+	 * @param mapContents : MapContents object
 	 * @return true if all countries are assigned to only one country, otherwise
 	 *         false
 	 */
@@ -152,7 +168,7 @@ import com.concordia.riskGame.model.Player.Player;
 	
 	/**
 	 * method to check if all the countries in the continents are connected or not
-	 * @param mapContents GameMap object
+	 * @param mapContents MapContents object
 	 * @return true if all continents are connected otherwise false
 	 */
 	public boolean checkConnectedCountryContinent(MapContents mapContents) {
@@ -362,6 +378,15 @@ import com.concordia.riskGame.model.Player.Player;
 			} else {
 				validMapFlag = false;
 				statusMessage = "Map is invalid as Continents are not connected";
+				System.out.println("Message : " + statusMessage);
+				return;
+			}
+ 			
+ 			if (mapValidator.checkContinentControlValue(mapContents)) {
+				validMapFlag = true;
+			} else {
+				validMapFlag = false;
+				statusMessage = "Map is invalid as Continents Control value can not be less than zero";
 				System.out.println("Message : " + statusMessage);
 				return;
 			}
