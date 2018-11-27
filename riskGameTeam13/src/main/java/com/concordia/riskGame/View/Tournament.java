@@ -18,8 +18,11 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import com.concordia.riskGame.control.TournamentGameDriver;
 
@@ -352,51 +355,52 @@ public class Tournament extends JFrame implements ActionListener {
 		okayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 
-				if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4"))
+				
+				
+				boolean validity= true;
+
+				if(!mapCountCombo.getSelectedItem().toString().equals(String.valueOf(filesSelected.size())))
 				{
-					playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
-					playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
+					
+				    JOptionPane.showMessageDialog(frame,"Select file for all the maps.");
+				    validity= false;
+				}
+				if(playercount==null)
+				{
+				    JOptionPane.showMessageDialog(frame,"Select the players");
+				    validity= false;
 
 				}
-				if (playercount.equals("3") || playercount.equals("4")) {
+				if(validity)
+				{
+					if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4"))
+					{
+						playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
+						playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
 
-					playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
-				}
-				if (playercount.equals("4")) {
-					playerType.put("Player4", (String) cbPlayer4.getSelectedItem());
+					}
+					if (playercount.equals("3") || playercount.equals("4")) {
+
+						playerType.put("Player3", (String) cbPlayer3.getSelectedItem());
+					}
+					if (playercount.equals("4")) {
+						playerType.put("Player4", (String) cbPlayer4.getSelectedItem());
+					}
+					
+					tgm= new TournamentGameDriver();
+					
+					try {
+						tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
+						frame.setVisible(false);
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				
-				tgm= new TournamentGameDriver();
-				
-				try {
-					tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
-					frame.setVisible(false);
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				/*if(mapCountCombo.getSelectedItem().toString().equals(filesSelected.size()))
-				{
-					System.out.println("All are same");
-				}
-				else
-				{
-			        dialogBox = new JDialog(frame , "Map file Error", true); 
-			        dialogBox.add( new JLabel ("Choose all the Map files."));  
-
-			        JButton button = new JButton ("OK");  
-			        dialogBox.add(button);
-			        dialogBox.setSize(300,300);    
-
-
-			        dialogBox.setVisible(true);  
-
-
-				}*/
 
 			}
 		});
