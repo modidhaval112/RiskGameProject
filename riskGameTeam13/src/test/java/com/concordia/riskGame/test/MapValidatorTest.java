@@ -24,6 +24,7 @@ public class MapValidatorTest {
 	File fileInvalidUnassignedCountry;
 	File fileInvalidAssignedToTwoCountries;
 	File fileInvalidContinentNotInList;
+	File fileInvalidContinentControlValue;
 	MapValidator mapValidatorObject;
 	Boolean validFlag;
 	
@@ -41,6 +42,7 @@ public class MapValidatorTest {
 		fileInvalidUnassignedCountry= new File("src/main/resources/Invalid_Country_Not_Assigned_To_Continent.map");
 		fileInvalidAssignedToTwoCountries= new File("src/main/resources/Invalid_Country_Assigned_To_Two_Continent.map");
 		fileInvalidContinentNotInList= new File("src/main/resources/Invalid_Country_Continent_Not_From_Continent_List.map");
+		fileInvalidContinentControlValue = new File("src/main/resources/Invalid_Continent_Control_Value.map");
 		
 		mapValidatorObject = new MapValidator(); 
 		
@@ -82,6 +84,19 @@ public class MapValidatorTest {
 	public void testDisconnectedMap() throws InvalidMapFileException {
 		
 		 mapValidatorObject.init(fileInvalidDisconnected);
+		 validFlag=mapValidatorObject.getValidMapFlag();
+		 
+		 assertFalse(validFlag);
+	}
+	
+	/**
+	 * This method checks if a continent control value is valid
+	 * @throws InvalidMapFileException  Map is Invalid.
+	 */
+	@Test
+	public void testcheckContinentControlValue() throws InvalidMapFileException {
+		
+		 mapValidatorObject.init(fileInvalidContinentControlValue);
 		 validFlag=mapValidatorObject.getValidMapFlag();
 		 
 		 assertFalse(validFlag);
