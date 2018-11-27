@@ -911,7 +911,9 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 		Country country = getSourceCountryFromString(countryName);
 		for(Country neighbour : country.getNeighbouringCountries()) {
 			Country n = getSourceCountryFromString(neighbour.getCountryName());
-			
+			if(!countryNeighbourList.contains(n) && n.getBelongsToPlayer().getName().equals(player.getName()) && !(n.getCountryName().equals(countryName))) {
+				countryNeighbourList.add(n);
+			}
 			for(Country nei : n.getNeighbouringCountries()) {
 				Country np = getSourceCountryFromString(nei.getCountryName());
 				if(!countryNeighbourList.contains(np) && np.getBelongsToPlayer().getName().equals(player.getName()) && !(np.getCountryName().equals(countryName))) {

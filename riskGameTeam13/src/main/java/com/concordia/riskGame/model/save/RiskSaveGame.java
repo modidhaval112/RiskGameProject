@@ -1,7 +1,6 @@
 package com.concordia.riskGame.model.save;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -10,16 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.concordia.riskGame.model.Map.MapContents;
-import com.concordia.riskGame.model.Player.Player;
 
 public class RiskSaveGame {
 
 	private Date date;
 	
-	public void saveGame(MapContents mapContObj) throws IOException
+	public String saveGame(MapContents mapContObj) throws IOException
 	{
 		FileOutputStream fileOutStream = null;
-		 ObjectOutputStream out = null;
+		ObjectOutputStream out = null;
+		String filePath = null;
 		try {
 		System.out.println("########## SAVE GAME  ##########");
 		date = new Date();
@@ -29,7 +28,7 @@ public class RiskSaveGame {
 		
 		dateString = dateString.replaceAll(":", "");
 		System.out.println("########## Date String is  ########## : "+dateString );
-		String filePath =  "C:\\SaveGame\\"+dateString;
+		filePath =  "C:\\SaveGame\\"+dateString;
 		File file = new File(filePath);
 		
 		file.setReadable(true);
@@ -66,5 +65,6 @@ public class RiskSaveGame {
 			}
 
 		}
+		return filePath;
 	}
 }

@@ -3,6 +3,7 @@ package com.concordia.riskGame.test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -23,10 +24,12 @@ import com.concordia.riskGame.model.Player.Player;
  */
 public class FortificationTest {
 
-	Player p1, p2;
-	Country c1,c2,c3,c4;
-	List<Country> listCountry, listCountry1;
-	MapContents mapContents;
+	private Player p1, p2;
+	private Country c1,c2,c3,c4;
+	private List<Country> listCountry, listCountry1;
+	private List<Player> listPlayer;
+	private MapContents mapContents;
+	private HashMap<Country, List<Country>> countryAndNBCountry;
 	
     @Rule
     public final TextFromStandardInputStream systemInMock
@@ -46,6 +49,8 @@ public class FortificationTest {
 		listCountry = new ArrayList<>();
 		listCountry1 = new ArrayList<>();
 		mapContents = MapContents.getInstance();
+		countryAndNBCountry = new HashMap<>();
+		listPlayer = new ArrayList<>();
 		
 		p1.setTotalArmies(40);
 		p2.setTotalArmies(40);
@@ -53,42 +58,52 @@ public class FortificationTest {
 		c2.setArmies(10);
 		c3.setArmies(10);
 		c4.setArmies(10);
+		c1.setBelongsToPlayer(p1);
+		c2.setBelongsToPlayer(p1);
+		c3.setBelongsToPlayer(p2);
+		c4.setBelongsToPlayer(p2);
 		
 		listCountry.add(c2);
 		listCountry.add(c3);
 		c1.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c1, listCountry);
+		countryAndNBCountry.put(c1, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c3);
 		listCountry.add(c4);
 		c2.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c2, listCountry);
+		countryAndNBCountry.put(c2, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c4);
 		listCountry.add(c1);
 		c3.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c3, listCountry);
+		countryAndNBCountry.put(c3, listCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c1);
 		listCountry.add(c2);
+		listCountry.add(c3);
 		c4.setNeighbouringCountries(listCountry);
-		mapContents.getCountryAndNeighbors().put(c4, listCountry);
+		countryAndNBCountry.put(c4, listCountry);
+		mapContents.setCountryAndNeighbors(countryAndNBCountry);
 		
 		listCountry = new ArrayList<>();
 		
 		listCountry.add(c1);
 		listCountry.add(c2);
 		p1.setAssignedCountries(listCountry);
+		listPlayer.add(p1);
 						
 		listCountry1.add(c3);
 		listCountry1.add(c4);
 		p2.setAssignedCountries(listCountry1);
+		listPlayer.add(p2);
+		
+		mapContents.setPlayerList(listPlayer);
 		
 	}
 	
