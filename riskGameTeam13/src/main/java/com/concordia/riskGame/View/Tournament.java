@@ -5,7 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import com.concordia.riskGame.control.TournamentGameDriver;
+import com.concordia.riskGame.util.MapValidator;
 
 /**
  * This class has the implementation of tournament view consisting of all the tournament, player, games and turns.
@@ -88,6 +92,10 @@ public class Tournament extends JFrame implements ActionListener {
 
 	private List<String> filesSelected = new ArrayList<>();
 	TournamentGameDriver tgm;
+	
+	private File fileObject;
+	private BufferedReader bufferReaderForFile;
+	private MapValidator mapValidator;
 
 
 	/**
@@ -414,6 +422,8 @@ public class Tournament extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == fileButton1|| e.getSource() == fileButton2||e.getSource() == fileButton3||e.getSource() == fileButton4||e.getSource() == fileButton5)
 		{
+			
+			
 			fileChooser = new JFileChooser();
 			fileChooser.setDialogTitle("Select the map");
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -426,7 +436,27 @@ public class Tournament extends JFrame implements ActionListener {
 			if (result == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				String fileName = file.getName();
+				
+				fileObject = new File(file.getAbsolutePath().toString());
+				try {
+					bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				mapValidator = new MapValidator();
+				mapValidator.init(fileObject);
+				
+				if (!mapValidator.getValidMapFlag()) {
+					System.out.println("Invalid Map File");
+				    JOptionPane.showMessageDialog(frame,"Invalid Map File");
+
+				}
+				
+				else
+				{
 				filesSelected.add(file.getAbsolutePath().toString());
+				}
 			}
 
 		}
