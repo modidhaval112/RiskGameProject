@@ -1,5 +1,8 @@
 package com.concordia.riskGame.control;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,12 +11,15 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import com.concordia.riskGame.exception.InvalidMapFileException;
 import com.concordia.riskGame.model.Card.Deck;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.Tournament.Tournament;
+import com.concordia.riskGame.util.MapValidator;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 /**
@@ -29,6 +35,11 @@ public class TournamentGameDriver {
 	public int turns;
 	private List<String> results;
 	MapParseProcessor mapParseObject;
+	private String filePath;
+	private File fileObject;
+	private BufferedReader bufferReaderForFile;
+	private MapValidator mapValidator;
+
 	/**
 	 * The following method calls each of the game phase for each player.
 	 * 
@@ -47,6 +58,20 @@ public class TournamentGameDriver {
 			LOGGER.debug("Current Map is" +gameMapFiles.indexOf(fileName) +"Filename is"+fileName);
 			for(int j=0; j<noOfGames;j++)
 			{
+
+				fileObject = new File(fileName);
+				LOGGER.info("File Path " + fileName);
+				bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
+				mapValidator = new MapValidator();
+				mapValidator.init(fileObject);
+
+				if (!mapValidator.getValidMapFlag()) {
+					//throw new InvalidMapFileException("Invalid Map File");
+					results.add("Invalid Map File");
+
+				}
+				else
+				{
 				mapParseObject = new MapParseProcessor();
 				mapParseObject.mapParser(fileName,String.valueOf(playerNamesAndTypes.size()), playerNamesAndTypes,"tournament");
 				MapContents mapContents =MapContents.getInstance();
@@ -107,33 +132,33 @@ public class TournamentGameDriver {
 
 				}
 
-
 			}
-
 		}
-		LOGGER.debug(Arrays.toString(results.toArray()));
-		LOGGER.debug("========================================================");
-
-		int listcount=0;
-		for(String fileName : gameMapFiles)
-		{
-			for(int j=0; j<noOfGames;j++)
-			{
-				LOGGER.debug( "Map "+( gameMapFiles.indexOf(fileName)+1) +" Game "+(j+1)+" result is " +results.get(listcount));
-				listcount++;
-			}
-
-		}
-		LOGGER.info("========================================================");
-
-		if(endTheGame) {
-			MapContents mapContents = MapContents.getInstance();
-			mapContents.setTournamentResults(results);
-			System.exit(0);
-		}
-
-
 
 	}
+	LOGGER.debug(Arrays.toString(results.toArray()));
+	LOGGER.debug("========================================================");
+
+	int listcount=0;
+	for(String fileName : gameMapFiles)
+	{
+		for(int j=0; j<noOfGames;j++)
+		{
+			LOGGER.debug( "Map "+( gameMapFiles.indexOf(fileName)+1) +" Game "+(j+1)+" result is " +results.get(listcount));
+			listcount++;
+		}
+
+	}
+	LOGGER.info("========================================================");
+
+	if(endTheGame) {
+		MapContents mapContents = MapContents.getInstance();
+		mapContents.setTournamentResults(results);
+		System.exit(0);
+	}
+
+
+
+}
 
 }
