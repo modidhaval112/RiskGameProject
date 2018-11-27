@@ -52,21 +52,17 @@ public class TournamentGameDriver {
 		results = new ArrayList<>();
 
 		Tournament tournament = new Tournament(playerNamesAndTypes, gameMapFiles, noOfGames, noOfTurns);
-		LOGGER.debug("No of Turns is "+noOfTurns);
 		for(String fileName : gameMapFiles)
 		{
-			LOGGER.debug("Current Map is" +gameMapFiles.indexOf(fileName) +"Filename is"+fileName);
 			for(int j=0; j<noOfGames;j++)
 			{
 
 				fileObject = new File(fileName);
-				LOGGER.info("File Path " + fileName);
 				bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
 				mapValidator = new MapValidator();
 				mapValidator.init(fileObject);
 
 				if (!mapValidator.getValidMapFlag()) {
-					//throw new InvalidMapFileException("Invalid Map File");
 					results.add("Invalid Map File");
 
 				}
@@ -88,15 +84,11 @@ public class TournamentGameDriver {
 					List<Player> removablePlayers = new ArrayList<>();
 					for(Player player : mapContents.getPlayerList()) {
 						if(player.isHasLost()) {
-							System.out.println("Lost Player : " + player.getName());
-							System.out.println("Removing Player : " );
 							removablePlayers.add(player);
 						}
 					}
 					mapContents.getPlayerList().removeAll(removablePlayers);
 					Iterator<Player> iterator = mapContents.getPlayerList().iterator();
-					System.out.println("mapContents.getPlayerList() : " + mapContents.getPlayerList().size());
-					LOGGER.debug("After Iterator");		
 					while(iterator.hasNext() &&!endTheGame &&  turns < noOfTurns) {
 						turns++;
 						LOGGER.debug("Turns Count is"+turns);
@@ -108,11 +100,9 @@ public class TournamentGameDriver {
 								playerInstance = playerInstance.strategy.attackPhase(playerInstance);
 							}
 							if(playerInstance.getHasWon()) {
-								LOGGER.debug("Save the result and Exit the loop");
 								endTheGame=true;
 								results.add(playerInstance.getName());
-								LOGGER.debug(results.size());
-								LOGGER.debug(playerInstance.getName());
+								LOGGER.debug("Game won by "+playerInstance.getName());
 
 
 
