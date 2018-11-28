@@ -52,6 +52,7 @@ public class TournamentGameDriver {
 		results = new ArrayList<>();
 
 		Tournament tournament = new Tournament(playerNamesAndTypes, gameMapFiles, noOfGames, noOfTurns);
+		LOGGER.info("=============Tournament Started============");
 		for(String fileName : gameMapFiles)
 		{
 			for(int j=0; j<noOfGames;j++)
@@ -89,9 +90,10 @@ public class TournamentGameDriver {
 					}
 					mapContents.getPlayerList().removeAll(removablePlayers);
 					Iterator<Player> iterator = mapContents.getPlayerList().iterator();
-					while(iterator.hasNext() &&!endTheGame &&  turns < noOfTurns) {
-						turns++;
-						LOGGER.debug("Turns Count is"+turns);
+					turns++;
+					LOGGER.info("Turns Count is"+turns);
+
+					while(iterator.hasNext() &&!endTheGame) {
 						Player playerInstance = new Player();
 						Player p = iterator.next();
 						if(!p.isHasLost()) {
