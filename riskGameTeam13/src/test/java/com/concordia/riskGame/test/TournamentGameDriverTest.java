@@ -23,9 +23,9 @@ public class TournamentGameDriverTest {
 	private List<String> gameMapFiles;
 	private Player p1, p2;
 	private boolean validGameFlag;
-	
+
 	@Rule
-    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
 	/**
 	 * before method for initializing objects
@@ -40,7 +40,7 @@ public class TournamentGameDriverTest {
 		playerNamesAndTypes.put("Player1", "Aggressive");
 		playerNamesAndTypes.put("Player2", "Cheater");
 		gameMapFiles.add("src/main/resources/test.map");
-		
+
 	}
 
 	/**
@@ -51,59 +51,61 @@ public class TournamentGameDriverTest {
 	@Test
 	public void testReadSavedMapContent() throws IOException {
 		try {
-			
+
 			exit.expectSystemExitWithStatus(0);
 			exit.checkAssertionAfterwards(new Assertion() {
-		            @Override
-		            public void checkAssertion() throws Exception {
-		                System.out.println("This is executed AFTER System.exit()");
-		                
-		    			MapContents mapContents = MapContents.getInstance();
-		    			System.out.println("No of Countries : " + mapContents.getCountryList().size());
-		    			System.out.println("No of Players : " + mapContents.getPlayerList().size());
+				@Override
+				public void checkAssertion() throws Exception {
+					System.out.println("This is executed AFTER System.exit()");
 
-		    			for (String result : mapContents.getTournamentResults()) {
-		    				System.out.println("in If");
-		    				if (result.equalsIgnoreCase("draw") && mapContents.playerList.get(0).getAssignedCountries().size()
-		    						+ mapContents.playerList.get(1).getAssignedCountries().size() == mapContents.getCountryList()
-		    								.size()) {
-		    					validGameFlag = true;
-		    				} else if (!result.equalsIgnoreCase("draw")) {
-			    				System.out.println("in else");
+					MapContents mapContents = MapContents.getInstance();
+					System.out.println("No of Countries : " + mapContents.getCountryList().size());
+					System.out.println("No of Players : " + mapContents.getPlayerList().size());
 
-		    					for (Player player : mapContents.getPlayerList()) {
-		    						System.out.println("Player Name : " + player.getName());
-			    					int i = 0;
-		    						for(String result1 : mapContents.getTournamentResults()) {
-		    						if (player.getName().equalsIgnoreCase(result1)) {
-		    							if (player.getAssignedCountries().size() == mapContents.getCountryList().size()) {
-		    								validGameFlag = true;
-		    							} else {
-		    								System.out.println(" 3 : result " + result);
-		    								validGameFlag = false;
-		    								break;
-		    							}
-		    						}
-		    						}
-		    						i++;
-		    					}
-		    				}
-		    			}
+					for(String result : mapContents.getTournamentResults()) {
+						System.out.println("in If");
+						if(result.equalsIgnoreCase("draw")
+								&& mapContents.playerList.get(0).getAssignedCountries().size()
+										+ mapContents.playerList.get(1).getAssignedCountries().size() == mapContents
+												.getCountryList().size()) {
+							validGameFlag = true;
+						} else if(!result.equalsIgnoreCase("draw")) {
+							System.out.println("in else");
 
-		    			assertTrue(validGameFlag);
-		    			
-		    			for(String result : mapContents.getTournamentResults()) {
-		    				System.out.println("results : " + result);
-		    			}
+							for(Player player : mapContents.getPlayerList()) {
+								System.out.println("Player Name : " + player.getName());
+								int i = 0;
+								for(String result1 : mapContents.getTournamentResults()) {
+									if(player.getName().equalsIgnoreCase(result1)) {
+										if (player.getAssignedCountries().size() == mapContents.getCountryList()
+												.size()) {
+											validGameFlag = true;
+										} else {
+											System.out.println(" 3 : result " + result);
+											validGameFlag = false;
+											break;
+										}
+									}
+								}
+								i++;
+							}
+						}
+					}
 
-		            }
-		        });
-			
+					assertTrue(validGameFlag);
+
+					for(String result : mapContents.getTournamentResults()) {
+						System.out.println("results : " + result);
+					}
+
+				}
+			});
+
 			TournamentGameDriver driver = new TournamentGameDriver();
 			driver.gamePhase(playerNamesAndTypes, gameMapFiles, 2, 8);
 
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 	}
