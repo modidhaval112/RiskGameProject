@@ -16,7 +16,11 @@ import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import com.concordia.riskGame.control.TournamentGameDriver;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
-
+/**
+ * This class implements the tournament test cases
+ * @author DModi
+ *
+ */
 public class TournamentGameDriverTest {
 
 	private HashMap<String, String> playerNamesAndTypes;

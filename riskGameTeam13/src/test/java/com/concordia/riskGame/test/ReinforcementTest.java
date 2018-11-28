@@ -27,7 +27,6 @@ public class ReinforcementTest {
 		noOfCountries1= 10;
 		noOfCountries2= 2;
 		noOfCountries3= 21;
-		
 		result=0;
 	}
 	
@@ -39,7 +38,6 @@ public class ReinforcementTest {
 	public void reinforcementArmyCalculationTest1() {
 		
 		GameDriver gameDriverObject= new GameDriver();
-		
 		result= gameDriverObject.calculateReiforcementArmies(noOfCountries1);
 		assertEquals(3,result);
 		
