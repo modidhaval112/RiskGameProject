@@ -36,11 +36,9 @@ public class TournamentGameDriverTest {
 		playerNamesAndTypes = new HashMap<>();
 		gameMapFiles = new ArrayList<>();
 		validGameFlag = false;
-
 		playerNamesAndTypes.put("Player1", "Aggressive");
 		playerNamesAndTypes.put("Player2", "Cheater");
 		gameMapFiles.add("src/main/resources/test.map");
-
 	}
 
 	/**
@@ -51,7 +49,6 @@ public class TournamentGameDriverTest {
 	@Test
 	public void testReadSavedMapContent() throws IOException {
 		try {
-
 			exit.expectSystemExitWithStatus(0);
 			exit.checkAssertionAfterwards(new Assertion() {
 				@Override
@@ -103,8 +100,7 @@ public class TournamentGameDriverTest {
 
 			TournamentGameDriver driver = new TournamentGameDriver();
 			driver.gamePhase(playerNamesAndTypes, gameMapFiles, 2, 8);
-
-		} catch (Exception e) {
+		}catch (Exception e) {
 			// e.printStackTrace();
 		}
 
