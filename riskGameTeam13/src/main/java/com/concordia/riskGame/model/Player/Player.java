@@ -762,6 +762,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	public String reEnterSourceCountry(Player player) {
 		String soruceCountry = null;
 		Scanner sc = new Scanner(System.in);
+		System.out.println("#### Invalid Source Country! #####");
 		System.out.println("#### Please enter a valid source country  or quit to exit fortification phase #####");
 		soruceCountry = sc.nextLine();
 
