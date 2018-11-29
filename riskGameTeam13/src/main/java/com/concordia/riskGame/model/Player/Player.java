@@ -526,7 +526,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	
 				System.out.println("Exception Message " + e.getMessage());
 				e.printStackTrace();
-				/*forfeitPhase(playerObject);*/
+				forfeitPhase(playerObject);
 			}
 		}
 		else
