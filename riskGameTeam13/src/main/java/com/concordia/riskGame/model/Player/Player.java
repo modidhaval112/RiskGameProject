@@ -465,19 +465,19 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 							if (sourcesArmies == 1) {
 								playerObject.setPhase("You cannot move the only army from this Country");
 								setErrorMesage("You cannot move the only army from this Country");
-								throw new Exception();
+								throw new Exception("You cannot move the only army from this Country");
 							}
 							if (sourcesArmies < movingArmies) {
 								playerObject.setPhase(
 										"The country doesnt have the mentioned number of armies, please enter a lesser number");
 								setErrorMesage("The country doesnt have the mentioned number of armies, please enter a lesser number");
-								throw new Exception();
+								throw new Exception("The country doesnt have the mentioned number of armies, please enter a lesser number");
 							}
 							if (sourcesArmies == movingArmies) {
 								playerObject.setPhase(
 										"You cannot move all the armies from this Country, please enter a lesser number");
 								setErrorMesage("You cannot move all the armies from this Country, please enter a lesser number");
-								throw new Exception();
+								throw new Exception("You cannot move all the armies from this Country, please enter a lesser number");
 							}
 							sourcesArmies = sourcesArmies - movingArmies;
 							sourceCountry.setArmies(sourcesArmies);
