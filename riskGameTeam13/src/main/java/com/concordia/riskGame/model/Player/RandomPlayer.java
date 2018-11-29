@@ -48,6 +48,7 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 		Random random = new Random();
 		int rand = random.nextInt(countriesSize);
 		Country randomCountry = player.getSourceCountryFromPlayerUsingString(player.getAssignedCountries().get(rand).getCountryName(),player);
+		player.setPhase("#### The country into which the armies are being reinforced is  #### :" + randomCountry.getCountryName());
 		randomCountry.setArmies(randomCountry.getArmies()+assignedArmies);
 		player.setPhase("######### Player army count after reinforcment  ####### ");
 		player.setPhase("######## Player Name ########### : " + player.getName());
@@ -99,13 +100,14 @@ public class RandomPlayer implements PlayerStrategy,Serializable {
 			randomNumbersList.add(randn);
 			sourceCountryObject = sortedListBasedOnArmies.get(randn);
 			int numberOfNeighbours = sourceCountryObject.getNeighbouringCountries().size();
-			player.setPhase("#### Source Country : "+sourceCountryObject.getCountryName()+" ####");
+			
 			while(sourceCountryObject.getArmies()>1 && numberOfNeighbours>0 && rand>0) {
 				destinationCountryObject = player.getSourceCountryFromString(sourceCountryObject.getNeighbouringCountries().get(numberOfNeighbours-1).getCountryName());
 				if(destinationCountryObject.getBelongsToPlayer().equals(player)) {
 					numberOfNeighbours--;
 					continue;
 				}
+				player.setPhase("#### Source Country : "+sourceCountryObject.getCountryName()+" ####");
 				player.setPhase("#### Destination Country : "+destinationCountryObject.getCountryName()+" ####");
 				while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0 && rand>0) {
 					player.setPhase("#### Attack Number "+(++j)+" of Random Player");
