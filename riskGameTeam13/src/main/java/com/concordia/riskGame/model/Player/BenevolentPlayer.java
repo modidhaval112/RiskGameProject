@@ -35,6 +35,7 @@ public class BenevolentPlayer implements PlayerStrategy,Serializable {
 		assignedArmies = assignedArmies + armiesContControl;
 		player.setPhase("#### The total number of armies to be reinforced are  #### :" + assignedArmies);
 		Country weakestCountry = getWeakestCountry(player);
+//		player.setPhase("#### The country into which the armies are being reinforced is  #### :" + weakestCountry.getCountryName());
 		weakestCountry.setArmies(weakestCountry.getArmies()+assignedArmies);
 		player.setPhase("######### Player army count after reinforcment  ####### ");
 		player.setPhase("######## Player Name ########### : " + player.getName());

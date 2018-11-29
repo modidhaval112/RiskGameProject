@@ -109,6 +109,8 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 				continue;
 			}*/
 				//while (sourceCountryObject.getArmies() > 1 && destinationCountryObject.getArmies() != 0) {
+					player.setPhase("Source Country : "+ sourceCountryObject.getCountryName());
+					player.setPhase("Destination Country : "+ destinationCountryObject.getCountryName());
 					maximumAttackerDice = player.getMaxAttackerDiceCount (sourceCountryObject.getArmies());
 					maximumDefenderDice = player.getMaxDefenderDiceCount(destinationCountryObject.getArmies());
 					System.out.println();
@@ -174,8 +176,12 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 		return player;
 		}
 		
+	/**
+	 * This Method returns the strongest country object with attackable neighbors of a Player.
+	 * @param player
+	 * @return
+	 */
 	private Country getStrongestAttackableCountry(Player player) {
-
 		List<Country> playerOwnedCountries = player.getAssignedCountries();
 		Country strongestCountry = null;
 		int armyCount = 0;
@@ -186,7 +192,6 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 			}
 		}
 		return strongestCountry;
-	
 	}
 
 	/**

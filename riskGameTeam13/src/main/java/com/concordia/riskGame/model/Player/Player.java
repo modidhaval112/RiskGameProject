@@ -526,7 +526,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	
 				System.out.println("Exception Message " + e.getMessage());
 				e.printStackTrace();
-				forfeitPhase(playerObject);
+				/*forfeitPhase(playerObject);*/
 			}
 		}
 		else
@@ -762,7 +762,6 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	public String reEnterSourceCountry(Player player) {
 		String soruceCountry = null;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("#### Invalid Source Country! #####");
 		System.out.println("#### Please enter a valid source country  or quit to exit fortification phase #####");
 		soruceCountry = sc.nextLine();
 
@@ -1257,9 +1256,9 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	 * @param player player object
 	 */
 	public void printAllCountriesOfaPlayer(Player player) {
-		System.out.println("Countries assigned to this player are");
+		player.setPhase("Countries assigned to this player are");
 		for (Country countryObj : player.getAssignedCountries()) {
-			System.out.println(countryObj.getCountryName() + " : " + countryObj.getArmies());
+			player.setPhase(countryObj.getCountryName() + " : " + countryObj.getArmies());
 		}
 	}
 
