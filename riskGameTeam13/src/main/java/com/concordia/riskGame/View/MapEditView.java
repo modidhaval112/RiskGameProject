@@ -656,6 +656,7 @@ public class MapEditView extends java.awt.Frame {
 						}
 
 					}
+					continent.setNumberOfCountries(continentCountries.size());
 					continentsWithItsCountries.put(continent, countries);
 
 				}
