@@ -203,6 +203,12 @@ public class CardView implements Observer{
 	}
 	
 	
+	/**
+	 * It is used for exchanging the cards for the computer players
+	 * @param player accepts the player input
+	 * @return It returns the armies to be given
+	 * @throws Exception Throws exception
+	 */
 	public int exchangeCardsForComputerPlayers(Player player) throws Exception {
 		int armiesToBeGiven =0;
 		HashMap<String, Integer> cardCount = new HashMap<>();
