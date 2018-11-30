@@ -22,6 +22,10 @@ public class DiceTest {
 	Dice dice;
 	boolean check;
 	
+	/**
+	 * It is used for setting up context for test case
+	 * @throws Exception throws exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		results = new ArrayList<>();
