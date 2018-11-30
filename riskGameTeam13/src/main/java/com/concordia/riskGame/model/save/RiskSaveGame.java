@@ -21,7 +21,7 @@ public class RiskSaveGame {
 	 * This method writes the objects into the file
 	 * @param mapContObj map content object that is to be saved
 	 * @return filePath file path of the saved game
-	 * @throws IOException
+	 * @throws IOException if there is an error
 	 */
 	public String saveGame(MapContents mapContObj) throws IOException
 	{
