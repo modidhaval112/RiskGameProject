@@ -48,7 +48,7 @@ public class TournamentGameDriverTest {
 	/**
 	 * Test method to check if saved game file has been created or not
 	 * 
-	 * @throws IOException
+	 * @throws IOException if there is an error 
 	 */
 	@Test
 	public void testReadSavedMapContent() throws IOException {
