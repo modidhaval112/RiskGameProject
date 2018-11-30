@@ -243,7 +243,7 @@ public class CardView implements Observer {
 			}
 			LOGGER.info(card.getType() + ", " + card.getCountry().getCountryName());
 		}
-		if (cardTypes == 3) {
+		if (cardTypes >= 3) {
 			cardExchangePossible = true;
 		}
 		for (Entry<String, Integer> cardVal : cardCount.entrySet()) {
