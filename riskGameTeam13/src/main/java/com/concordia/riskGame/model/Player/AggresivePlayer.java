@@ -188,9 +188,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	}
 
 	/**
-	 * This Method returns the strongest country object with attackable neighbors of
-	 * a Player.
-	 * 
+	 * This Method returns the strongest country object with attackable neighbors of a Player.
 	 * @param player
 	 * @return
 	 */
