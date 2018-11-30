@@ -18,10 +18,10 @@ public class Tournament {
 	
 	/**
 	 * This method assigning the map files,count of games and turns
-	 * @param playerNameAndTypes MAp of the player and the types of players
+	 * @param playerNamesAndTypes MAp of the player and the types of players
 	 * @param mapFiles list of game map file names
-	 * @param numberOfGames count of the games played
-	 * @param numberOfTurns count of the turns
+	 * @param noOfGames count of the games played
+	 * @param noOfTurns count of the turns
 	 */
 	public Tournament(HashMap<String, String> playerNamesAndTypes ,List<String> mapFiles, int noOfGames, int noOfTurns) {
 		super();
