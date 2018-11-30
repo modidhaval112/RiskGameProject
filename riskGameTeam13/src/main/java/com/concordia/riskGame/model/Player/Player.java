@@ -1078,9 +1078,9 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
+		player.setCanAttack(false);
+		player.setCanFortify(false);
 		for (Country c : player.getAssignedCountries()) {
-			player.setCanAttack(false);
-			player.setCanFortify(false);
 			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
