@@ -7,11 +7,20 @@ import java.util.List;
 
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
-
+/**
+ * This class implements  the behavior for the cheater player
+ * @author Dheeraj As
+ *
+ */
 public class CheaterPlayer implements PlayerStrategy,Serializable {
 	
 	private static final long serialversionUID = 1L;
-
+	/**
+	 * This method implements the reinforce phase of the cheater player
+	 * 
+	 * @param player player object
+	 * @return return player object after reinforcing
+	 */
 	@Override
 	public Player reinforcePhase(Player player) {
 		player.setDomination();
@@ -27,7 +36,12 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.setCanAttack(true);
 		return player;
 	}
-
+	/**
+	 * This method is to get the strongest country of a player
+	 * 
+	 * @param player
+	 * @return country with most number of armies
+	 */
 	@Override
 	public Player attackPhase(Player player) {
 		player.setDomination();
@@ -72,7 +86,6 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
 		int movableArmies = 1;
 		if (movableArmies > 0) {
-			//sourceCountryObject.setArmies(sourceCountryObject.getArmies() - movableArmies);
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies() + movableArmies);
 		}
 	}
@@ -90,7 +103,12 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 			sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
 		destinationCountryObject.getBelongsToPlayer().setCardList(new ArrayList<Card>());
 	}
-
+	/**
+	 * This method implements the fortify phase of the cheater player
+	 * 
+	 * @param player player object
+	 * @return return player object after fortifying
+	 */
 
 	@Override
 	public Player forfeitPhase(Player player) {
@@ -107,7 +125,6 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 					break;
 				}
 			}
-			//playerCountry.setArmies(playerCountry.getArmies()*2);
 		}
 		player.setPhase("#### After Fortification Phase");
 		player.printAllCountriesOfaPlayer(player);
