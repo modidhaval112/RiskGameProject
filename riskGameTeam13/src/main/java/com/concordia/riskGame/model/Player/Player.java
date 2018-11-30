@@ -1103,7 +1103,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * 
 	 * @param sourceCountryObject      Source Country Object
 	 * @param destinationCountryObject destination country object
-	 * @param player
+	 * @param player player object
 	 */
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject, Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
@@ -1525,9 +1525,9 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * Method to remove the cards from the player card list and to add to the deck
 	 * for a Computer player.
 	 * 
-	 * @param exchangeDifferentCards
-	 * @param exchangeSameCards
-	 * @param player
+	 * @param exchangeDifferentCards exchanging different cards
+	 * @param exchangeSameCards exchanging same cards list
+	 * @param player player object
 	 */
 	public void exchangeCardsForComputerPlayer(List<Card> exchangeDifferentCards, List<Card> exchangeSameCards,
 			Player player) {
@@ -1885,10 +1885,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	/**
 	 * This method will execute the attack method from the PlayerStrategy interface
 	 * 
-	 * @param country1 name of the attacker's country
-	 * @param country2 name of the defender's country
-	 * @param gameView object of GameView class
-	 * @param model    object of Player class
+	 *@param player player object
 	 */
 	public void executeAttack(Player player) {
 		this.strategy.attackPhase(player);
@@ -1899,7 +1896,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * interface
 	 * 
 	 * @param player object of Player class
-	 * @throws Exception
+	 * @throws Exception if there is an error
 	 */
 	public void executeReinforce(Player player) throws Exception {
 		this.strategy.reinforcePhase(player);
