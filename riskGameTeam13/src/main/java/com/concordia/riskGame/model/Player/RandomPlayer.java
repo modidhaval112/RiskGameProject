@@ -198,6 +198,8 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 			}
 
 		}
+		player.setPhase("Attack Phase has ended");
+		player.printAllCountriesOfaPlayer(player);
 		checkPlayerTurnCanContinue(player);
 		player.setCardGiven(false);
 		return player;

@@ -182,7 +182,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 				player.checkPlayerTurnCanContinue(player);
 			}
 		}
-
+		player.setPhase("Attack Phase has ended");
 		player.printAllCountriesOfaPlayer(player);
 		checkPlayerTurnCanContinue(player);
 		player.setCardGiven(false);
