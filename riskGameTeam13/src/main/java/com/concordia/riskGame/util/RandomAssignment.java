@@ -66,7 +66,6 @@ public class RandomAssignment {
 		RandomAssignment inputObject = new RandomAssignment();
 		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		List<Country> newCountryList = new ArrayList<>(countryList);
-
 		dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		Map<Player, List<Country>> playerAssign = new HashMap<>();
 		newCountryList = new ArrayList<>(countryList);
