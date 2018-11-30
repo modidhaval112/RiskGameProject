@@ -60,10 +60,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 			strongestCountry.setArmies(strongestCountry.getArmies() + assignedArmies);
 			player.setPhase("######### Player army count after reinforcment  ####### ");
 			player.setPhase("######## Player Name ########### : " + player.getName());
-			for (Country country : player.getAssignedCountries()) {
-				player.setPhase("					##### The Country Name  ####### : " + country.getCountryName());
-				player.setPhase("					##### The Army Count      ####### : " + country.getArmies());
-			}
+			player.printAllCountriesOfaPlayer(player);
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage());
 			reinforcePhase(player);

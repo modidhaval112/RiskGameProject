@@ -18,6 +18,11 @@ import com.concordia.riskGame.model.Player.BenevolentPlayer;
 import com.concordia.riskGame.model.Player.Player;
 import com.concordia.riskGame.model.save.RiskSaveGame;
 
+/**
+ * @author saich
+ * It is used for testing loaded game
+ *
+ */
 public class LoadGameTest {
 	
 	private MapContents mapContents;
