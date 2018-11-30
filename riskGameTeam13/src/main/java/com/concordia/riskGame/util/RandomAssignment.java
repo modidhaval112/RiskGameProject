@@ -31,7 +31,7 @@ public class RandomAssignment {
 	 * 
 	 * @param noOfPlayers number of players
 	 * @param countryList List of Countries
-	 * @param playerType 
+	 * @param playerType type of player he is
 	 * @return player Player object
 	 */
 	public Player randonAssignmentMethod(int noOfPlayers, List<Country> countryList, HashMap<String, String> playerType) {
