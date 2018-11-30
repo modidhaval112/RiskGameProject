@@ -3,7 +3,11 @@ package com.concordia.riskGame.model.Tournament;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * This class implements the model for tournament
+ * @author Dheeraj As
+ *
+ */
 public class Tournament {
 	
 	public int noOfTurns;
