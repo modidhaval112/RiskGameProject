@@ -14,7 +14,7 @@ public interface PlayerStrategy {
 	 * This method is for the reinforcement of the countries owned by the player.
 	 * @param player We pass the player object who is currently playing the game.
 	 * @return enriched player object is returned
-	 * @throws Exception 
+	 * @throws Exception  if error
 	 */
 	public Player reinforcePhase(Player player) throws Exception;
 	/**
