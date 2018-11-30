@@ -568,7 +568,7 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 	public boolean checkValidArmyFortification(int army)
 	{ 
 		boolean returnValue = false;
-		if(army < 0)
+		if(army <= 0)
 			returnValue = false;
 		else
 			returnValue = true;
@@ -739,11 +739,13 @@ public class Player extends Observable implements Serializable,PlayerStrategy {
 			if(!countryNeighbourList.contains(n) && n.getBelongsToPlayer().getName().equals(player.getName()) && !(n.getCountryName().equals(countryName))) {
 				countryNeighbourList.add(n);
 			}
+			if(n.getBelongsToPlayer().getName().equals(player.getName())) {
 			for(Country nei : n.getNeighbouringCountries()) {
 				Country np = getSourceCountryFromString(nei.getCountryName());
 				if(!countryNeighbourList.contains(np) && np.getBelongsToPlayer().getName().equals(player.getName()) && !(np.getCountryName().equals(countryName))) {
 					countryNeighbourList.add(nei);
 				}
+			}
 			}
 			/*if(!countryNeighbourList.isEmpty())
 			countryNeighbourList.removeAll(n.getNeighbouringCountries());
