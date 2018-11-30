@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.concordia.riskGame.control.GameDriver;
+import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 
@@ -27,6 +28,7 @@ public class ReinforcementTest {
 	Player playerTest;
 	Country c1;
 	List<Country> countryList;
+	Continent con;
 	/**
 	 * Initializing the Context
 	 */
@@ -41,7 +43,8 @@ public class ReinforcementTest {
 		c1 = new Country("India");
 		countryList.add(c1);
 		playerTest.setAssignedCountries(countryList);
-		
+		con = new Continent("Con",2);
+		con.setCountries(countryList);
 	}
 	
 	/**
@@ -73,7 +76,7 @@ public class ReinforcementTest {
 	}
 	
 	/**
-	 * 
+	 * The following method tests the countries owned by the player.
 	 */
 	@Test
 	public void printCountriesOwnedByPlayer() {
@@ -83,8 +86,6 @@ public class ReinforcementTest {
 	
 	assertEquals("India",name);
 	assertEquals(1,countryCount);
-	
-	
 	
 	}
 	
