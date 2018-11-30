@@ -3,6 +3,7 @@ package com.concordia.riskGame.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
+import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 
 
@@ -29,6 +31,10 @@ public class ReinforcementTest {
 	Country c1;
 	List<Country> countryList;
 	Continent con;
+	MapContents mapConObejct;
+	HashMap<Continent, List<Country>> continentAndItsCountries;
+	List<Player> playerList;
+	
 	/**
 	 * Initializing the Context
 	 */
@@ -38,13 +44,21 @@ public class ReinforcementTest {
 		noOfCountries2= 2;
 		noOfCountries3= 21;
 		result=0;
-		playerTest = new Player();
+		playerTest = new Player("playerTest");
 		countryList = new ArrayList();
 		c1 = new Country("India");
+		c1.setBelongsToPlayer(playerTest);
 		countryList.add(c1);
 		playerTest.setAssignedCountries(countryList);
 		con = new Continent("Con",2);
 		con.setCountries(countryList);
+		mapConObejct=MapContents.getInstance();
+		continentAndItsCountries = new  HashMap<>();
+		continentAndItsCountries.put(con, countryList);
+		mapConObejct.setContinentAndItsCountries(continentAndItsCountries);
+		playerList = new ArrayList();
+		playerList.add(playerTest);
+		mapConObejct.setPlayerList(playerList);
 	}
 	
 	/**
@@ -79,7 +93,7 @@ public class ReinforcementTest {
 	 * The following method tests the countries owned by the player.
 	 */
 	@Test
-	public void printCountriesOwnedByPlayer() {
+	public void testPrintCountriesOwnedByPlayer() {
 	
 	String name = playerTest.getAssignedCountries().get(0).getCountryName();
 	int countryCount = playerTest.getAssignedCountries().size();
@@ -90,5 +104,16 @@ public class ReinforcementTest {
 	}
 	
 	
-	
+	/**
+	 * The following returns the List of Continents owned by the players.
+	 */
+	@Test
+	public void testContinentControlByPlayer()
+	{
+		
+		int size = playerTest.contienentControlList(playerTest).size();
+		assertEquals(1, size);
+		
+		
+	}
 }
