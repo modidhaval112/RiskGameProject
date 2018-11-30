@@ -1074,7 +1074,6 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 
 	/**
 	 * This method checks if player's turn can continue or not
-	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
