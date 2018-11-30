@@ -103,7 +103,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
 		List<Integer> randomNumbersList = new ArrayList<>();
 		Random random = new Random();
-		int rand = random.nextInt(attackableCount);
+		int rand = random.nextInt(attackableCount+1);
 		player.setPhase("#### Random player will attack " + rand + " times");
 		while (rand != 0) {
 			int j = 0;
