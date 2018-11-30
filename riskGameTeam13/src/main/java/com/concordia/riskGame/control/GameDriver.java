@@ -262,7 +262,7 @@ public class GameDriver {
 	/**
 	 * The method is driver method for the loaded game from file. 	
 	 * @param mapContentOb The mapContent Object.
-	 * @throws Exception
+	 * @throws Exception if there is an error
 	 */
 	public void load(MapContents mapContentOb) throws Exception {
 			
