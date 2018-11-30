@@ -416,7 +416,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 				}
 
 				List<Country> destNeighborCountryList = new ArrayList();
-				destNeighborCountryList = printNeighbouringCountry(srcCountry, player);
+				destNeighborCountryList = printNeighbouringCountryList(srcCountry, player);
 
 				if (destNeighborCountryList.size() == 0) {
 					playerObject.setPhase("##### The source country has zero neighboring countries ######");
@@ -430,6 +430,16 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 					playerObject.setPhase(
 							" ###### Printing the destination fortifiable countries for the source country ###### ");
 					destNeighborCountryList = printNeighbouringCountryList(srcCountry, player);
+					
+					System.out.println("####### Printing the neighbour countries owned by the player #########");
+
+					System.out
+							.println("#######***** The size of common country list is******* ######## " + destNeighborCountryList.size());
+					for (Country countryObj : destNeighborCountryList) {
+						System.out.println(countryObj.getCountryName());
+					}
+					
+					
 					playerObject.setPhase(" ###### Please enter destination country to move armies  ###### ");
 					String destinationCountry = sc.nextLine();
 					destinationCountry = destinationCountry.trim();
@@ -740,13 +750,13 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 			}
 		}
 
-		System.out.println("####### Printing the neighbour countries owned by the player #########");
+		/*System.out.println("####### Printing the neighbour countries owned by the player #########");
 
 		System.out
 				.println("#######***** The size of common country list is******* ######## " + commonCountryList.size());
 		for (Country countryObj : commonCountryList) {
 			System.out.println(countryObj.getCountryName());
-		}
+		}*/
 
 		return commonCountryList;
 	}
