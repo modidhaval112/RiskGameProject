@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.concordia.riskGame.model.Player.Player;
 
-
-
 /**
  * Country Class go get and set all properties of a country.
  * 
@@ -15,7 +13,7 @@ import com.concordia.riskGame.model.Player.Player;
  */
 
 public class Country implements Serializable {
-	
+
 	private static final long serialversionUID = 1L;
 
 	private String countryName;
@@ -25,6 +23,7 @@ public class Country implements Serializable {
 	private int endPixel;
 	private int armies;
 	private Player belongsToPlayer;
+
 	/***
 	 * Default Constructor
 	 **/
@@ -190,19 +189,17 @@ public class Country implements Serializable {
 	 * 
 	 * @param belongsToPlayer The player to which this country belongs.
 	 */
-	public void setBelongsToPlayer(Player belongsToPlayer) 
-	{
+	public void setBelongsToPlayer(Player belongsToPlayer) {
 		this.belongsToPlayer = belongsToPlayer;
 	}
-	
-	
-	 @Override
-	    public boolean equals(Object anObject) {
-	        if (!(anObject instanceof Country)) {
-	            return false;
-	        }
-	        Country otherCountry = (Country)anObject;
-	        return otherCountry.getCountryName().equals(getCountryName());
-	    }
-	
+
+	@Override
+	public boolean equals(Object anObject) {
+		if (!(anObject instanceof Country)) {
+			return false;
+		}
+		Country otherCountry = (Country) anObject;
+		return otherCountry.getCountryName().equals(getCountryName());
+	}
+
 }

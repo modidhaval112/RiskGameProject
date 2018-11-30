@@ -26,13 +26,14 @@ public class MapOperations {
 	private static final String[] ILLEGAL_CHARACTERS = { "/", "\n", "\r", "\t", "\0", "\f", "`", "?", "*", "\\", "<",
 			">", "|", "\"", ":" };
 	private MapValidator mapValidator = new MapValidator();
+
 	/**
 	 * This method is used to create map file after taking inputs from the user
 	 * 
 	 * @param mapContents Map Content
 	 * @param fileName    name of the file
 	 * @param filePath    Path of the file.
-	 * @return fileName  name of the file
+	 * @return fileName name of the file
 	 * @throws FileNotFoundException File when found in its path.
 	 */
 	public String writeMapFile(MapContents mapContents, String fileName, String filePath) throws FileNotFoundException {
@@ -77,34 +78,31 @@ public class MapOperations {
 		}
 		try (PrintWriter out = new PrintWriter(file)) {
 			out.print(mapFileContents);
-			
-			
-		}
-		catch (FileNotFoundException e) {
+
+		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException();
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		try {
-		 
-		mapValidator.init(file);
-		if(!mapValidator.getValidMapFlag()) {
-			throw new InvalidMapFileException("Invalid Map File");
-		}
-		}catch (Exception e) {
+
+			mapValidator.init(file);
+			if (!mapValidator.getValidMapFlag()) {
+				throw new InvalidMapFileException("Invalid Map File");
+			}
+		} catch (Exception e) {
 			System.out.println("Please start over the map creation");
-			System.out.println("Fileexists"+file.exists());
-			//System.out.println("File deleted "+file.delete());
+			System.out.println("Fileexists" + file.exists());
+			// System.out.println("File deleted "+file.delete());
 			GameLauncher gameLauncher = new GameLauncher();
 		}
-		if(mapValidator.getValidMapFlag()) {
-		System.out.println("File has been created");
-		GameLauncher gameLauncher;
-			if(filePath==null) {
-		 gameLauncher = new GameLauncher();
+		if (mapValidator.getValidMapFlag()) {
+			System.out.println("File has been created");
+			GameLauncher gameLauncher;
+			if (filePath == null) {
+				gameLauncher = new GameLauncher();
 			}
 		}
 		return fileName;

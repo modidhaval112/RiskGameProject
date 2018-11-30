@@ -1,6 +1,5 @@
 package com.concordia.riskGame.model.Card;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,13 +7,12 @@ import java.util.List;
 
 import com.concordia.riskGame.model.Country.Country;
 
-
 /**
  * Allows the creation of the Risk deck containing the 42 Risk cards.
  *
  * @author Sande
  */
-public class Deck implements Serializable{
+public class Deck implements Serializable {
 
 	private static final long serialversionUID = 1L;
 	private int i;
@@ -22,20 +20,21 @@ public class Deck implements Serializable{
 	private String input;
 	private String name;
 	private String[] typesArray;
-	public  ArrayList<Card> deckOfCards;
+	public ArrayList<Card> deckOfCards;
 	private Card drawCard;
 
 	/**
-	 *  Creates all cards, one for each territory. Each card has either
-	 * a type of Infantry, Cavalry, or Artillery.
+	 * Creates all cards, one for each territory. Each card has either a type of
+	 * Infantry, Cavalry, or Artillery.
+	 * 
 	 * @param list list of country names
 	 */
 	public void setDeckOfCards(List<Country> list) {
 
 		Collections.shuffle(list);
 
-		//Types of cards
-		typesArray = new String[]{"Infantry", "Cavalry", "Artillery"};
+		// Types of cards
+		typesArray = new String[] { "Infantry", "Cavalry", "Artillery" };
 
 		deckOfCards = new ArrayList<Card>();
 
@@ -48,11 +47,12 @@ public class Deck implements Serializable{
 	/**
 	 * Public default constructor to access other methods.
 	 */
-	public Deck(){
+	public Deck() {
 	}
 
 	/**
 	 * Intialization of the instance.
+	 * 
 	 * @return It is returning of type deck
 	 */
 	public static Deck getInstance() {
@@ -64,6 +64,7 @@ public class Deck implements Serializable{
 
 	/**
 	 * Removes a card from the deck and return it
+	 * 
 	 * @return card object
 	 */
 	public Card draw() {
@@ -76,6 +77,7 @@ public class Deck implements Serializable{
 
 	/**
 	 * Add a card to the deck
+	 * 
 	 * @param card name of the card which is to be added to deck
 	 */
 	public void add(Card card) {

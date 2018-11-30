@@ -18,51 +18,54 @@ import com.concordia.riskGame.model.Player.RandomPlayer;
 
 /**
  * This class assigns countries randomly to the different players
+ * 
  * @author d_modi
  */
 public class RandomAssignment {
 
-	
-	public static String PLAYER = "Player"; 
+	public static String PLAYER = "Player";
+
 	/**
 	 * This method sets countries randomly assign to the players
+	 * 
 	 * @param noOfPlayers number of players
 	 * @param countryList List of Countries
-	 * @param playerType type of player he is
+	 * @param playerType  type of player he is
 	 * @return player Player object
 	 */
-	public Player randonAssignmentMethod(int noOfPlayers, List<Country> countryList, HashMap<String, String> playerType) {
+	public Player randonAssignmentMethod(int noOfPlayers, List<Country> countryList,
+			HashMap<String, String> playerType) {
 		int noOfCountries = countryList.size();
 		System.out.println("Players : " + noOfPlayers + " Countries : " + noOfCountries);
 		List<Player> playersList = new ArrayList<>();
 		for (int i = 0; i < noOfPlayers; i++) {
 			Player playerObject = new Player("Player - " + (i + 1));
-			String type = playerType.get(PLAYER+(i+1));
+			String type = playerType.get(PLAYER + (i + 1));
 			switch (type) {
-            case "Aggressive":
-            	playerObject.setStrategy(new AggresivePlayer());
-            	playerObject.setComputerPlayer(true);
-                break;
-            case "Benevolent":
-            	playerObject.setStrategy(new BenevolentPlayer());
-            	playerObject.setComputerPlayer(true);
-                break;
-            case "Random":
-            	playerObject.setStrategy(new RandomPlayer());
-            	playerObject.setComputerPlayer(true);
-                break;
-            case "Cheater":
-            	playerObject.setStrategy(new CheaterPlayer());
-            	playerObject.setComputerPlayer(true);
-                break;
-            default:
-            	playerObject.setStrategy(new Player());
+			case "Aggressive":
+				playerObject.setStrategy(new AggresivePlayer());
+				playerObject.setComputerPlayer(true);
+				break;
+			case "Benevolent":
+				playerObject.setStrategy(new BenevolentPlayer());
+				playerObject.setComputerPlayer(true);
+				break;
+			case "Random":
+				playerObject.setStrategy(new RandomPlayer());
+				playerObject.setComputerPlayer(true);
+				break;
+			case "Cheater":
+				playerObject.setStrategy(new CheaterPlayer());
+				playerObject.setComputerPlayer(true);
+				break;
+			default:
+				playerObject.setStrategy(new Player());
 			}
 			playersList.add(playerObject);
 		}
-		
+
 		playersList.sort(Comparator.comparing(Player::getName));
-		
+
 		RandomAssignment inputObject = new RandomAssignment();
 		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		List<Country> newCountryList = new ArrayList<>(countryList);
@@ -84,12 +87,13 @@ public class RandomAssignment {
 			playerAssign.put(playersList.get(i), countryList1);
 		}
 		player.setPlayerAssign(playerAssign);
-						
+
 		return player;
 	}
 
 	/**
 	 * This method divides a number into smaller numbers
+	 * 
 	 * @param number number of countries
 	 * @param parts  number of players
 	 * @return randoms array of divided numbers

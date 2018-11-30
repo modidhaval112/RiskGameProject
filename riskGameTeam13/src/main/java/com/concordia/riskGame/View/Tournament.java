@@ -32,7 +32,9 @@ import com.concordia.riskGame.control.TournamentGameDriver;
 import com.concordia.riskGame.util.MapValidator;
 
 /**
- * This class has the implementation of tournament view consisting of all the tournament, player, games and turns.
+ * This class has the implementation of tournament view consisting of all the
+ * tournament, player, games and turns.
+ * 
  * @author saich
  *
  */
@@ -42,9 +44,9 @@ public class Tournament extends JFrame implements ActionListener {
 	private HashMap<String, String> playerType = new HashMap<>();
 	private int noOfTurns;
 	private int noOfGames;
-	private List<String> maps; 
+	private List<String> maps;
 	private JFrame frame;
-	private JPanel panel ;
+	private JPanel panel;
 	private JLabel player1;
 	private JLabel player2;
 	private JLabel player3;
@@ -78,13 +80,12 @@ public class Tournament extends JFrame implements ActionListener {
 	private JComboBox gamesCountCombo;
 	private JComboBox turnsCombo;
 
-	private String[] playerCounterArray = {"2", "3", "4" };
-	private String[] mapArray = {"1","2","3", "4", "5"};
+	private String[] playerCounterArray = { "2", "3", "4" };
+	private String[] mapArray = { "1", "2", "3", "4", "5" };
 	private int[] turnsArray = IntStream.rangeClosed(10, 50).toArray();
 	private String strArray[] = Arrays.stream(turnsArray).mapToObj(String::valueOf).toArray(String[]::new);
 
-
-	private  JDialog dialogBox;  
+	private JDialog dialogBox;
 
 	private JLabel countLabel;
 	private JLabel mapLabel;
@@ -95,35 +96,33 @@ public class Tournament extends JFrame implements ActionListener {
 
 	private List<String> filesSelected = new ArrayList<>();
 	TournamentGameDriver tgm;
-	
+
 	private File fileObject;
 	private BufferedReader bufferReaderForFile;
 	private MapValidator mapValidator;
 
-
 	/**
 	 * Default constructor
 	 */
-	Tournament()
-	{
+	Tournament() {
 		tournamentView();
 	}
 
 	/**
-	 * Tournament view method consists of the tournament view which accepts players, maps, turns and games.
+	 * Tournament view method consists of the tournament view which accepts players,
+	 * maps, turns and games.
 	 */
-	public void tournamentView()
-	{
+	public void tournamentView() {
 		frame = new JFrame();
 		panel = new JPanel();
 
 		frame.setTitle("Touranment Mode");
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
-		frame.setSize(550,250);
-		panel.setSize(700,700);
+		frame.setSize(550, 250);
+		panel.setSize(700, 700);
 		GridBagLayout layout = new GridBagLayout();
-		panel.setLayout(layout);        
+		panel.setLayout(layout);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 
@@ -138,15 +137,14 @@ public class Tournament extends JFrame implements ActionListener {
 		map4 = new JLabel();
 		map5 = new JLabel();
 
-
 		countLabel = new JLabel("Select the number of Players");
-		mapLabel=  new JLabel("Select the number of Maps");
-		gamesLabel= new JLabel("Select number of Games");
-		turnsLabel=new JLabel("Select number of turns");
+		mapLabel = new JLabel("Select the number of Maps");
+		gamesLabel = new JLabel("Select number of Games");
+		turnsLabel = new JLabel("Select number of turns");
 		playerCountCombo = new JComboBox(playerCounterArray);
-		mapCountCombo= new JComboBox(mapArray);
-		gamesCountCombo=new JComboBox(mapArray);
-		turnsCombo =new JComboBox(strArray);
+		mapCountCombo = new JComboBox(mapArray);
+		gamesCountCombo = new JComboBox(mapArray);
+		turnsCombo = new JComboBox(strArray);
 
 		okayButton = new JButton("OK");
 
@@ -175,19 +173,17 @@ public class Tournament extends JFrame implements ActionListener {
 		cbPlayer3 = new JComboBox(playersTypes);
 		cbPlayer4 = new JComboBox(playersTypes);
 
-
-		fileButton1 =new JButton("Map1");
-		fileButton2 =new JButton("Map2");
-		fileButton3 =new JButton("Map3");
-		fileButton4 =new JButton("Map4");
-		fileButton5 =new JButton("Map5");
+		fileButton1 = new JButton("Map1");
+		fileButton2 = new JButton("Map2");
+		fileButton3 = new JButton("Map3");
+		fileButton4 = new JButton("Map4");
+		fileButton5 = new JButton("Map5");
 
 		fileButton1.addActionListener(this);
 		fileButton2.addActionListener(this);
 		fileButton3.addActionListener(this);
 		fileButton4.addActionListener(this);
 		fileButton5.addActionListener(this);
-
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -226,7 +222,7 @@ public class Tournament extends JFrame implements ActionListener {
 			public void actionPerformed(final ActionEvent e) {
 				playercount = (String) playerCountCombo.getSelectedItem();
 
-				if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4") ) {
+				if (playercount.equals("2") || playercount.equals("3") || playercount.equals("4")) {
 
 					gbc.gridx = 0;
 					gbc.gridy = 4;
@@ -247,9 +243,8 @@ public class Tournament extends JFrame implements ActionListener {
 					panel.remove(cbPlayer4);
 					panel.remove(player4);
 
-
 				}
-				if (playercount.equals("3")|| playercount.equals("4") ) {
+				if (playercount.equals("3") || playercount.equals("4")) {
 
 					gbc.gridx = 0;
 					gbc.gridy = 8;
@@ -261,7 +256,7 @@ public class Tournament extends JFrame implements ActionListener {
 					panel.remove(cbPlayer4);
 					panel.remove(player4);
 				}
-				if (playercount.equals("4") ) {
+				if (playercount.equals("4")) {
 					gbc.gridx = 0;
 					gbc.gridy = 10;
 					panel.add(player4, gbc);
@@ -278,12 +273,12 @@ public class Tournament extends JFrame implements ActionListener {
 			}
 		});
 
-
 		mapCountCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				mapCount = (String) mapCountCombo.getSelectedItem();
 
-				if (mapCount.equals("1")||mapCount.equals("2")||mapCount.equals("3") || mapCount.equals("4") ||mapCount.equals("5") ) {
+				if (mapCount.equals("1") || mapCount.equals("2") || mapCount.equals("3") || mapCount.equals("4")
+						|| mapCount.equals("5")) {
 
 					gbc.gridx = 8;
 					gbc.gridy = 4;
@@ -301,12 +296,9 @@ public class Tournament extends JFrame implements ActionListener {
 					panel.remove(fileButton5);
 					panel.remove(map5);
 
-
 				}
 
-				if (mapCount.equals("2")||mapCount.equals("3") || mapCount.equals("4") ||mapCount.equals("5") ) {
-
-
+				if (mapCount.equals("2") || mapCount.equals("3") || mapCount.equals("4") || mapCount.equals("5")) {
 
 					gbc.gridx = 8;
 					gbc.gridy = 6;
@@ -321,9 +313,8 @@ public class Tournament extends JFrame implements ActionListener {
 					panel.remove(fileButton5);
 					panel.remove(map5);
 
-
 				}
-				if (mapCount.equals("3") ||mapCount.equals("4")||mapCount.equals("5")) {
+				if (mapCount.equals("3") || mapCount.equals("4") || mapCount.equals("5")) {
 
 					gbc.gridx = 8;
 					gbc.gridy = 8;
@@ -336,7 +327,7 @@ public class Tournament extends JFrame implements ActionListener {
 					panel.remove(fileButton5);
 					panel.remove(map5);
 				}
-				if (mapCount.equals("4") ||mapCount.equals("5")) {
+				if (mapCount.equals("4") || mapCount.equals("5")) {
 					gbc.gridx = 8;
 					gbc.gridy = 10;
 					panel.add(map4, gbc);
@@ -372,26 +363,20 @@ public class Tournament extends JFrame implements ActionListener {
 		okayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 
-				
-				
-				boolean validity= true;
+				boolean validity = true;
 
-				if(!mapCountCombo.getSelectedItem().toString().equals(String.valueOf(filesSelected.size())))
-				{
-					
-				    JOptionPane.showMessageDialog(frame,"Select file for all the maps.");
-				    validity= false;
+				if (!mapCountCombo.getSelectedItem().toString().equals(String.valueOf(filesSelected.size()))) {
+
+					JOptionPane.showMessageDialog(frame, "Select file for all the maps.");
+					validity = false;
 				}
-				if(playercount==null)
-				{
-				    JOptionPane.showMessageDialog(frame,"Select the players");
-				    validity= false;
+				if (playercount == null) {
+					JOptionPane.showMessageDialog(frame, "Select the players");
+					validity = false;
 
 				}
-				if(validity)
-				{
-					if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4"))
-					{
+				if (validity) {
+					if (playercount.equals("2") || playercount.equals("3") || playercount.equals("4")) {
 						playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
 						playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
 
@@ -403,11 +388,13 @@ public class Tournament extends JFrame implements ActionListener {
 					if (playercount.equals("4")) {
 						playerType.put("Player4", (String) cbPlayer4.getSelectedItem());
 					}
-					
-					tgm= new TournamentGameDriver();
-					
+
+					tgm = new TournamentGameDriver();
+
 					try {
-						tgm.gamePhase(playerType, filesSelected,Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),Integer.parseInt(turnsCombo.getSelectedItem().toString()));
+						tgm.gamePhase(playerType, filesSelected,
+								Integer.parseInt(gamesCountCombo.getSelectedItem().toString()),
+								Integer.parseInt(turnsCombo.getSelectedItem().toString()));
 						frame.setVisible(false);
 					} catch (NumberFormatException e1) {
 						e1.printStackTrace();
@@ -415,18 +402,15 @@ public class Tournament extends JFrame implements ActionListener {
 						e1.printStackTrace();
 					}
 				}
-				
 
 			}
 		});
 	}
 
-
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == fileButton1|| e.getSource() == fileButton2||e.getSource() == fileButton3||e.getSource() == fileButton4||e.getSource() == fileButton5)
-		{
-			
-			
+		if (e.getSource() == fileButton1 || e.getSource() == fileButton2 || e.getSource() == fileButton3
+				|| e.getSource() == fileButton4 || e.getSource() == fileButton5) {
+
 			fileChooser = new JFileChooser();
 			fileChooser.setDialogTitle("Select the map");
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -439,7 +423,7 @@ public class Tournament extends JFrame implements ActionListener {
 			if (result == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				String fileName = file.getName();
-				
+
 				fileObject = new File(file.getAbsolutePath().toString());
 				try {
 					bufferReaderForFile = new BufferedReader(new FileReader(fileObject));
@@ -449,19 +433,18 @@ public class Tournament extends JFrame implements ActionListener {
 				}
 				mapValidator = new MapValidator();
 				mapValidator.init(fileObject);
-				
+
 				if (!mapValidator.getValidMapFlag()) {
 					LOGGER.info("Invalid Map File");
-				    JOptionPane.showMessageDialog(frame,"Invalid Map File");
+					JOptionPane.showMessageDialog(frame, "Invalid Map File");
 
 				}
-				
-				else
-				{
-				filesSelected.add(file.getAbsolutePath().toString());
+
+				else {
+					filesSelected.add(file.getAbsolutePath().toString());
 				}
 			}
 
 		}
-	}  
+	}
 }

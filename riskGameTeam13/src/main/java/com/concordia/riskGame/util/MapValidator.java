@@ -18,6 +18,7 @@ import com.concordia.riskGame.model.Player.Player;
 
 /**
  * This class contains all the methods to validate the map file.
+ * 
  * @author d_modi
  */
 public class MapValidator {
@@ -26,6 +27,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if all the labels are described properly
+	 * 
 	 * @param mapContents It is of type map Contents Object
 	 * @return true if all labels are described properly, otherwise false
 	 */
@@ -38,6 +40,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if Country Continent if from Continent list only
+	 * 
 	 * @param mapContents : MapContents object
 	 * @return true if Country Continent is from Continent List, otherwise false
 	 */
@@ -56,6 +59,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if map is connected continent graph or not
+	 * 
 	 * @param mapContinent map of continent and Countries
 	 * @param visitedMap   map of Country and visited value, 1 for visited and 0 if
 	 *                     not visited
@@ -83,6 +87,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if all continent have at least one country
+	 * 
 	 * @param mapContents : MapContents object
 	 * @return true if all continent has at least one country, otherwise false
 	 */
@@ -97,6 +102,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if all continent control value
+	 * 
 	 * @param mapContents : MapContents object
 	 * @return true if all continent has at least one country, otherwise false
 	 */
@@ -111,6 +117,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if country is assigned to only one country
+	 * 
 	 * @param mapContents : MapContents object
 	 * @return true if all countries are assigned to only one country, otherwise
 	 *         false
@@ -134,6 +141,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if map is connected graph or not
+	 * 
 	 * @param parent     starting node of the graph
 	 * @param mapCountry map of Country and neighboring Countries
 	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
@@ -154,7 +162,7 @@ public class MapValidator {
 		if (nbCountries != null && !nbCountries.isEmpty()) {
 			for (int i = 0; i < nbCountries.size(); i++) {
 				if (!visitedMap.containsKey(nbCountries.get(i).getCountryName().trim())) {
-					
+
 					checkConnectedGraphForContinent(nbCountries.get(i), mapCountry, visitedMap);
 
 				}
@@ -165,6 +173,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if all the countries in the continents are connected or not
+	 * 
 	 * @param mapContents MapContents object
 	 * @return true if all continents are connected otherwise false
 	 */
@@ -229,7 +238,7 @@ public class MapValidator {
 					connectedCountries++;
 				}
 			}
-			
+
 			if (mapContents.getContinentAndItsCountries().get(c).size() == countireswithNoNbCounty) {
 				System.out.println("****************************************************");
 				System.out.println("Continent " + c.getContinentName() + " is Not Connected");
@@ -253,6 +262,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check if map is connected graph or not
+	 * 
 	 * @param parent     starting node of the graph
 	 * @param mapCountry map of Country and neighboring Countries
 	 * @param visitedMap map of Country and visited value, 1 for visited and 0 if
@@ -280,6 +290,7 @@ public class MapValidator {
 
 	/**
 	 * Method to check all the output returned by above described method
+	 * 
 	 * @param file : File Object
 	 */
 	public void init(File file) {
@@ -401,6 +412,7 @@ public class MapValidator {
 
 	/**
 	 * This method returns boolean value for Valid Map
+	 * 
 	 * @return validMapFlag true if map is valid otherwise false
 	 */
 	public Boolean getValidMapFlag() {

@@ -12,22 +12,21 @@ import com.concordia.riskGame.model.Country.Country;
  *
  */
 public class Continent implements Serializable {
-	
+
 	private static final long serialversionUID = 1L;
-	
+
 	private String continentName;
 	private List<Country> countries;
 	private int numberOfCountries;
 	private int continentControlValue;
 
-	
 	/**
 	 * It is default constructor of the continent class
 	 */
-	public Continent()
-	{
-		
+	public Continent() {
+
 	}
+
 	/**
 	 * This is a constructor to create the Continent given only the continent.
 	 * 
@@ -73,7 +72,7 @@ public class Continent implements Serializable {
 	/**
 	 * method to set the countries which belong to this continent
 	 * 
-	 * @param countries List of country objects 
+	 * @param countries List of country objects
 	 */
 	public void setCountries(List<Country> countries) {
 		this.countries = countries;
