@@ -31,6 +31,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 		int armiesContControl = 0;
 		int assignedArmies = 0;
 		int armiesToBeGiven = 0;
+		player.setPhase(player.getName() + " is in Reinforcement phase ");
 		player.setPhase("#### Benevolent Player Reinforcement Phase");
 		assignedArmies = player.calculateReiforcementArmies(player.getAssignedCountries().size());
 		List<Continent> currcontControlList = new ArrayList();
@@ -83,6 +84,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	public Player attackPhase(Player player) {
 		player.setDomination();
 		player.setCurrentPhase(Player.attackPhase);
+		player.setPhase(player.getName() + " is in attack phase ");
 		player.setPhase("#### BENEVOLENT PLAYER ATTACK PHASE BEGINS####");
 		player.setPhase("#### BENEVOLENT PLAYER DOESNT ATTACK####");
 		checkPlayerTurnCanContinue(player);
@@ -98,6 +100,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	public Player forfeitPhase(Player player) {
 		player.setCurrentPhase(Player.fortificationPhase);
 		player.setDomination();
+		player.setPhase(player.getName() + " is in Forfeit phase ");
 		player.setPhase("#### Benevolent Player Forfeit Phase");
 		player.setPhase("#### Before Fortification ####");
 		player.printAllCountriesOfaPlayer(player);

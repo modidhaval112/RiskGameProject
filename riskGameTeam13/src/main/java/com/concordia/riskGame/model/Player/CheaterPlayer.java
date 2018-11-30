@@ -25,6 +25,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	public Player reinforcePhase(Player player) {
 		player.setDomination();
 		player.setCurrentPhase(Player.reinforcePhase);
+		player.setPhase(player.getName() + " is in Reinforcement phase ");
 		player.setPhase("#### Cheater Player Reinforcement Phase");
 		player.printAllCountriesOfaPlayer(player);
 		for(Country country : player.getAssignedCountries()) {
@@ -46,6 +47,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	public Player attackPhase(Player player) {
 		player.setDomination();
 		player.setCurrentPhase(Player.reinforcePhase);
+		player.setPhase(player.getName() + " is in attack phase ");
 		player.setPhase("#### Cheater Player Attack Phase");
 		player.printAllCountriesOfaPlayer(player);
 		Iterator<Country> iterator =  new ArrayList<>(player.getAssignedCountries()).iterator();
@@ -114,6 +116,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	public Player forfeitPhase(Player player) {
 		player.setDomination();
 		player.setCurrentPhase(Player.fortificationPhase);
+		player.setPhase(player.getName() + " is in Fortification phase ");
 		player.setPhase("#### Cheater Player Fortification Phase");
 		player.printAllCountriesOfaPlayer(player);
 		for(Country country : player.getAssignedCountries()) {

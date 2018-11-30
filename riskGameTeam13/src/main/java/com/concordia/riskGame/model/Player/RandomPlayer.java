@@ -38,6 +38,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 			int armiesContControl = 0;
 			int assignedArmies = 0;
 			int armiesToBeGiven = 0;
+			player.setPhase(player.getName() + " is in Reinforcement phase ");
 			player.setPhase("#### Random Player Reinforcement Phase");
 			assignedArmies = player.calculateReiforcementArmies(player.getAssignedCountries().size());
 			List<Continent> currcontControlList = new ArrayList();
@@ -98,6 +99,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 		List<Integer> defenderDiceResults;
 		Country sourceCountryObject;
 		Country destinationCountryObject;
+		player.setPhase(player.getName() + " is in attack phase ");
 		player.setPhase("#### Random Player Attack Phase");
 		int attackableCount = player.getAssignedCountries().size();
 		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
@@ -211,6 +213,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 	public Player forfeitPhase(Player player) {
 		player.setCurrentPhase(Player.fortificationPhase);
 		player.setDomination();
+		player.setPhase(player.getName() + " is in Forfeit phase ");
 		player.setPhase("#### Random Player Forfeit Phase");
 		player.setPhase("#### Before Fortification ####");
 		player.printAllCountriesOfaPlayer(player);
