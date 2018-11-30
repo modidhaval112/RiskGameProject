@@ -65,16 +65,8 @@ public class RandomAssignment {
 		
 		RandomAssignment inputObject = new RandomAssignment();
 		int[] dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
-		Map<Continent, List<Country>> continentAssign = new HashMap<>();
 		List<Country> newCountryList = new ArrayList<>(countryList);
-		System.out.println("\n");
-		for (Continent key : continentAssign.keySet()) {
-			System.out.println("Continent Name : " + key.getContinentName());
-			for (int i = 0; i < key.getCountries().size(); i++) {
-				System.out.println("Assigned Countries : " + continentAssign.get(key).get(i).getCountryName());
-			}
-			System.out.println("");
-		}
+
 		dividedValuesList = inputObject.divider(noOfCountries, noOfPlayers);
 		Map<Player, List<Country>> playerAssign = new HashMap<>();
 		newCountryList = new ArrayList<>(countryList);
