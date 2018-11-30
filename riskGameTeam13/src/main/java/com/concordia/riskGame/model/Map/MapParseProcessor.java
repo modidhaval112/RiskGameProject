@@ -71,7 +71,8 @@ public class MapParseProcessor  implements Serializable {
 	 * 
 	 * @param filePath    Path of the map file
 	 * @param numberOfPlayer Number of players returned from the drop down menu
-	 * 
+	 * @param playerType Type of player (human, aggressive.. etc)
+	 * @param gameType Type of game that is being played
 	 * @return the mapContent Object with map details enriched
 	 */
 
