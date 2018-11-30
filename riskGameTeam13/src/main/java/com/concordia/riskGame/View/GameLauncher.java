@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -27,6 +31,8 @@ import java.awt.Insets;
  * @author Dheeraj As - Team 13
  */
 public class GameLauncher extends JFrame implements ActionListener {
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	private JFrame gameFrame;
 	private TitledBorder border;
@@ -50,7 +56,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		try {
 			initUI();
 		} catch (Exception e) {
-			System.out.println("Error Message : " + e.getMessage());
+			LOGGER.error("Error Message : " + e.getMessage());
 		}
 
 	}
@@ -64,12 +70,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		gameFrame = new JFrame("Concordia Conquest");
 		gameFrame.setVisible(true);
 
-		/*try {
-			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/rsz_aoe_bk.jpg"))));
-			gameFrame.setContentPane(label);
-		} catch (IOException e) {
-			System.out.println("Error Message : " + e.getMessage());
-		}*/
+
 
 		gameFrame.setSize(500, 500);
 		gameFrame.setLocation(500, 200);
@@ -156,38 +157,38 @@ public class GameLauncher extends JFrame implements ActionListener {
 
 		String action = event.getActionCommand();
 		if (event.getSource() == startGameButton) {
-			System.out.println("####  startGameButton is clicked ####");
+			LOGGER.info("####  startGameButton is clicked ####");
 			gameFrame.setVisible(false);
 			playerCount = new PlayerCount();
 			playerCount.setVisible(true);
 
 		} else if (event.getSource() == createMapButton) {
-			System.out.println("#### createMapButton  is clicked ####");
+			LOGGER.info("#### createMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			createMapFile = new CreateMapFile();
 			createMapFile.createMap();
 
 		} else if (event.getSource() == editMapButton) {
-			System.out.println("#### editMapMapButton  is clicked ####");
+			LOGGER.info("#### editMapMapButton  is clicked ####");
 			gameFrame.setVisible(false);
 			editObject = new MapEditView();
 			editObject.EditMapFileChoose();
 
 		} else if (event.getSource() == tournamentButton) {
-			System.out.println("#### tournamentButton  is clicked ####");
+			LOGGER.info("#### tournamentButton  is clicked ####");
 			gameFrame.setVisible(false);
 			tournament= new Tournament();
-			
+
 
 
 		}
 
 		else if (event.getSource() == loadGameButton) {
-			System.out.println("#### loadGameButton  is clicked ####");
+			LOGGER.info("#### loadGameButton  is clicked ####");
 			gameFrame.dispose();
 			LoadGame loadgame = new LoadGame();
 			loadgame.chooseFileMethod();
-			
+
 		} else if (event.getSource() == exitButton) {
 			System.exit(0);
 

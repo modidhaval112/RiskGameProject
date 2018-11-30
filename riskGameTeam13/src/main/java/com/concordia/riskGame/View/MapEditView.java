@@ -30,6 +30,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -41,6 +45,8 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  * @author saich
  */
 public class MapEditView extends java.awt.Frame {
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	private JLabel headingLabel = new JLabel();
 	private JLabel labecountries = new JLabel();
@@ -322,7 +328,7 @@ public class MapEditView extends java.awt.Frame {
 					Object selectionValues[] = list.getSelectedValues();
 					for (int i = 0, n = selections.length; i < n; i++) {
 						List<String>countryNeighboursList=countryAndNeighborsMap.get(selectionValues[i].toString());
-						System.out.println(countryNeighboursList);
+						LOGGER.info(countryNeighboursList);
 						countryNeighbours.removeAllElements();
 						if(countryNeighboursList!=null)
 						{
@@ -378,7 +384,7 @@ public class MapEditView extends java.awt.Frame {
 			public void actionPerformed(ActionEvent e)
 			{
 				String s = (String) continentsJList.getSelectedValue();
-				System.out.println("Continent Selected: " + s);
+				LOGGER.info("Continent Selected: " + s);
 				setLog("Continent Removed: " + s);
 				removeContinent(s);
 				frame.validate();
@@ -393,7 +399,7 @@ public class MapEditView extends java.awt.Frame {
 			public void actionPerformed(ActionEvent e)
 			{
 				String s = (String) countriesJList.getSelectedValue();
-				System.out.println("Country Selected: " + s);
+				LOGGER.info("Country Selected: " + s);
 				setLog("Country Removed: " + s);
 				removeCountry(s);
 				frame.validate();
@@ -656,7 +662,7 @@ public class MapEditView extends java.awt.Frame {
 						}
 
 					}
-					
+
 					continent.setNumberOfCountries(continentCountries.size());
 					continentsWithItsCountries.put(continent, countries);
 
@@ -696,7 +702,6 @@ public class MapEditView extends java.awt.Frame {
 				mapContents.setContinentAndItsCountries(continentsWithItsCountries);
 				mapContents.setCountryAndNeighbors(countriesWithItsNeighbours);
 				MapOperations mapOperations = new MapOperations();
-				System.out.println("In operations");
 				String fileName=filePath.substring(filePath.lastIndexOf("\\")+1,filePath.length());
 				try {
 					mapOperations.writeMapFile(mapContents,fileName.substring(0, fileName.lastIndexOf(".")),filePath.substring(0,filePath.lastIndexOf("\\")));
@@ -713,7 +718,7 @@ public class MapEditView extends java.awt.Frame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("In exit map");
+				LOGGER.info("In exit map");
 				frame.dispose();
 				System.exit(0);
 
@@ -797,7 +802,7 @@ public class MapEditView extends java.awt.Frame {
 	 */
 	public void removeCountry(String Country)
 	{
-		System.out.println("In removing Continent");
+		LOGGER.info("In removing Continent");
 		countryAndNeighborsMap.remove(Country);
 		countries.removeElement(Country);
 
@@ -881,14 +886,13 @@ public class MapEditView extends java.awt.Frame {
 	 */
 	public void addCountry(String Country,String Continent)
 	{
-		System.out.println("In Adding Country");
+		LOGGER.info("In Adding Country");
 		countries.addElement(Country);
 
 		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
 		{
 
 			List<String>  continentCountries= new ArrayList<String>();
-			System.out.println(entry.getKey().toString());
 
 
 
@@ -899,7 +903,7 @@ public class MapEditView extends java.awt.Frame {
 				continentCountries= entry.getValue();
 
 				continentCountries.add(Country);
-				System.out.println("continent countries are"+continentCountries);
+				LOGGER.info("continent countries are"+continentCountries);
 				continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
 			}
 
@@ -907,7 +911,7 @@ public class MapEditView extends java.awt.Frame {
 			if(entry.getValue()== null & Continent.equals(entry.getKey().toString()))
 			{
 				continentCountries.add(Country);
-				System.out.println("continent countries loop are"+continentCountries);
+				LOGGER.info("continent countries loop are"+continentCountries);
 				continentsAndCountriesMap.put(entry.getKey().toString(), continentCountries);
 			}
 
@@ -980,7 +984,7 @@ public class MapEditView extends java.awt.Frame {
 	 */
 	public void renameCountry(String Country,String renamedCountry)
 	{
-		System.out.println("In renaming Country");
+		LOGGER.info("In renaming Country");
 
 
 		for (Map.Entry<String, List<String>> entry : continentsAndCountriesMap.entrySet())
@@ -1023,9 +1027,7 @@ public class MapEditView extends java.awt.Frame {
 
 			if(entry.getKey().equals(Country))
 			{
-				System.out.println("before put");
 				CountriesRenameList= continentCountries;
-				System.out.println("after put");
 			}
 
 			if (continentCountries!= null)
@@ -1087,7 +1089,7 @@ public class MapEditView extends java.awt.Frame {
 			if(entry.getKey().equals(country))
 			{
 				continentCountries.add(adjacentCountry);
-				System.out.println(adjacentCountry);
+				LOGGER.info(adjacentCountry);
 				countryAndNeighborsMap.put(country,continentCountries);
 			}
 
@@ -1132,7 +1134,7 @@ public class MapEditView extends java.awt.Frame {
 		try {
 
 			{
-				System.out.println("#### In Choosing the file ####");
+				LOGGER.info("#### In Choosing the file ####");
 				filenameFilter = new FileNameExtensionFilter(" .map", "map", "map");
 				//countFrame.setVisible(true);
 				fileChooser = new JFileChooser();
@@ -1146,7 +1148,7 @@ public class MapEditView extends java.awt.Frame {
 
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
-					System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
+					LOGGER.info("Selected file: " + selectedFile.getAbsolutePath().toString());
 					filePath = selectedFile.getAbsolutePath().toString();
 					mapParseObject = new MapParseProcessor();
 					mapParseObject.editMapParsermapParser(selectedFile.getAbsolutePath().toString());

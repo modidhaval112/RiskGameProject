@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -18,6 +21,8 @@ import com.concordia.riskGame.model.Map.MapOperations;
  *
  */
 public class CreateMapFile {
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	private static final int List = 0;
 	private int numberOfContinents;
@@ -38,16 +43,16 @@ public class CreateMapFile {
 			countries = new ArrayList<>() ;
 			continentsWithItsCountries= new HashMap<>();
 			countriesWithItsNeighbours = new HashMap<>();
-			System.out.println("Enter the number of Continents");
+			LOGGER.info("Enter the number of Continents");
 			numberOfContinents = scanner.nextInt();
 			for(int i=1;i<=numberOfContinents;i++) {
-				System.out.println("Enter the name of the Continent"+ i);
+				LOGGER.info("Enter the name of the Continent"+ i);
 				nameOfContinents.add(scanner.next());
 			}
 			for(int i=0;i<numberOfContinents;i++) {
-				System.out.println("Enter the Number of Countries in the Continent : " + nameOfContinents.get(i));
+				LOGGER.info("Enter the Number of Countries in the Continent : " + nameOfContinents.get(i));
 				int numberOfCountries = scanner.nextInt(); // add number format exception
-				System.out.println("Enter the Name of countries that belong to the Continent : "+nameOfContinents.get(i));
+				LOGGER.info("Enter the Name of countries that belong to the Continent : "+nameOfContinents.get(i));
 				for(int j=0;j<numberOfCountries;j++) {
 					String countryName = scanner.next();
 					nameOfCountries.add(countryName);
@@ -60,17 +65,17 @@ public class CreateMapFile {
 				continentsWithItsCountries.put(continent, countries);
 			}
 			for(int i=0;i<countries.size();i++) {
-				System.out.println("Enter the neighbouring countries to the country\""  + countries.get(i).getCountryName() + "\"in \",\"(comma) seperated values " );
+				LOGGER.info("Enter the neighbouring countries to the country\""  + countries.get(i).getCountryName() + "\"in \",\"(comma) seperated values " );
 				String[] neighbouringCountries = scanner.nextLine().split(",");
 				List<Country> neighbourCountries = new ArrayList<>();
 				boolean errorWhileReadingCountry = false;
 				for(String neighbour : neighbouringCountries) {
 					if(neighbour.equals(countries.get(i).getCountryName())) {
-						System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
+						LOGGER.info("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 						errorWhileReadingCountry = true;
 						neighbourCountries=reenterCountries(countries.get(i).getCountryName(),scanner,countries.get(i).getBelongsToContinent());
 					}else if(!nameOfCountries.contains(neighbour)) {
-						System.out.println("A country is not in the list. Please enter the neighbouring countries again ");
+						LOGGER.info("A country is not in the list. Please enter the neighbouring countries again ");
 						errorWhileReadingCountry = true;
 						neighbourCountries=reenterCountries(countries.get(i).getCountryName(),scanner,countries.get(i).getBelongsToContinent());
 					}else {
@@ -83,13 +88,13 @@ public class CreateMapFile {
 				countriesWithItsNeighbours.put(countries.get(i), neighbourCountries);
 			}
 		}catch (Exception InputMismatchException) {
-			System.out.println("Please enter a valid input ");
+			LOGGER.error("Please enter a valid input ");
 			createMap();
 		} 
 
 
 
-		System.out.println("Please Enter the Name of The Map that you want to create");
+		LOGGER.info("Please Enter the Name of The Map that you want to create");
 
 		String fileName = scanner.nextLine();
 		MapContents.setMapContents(null);
@@ -100,7 +105,7 @@ public class CreateMapFile {
 		try {
 			mapOperations.writeMapFile(mapContents, fileName,null);
 		} catch (FileNotFoundException e) {
-			System.out.println("Error Message : " + e.getMessage());
+			LOGGER.error("Error Message : " + e.getMessage());
 		}
 	}
 
@@ -118,10 +123,10 @@ public class CreateMapFile {
 		boolean errorWhileReadingCountry = false;
 		for(String neighbour : neighbouringCountries) {
 			if(neighbour.equals(countryName)) {
-				System.out.println("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
+				LOGGER.info("A country cannot be neighbour to itself. Please enter the neighbouring countries again ");
 				reenterCountries(countryName,scanner,continent);
 			}else if(!nameOfCountries.contains(neighbour)) {
-				System.out.println("A country is not in the list. Please enter the neighbouring countries again ");
+				LOGGER.info("A country is not in the list. Please enter the neighbouring countries again ");
 				errorWhileReadingCountry = true;
 				neighbourCountries=reenterCountries(countryName,scanner,continent);
 			}else {

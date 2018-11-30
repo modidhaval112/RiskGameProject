@@ -19,6 +19,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.model.Map.MapParseProcessor;
 /**
  * This Class performs actions for selecting the number of players from property
@@ -29,6 +33,7 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  *
  */
 public class PlayerCount extends JFrame {
+	private static Logger LOGGER = LogManager.getLogger();
 	private String[] playerCounterArray = {"2", "3", "4", "5", "6" };
 	private int noOfPlayers;
 	private JFrame countFrame;
@@ -64,7 +69,7 @@ public class PlayerCount extends JFrame {
 		try {
 			Count();
 		} catch (Exception e) {
-			System.out.println("Error Message : " + e.getMessage());
+			LOGGER.error("Error Message : " + e.getMessage());
 		}
 	}
 	/**
@@ -204,41 +209,7 @@ public class PlayerCount extends JFrame {
 				countFrame.repaint();
 			}
 		});
-		// set Background Image
-		/*
-		 * try { //JLabel label = new JLabel(new ImageIcon(ImageIO.read(new
-		 * File("src/main/resources/rsz_aoe_bk.jpg"))));
-		 * countFrame.setContentPane(label); } catch (IOException e) {
-		 * System.out.println("Error Message : " + e.getMessage()); }
-		 * 
-		 * /*
-		 * 
-		 * countFrame.getContentPane().setLayout(null);
-		 * 
-		 * countLabel = new JLabel("select the number of players");
-		 * countLabel.setPreferredSize(new Dimension(304, 14));
-		 * countLabel.setMaximumSize(new Dimension(300, 300));
-		 * countLabel.setForeground(new Color(255, 255, 255)); countLabel.setFont(new
-		 * Font("Georgia", Font.BOLD, 15)); countLabel.setBounds(60, 101, 230, 30);
-		 * 
-		 * countFrame.getContentPane().add(countLabel);
-		 * 
-		 * playerCountCombo = new JComboBox(playerCounterArray);
-		 * playerCountCombo.setForeground(new Color(102, 0, 0));
-		 * playerCountCombo.setBounds(300, 107, 42, 20);
-		 * 
-		 * countFrame.getContentPane().add(playerCountCombo);
-		 * 
-		 * okayButton = new JButton("OK"); okayButton.setForeground(new Color(102, 0,
-		 * 0)); okayButton.setFont(new Font("Georgia", Font.PLAIN, 11));
-		 * okayButton.setBounds(195, 201, 82, 30); okayButton.addActionListener(this);
-		 * 
-		 * countFrame.getContentPane().add(okayButton);
-		 * 
-		 * selectMapLabel = new JLabel("select map file to start the game");
-		 * 
-		 * countFrame.setSize(500, 500); countFrame.setLocation(500, 200);
-		 */
+
 		/**
 		 * This function implements actions when okay button is clicked and presents
 		 * user the option to select the map file
@@ -275,9 +246,9 @@ public class PlayerCount extends JFrame {
 						for (String name : playerType.keySet()) {
 							String key = name.toString();
 							String value = playerType.get(name).toString();
-							System.out.println(key + " " + value);
+							LOGGER.info(key + " " + value);
 						}
-						System.out.println("#### Okay Button is Clicked ####");
+						LOGGER.info("#### Okay Button is Clicked ####");
 						filenameFilter = new FileNameExtensionFilter(" .map", "map", "map");
 						countFrame.setVisible(false);
 						fileChooser = new JFileChooser();
@@ -290,7 +261,7 @@ public class PlayerCount extends JFrame {
 						fileChooser.setVisible(true);
 						if (result == JFileChooser.APPROVE_OPTION) {
 							File selectedFile = fileChooser.getSelectedFile();
-							System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
+							LOGGER.info("Selected file: " + selectedFile.getAbsolutePath().toString());
 							filePath = selectedFile.getAbsolutePath().toString();
 							mapParseObject = new MapParseProcessor();
 							mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),
@@ -298,7 +269,7 @@ public class PlayerCount extends JFrame {
 						}
 					}
 				} catch (Exception e) {
-					System.out.println("Error Message : " + e.getMessage());
+					LOGGER.error("Error Message : " + e.getMessage());
 				}
 			}
 		});
