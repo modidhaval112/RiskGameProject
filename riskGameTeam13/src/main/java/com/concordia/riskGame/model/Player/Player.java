@@ -1528,6 +1528,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 */
 	public void exchangeCardsForComputerPlayer(List<Card> exchangeDifferentCards, List<Card> exchangeSameCards,
 			Player player) {
+		
 		if (exchangeDifferentCards.size() == 3) {
 			boolean s = player.getCardList().remove(exchangeDifferentCards.get(0));
 			player.getCardList().remove(exchangeDifferentCards.get(1));
@@ -1536,14 +1537,13 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 			deck.add(exchangeDifferentCards.get(1));
 			deck.add(exchangeDifferentCards.get(2));
 		} else if (exchangeSameCards.size() == 3) {
-			if (exchangeDifferentCards.size() == 3) {
-				boolean s = player.getCardList().remove(exchangeDifferentCards.get(0));
-				player.getCardList().remove(exchangeDifferentCards.get(1));
-				player.getCardList().remove(exchangeDifferentCards.get(2));
-				deck.add(exchangeDifferentCards.get(0));
-				deck.add(exchangeDifferentCards.get(1));
-				deck.add(exchangeDifferentCards.get(2));
-			}
+				boolean s = player.getCardList().remove(exchangeSameCards.get(0));
+				player.getCardList().remove(exchangeSameCards.get(1));
+				player.getCardList().remove(exchangeSameCards.get(2));
+				deck.add(exchangeSameCards.get(0));
+				deck.add(exchangeSameCards.get(1));
+				deck.add(exchangeSameCards.get(2));
+			
 		}
 		setExchanged(true);
 		setCardList(player.getCardList());

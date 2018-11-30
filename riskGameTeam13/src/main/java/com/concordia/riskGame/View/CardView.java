@@ -243,7 +243,7 @@ public class CardView implements Observer {
 			}
 			LOGGER.info(card.getType() + ", " + card.getCountry().getCountryName());
 		}
-		if (cardTypes >= 3) {
+		if (cardTypes == 3) {
 			cardExchangePossible = true;
 		}
 		for (Entry<String, Integer> cardVal : cardCount.entrySet()) {
@@ -268,7 +268,7 @@ public class CardView implements Observer {
 				player.setExchanged(false);
 				int count = MapContents.getInstance().getCardExchangeCount();
 				armiesToBeGiven = (count + 1) * 5;
-
+				LOGGER.info("####### Armies For Only Card Exchange"+armiesToBeGiven+" ######## ");
 				MapContents.getInstance().setCardExchangeCount(MapContents.getInstance().getCardExchangeCount() + 1);
 				exchangeCards = exchangeDifferentCards.size() == 3 ? exchangeDifferentCards : exchangeSameCards;
 				player = player.exChangeCardTerritoryExist(exchangeCards, player);
