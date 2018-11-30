@@ -82,12 +82,12 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
 		sourceCountryObject.getBelongsToPlayer().getAssignedCountries().add(destinationCountryObject);
-		if (destinationCountryObject.getBelongsToPlayer().getAssignedCountries().size() == 0) {
+		if(destinationCountryObject.getBelongsToPlayer().getAssignedCountries().size() == 0) {
 			playerHasLost(sourceCountryObject, destinationCountryObject);
 		}
 		destinationCountryObject.setBelongsToPlayer(sourceCountryObject.getBelongsToPlayer());
 		int movableArmies = 1;
-		if (movableArmies > 0) {
+		if(movableArmies > 0) {
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies() + movableArmies);
 		}
 	}
@@ -101,7 +101,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		destinationCountryObject.getBelongsToPlayer().setHasLost(true);
 		destinationCountryObject.getBelongsToPlayer().setEndGameForThisPlayer(true);
 		List<Card> listOfDefenderCards = destinationCountryObject.getBelongsToPlayer().getCardList();
-		for (Card card : listOfDefenderCards)
+		for(Card card : listOfDefenderCards)
 			sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
 		destinationCountryObject.getBelongsToPlayer().setCardList(new ArrayList<Card>());
 	}
@@ -139,10 +139,10 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
-		for (Country c : player.getAssignedCountries()) {
+		for(Country c : player.getAssignedCountries()) {
 			player.setCanAttack(false);
 			player.setCanFortify(false);
-			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+			if(c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
 				player.setCanFortify(true);
 				break;

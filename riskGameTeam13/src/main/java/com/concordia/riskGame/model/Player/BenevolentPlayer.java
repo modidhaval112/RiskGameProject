@@ -36,8 +36,8 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 		assignedArmies = player.calculateReiforcementArmies(player.getAssignedCountries().size());
 		List<Continent> currcontControlList = new ArrayList();
 		currcontControlList = player.contienentControlList(player);
-		if (currcontControlList != null) {
-			for (Continent cont : currcontControlList) {
+		if(currcontControlList != null) {
+			for(Continent cont : currcontControlList) {
 				player.setPhase(" ##### continent name is ###### " + cont.getContinentName()
 						+ " and     control value is " + cont.getContinentControlValue());
 				armiesContControl = armiesContControl + cont.getContinentControlValue();
@@ -66,8 +66,8 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 		List<Country> playerOwnedCountries = player.getAssignedCountries();
 		Country weakestCountry = null;
 		int armyCount = 9999;
-		for (Country country : playerOwnedCountries) {
-			if (country.getArmies() < armyCount) {
+		for(Country country : playerOwnedCountries) {
+			if(country.getArmies() < armyCount) {
 				armyCount = country.getArmies();
 				weakestCountry = country;
 			}
@@ -111,9 +111,9 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 		int countriesSize = sortedCountryList.size();
 		while (!fortificationDone && countriesSize > 0) {
 			destinationCountry = sortedCountryList.get(countriesSize - 1);
-			for (Country country2 : destinationCountry.getNeighbouringCountries()) {
+			for(Country country2 : destinationCountry.getNeighbouringCountries()) {
 				sourceCountry = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
-				if (sourceCountry != null && sourceCountry.getArmies() > 3) {
+				if(sourceCountry != null && sourceCountry.getArmies() > 3) {
 					fortificationDone = true;
 					break;
 				}
@@ -121,7 +121,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 			countriesSize--;
 		}
 
-		if (sourceCountry == null || destinationCountry == null) {
+		if(sourceCountry == null || destinationCountry == null) {
 			player.setPhase("#### Fortification not possible####");
 			player.setPhase("#### After Fortification ####");
 			player.printAllCountriesOfaPlayer(player);
@@ -148,17 +148,17 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	 */
 	public List<Country> getSortedCountryListBasedOnDescArmy(Player player) {
 		List<Integer> armiesList = new ArrayList<>();
-		for (Country country : player.getAssignedCountries()) {
+		for(Country country : player.getAssignedCountries()) {
 			Country playerCountry = player.getSourceCountryFromString(country.getCountryName());
 			armiesList.add(playerCountry.getArmies());
 		}
 		List<Country> sortedCountryList = new ArrayList<>();
 		Collections.sort(armiesList);
 		Collections.reverse(armiesList);
-		for (Integer army : armiesList) {
-			for (Country country : player.getAssignedCountries()) {
+		for(Integer army : armiesList) {
+			for(Country country : player.getAssignedCountries()) {
 				Country playerCountry = player.getSourceCountryFromString(country.getCountryName());
-				if (playerCountry.getArmies() == army && !sortedCountryList.contains(playerCountry)) {
+				if(playerCountry.getArmies() == army && !sortedCountryList.contains(playerCountry)) {
 					sortedCountryList.add(playerCountry);
 					break;
 				}
@@ -173,21 +173,21 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
-		for (Country c : player.getAssignedCountries()) {
+		for(Country c : player.getAssignedCountries()) {
 			player.setCanAttack(false);
 			player.setCanFortify(false);
-			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
+			if(c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
 			}
 
-			if (c.getArmies() > 1 && player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player) != null
+			if(c.getArmies() > 1 && player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanFortify(true);
 				break;
 			}
 		}
-		if (player.getAssignedCountries().size() == 1) {
+		if(player.getAssignedCountries().size() == 1) {
 			player.setCanFortify(false);
 		}
 	}
