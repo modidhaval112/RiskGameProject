@@ -70,7 +70,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 			player.setPhase("####**** CHEATER PLAYER HAS WON ****####");
 			return player;
 		}
-		checkPlayerTurnCanContinue(player);
+		//checkPlayerTurnCanContinue(player);
 		return player;
 	}
 	

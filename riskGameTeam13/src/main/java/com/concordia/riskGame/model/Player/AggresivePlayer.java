@@ -338,12 +338,14 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	void checkPlayerTurnCanContinue(Player player) {
 		for (Country c : player.getAssignedCountries()) {
 			player.setCanAttack(false);
-			player.setCanFortify(false);
 			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
+				break;
 			}
-
+		}
+		for (Country c : player.getAssignedCountries()) {
+			player.setCanFortify(false);
 			if (c.getArmies() > 1 && player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringPlayerOwnedCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanFortify(true);
