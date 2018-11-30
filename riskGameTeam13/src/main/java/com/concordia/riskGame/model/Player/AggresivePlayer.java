@@ -98,7 +98,7 @@ public class AggresivePlayer implements PlayerStrategy,Serializable {
 		while(attackableCount!=0) {
 		//sourceCountryObject = sortedListBasedOnArmies.get(attackableCount-1);
 			sourceCountryObject = getStrongestAttackableCountry(player);
-			if(sourceCountryObject.getArmies()==1) {
+			if(sourceCountryObject == null || sourceCountryObject.getArmies()==1) {
 				break;
 			}
 		int numberOfNeighbours = player.checkNeighboringAttackableCountriesAndArmies(sourceCountryObject, player).size();
