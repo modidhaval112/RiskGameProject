@@ -12,6 +12,9 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.control.GameDriver;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Map.MapParseProcessor;
@@ -22,6 +25,8 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
  *
  */
 public class LoadGame {
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	private JFileChooser fileChooser;
 	private String filePath;
@@ -34,8 +39,8 @@ public class LoadGame {
 	{
 		
 		try {
-		System.out.println("##### Select a file to load the game #######");
-		System.out.println("#### Okay Button is Clicked ####");
+		LOGGER.info("##### Select a file to load the game #######");
+		LOGGER.info("#### Okay Button is Clicked ####");
 		
 		
 		fileChooser = new JFileChooser();
@@ -51,9 +56,9 @@ public class LoadGame {
 		
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			System.out.println("Selected file: " + selectedFile.getAbsolutePath().toString());
+			LOGGER.info("Selected file: " + selectedFile.getAbsolutePath().toString());
 			filePath = selectedFile.getAbsolutePath().toString();
-			System.out.println("###### The selected file path is ####### : "+filePath );
+			LOGGER.info("###### The selected file path is ####### : "+filePath );
 			MapContents mapContentObject = readSavedMapContent(filePath);
 			GameDriver gameDriverObject = new GameDriver();
 			gameDriverObject.load(mapContentObject);
@@ -71,25 +76,27 @@ public class LoadGame {
 	 * @param filePath The path of the saved file. 
 	 */
 	public MapContents readSavedMapContent(String filePath)
+
 	{
+		
 		MapContents mapContentObject = null;
 		try {
-			System.out.println("##### Calling readSavedMapContent() #########");
-			System.out.println("##### file path is  ######### : "+ filePath );
+			LOGGER.info("##### Calling readSavedMapContent() #########");
+			LOGGER.info("##### file path is  ######### : "+ filePath );
 			FileInputStream saveFile = new FileInputStream(filePath);
 			ObjectInputStream restore = new ObjectInputStream(saveFile);
 			Object obj = restore.readObject();
-			System.out.println("####### Saved file object is ####### : "+obj.toString());
+			LOGGER.info("####### Saved file object is ####### : "+obj.toString());
 			
 			mapContentObject = (MapContents)obj;
-			System.out.println("####### mapContentObject file object is ####### : "+mapContentObject.toString());
+			LOGGER.info("####### mapContentObject file object is ####### : "+mapContentObject.toString());
 			
-			System.out.println("##########  Loaded Saved game File #######");
-			System.out.println("##########  Map Content Number of Player       ####### : "+mapContentObject.getPlayerList().size());
-			System.out.println("##########  Map Content Number of Countries  ####### : "+mapContentObject.getCountryList().size());
+			LOGGER.info("##########  Loaded Saved game File #######");
+			LOGGER.info("##########  Map Content Number of Player       ####### : "+mapContentObject.getPlayerList().size());
+			LOGGER.info("##########  Map Content Number of Countries  ####### : "+mapContentObject.getCountryList().size());
 	
 			rotateValue = mapContentObject.getRotateCount();
-			System.out.println("######### The roate count value is ######## : "+rotateValue);
+			LOGGER.info("######### The roate count value is ######## : "+rotateValue);
 			List<com.concordia.riskGame.model.Player.Player> playerListLoadGame = new ArrayList();
 			playerListLoadGame = mapContentObject.getPlayerList();
 			Collections.rotate(playerListLoadGame, playerListLoadGame.size() - rotateValue);

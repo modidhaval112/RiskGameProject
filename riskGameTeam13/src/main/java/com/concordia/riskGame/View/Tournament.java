@@ -25,7 +25,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.junit.contrib.java.lang.system.SystemOutRule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.concordia.riskGame.control.TournamentGameDriver;
 import com.concordia.riskGame.util.MapValidator;
@@ -36,6 +37,8 @@ import com.concordia.riskGame.util.MapValidator;
  *
  */
 public class Tournament extends JFrame implements ActionListener {
+	private static Logger LOGGER = LogManager.getLogger();
+
 	private HashMap<String, String> playerType = new HashMap<>();
 	private int noOfTurns;
 	private int noOfGames;
@@ -448,7 +451,7 @@ public class Tournament extends JFrame implements ActionListener {
 				mapValidator.init(fileObject);
 				
 				if (!mapValidator.getValidMapFlag()) {
-					System.out.println("Invalid Map File");
+					LOGGER.info("Invalid Map File");
 				    JOptionPane.showMessageDialog(frame,"Invalid Map File");
 
 				}

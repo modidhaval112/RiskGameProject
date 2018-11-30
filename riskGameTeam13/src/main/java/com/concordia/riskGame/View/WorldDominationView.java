@@ -14,6 +14,8 @@ import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
 import com.concordia.riskGame.model.Player.Player;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -22,6 +24,8 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class WorldDominationView implements Observer {
+	private static Logger LOGGER = LogManager.getLogger();
+
 
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
@@ -35,7 +39,7 @@ public class WorldDominationView implements Observer {
 		if("domination".equals(player.dominationPrint))
 		{
 			player.dominationPrint="";
-			System.out.println(System.lineSeparator()+"############################################### World  domination view ##################################################");
+			LOGGER.info(System.lineSeparator()+"############################################### World  domination view ##################################################");
 			List<Player> playerList=MapContents.getInstance().getPlayerList();
 			DecimalFormat df = new DecimalFormat("#.##");
 
@@ -82,13 +86,13 @@ public class WorldDominationView implements Observer {
 					countryArmies=countryArmies+country.getArmies();
 
 				}
-				System.out.println(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+", Number of Continents occupied by the Player are:  "+continentsOccupied + " Occupied Continents are: " +StringUtils.join(continentsOcuupied, ','));
+				LOGGER.info(playerList.get(i).getName() +" Percentage of Map Contolled-"+percentage+" Total army player has "+countryArmies+", Number of Continents occupied by the Player are:  "+continentsOccupied + " Occupied Continents are: " +StringUtils.join(continentsOcuupied, ','));
 
 
 			}
 
 
-			System.out.println("##############################################################################################################################"+System.lineSeparator());
+			LOGGER.info("##############################################################################################################################"+System.lineSeparator());
 		}
 	}
 }

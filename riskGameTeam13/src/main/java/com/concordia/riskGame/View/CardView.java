@@ -8,6 +8,9 @@ import java.util.Observer;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Map.MapContents;
@@ -21,6 +24,7 @@ import com.concordia.riskGame.model.Player.Player;
  */
 public class CardView implements Observer{
 
+	private static Logger LOGGER = LogManager.getLogger();
 
 
 	/**
@@ -39,7 +43,7 @@ public class CardView implements Observer{
 		String cardExchangeChoice;
 		boolean cardExchangePossible = false;
 		String cardAppearingMoreThanThrice = null;
-		System.out.println("The cards with this player are :");
+		LOGGER.info("The cards with this player are :");
 		for (Card card : player.getCardList()) {
 			if (!cardCount.containsKey(card.getType())) {
 				cardCount.put(card.getType(), 1);
@@ -49,7 +53,7 @@ public class CardView implements Observer{
 				c++;
 				cardCount.put(card.getType(), c);
 			}
-			System.out.println(card.getType() + ", "+card.getCountry().getCountryName());
+			LOGGER.info(card.getType() + ", "+card.getCountry().getCountryName());
 		}
 
 		if (cardTypes == 3) {
@@ -63,18 +67,18 @@ public class CardView implements Observer{
 		}
 
 		if (player.getCardList().size() < 3) {
-			System.out.println();
-			System.out.println("Not enough cards to exchange ,continuing with the reinforcement phase");
+			LOGGER.info("\n");
+			LOGGER.info("Not enough cards to exchange ,continuing with the reinforcement phase");
 		} else if (cardExchangePossible) {
 			if (player.getCardList().size() < 5) {
-				System.out.println("Do you want to exchange the cards to armies(yes/no");
+				LOGGER.info("Do you want to exchange the cards to armies(yes/no");
 				cardExchangeChoice = scanner.nextLine();
 				if (cardExchangeChoice.equals("yes")) {
 					int i=0;
 					for (Card card : player.getCardList()) {
-						System.out.println(card.getType()+ ", "+card.getCountry().getCountryName() + " : "+ (++i));
+						LOGGER.info(card.getType()+ ", "+card.getCountry().getCountryName() + " : "+ (++i));
 					}
-					System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
+					LOGGER.info("Enter the numbers of card you want to exchange in comma seperated values");
 					String[] cardsList = scanner.nextLine().split(",");
 					List<Card> exchangeCards = new ArrayList<>();
 					List<Integer> cardNumbers = new ArrayList<>();
@@ -82,18 +86,18 @@ public class CardView implements Observer{
 						cardNumbers.add(Integer.parseInt(card));
 					}
 					if(cardNumbers.size()<3) {
-						System.out.println("Please enter at least 3 numbers for exchanging cards.");
+						LOGGER.info("Please enter at least 3 numbers for exchanging cards.");
 						throw new Exception();
 					}
 					for(int c : cardNumbers) {
 						exchangeCards.add(player.getCardList().get(c-1));
 					}
 					if(!player.checkCardDifferentTypes(exchangeCards,cardTypes) && !player.checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
-						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+						LOGGER.info("Please enter numbers of same cards appearing thrice or three cards which are different.");
 						throw new Exception();
 					}
 					if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null || player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
-						System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+						LOGGER.info("Please enter numbers of same cards appearing thrice or three cards which are different.");
 						throw new Exception();
 					}
 					player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
@@ -106,28 +110,28 @@ public class CardView implements Observer{
 
 					player = player.exChangeCardTerritoryExist(exchangeCards,player);
 
-					System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+					LOGGER.info("####### Country and Armies after exchange card territory reinforcements ######## ");
 
 					for(Country c : player.getAssignedCountries())
 					{
-						System.out.println("######## Army Assignment after card exchange ###### ");
-						System.out.println("######## Country Name  ########## :"+c.getCountryName());
-						System.out.println("######## Country Armies #########   :"+c.getArmies());
+						LOGGER.info("######## Army Assignment after card exchange ###### ");
+						LOGGER.info("######## Country Name  ########## :"+c.getCountryName());
+						LOGGER.info("######## Country Armies #########   :"+c.getArmies());
 
 					}
 
 
-					System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
+					LOGGER.info("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 					player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 				} else {
-					System.out.println("Not Exchanging the cards to armies");
+					LOGGER.info("Not Exchanging the cards to armies");
 				}
 			} else {
 				int i=0;
 				for (Card card : player.getCardList()) {
-					System.out.println(card.getName() + " : "+ (++i));
+					LOGGER.info(card.getName() + " : "+ (++i));
 				}
-				System.out.println("Enter the numbers of card you want to exchange in comma seperated values");
+				LOGGER.info("Enter the numbers of card you want to exchange in comma seperated values");
 				String[] cardsList = scanner.nextLine().split(",");
 				List<Card> exchangeCards = new ArrayList<>();
 				List<Integer> cardNumbers = new ArrayList<>();
@@ -135,18 +139,18 @@ public class CardView implements Observer{
 					cardNumbers.add(Integer.parseInt(card));
 				}
 				if(cardNumbers.size()<3) {
-					System.out.println("Please enter at least 3 numbers for exchanging cards.");
+					LOGGER.info("Please enter at least 3 numbers for exchanging cards.");
 					throw new Exception();
 				}
 				for(int c : cardNumbers) {
 					exchangeCards.add(player.getCardList().get(c-1));
 				}
 				if(!player.checkCardDifferentTypes(exchangeCards,cardTypes) && !player.checkCardSameType(exchangeCards,cardAppearingMoreThanThrice)) {
-					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+					LOGGER.info("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
 				if(player.getCardExchangeTypeCount()<3 && (player.getCardExchangeAppearingMoreThanThrice()==null || player.getCardExchangeAppearingMoreThanThrice().isEmpty())){
-					System.out.println("Please enter numbers of same cards appearing thrice or three cards which are different.");
+					LOGGER.info("Please enter numbers of same cards appearing thrice or three cards which are different.");
 					throw new Exception();
 				}
 				player.exchangeCards(player.getCardExchangeTypeCount(), player.getCardExchangeAppearingMoreThanThrice(), player,cardNumbers);
@@ -158,22 +162,22 @@ public class CardView implements Observer{
 
 				player = player.exChangeCardTerritoryExist(exchangeCards,player);
 
-				System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+				LOGGER.info("####### Country and Armies after exchange card territory reinforcements ######## ");
 
 				for(Country c : player.getAssignedCountries())
 				{
-					System.out.println("######## Army Assignment after card exchange ###### ");
-					System.out.println("######## Country Name  ########## :"+c.getCountryName());
-					System.out.println("######## Country Armies #########   :"+c.getArmies());
+					LOGGER.info("######## Army Assignment after card exchange ###### ");
+					LOGGER.info("######## Country Name  ########## :"+c.getCountryName());
+					LOGGER.info("######## Country Armies #########   :"+c.getArmies());
 
 				}
 
 
-				System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
+				LOGGER.info("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 				player.setCardExchangeCount(player.getCardExchangeCount() + 1);
 			}
 		} else if (!cardExchangePossible) {
-			System.out.println("Not enough cards to exchange , moving to reinforcement");
+			LOGGER.info("Not enough cards to exchange , moving to reinforcement");
 		}
 		return armiesToBeGiven;
 	}
@@ -186,12 +190,12 @@ public class CardView implements Observer{
 		Player player = (Player) arg0;
 		if(player != null && Player.reinforcePhase.equals(player.getCurrentPhase()) && !(player.getCardList()==null)  && player.getExchanged()) {
 
-			System.out.println("**************In Card View*************** ");
+			LOGGER.info("**************In Card View*************** ");
 			List<Card> cardList = player.getCardList();
-			System.out.println("Cards after exchanging the cards");
+			LOGGER.info("Cards after exchanging the cards");
 
 			for(Card card : cardList) {
-				System.out.println(card.getName());
+				LOGGER.info(card.getName());
 			}
 
 		}
@@ -210,7 +214,7 @@ public class CardView implements Observer{
 		List<Card> exchangeSameCards = new ArrayList<>();
 		List<Card> exchangeDifferentCards = new ArrayList<>();
 		List<Card> exchangeCards = new ArrayList<>();
-		System.out.println("The cards with this player are :");
+		LOGGER.info("The cards with this player are :");
 		for (Card card : player.getCardList()) {
 			if (!cardCount.containsKey(card.getType())) {
 				cardCount.put(card.getType(), 1);
@@ -221,7 +225,7 @@ public class CardView implements Observer{
 				c++;
 				cardCount.put(card.getType(), c);
 			}
-			System.out.println(card.getType() + ", "+card.getCountry().getCountryName());
+			LOGGER.info(card.getType() + ", "+card.getCountry().getCountryName());
 		}
 		if (cardTypes == 3) {
 			cardExchangePossible = true;
@@ -240,8 +244,8 @@ public class CardView implements Observer{
 			}
 		}
 		if (player.getCardList().size() < 3) {
-			System.out.println();
-			System.out.println("Not enough cards to exchange ,continuing with the reinforcement phase");
+			LOGGER.info("\n");
+			LOGGER.info("Not enough cards to exchange ,continuing with the reinforcement phase");
 		} else if (cardExchangePossible) {
 			if((exchangeDifferentCards.size()==3 || exchangeSameCards.size()==3)) {
 				player.exchangeCardsForComputerPlayer(exchangeDifferentCards,exchangeSameCards,player);
@@ -253,18 +257,18 @@ public class CardView implements Observer{
 				exchangeCards = exchangeDifferentCards.size()==3 ? exchangeDifferentCards : exchangeSameCards;
 				player = player.exChangeCardTerritoryExist(exchangeCards,player);
 
-				System.out.println("####### Country and Armies after exchange card territory reinforcements ######## ");
+				LOGGER.info("####### Country and Armies after exchange card territory reinforcements ######## ");
 
 				for(Country c : player.getAssignedCountries())
 				{
-					System.out.println("######## Army Assignment after card exchange ###### ");
-					System.out.println("######## Country Name  ########## :"+c.getCountryName());
-					System.out.println("######## Country Armies #########   :"+c.getArmies());
+					LOGGER.info("######## Army Assignment after card exchange ###### ");
+					LOGGER.info("######## Country Name  ########## :"+c.getCountryName());
+					LOGGER.info("######## Country Armies #########   :"+c.getArmies());
 
 				}
 
 
-				System.out.println("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
+				LOGGER.info("Player recieves " + armiesToBeGiven + " armies for exchanging the cards");
 			}
 		}
 		return armiesToBeGiven;
