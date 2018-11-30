@@ -1069,13 +1069,12 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 
 	/**
 	 * This method checks if player's turn can continue or not
-	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
+		player.setCanAttack(false);
+		player.setCanFortify(false);
 		for (Country c : player.getAssignedCountries()) {
-			player.setCanAttack(false);
-			player.setCanFortify(false);
 			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
 					&& !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
@@ -1290,10 +1289,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 			}
 			player.setPhase("######### Player army count after reinforcment  ####### ");
 			player.setPhase("######## Player Name ########### : " + player.getName());
-			for (Country country : player.getAssignedCountries()) {
-				player.setPhase("					##### The Country Name  ####### : " + country.getCountryName());
-				player.setPhase("					##### The Army Count      ####### : " + country.getArmies());
-			}
+			printAllCountriesOfaPlayer(player);
 		} catch (Exception e) {
 			System.out.println("Exception Message : " + e.getMessage());
 			reinforcePhase(player);
@@ -1686,7 +1682,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * @param player the Player object
 	 */
 	public void printAllCountriesOwnedByPlayer(Player player) {
-		for (Country countryObj : player.getAssignedCountries()) {
+		for (Country countryObj : player.getAssignedCountries()) { 
 			System.out.print(countryObj.getCountryName() + ",");
 		}
 	}
