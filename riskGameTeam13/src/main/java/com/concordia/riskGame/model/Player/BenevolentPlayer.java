@@ -59,7 +59,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	/**
 	 * This method is to get the strongest country of a player
 	 * 
-	 * @param player
+	 * @param player player It takes input of type player model
 	 * @return country with most number of armies
 	 */
 	private Country getWeakestCountry(Player player) {

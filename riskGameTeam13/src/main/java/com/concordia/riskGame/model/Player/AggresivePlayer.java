@@ -72,7 +72,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	/**
 	 * This method is to get the strongest country of a player
 	 * 
-	 * @param player
+	 * @param player It takes input of type player model
 	 * @return country with most number of armies
 	 */
 	private Country getStrongestCountry(Player player) {
@@ -191,8 +191,8 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	 * This Method returns the strongest country object with attackable neighbors of
 	 * a Player.
 	 * 
-	 * @param player
-	 * @return
+	 * @param player player It takes input of type player model
+	 * @return returns the attackable country
 	 */
 	private Country getStrongestAttackableCountry(Player player) {
 		List<Country> playerOwnedCountries = player.getAssignedCountries();
