@@ -33,8 +33,8 @@ import com.concordia.riskGame.util.RandomAssignment;
  * @author Dheeraj As - Team 13
  * @author Darwin Anirudh G - Team 13
  */
-public class MapParseProcessor  implements Serializable {
-	
+public class MapParseProcessor implements Serializable {
+
 	private static final long serialversionUID = 1L;
 
 	private File file;
@@ -69,14 +69,15 @@ public class MapParseProcessor  implements Serializable {
 	 * This method reads the map file and set the corresponding continents and
 	 * countries in their respective entity classes.
 	 * 
-	 * @param filePath    Path of the map file
+	 * @param filePath       Path of the map file
 	 * @param numberOfPlayer Number of players returned from the drop down menu
-	 * @param playerType Type of player (human, aggressive.. etc)
-	 * @param gameType Type of game that is being played
+	 * @param playerType     Type of player (human, aggressive.. etc)
+	 * @param gameType       Type of game that is being played
 	 * @return the mapContent Object with map details enriched
 	 */
 
-	public MapContents mapParser(String filePath, String numberOfPlayer,HashMap<String,String> playerType,String gameType) {
+	public MapContents mapParser(String filePath, String numberOfPlayer, HashMap<String, String> playerType,
+			String gameType) {
 		try {
 
 			fileObject = new File(filePath);
@@ -98,10 +99,10 @@ public class MapParseProcessor  implements Serializable {
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapContentObject.setCountryList(countryList);
 			RandomAssignment randonAssignment = new RandomAssignment();
-			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList,playerType);
+			playerObject = randonAssignment.randonAssignmentMethod(numberOfPlayers, countryList, playerType);
 			initialArmies = initialArmyAssignment(numberOfPlayers);
 			playerList = new ArrayList();
-			
+
 			Set<Player> setplayer = playerObject.getPlayerAssign().keySet();
 			List<Player> sortedPlayerList = new ArrayList<Player>(setplayer);
 			sortedPlayerList.sort(Comparator.comparing(Player::getName));
@@ -121,10 +122,9 @@ public class MapParseProcessor  implements Serializable {
 
 			armyAssignment(playerList);
 			mapContentObject.setPlayerList(playerList);
-			if(!gameType.equals("tournament"))
-			{
-			gameDriverObject = new GameDriver();
-			gameDriverObject.gamePhase();
+			if (!gameType.equals("tournament")) {
+				gameDriverObject = new GameDriver();
+				gameDriverObject.gamePhase();
 			}
 		} catch (InvalidMapFileException e) {
 			System.out.println("Please select a valid map");
@@ -241,30 +241,30 @@ public class MapParseProcessor  implements Serializable {
 							String[] adjCountries3 = adjCountries2[1].split(",", 2);
 							Country cc = new Country(territoryValues[0], adjCountries3[0]);
 							adjCountry = new ArrayList<Country>();
-							
-							 StringTokenizer st = null;
-							if(adjCountries3.length>1)
-							 st = new StringTokenizer(adjCountries3[1], ", ");
-							
-							while (st!= null && st.hasMoreTokens()) {
+
+							StringTokenizer st = null;
+							if (adjCountries3.length > 1)
+								st = new StringTokenizer(adjCountries3[1], ", ");
+
+							while (st != null && st.hasMoreTokens()) {
 								Country adjC = new Country(st.nextToken(","));
 								adjCountry.add(adjC);
 							}
 							cc.setNeighbouringCountries(adjCountry);
 							countryList.add(cc);
 							countryAndNeighbors.put(cc, adjCountry);
-							}
 						}
+					}
 				}
 			}
-			
+
 			MapContents.setMapContents(null);
 			mapContentObject = MapContents.getInstance();
 			setcontitentAndCountriesMap();
 			mapContentObject.setContinentAndItsCountries(continentAndItsCountries);
 			mapContentObject.setCountryAndNeighbors(countryAndNeighbors);
 			mapContentObject.setLabelCount(labelCount);
-			
+
 		} catch (Exception e) {
 			System.out.println("Error Message : " + e.getMessage());
 			e.printStackTrace();
@@ -416,14 +416,14 @@ public class MapParseProcessor  implements Serializable {
 
 	/**
 	 * Call the driver for the load game.
+	 * 
 	 * @param mpcontObject mapcontent object
 	 */
-	public void callGamePhase(MapContents mpcontObject)
-	{
+	public void callGamePhase(MapContents mpcontObject) {
 		try {
 			gameDriverObject.load(mpcontObject);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 	}

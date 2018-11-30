@@ -26,6 +26,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method implements the reinforce phase of the random player
+	 * 
 	 * @param player player object
 	 * @return return player object after reinforcing
 	 */
@@ -80,6 +81,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method implements the attack phase of the random player
+	 * 
 	 * @param player player object
 	 * @return return player object after attack is complete
 	 */
@@ -103,7 +105,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 		List<Country> sortedListBasedOnArmies = getSortedCountryListBasedOnArmy(player);
 		List<Integer> randomNumbersList = new ArrayList<>();
 		Random random = new Random();
-		int rand = random.nextInt(attackableCount);
+		int rand = random.nextInt(attackableCount + 1);
 		player.setPhase("#### Random player will attack " + rand + " times");
 		while (rand != 0) {
 			int j = 0;
@@ -205,6 +207,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method implements the fortify phase of the random player
+	 * 
 	 * @param player player object
 	 * @return return player object after fortifying
 	 */
@@ -270,6 +273,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 	/**
 	 * This method is to sort the country list of a player based on the army count
 	 * of the countries in ascending order
+	 * 
 	 * @param player the player object is passed
 	 * @return a sorted list of countries
 	 */
@@ -296,9 +300,10 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 	/**
 	 * This method transfer country from one player to another player when player
 	 * losses the country
+	 * 
 	 * @param sourceCountryObject      Source Country Object
 	 * @param destinationCountryObject destination country object
-	 * @param player player object
+	 * @param player                   player object
 	 */
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject, Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
@@ -325,6 +330,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method do needed operations after player has lost
+	 * 
 	 * @param sourceCountryObject      source country object
 	 * @param destinationCountryObject destination country object
 	 */
@@ -339,6 +345,7 @@ public class RandomPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method checks if player's turn can continue or not
+	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {

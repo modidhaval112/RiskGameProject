@@ -430,16 +430,15 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 					playerObject.setPhase(
 							" ###### Printing the destination fortifiable countries for the source country ###### ");
 					destNeighborCountryList = printNeighbouringCountryList(srcCountry, player);
-					
+
 					System.out.println("####### Printing the neighbour countries owned by the player #########");
 
-					System.out
-							.println("#######***** The size of common country list is******* ######## " + destNeighborCountryList.size());
+					System.out.println("#######***** The size of common country list is******* ######## "
+							+ destNeighborCountryList.size());
 					for (Country countryObj : destNeighborCountryList) {
 						System.out.println(countryObj.getCountryName());
 					}
-					
-					
+
 					playerObject.setPhase(" ###### Please enter destination country to move armies  ###### ");
 					String destinationCountry = sc.nextLine();
 					destinationCountry = destinationCountry.trim();
@@ -749,14 +748,6 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 				}
 			}
 		}
-
-		/*System.out.println("####### Printing the neighbour countries owned by the player #########");
-
-		System.out
-				.println("#######***** The size of common country list is******* ######## " + commonCountryList.size());
-		for (Country countryObj : commonCountryList) {
-			System.out.println(countryObj.getCountryName());
-		}*/
 
 		return commonCountryList;
 	}
@@ -1080,10 +1071,11 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 
 	/**
 	 * This method checks if player's turn can continue or not
+	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
-		
+
 		for (Country c : player.getAssignedCountries()) {
 			player.setCanAttack(false);
 			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
@@ -1111,7 +1103,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * 
 	 * @param sourceCountryObject      Source Country Object
 	 * @param destinationCountryObject destination country object
-	 * @param player player object
+	 * @param player                   player object
 	 */
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject, Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
@@ -1531,8 +1523,8 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * for a Computer player.
 	 * 
 	 * @param exchangeDifferentCards exchanging different cards
-	 * @param exchangeSameCards exchanging same cards list
-	 * @param player player object
+	 * @param exchangeSameCards      exchanging same cards list
+	 * @param player                 player object
 	 */
 	public void exchangeCardsForComputerPlayer(List<Card> exchangeDifferentCards, List<Card> exchangeSameCards,
 			Player player) {
@@ -1696,7 +1688,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	 * @param player the Player object
 	 */
 	public void printAllCountriesOwnedByPlayer(Player player) {
-		for (Country countryObj : player.getAssignedCountries()) { 
+		for (Country countryObj : player.getAssignedCountries()) {
 			System.out.print(countryObj.getCountryName() + ",");
 		}
 	}
@@ -1890,7 +1882,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	/**
 	 * This method will execute the attack method from the PlayerStrategy interface
 	 * 
-	 *@param player player object
+	 * @param player player object
 	 */
 	public void executeAttack(Player player) {
 		this.strategy.attackPhase(player);

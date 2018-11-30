@@ -7,14 +7,17 @@ import java.util.List;
 
 import com.concordia.riskGame.model.Card.Card;
 import com.concordia.riskGame.model.Country.Country;
+
 /**
- * This class implements  the behavior for the cheater player
+ * This class implements the behavior for the cheater player
+ * 
  * @author Dheeraj As
  *
  */
-public class CheaterPlayer implements PlayerStrategy,Serializable {
-	
+public class CheaterPlayer implements PlayerStrategy, Serializable {
+
 	private static final long serialversionUID = 1L;
+
 	/**
 	 * This method implements the reinforce phase of the cheater player
 	 * 
@@ -28,15 +31,16 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.setPhase(player.getName() + " is in Reinforcement phase ");
 		player.setPhase("#### Cheater Player Reinforcement Phase");
 		player.printAllCountriesOfaPlayer(player);
-		for(Country country : player.getAssignedCountries()) {
+		for (Country country : player.getAssignedCountries()) {
 			Country playerCountry = player.getSourceCountryFromString(country.getCountryName());
-			playerCountry.setArmies(playerCountry.getArmies()*2);
+			playerCountry.setArmies(playerCountry.getArmies() * 2);
 		}
 		player.setPhase("#### After Reinforcement Phase");
 		player.printAllCountriesOfaPlayer(player);
 		player.setCanAttack(true);
 		return player;
 	}
+
 	/**
 	 * This method is to get the strongest country of a player
 	 * 
@@ -50,33 +54,36 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.setPhase(player.getName() + " is in attack phase ");
 		player.setPhase("#### Cheater Player Attack Phase");
 		player.printAllCountriesOfaPlayer(player);
-		Iterator<Country> iterator =  new ArrayList<>(player.getAssignedCountries()).iterator();
-		while(iterator.hasNext()) {
+		Iterator<Country> iterator = new ArrayList<>(player.getAssignedCountries()).iterator();
+		while (iterator.hasNext()) {
 			Country playerCountry = player.getSourceCountryFromString(iterator.next().getCountryName());
-			for(Country country2 : playerCountry.getNeighbouringCountries()) {
-				Country belongsToPlayer = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
-				if(belongsToPlayer == null) {
+			for (Country country2 : playerCountry.getNeighbouringCountries()) {
+				Country belongsToPlayer = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(),
+						player);
+				if (belongsToPlayer == null) {
 					Country destinationCountry = player.getSourceCountryFromString(country2.getCountryName());
-					playerLosesTheCountry(playerCountry,destinationCountry);
-					
+					playerLosesTheCountry(playerCountry, destinationCountry);
+
 				}
 			}
 		}
 		player.setPhase("#### After Cheater Player Attack Phase");
 		player.printAllCountriesOfaPlayer(player);
 		boolean result = player.hasPlayerWon(player);
-		if(result) {
+		if (result) {
 			player.setHasWon(true);
 			player.setPhase("####**** CHEATER PLAYER HAS WON ****####");
 			return player;
 		}
-		//checkPlayerTurnCanContinue(player);
+		// checkPlayerTurnCanContinue(player);
 		return player;
 	}
-	
+
 	/**
-	 * This method transfer country from one player to another player when player losses the country 
-	 * @param sourceCountryObject Source Country Object
+	 * This method transfer country from one player to another player when player
+	 * losses the country
+	 * 
+	 * @param sourceCountryObject      Source Country Object
 	 * @param destinationCountryObject destination country object
 	 */
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject) {
@@ -91,10 +98,11 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 			destinationCountryObject.setArmies(destinationCountryObject.getArmies() + movableArmies);
 		}
 	}
-	
+
 	/**
 	 * This method do needed operations after player has lost
-	 * @param sourceCountryObject source country object
+	 * 
+	 * @param sourceCountryObject      source country object
 	 * @param destinationCountryObject destination country object
 	 */
 	public void playerHasLost(Country sourceCountryObject, Country destinationCountryObject) {
@@ -105,6 +113,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 			sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
 		destinationCountryObject.getBelongsToPlayer().setCardList(new ArrayList<Card>());
 	}
+
 	/**
 	 * This method implements the fortify phase of the cheater player
 	 * 
@@ -119,12 +128,13 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.setPhase(player.getName() + " is in Fortification phase ");
 		player.setPhase("#### Cheater Player Fortification Phase");
 		player.printAllCountriesOfaPlayer(player);
-		for(Country country : player.getAssignedCountries()) {
+		for (Country country : player.getAssignedCountries()) {
 			Country playerCountry = player.getSourceCountryFromString(country.getCountryName());
-			for(Country country2 : playerCountry.getNeighbouringCountries()) {
-				Country belongsToPlayer = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(), player);
-				if(belongsToPlayer == null) {
-					playerCountry.setArmies(playerCountry.getArmies()*2);
+			for (Country country2 : playerCountry.getNeighbouringCountries()) {
+				Country belongsToPlayer = player.getSourceCountryFromPlayerUsingString(country2.getCountryName(),
+						player);
+				if (belongsToPlayer == null) {
+					playerCountry.setArmies(playerCountry.getArmies() * 2);
 					break;
 				}
 			}
@@ -133,16 +143,18 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 		player.printAllCountriesOfaPlayer(player);
 		return player;
 	}
-	
+
 	/**
 	 * This method checks if player's turn can continue or not
+	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {
 		for (Country c : player.getAssignedCountries()) {
 			player.setCanAttack(false);
 			player.setCanFortify(false);
-			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player)!=null && !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
+			if (c.getArmies() > 1 && player.checkNeighboringAttackableCountriesAndArmies(c, player) != null
+					&& !player.checkNeighboringAttackableCountriesAndArmies(c, player).isEmpty()) {
 				player.setCanAttack(true);
 				player.setCanFortify(true);
 				break;

@@ -24,16 +24,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.concordia.riskGame.model.Map.MapParseProcessor;
+
 /**
  * This Class performs actions for selecting the number of players from property
  * file and select the .map file for the game.
+ * 
  * @author Darwin Anirudh -Team 13
  * @author Dheeraj As - Team 13
  *
  */
 public class PlayerCount extends JFrame {
 	private static Logger LOGGER = LogManager.getLogger();
-	private String[] playerCounterArray = {"2", "3", "4", "5", "6" };
+	private String[] playerCounterArray = { "2", "3", "4", "5", "6" };
 	private int noOfPlayers;
 	private JFrame countFrame;
 	private JPanel panel = new JPanel();
@@ -61,6 +63,7 @@ public class PlayerCount extends JFrame {
 	private JComboBox cbPlayer5;
 	private JComboBox cbPlayer6;
 	private String playercount;
+
 	/**
 	 * This constructor calls the Count method
 	 */
@@ -71,6 +74,7 @@ public class PlayerCount extends JFrame {
 			LOGGER.error("Error Message : " + e.getMessage());
 		}
 	}
+
 	/**
 	 * The function of this method is to allow the player to select the number of
 	 * players from a configuration file.
@@ -84,7 +88,7 @@ public class PlayerCount extends JFrame {
 		countFrame.setLocationRelativeTo(null);
 		countFrame.setSize(500, 500);
 		countFrame.setLocation(500, 200);
-		//panel.setBackground(Color.cyan);
+		// panel.setBackground(Color.cyan);
 		GridBagLayout layout = new GridBagLayout();
 		panel.setLayout(layout);
 		countFrame.add(panel);
@@ -128,8 +132,8 @@ public class PlayerCount extends JFrame {
 			public void actionPerformed(final ActionEvent e) {
 				playercount = (String) playerCountCombo.getSelectedItem();
 
-				if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
-						|| playercount.equals("6")) {
+				if (playercount.equals("2") || playercount.equals("3") || playercount.equals("4")
+						|| playercount.equals("5") || playercount.equals("6")) {
 
 					gbc.gridx = 0;
 					gbc.gridy = 4;
@@ -212,6 +216,7 @@ public class PlayerCount extends JFrame {
 		/**
 		 * This function implements actions when okay button is clicked and presents
 		 * user the option to select the map file
+		 * 
 		 * @param event User Event
 		 */
 		okayButton.addActionListener(new ActionListener() {
@@ -220,9 +225,8 @@ public class PlayerCount extends JFrame {
 					if (event.getSource() == okayButton) {
 						HashMap<String, String> playerType = new HashMap<>();
 
-						if (playercount.equals("2")||playercount.equals("3") || playercount.equals("4") || playercount.equals("5")
-								|| playercount.equals("6"))
-						{
+						if (playercount.equals("2") || playercount.equals("3") || playercount.equals("4")
+								|| playercount.equals("5") || playercount.equals("6")) {
 							playerType.put("Player1", (String) cbPlayer1.getSelectedItem());
 							playerType.put("Player2", (String) cbPlayer2.getSelectedItem());
 
@@ -263,7 +267,7 @@ public class PlayerCount extends JFrame {
 							filePath = selectedFile.getAbsolutePath().toString();
 							mapParseObject = new MapParseProcessor();
 							mapParseObject.mapParser(selectedFile.getAbsolutePath().toString(),
-									playerCountCombo.getSelectedItem().toString(), playerType,"single");
+									playerCountCombo.getSelectedItem().toString(), playerType, "single");
 						}
 					}
 				} catch (Exception e) {
@@ -272,47 +276,60 @@ public class PlayerCount extends JFrame {
 			}
 		});
 	}
+
 	/**
 	 * This method get the filePath
+	 * 
 	 * @return filePath
 	 */
 	public String getFilePath() {
 		return filePath;
 	}
+
 	/**
 	 * this method sets the filePath
+	 * 
 	 * @param filePath path of the file
 	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
+
 	/**
 	 * method to get Player Array
+	 * 
 	 * @return playerCounterArray player array
 	 */
 	public String[] getPlayerCounter() {
 		return playerCounterArray;
 	}
+
 	/**
 	 * method to set player Array
+	 * 
 	 * @param playerCounter Alayer Array
 	 */
 	public void setPlayerCounter(String[] playerCounter) {
 		this.playerCounterArray = playerCounter;
 	}
+
 	/**
 	 * method to get ReadConfiguration object
+	 * 
 	 * @return readConfigurationObject ReadConfiguration object
 	 */
 	/**
 	 * method to get numberOfPlayers
+	 * 
 	 * @return noOfPlayers number of players
 	 */
 	public int getNoOfPlayers() {
 		return noOfPlayers;
 	}
+
 	/**
 	 * method to set number of players
+	 * 
 	 * @param noOfPlayers number of Players
 	 */
 	public void setNoOfPlayers(int noOfPlayers) {

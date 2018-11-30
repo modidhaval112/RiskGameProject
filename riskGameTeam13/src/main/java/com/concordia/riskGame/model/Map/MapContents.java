@@ -9,10 +9,6 @@ import com.concordia.riskGame.model.Continent.Continent;
 import com.concordia.riskGame.model.Country.Country;
 import com.concordia.riskGame.model.Player.Player;
 
-
-
-
-
 /**
  * This class contains getters and setters for MapContents attributes
  * 
@@ -21,12 +17,11 @@ import com.concordia.riskGame.model.Player.Player;
 public class MapContents implements Serializable {
 
 	private static final long serialversionUID = 1L;
-	
+
 	private static MapContents mapContents;
 
-
 	private HashMap<Country, List<Country>> countryAndNeighbors = new HashMap<>();
-	private HashMap<Continent, List<Country>> continentAndItsCountries = new  HashMap<>();
+	private HashMap<Continent, List<Country>> continentAndItsCountries = new HashMap<>();
 	private String mapAuthorName;
 	private int labelCount;
 	public List<Player> playerList = new ArrayList<>();
@@ -34,7 +29,6 @@ public class MapContents implements Serializable {
 	private int cardExchangeCount = 0;
 	public int rotateCount;
 	private List<String> tournamentResults;
-	
 
 	/**
 	 * Default Constructor
@@ -44,6 +38,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * It creates the Instance of the mapContents
+	 * 
 	 * @return returns mapContents object
 	 */
 	public static MapContents getInstance() {
@@ -55,7 +50,8 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method is to get map author name
-	 * @return  mapAuthorName
+	 * 
+	 * @return mapAuthorName
 	 */
 	public String getMapAuthorName() {
 		return mapAuthorName;
@@ -63,7 +59,8 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method is to set map author name
-	 * @param  mapAuthorName Name of the map author.
+	 * 
+	 * @param mapAuthorName Name of the map author.
 	 */
 	public void setMapAuthorName(String mapAuthorName) {
 		this.mapAuthorName = mapAuthorName;
@@ -71,7 +68,8 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method is to get Hashmap of countries and its list of neighbors.
-	 * @return  countryAndNeighbors Hashmap of countries and its list of neighbors.
+	 * 
+	 * @return countryAndNeighbors Hashmap of countries and its list of neighbors.
 	 */
 	public HashMap<Country, List<Country>> getCountryAndNeighbors() {
 		return countryAndNeighbors;
@@ -79,6 +77,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method is to set Hashmap of countries and its list of neighbors.
+	 * 
 	 * @param countryAndNeighbors Hashmap of countries and its list of neighbors.
 	 */
 	public void setCountryAndNeighbors(HashMap<Country, List<Country>> countryAndNeighbors) {
@@ -87,7 +86,9 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Method to get Continent and its countries
-	 * @return  continentAndItsCountries Hashmap of continents and its list of countries.
+	 * 
+	 * @return continentAndItsCountries Hashmap of continents and its list of
+	 *         countries.
 	 */
 	public HashMap<Continent, List<Country>> getContinentAndItsCountries() {
 		return continentAndItsCountries;
@@ -95,7 +96,9 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Method to set Continent and its countries
-	 * @param continentAndItsCountries Hashmap of continents and its list of countries.
+	 * 
+	 * @param continentAndItsCountries Hashmap of continents and its list of
+	 *                                 countries.
 	 */
 	public void setContinentAndItsCountries(HashMap<Continent, List<Country>> continentAndItsCountries) {
 		this.continentAndItsCountries = continentAndItsCountries;
@@ -103,6 +106,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * To set the MapContentsObject
+	 * 
 	 * @param mapContents object is set
 	 */
 	public static void setMapContents(MapContents mapContents) {
@@ -111,6 +115,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method returns the Player List
+	 * 
 	 * @return List of Players in the game.
 	 */
 	public List<Player> getPlayerList() {
@@ -119,6 +124,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method sets the Player List
+	 * 
 	 * @param playerList The list of players to be set.
 	 */
 	public void setPlayerList(List<Player> playerList) {
@@ -127,6 +133,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Returns number of labels in the map
+	 * 
 	 * @return It returns labelCount
 	 */
 	public int getLabelCount() {
@@ -135,6 +142,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Sets number of labels in the map
+	 * 
 	 * @param labelCount label count value
 	 */
 	public void setLabelCount(int labelCount) {
@@ -143,6 +151,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Get the country list
+	 * 
 	 * @return the countryList
 	 */
 	public List<Country> getCountryList() {
@@ -151,6 +160,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Setting the country list
+	 * 
 	 * @param countryList The countryList to set
 	 */
 	public void setCountryList(List<Country> countryList) {
@@ -159,6 +169,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Getting the cardexchangecount
+	 * 
 	 * @return It returns the CardExchange count
 	 */
 	public int getCardExchangeCount() {
@@ -167,7 +178,8 @@ public class MapContents implements Serializable {
 
 	/**
 	 * Setting the army exchnage count
-	 * @param armyExchangeCount  Army exchange count
+	 * 
+	 * @param armyExchangeCount Army exchange count
 	 */
 	public void setCardExchangeCount(int armyExchangeCount) {
 		this.cardExchangeCount = armyExchangeCount;
@@ -175,6 +187,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * The following method returns the rotate count.
+	 * 
 	 * @return It returns the value of rotato count.
 	 */
 	public int getRotateCount() {
@@ -183,6 +196,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * The following sets the value of rotate count.
+	 * 
 	 * @param rotateCount Number of times to rotate.
 	 */
 	public void setRotateCount(int rotateCount) {
@@ -191,6 +205,7 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method returns the result of the tournament
+	 * 
 	 * @return tournamentResults result of the tournament
 	 */
 	public List<String> getTournamentResults() {
@@ -199,13 +214,11 @@ public class MapContents implements Serializable {
 
 	/**
 	 * This method sets the result of the tournament
+	 * 
 	 * @param tournamentResults result of the tournament
 	 */
 	public void setTournamentResults(List<String> tournamentResults) {
 		this.tournamentResults = tournamentResults;
 	}
-	
-	
-	
 
 }

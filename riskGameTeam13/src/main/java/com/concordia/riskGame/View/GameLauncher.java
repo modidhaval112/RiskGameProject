@@ -26,12 +26,12 @@ import java.awt.Insets;
 /**
  * The functionality of the class is to present the viewer a menu to start the
  * game , exit etc
+ * 
  * @author Darwin Anirudh -Team 13
  * @author Dheeraj As - Team 13
  */
 public class GameLauncher extends JFrame implements ActionListener {
 	private static Logger LOGGER = LogManager.getLogger();
-
 
 	private JFrame gameFrame;
 	private TitledBorder border;
@@ -68,8 +68,6 @@ public class GameLauncher extends JFrame implements ActionListener {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		gameFrame = new JFrame("Concordia Conquest");
 		gameFrame.setVisible(true);
-
-
 
 		gameFrame.setSize(500, 500);
 		gameFrame.setLocation(500, 200);
@@ -176,9 +174,7 @@ public class GameLauncher extends JFrame implements ActionListener {
 		} else if (event.getSource() == tournamentButton) {
 			LOGGER.info("#### tournamentButton  is clicked ####");
 			gameFrame.setVisible(false);
-			tournament= new Tournament();
-
-
+			tournament = new Tournament();
 
 		}
 

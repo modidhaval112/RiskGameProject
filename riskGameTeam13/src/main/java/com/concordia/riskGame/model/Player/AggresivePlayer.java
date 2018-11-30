@@ -93,6 +93,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method implements the attack phase of the player
+	 * 
 	 * @param player player object
 	 * @return return player object after attack is complete
 	 */
@@ -164,7 +165,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 					} else {
 						break;
 					}
-					
+
 					player.setPhase("Number of armies in " + sourceCountryObject.getCountryName() + " is "
 							+ sourceCountryObject.getArmies());
 					player.setPhase("Number of armies in " + destinationCountryObject.getCountryName() + " is "
@@ -190,7 +191,9 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	}
 
 	/**
-	 * This Method returns the strongest country object with attackable neighbors of a Player.
+	 * This Method returns the strongest country object with attackable neighbors of
+	 * a Player.
+	 * 
 	 * @param player
 	 * @return
 	 */
@@ -214,7 +217,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	 * 
 	 * @param sourceCountryObject      Source Country Object
 	 * @param destinationCountryObject destination country object
-	 * @param player player object
+	 * @param player                   player object
 	 */
 	public void playerLosesTheCountry(Country sourceCountryObject, Country destinationCountryObject, Player player) {
 		destinationCountryObject.getBelongsToPlayer().getAssignedCountries().remove(destinationCountryObject);
@@ -253,8 +256,10 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 			sourceCountryObject.getBelongsToPlayer().getCardList().add(card);
 		destinationCountryObject.getBelongsToPlayer().setCardList(new ArrayList<Card>());
 	}
+
 	/**
 	 * This method implements the fortify phase of the player
+	 * 
 	 * @param player player object
 	 * @return return player object after fortifying
 	 */
@@ -308,6 +313,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 	/**
 	 * This method is to sort the country list of a player based on the army count
 	 * of the countries in ascending order
+	 * 
 	 * @param player the player object is passed
 	 * @return a sorted list of countries
 	 */
@@ -333,6 +339,7 @@ public class AggresivePlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method checks if player's turn can continue or not
+	 * 
 	 * @param player player object
 	 */
 	void checkPlayerTurnCanContinue(Player player) {

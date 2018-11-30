@@ -77,6 +77,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 
 	/**
 	 * This method implements the attack phase of the benevolent player
+	 * 
 	 * @param player player object
 	 * @return return player object after attack is complete
 	 */
@@ -90,6 +91,7 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 		checkPlayerTurnCanContinue(player);
 		return player;
 	}
+
 	/**
 	 * This method implements the fortify phase of the benevolent player
 	 * 
