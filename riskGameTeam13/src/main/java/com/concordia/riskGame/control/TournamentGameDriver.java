@@ -23,6 +23,7 @@ import com.concordia.riskGame.util.MapValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 /**
+ * This class implements the tournament game driver logic
  * @author saich
  *
  */
@@ -42,7 +43,10 @@ public class TournamentGameDriver {
 
 	/**
 	 * The following method calls each of the game phase for each player.
-	 * 
+	 * @param playerNamesAndTypes hash map of player names and types
+	 * @param gameMapFiles is the list of map files for the tournament
+	 * @param noOfGames number of games in tournament
+	 * @param noOfTurns is the defactor number
 	 * @throws Exception throws exception
 	 */
 	public void gamePhase(HashMap<String, String> playerNamesAndTypes,List<String> gameMapFiles,int noOfGames,int noOfTurns) throws Exception {
