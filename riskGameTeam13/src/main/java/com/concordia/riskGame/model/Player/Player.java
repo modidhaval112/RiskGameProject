@@ -457,11 +457,6 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 									+ movingArmies);
 					int destArmies = 0;
 					int sourcesArmies = 0;
-					/*
-					 * if (!isNeighbour(fromCountry, toCountry)) {
-					 * System.out.println("##### The Countries are not neighbours ######");
-					 * setErrorMesage("The Countries are not neighbours"); throw new Exception(); }
-					 */
 					List<Country> assignedCountriesClone = new ArrayList<Country>();
 					List<Country> assignedCountriesClone2 = new ArrayList<Country>();
 					for (Country countryInstance : player.getAssignedCountries()) {
@@ -606,6 +601,7 @@ public class Player extends Observable implements Serializable, PlayerStrategy {
 	public String reEnterSourceCountryforListCheck(Player player) {
 		String soruceCountry = null;
 		Scanner sc = new Scanner(System.in);
+		System.out.println("Invalid Source Country");
 		System.out.println("#### Please enter a valid source country or quit to exit fortification phase #####");
 		soruceCountry = sc.nextLine();
 		List<Country> destCountryList = new ArrayList();
