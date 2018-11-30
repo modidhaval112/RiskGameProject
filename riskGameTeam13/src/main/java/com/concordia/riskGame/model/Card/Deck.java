@@ -17,17 +17,12 @@ import com.concordia.riskGame.model.Country.Country;
 public class Deck implements Serializable{
 
 	private static final long serialversionUID = 1L;
-	
 	private int i;
 	private static Deck deck;
-
 	private String input;
 	private String name;
-
 	private String[] typesArray;
-
 	public  ArrayList<Card> deckOfCards;
-
 	private Card drawCard;
 
 	/**
@@ -45,9 +40,7 @@ public class Deck implements Serializable{
 		deckOfCards = new ArrayList<Card>();
 
 		for (i = 0; i < list.size(); i++) {
-			// Add new cards to deck
 			deckOfCards.add(new Card(typesArray[i % 3], list.get(i)));
-			//System.out.println("Added new card to deck: " + deck.get(i).getName());
 		}
 		Collections.shuffle(deckOfCards);
 	}
@@ -56,7 +49,6 @@ public class Deck implements Serializable{
 	 * Public default constructor to access other methods.
 	 */
 	public Deck(){
-		// deck = new ArrayList<>();
 	}
 
 	/**

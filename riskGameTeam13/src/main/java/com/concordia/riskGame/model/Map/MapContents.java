@@ -40,7 +40,6 @@ public class MapContents implements Serializable {
 	 * Default Constructor
 	 */
 	private MapContents() {
-		//To Prevent Other classes from creating object.
 	}
 
 	/**

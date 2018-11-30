@@ -27,13 +27,12 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
 public class LoadGame {
 	private static Logger LOGGER = LogManager.getLogger();
 
-
 	private JFileChooser fileChooser;
 	private String filePath;
 	private int rotateValue;
 	
 	/**
-	 * method to choose file 
+	 * Method to choose file 
 	 */
 	public void chooseFileMethod()
 	{

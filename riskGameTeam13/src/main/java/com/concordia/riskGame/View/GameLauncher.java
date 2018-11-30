@@ -26,7 +26,6 @@ import java.awt.Insets;
 /**
  * The functionality of the class is to present the viewer a menu to start the
  * game , exit etc
- *
  * @author Darwin Anirudh -Team 13
  * @author Dheeraj As - Team 13
  */

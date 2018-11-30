@@ -18,9 +18,7 @@ import com.concordia.riskGame.model.Player.RandomPlayer;
 
 /**
  * This class assigns countries randomly to the different players
- * 
  * @author d_modi
- *
  */
 public class RandomAssignment {
 
@@ -28,7 +26,6 @@ public class RandomAssignment {
 	public static String PLAYER = "Player"; 
 	/**
 	 * This method sets countries randomly assign to the players
-	 * 
 	 * @param noOfPlayers number of players
 	 * @param countryList List of Countries
 	 * @param playerType type of player he is
@@ -102,7 +99,6 @@ public class RandomAssignment {
 
 	/**
 	 * This method divides a number into smaller numbers
-	 * 
 	 * @param number number of countries
 	 * @param parts  number of players
 	 * @return randoms array of divided numbers

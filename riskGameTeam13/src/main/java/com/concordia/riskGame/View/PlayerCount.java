@@ -27,7 +27,6 @@ import com.concordia.riskGame.model.Map.MapParseProcessor;
 /**
  * This Class performs actions for selecting the number of players from property
  * file and select the .map file for the game.
- * 
  * @author Darwin Anirudh -Team 13
  * @author Dheeraj As - Team 13
  *
@@ -213,7 +212,6 @@ public class PlayerCount extends JFrame {
 		/**
 		 * This function implements actions when okay button is clicked and presents
 		 * user the option to select the map file
-		 * 
 		 * @param event User Event
 		 */
 		okayButton.addActionListener(new ActionListener() {
@@ -276,7 +274,6 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * This method get the filePath
-	 * 
 	 * @return filePath
 	 */
 	public String getFilePath() {
@@ -284,7 +281,6 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * this method sets the filePath
-	 * 
 	 * @param filePath path of the file
 	 */
 	public void setFilePath(String filePath) {
@@ -292,7 +288,6 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * method to get Player Array
-	 * 
 	 * @return playerCounterArray player array
 	 */
 	public String[] getPlayerCounter() {
@@ -300,7 +295,6 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * method to set player Array
-	 * 
 	 * @param playerCounter Alayer Array
 	 */
 	public void setPlayerCounter(String[] playerCounter) {
@@ -308,12 +302,10 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * method to get ReadConfiguration object
-	 * 
 	 * @return readConfigurationObject ReadConfiguration object
 	 */
 	/**
 	 * method to get numberOfPlayers
-	 * 
 	 * @return noOfPlayers number of players
 	 */
 	public int getNoOfPlayers() {
@@ -321,7 +313,6 @@ public class PlayerCount extends JFrame {
 	}
 	/**
 	 * method to set number of players
-	 * 
 	 * @param noOfPlayers number of Players
 	 */
 	public void setNoOfPlayers(int noOfPlayers) {
