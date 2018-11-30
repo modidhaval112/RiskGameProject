@@ -74,6 +74,7 @@ public class LoadGame {
 	/**
 	 * The following method read the saved map file from the specified location and instantiates the map content object.
 	 * @param filePath The path of the saved file. 
+	 * @return mapContentObject returns mapContent object after loading
 	 */
 	public MapContents readSavedMapContent(String filePath)
 
