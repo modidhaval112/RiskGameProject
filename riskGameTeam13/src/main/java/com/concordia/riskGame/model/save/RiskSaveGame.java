@@ -9,11 +9,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.concordia.riskGame.model.Map.MapContents;
-
+/**
+ * This class implements the logic to save the game into a file
+ * @author Darwin Anirudh G
+ *
+ */
 public class RiskSaveGame {
 
 	private Date date;
-	
+	/**
+	 * This method writes the objects into the file
+	 * @param mapContObj map content object that is to be saved
+	 * @return filePath file path of the saved game
+	 * @throws IOException
+	 */
 	public String saveGame(MapContents mapContObj) throws IOException
 	{
 		FileOutputStream fileOutStream = null;
