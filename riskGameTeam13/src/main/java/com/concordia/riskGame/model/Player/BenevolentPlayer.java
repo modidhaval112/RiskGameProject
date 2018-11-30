@@ -81,6 +81,8 @@ public class BenevolentPlayer implements PlayerStrategy, Serializable {
 	 */
 	@Override
 	public Player attackPhase(Player player) {
+		player.setDomination();
+		player.setCurrentPhase(Player.attackPhase);
 		player.setPhase("#### BENEVOLENT PLAYER ATTACK PHASE BEGINS####");
 		player.setPhase("#### BENEVOLENT PLAYER DOESNT ATTACK####");
 		checkPlayerTurnCanContinue(player);
