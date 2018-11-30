@@ -1,8 +1,0 @@
-[Map]
-[Continents]
-con1=1
-con2=1
-
-[Territories]
-c1,0,0,con1,c2
-c2,0,0,con2,c1
