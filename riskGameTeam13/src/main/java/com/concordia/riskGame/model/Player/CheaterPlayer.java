@@ -39,7 +39,7 @@ public class CheaterPlayer implements PlayerStrategy,Serializable {
 	/**
 	 * This method is to get the strongest country of a player
 	 * 
-	 * @param player
+	 * @param player player object
 	 * @return country with most number of armies
 	 */
 	@Override
